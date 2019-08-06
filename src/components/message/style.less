@@ -1,0 +1,71 @@
+.message {
+    .message-notice {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1010;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-align: center;
+        font-size: 14px;
+        font-variant: tabular-nums;
+        font-feature-settings: 'tnum';
+        color: rgba(0, 0, 0, 0.65);
+        pointer-events: none;
+        list-style: none;
+
+        .message-notice-content {
+            display: block;
+            width: 100%;
+            height: 100%;
+
+            .message-content {
+                position: relative;
+                z-index: 2;
+                top: 50%;
+                margin-top: -20px;
+                display: inline-block;
+                background-color: #fff;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                background-repeat: no-repeat;
+                height: 40px;
+                line-height: 40px;
+                padding-left: 50px;
+                padding-right: 10px;
+            }
+
+            .message-success {
+                background-image: url("~images/message/success.png");
+            }
+
+            .message-info {
+                background-image: url("~images/message/info.png");
+            }
+
+            .message-error {
+                background-image: url("~images/message/error.png");
+            }
+
+            .message-warning {
+                background-image: url("~images/message/warning.png");
+            }
+
+            .message-loading {
+                background-image: url("~images/message/loading.gif");
+            }
+        }
+    }
+}
+
+.message-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, .1);
+    z-index: 1009;
+}
