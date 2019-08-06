@@ -1,10 +1,16 @@
-import React from 'react';
-import entry from 'utils/entry';
+import React from "react";
+import entry from "utils/entry";
+import Master from "commons/master";
+import Table from "./table";
 
-class Test extends React.Component {
+class App extends React.Component {
     render() {
-        return <div className="test"></div>
+        return (
+            <Master>
+                <Table />
+            </Master>
+        );
     }
 }
 
-entry(<Test />);
+entry(<App />);
