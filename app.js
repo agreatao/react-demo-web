@@ -27,6 +27,9 @@ app.use(cookieParser());
 app.use(`${CONFIG.baseURL}/`, express.static(path.join(__dirname, "dist/static")));
 
 app.use(`${CONFIG.baseURL}/patient`, express.static(path.join(__dirname, "dist/templates", "patient.html")));
+app.use(`${CONFIG.baseURL}/operationCheckAppointment`, express.static(path.join(__dirname, "dist/templates", "operationCheckAppointment.html")));
+
+
 
 // // 后台数据请求代理
 // app.all(`${CONFIG.baseURL}/**`, (req, res, next) => {
