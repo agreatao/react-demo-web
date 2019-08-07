@@ -1,46 +1,23 @@
 .page {
     border-top: 1px solid #e6e6e6;
-    display: table;
-    width: 100%;
-    height: 50px;
-    background: #fff;
+    display: flex;
+    justify-content: space-between;
     padding: 0 14px;
-    position: relative;
+
     .ant-pagination {
         display: inline-block;
     }
 
     .page-left,
     .page-right {
-        display: table-cell;
-        vertical-align: top;
-
-        .page-inner {
-            height: 50px;
-
-            &:before {
-                display: inline-block;
-                width: 0px;
-                height: 100%;
-                content: "";
-                vertical-align: middle;
-            }
-
-            &>* {
-                vertical-align: middle;
-            }
-
-            span {
-                margin: 0 8px;
-            }
-        }
+        display: flex;
+        align-items: center;
+        height: 50px;
 
 
-    }
-
-    .page-right {
-        .page-inner {
-            text-align: right;
+        span {
+            margin: 0 8px;
         }
     }
+
 }

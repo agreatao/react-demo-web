@@ -2,7 +2,7 @@ import store from 'store';
 import { bindActionCreators } from 'redux';
 import addEventListener from 'add-dom-event-listener';
 
-import { browserResize, browserScroll } from 'store/actions';
+import { browserResize, browserScroll } from 'store/actions/browser';
 
 var boundActionCreators = bindActionCreators({ browserResize, browserScroll }, store.dispatch);
 var _browserResize = boundActionCreators.browserResize;

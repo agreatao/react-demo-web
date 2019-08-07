@@ -1,5 +1,4 @@
 import axios from "axios";
-import Vue from "vue";
 
 let cancelList = [];
 const CancelToken = axios.CancelToken;
@@ -65,10 +64,4 @@ window.onbeforeunload = () => {
     http.cancel();
 };
 
-Vue.prototype.$http = http;
-Vue.prototype.$get = http.get;
-Vue.prototype.$post = http.post;
-Vue.prototype.$put = http.put;
-Vue.prototype.$delete = http.delete;
-Vue.prototype.$httpCancel = http.cancel;
-Vue.prototype.$form = http.form;
+export default http;

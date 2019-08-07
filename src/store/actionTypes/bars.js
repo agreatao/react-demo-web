@@ -1,0 +1,1 @@
+export const BARS_RESIZE = "BARS_RESIZE";

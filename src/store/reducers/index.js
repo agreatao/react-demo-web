@@ -1,7 +1,9 @@
 import browser from './browser';
+import bars from "./bars";
 
 const reducers = {
-    browser
+    browser,
+    bars
 };
 
 export default reducers;

@@ -1,5 +1,7 @@
 import { Modal } from "antd";
 
+const centered = true;
+
 export function info(content) {
     return new Promise((resolve) => {
         Modal.info({

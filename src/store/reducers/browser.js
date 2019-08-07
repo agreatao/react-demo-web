@@ -1,4 +1,4 @@
-import { BROWSER_RESIZE, BROWSER_SCROLL } from '../actionTypes';
+import { BROWSER_RESIZE, BROWSER_SCROLL } from '../actionTypes/browser';
 // 浏览器判断
 var explorer = { type: 'unkown', version: -1 };
 var ua = navigator.userAgent.toLowerCase();

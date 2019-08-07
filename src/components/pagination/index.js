@@ -24,10 +24,6 @@ class Page extends React.Component {
     }
     onChange(pageNo) {
         const { pageSize } = this.state;
-        this.setState({
-            pageNo,
-            jumpPageNo: pageNo
-        });
         this.props.onPageChange && this.props.onPageChange(pageNo, pageSize);
     }
     onJumpPageChange(e) {
@@ -45,9 +41,6 @@ class Page extends React.Component {
     }
     handleJumpPageChange() {
         const { jumpPageNo, pageSize } = this.state;
-        this.setState({
-            pageNo: jumpPageNo
-        });
         this.props.onPageChange && this.props.onPageChange(jumpPageNo, pageSize);
     }
     render() {
@@ -55,34 +48,29 @@ class Page extends React.Component {
         return (
             <div className="page">
                 <div className="page-left">
-                    <div className="page-inner">
-                        <span>共 {total} 条</span>
-                    </div>
+                    <span>共 {total} 条</span>
                 </div>
                 <div className="page-right">
-                    <div className="page-inner">
-                        {total > pageSize && (
-                            <Pagination
-                                current={pageNo}
-                                pageSize={pageSize}
-                                total={total}
-                                onChange={pageNo => this.onChange(pageNo)}
-                            />
-                        )}
-                        <span>跳至</span>
-                        <Input
-                            style={{ width: 60 }}
-                            value={jumpPageNo}
-                            onChange={e => this.onJumpPageChange(e)}
+                    {total > pageSize && (
+                        <Pagination
+                            current={pageNo}
+                            pageSize={pageSize}
+                            total={total}
+                            onChange={pageNo => this.onChange(pageNo)}
                         />
-                        <span>/ {Math.max(Math.ceil(total / pageSize), 1)} 页</span>
-                        <Button
-                            style={{ width: "auto" }}
-                            onClick={() => this.handleJumpPageChange()}
-                        >
-                            跳转
-                        </Button>
-                    </div>
+                    )}
+                    <span>跳至</span>
+                    <Input
+                        style={{ width: 60 }}
+                        value={jumpPageNo}
+                        onChange={e => this.onJumpPageChange(e)}
+                    />
+                    <span>/ {Math.max(Math.ceil(total / pageSize), 1)} 页</span>
+                    <Button
+                        onClick={() => this.handleJumpPageChange()}
+                    >
+                        跳转
+                    </Button>
                 </div>
             </div>
         );

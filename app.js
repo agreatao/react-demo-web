@@ -26,7 +26,7 @@ app.use(cookieParser());
 // 静态资源
 app.use(`${CONFIG.baseURL}/`, express.static(path.join(__dirname, "dist/static")));
 
-app.use(`${CONFIG.baseURL}/index`, express.static(path.join(__dirname, "dist/templates", "index.html")));
+app.use(`${CONFIG.baseURL}/patient`, express.static(path.join(__dirname, "dist/templates", "patient.html")));
 
 // // 后台数据请求代理
 // app.all(`${CONFIG.baseURL}/**`, (req, res, next) => {

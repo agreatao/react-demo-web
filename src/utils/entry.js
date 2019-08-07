@@ -1,7 +1,7 @@
 import {
     ConfigProvider
 } from "antd";
-import zh_CN from "antd/lib/locale-provider/zh_CN";
+import zhCN from 'antd/es/locale/zh_CN';
 import "lib/browser";
 import React from "react";
 import {
@@ -19,7 +19,7 @@ moment.locale("zh-cn");
 export default function entry(ReactNode) {
     render(
         <Provider store={store}>
-            <ConfigProvider locale={zh_CN}>
+            <ConfigProvider locale={zhCN}>
                 <React.Fragment>
                     {ReactNode}
                 </React.Fragment>
