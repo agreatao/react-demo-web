@@ -33,7 +33,6 @@ const ModalForm = Form.create()(
             const { data } = this.props;
             const { visible } = this.state;
             const { getFieldDecorator, getFieldValue } = this.props.form;
-            console.log(getFieldValue("date"));
             return (
                 <Modal
                     title={data != null ? "编辑患者" : "新增患者"}
@@ -140,7 +139,7 @@ const ModalForm = Form.create()(
     }
 );
 
-export default function(data) {
+export default function (data) {
     return new Promise(resolve => {
         let container = document.createElement("div");
         document.body.appendChild(container);

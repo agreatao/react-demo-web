@@ -6,7 +6,7 @@ import Table from "components/table";
 import Pagination from "components/pagination";
 import { remove } from "components/alert";
 import http from "utils/http";
-import patientFormModal from "./patientFormModal";
+import patientFormModal from "./formModal";
 
 const { RangePicker } = DatePicker;
 
@@ -27,7 +27,7 @@ export default connect(
                     tableData: [{ id: 1 }, { id: 2 }]
                 });
             }).catch(e => {
-                this.setState({ loading: false })
+                this.setState({ loading: false, tableData: [{ id: 1 }, { id: 2 }] })
             })
         })
     }
@@ -108,10 +108,6 @@ export default connect(
                         {
                             title: '就诊时间',
                             dataIndex: 'time'
-                        },
-                        {
-                            title: '操作人',
-                            dataIndex: 'b'
                         },
                         {
                             title: "操作",

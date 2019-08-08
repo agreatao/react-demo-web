@@ -1059,10 +1059,10 @@ class Pinyin {
     getCamelChars(str) {
         if (typeof str !== "string")
             throw new Error(-1, "函数getFisrt需要字符串类型参数!");
-        var chars = []; //保存中间结果的数组
-        for (var i = 0, len = str.length; i < len; i++) {
+        let chars = []; //保存中间结果的数组
+        for (let i = 0, len = str.length; i < len; i++) {
             //获得unicode码
-            var ch = str.charAt(i);
+            let ch = str.charAt(i);
             //检查该unicode码是否在处理范围之内,在则返回该码对映汉字的拼音首字母,不在则调用其它函数处理
             chars.push(this._getChar(ch));
         }
@@ -1072,10 +1072,9 @@ class Pinyin {
 
     // 提取拼音
     _getFullChar(str) {
-        for (var key in this.full_dict) {
+        for (let key in this.full_dict) {
             if (-1 !== this.full_dict[key].indexOf(str)) {
                 return this._capitalize(key);
-                break;
             }
         }
         return false;
@@ -1083,13 +1082,13 @@ class Pinyin {
     // 首字母大写
     _capitalize(str) {
         if (str.length > 0) {
-            var first = str.substr(0, 1).toUpperCase();
-            var spare = str.substr(1, str.length);
+            let first = str.substr(0, 1).toUpperCase();
+            let spare = str.substr(1, str.length);
             return first + spare;
         }
     }
     _getChar(ch) {
-        var unicode = ch.charCodeAt(0);
+        let unicode = ch.charCodeAt(0);
         //如果不在汉字处理范围之内,返回原字符,也可以调用自己的处理函数
         if (unicode > 40869 || unicode < 19968) return ch; //dealWithOthers(ch);
         //检查是否是多音字,是按多音字处理,不是就直接在strChineseFirstPY字符串中找对应的首字母
@@ -1101,22 +1100,22 @@ class Pinyin {
     }
     _getResult(chars) {
         if (!this.options.checkPolyphone) return chars.join("");
-        var result = [""];
-        for (var i = 0, len = chars.length; i < len; i++) {
-            var str = chars[i],
+        let result = [""];
+        for (let i = 0, len = chars.length; i < len; i++) {
+            let str = chars[i],
                 strlen = str.length;
             if (strlen == 1) {
-                for (var j = 0; j < result.length; j++) {
+                for (let j = 0; j < result.length; j++) {
                     result[k] += str;
                 }
             } else {
-                var swap1 = result.slice(0);
+                let swap1 = result.slice(0);
                 result = [];
-                for (var j = 0; j < strlen; j++) {
+                for (let j = 0; j < strlen; j++) {
                     //复制一个相同的arrRslt
-                    var swap2 = swap1.slice(0);
+                    let swap2 = swap1.slice(0);
                     //把当前字符str[k]添加到每个元素末尾
-                    for (var k = 0; k < swap2.length; k++) {
+                    for (let k = 0; k < swap2.length; k++) {
                         swap2[k] += str.charAt(j);
                     }
                     //把复制并修改后的数组连接到arrRslt上
@@ -1130,13 +1129,11 @@ class Pinyin {
 
 let pinyin = new Pinyin();
 
-export default pinyin;
-
-export const getFullChars = function(str) {
+export const getFullChars = function (str) {
     if (str) return pinyin.getFullChars(str);
     return "";
 };
-export const getCamelChars = function(str) {
+export const getCamelChars = function (str) {
     if (str) return pinyin.getCamelChars(str);
     return "";
 };

@@ -1,4 +1,4 @@
-export default function(strBirthday) {
+export default function (strBirthday) {
     if (!strBirthday) return -1;
     var returnAge;
     var strBirthdayArr = strBirthday.split("-");
