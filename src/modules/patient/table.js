@@ -47,7 +47,7 @@ export default connect(
     }
     handleEdit(data, e) {
         e && e.stopPropagation();
-        patientFormModal().then(() => {
+        patientFormModal(data).then(() => {
 
         }).catch(() => { });
     }
