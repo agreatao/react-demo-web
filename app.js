@@ -31,26 +31,26 @@ app.use(`${CONFIG.baseURL}/operationCheckAppointment`, express.static(path.join(
 
 
 
-// // 后台数据请求代理
-// app.all(`${CONFIG.baseURL}/**`, (req, res, next) => {
-//     request({
-//             method: req.method,
-//             url: CONFIG.apiUrl + req.url,
-//             json: true,
-//             body: req.body,
-//             rejectUnauthorized: false
-//         },
-//         (error, response, body) => {
-//             if (error) {
-//                 next();
-//             } else {
-//                 let contentType = response.headers["content-type"];
-//                 res.set("content-type", contentType);
-//                 res.send(body);
-//             }
-//         }
-//     );
-// });
+// 后台数据请求代理
+app.all(`${CONFIG.baseURL}/**`, (req, res, next) => {
+    request({
+            method: req.method,
+            url: CONFIG.apiUrl + req.url,
+            json: true,
+            body: req.body,
+            rejectUnauthorized: false
+        },
+        (error, response, body) => {
+            if (error) {
+                next();
+            } else {
+                let contentType = response.headers["content-type"];
+                res.set("content-type", contentType);
+                res.send(body);
+            }
+        }
+    );
+});
 
 app.use((req, res, next) => {
     var err = new Error("Not Found");

@@ -1,6 +1,6 @@
 module.exports = {
-    baseURL: "",
+    baseURL: "/msk",
     pages: ["patient", "operationCheckAppointment"],
     title: "",
-    apiUrl: "http://localhost:8000" // 接口
+    apiUrl: "http://localhost:8060" // 接口
 };
