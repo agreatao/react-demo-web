@@ -4,8 +4,6 @@ import {
     Icon,
     Form,
     Input,
-    Row,
-    Col,
     Select,
     DatePicker,
     Button
@@ -15,9 +13,9 @@ import ReactDOM from "react-dom";
 import { getFullChars } from "utils/pinyin";
 import getAge from "utils/age";
 import Bars from "components/bars";
-import {
-    Provider
-} from "react-redux";
+import { Provider } from "react-redux";
+import CheckInput from "./common/checkInput";
+import Inputs from "./common/inputs";
 import store from "store";
 
 const { TextArea } = Input;
@@ -40,12 +38,15 @@ const ModalForm = Form.create()(
             const { getFieldDecorator, getFieldValue } = this.props.form;
             return (
                 <React.Fragment>
-                    <Bars left={
-                        <React.Fragment>
-                            <a onClick={this.handleHideModal}><Icon type="left" /></a>
-                            <span>{data ? "编辑" : "新增"}患者</span>
-                        </React.Fragment>
-                    }
+                    <Bars
+                        left={
+                            <React.Fragment>
+                                <a onClick={this.handleHideModal}>
+                                    <Icon type="left" />
+                                </a>
+                                <span>{data ? "编辑" : "新增"}患者</span>
+                            </React.Fragment>
+                        }
                         right={
                             <React.Fragment>
                                 <Button type="primary">提交</Button>
@@ -53,39 +54,47 @@ const ModalForm = Form.create()(
                         }
                     />
                     <Form className="patient-form">
-                        <div className="form-col">
+                        <div className="base-info">
                             <h4 className="sub-title">患者基本信息</h4>
-                            <Row gutter={24}>
-                                <Col span={12}>
+                            <div className="form-row">
+                                <div className="form-col">
                                     <Form.Item label="病例号">
                                         {getFieldDecorator("name", {})(
                                             <Input disabled />
                                         )}
                                     </Form.Item>
-                                </Col>
-                                <Col span={12}>
+                                </div>
+                                <div className="form-col">
                                     <Form.Item label="出生年月">
                                         {getFieldDecorator("date", {})(
-                                            <DatePicker style={{ width: "100%" }} />
+                                            <DatePicker
+                                                style={{ width: "100%" }}
+                                            />
                                         )}
                                     </Form.Item>
-                                </Col>
-                            </Row>
-                            <Row gutter={24}>
-                                <Col span={12}>
+                                </div>
+                            </div>
+                            <div className="form-row">
+                                <div className="form-col">
                                     <Form.Item label="姓名">
-                                        {getFieldDecorator("name", {})(<Input />)}
+                                        {getFieldDecorator("name", {})(
+                                            <Input />
+                                        )}
                                     </Form.Item>
-                                </Col>
-                                <Col span={12}>
+                                </div>
+                                <div className="form-col">
                                     <Form.Item label="年龄">
                                         <Input
                                             disabled
                                             value={(() => {
-                                                let date = getFieldValue("date");
+                                                let date = getFieldValue(
+                                                    "date"
+                                                );
                                                 if (date) {
                                                     let age = getAge(
-                                                        date.format("YYYY-MM-DD")
+                                                        date.format(
+                                                            "YYYY-MM-DD"
+                                                        )
                                                     );
                                                     return age > -1 ? age : "";
                                                 }
@@ -93,10 +102,10 @@ const ModalForm = Form.create()(
                                             })()}
                                         />
                                     </Form.Item>
-                                </Col>
-                            </Row>
-                            <Row gutter={24}>
-                                <Col span={12}>
+                                </div>
+                            </div>
+                            <div className="form-row">
+                                <div className="form-col">
                                     <Form.Item label="姓名拼音">
                                         <Input
                                             disabled
@@ -105,15 +114,17 @@ const ModalForm = Form.create()(
                                             )}
                                         />
                                     </Form.Item>
-                                </Col>
-                                <Col span={12}>
+                                </div>
+                                <div className="form-col">
                                     <Form.Item label="联系方式">
-                                        {getFieldDecorator("name", {})(<Input />)}
+                                        {getFieldDecorator("name", {})(
+                                            <Input />
+                                        )}
                                     </Form.Item>
-                                </Col>
-                            </Row>
-                            <Row gutter={24}>
-                                <Col span={12}>
+                                </div>
+                            </div>
+                            <div className="form-row">
+                                <div className="form-col">
                                     <Form.Item label="性别">
                                         {getFieldDecorator("name", {})(
                                             <Select>
@@ -122,114 +133,143 @@ const ModalForm = Form.create()(
                                             </Select>
                                         )}
                                     </Form.Item>
-                                </Col>
-                                <Col span={12}>
+                                </div>
+                                <div className="form-col">
                                     <Form.Item label="联系方式">
-                                        {getFieldDecorator("name", {})(<Input />)}
+                                        {getFieldDecorator("name", {})(
+                                            <Input />
+                                        )}
                                     </Form.Item>
-                                </Col>
-                            </Row>
-                            <Row gutter={24}>
-                                <Col span={12}>
+                                </div>
+                            </div>
+                            <div className="form-row">
+                                <div className="form-col">
                                     <Form.Item label="身份证">
-                                        {getFieldDecorator("name", {})(<Input />)}
+                                        {getFieldDecorator("name", {})(
+                                            <Input />
+                                        )}
                                     </Form.Item>
-                                </Col>
-                                <Col span={12}>
+                                </div>
+                                <div className="form-col">
                                     <Form.Item label="职业">
-                                        {getFieldDecorator("name", {})(<Input />)}
+                                        {getFieldDecorator("name", {})(
+                                            <Input />
+                                        )}
                                     </Form.Item>
-                                </Col>
-                            </Row>
+                                </div>
+                            </div>
                             <Form.Item label="地址">
                                 {getFieldDecorator("address", {})(<TextArea />)}
                             </Form.Item>
                         </div>
-                        <div className="form-col">
+                        <div className="history">
                             <h4 className="sub-title">既往病史</h4>
-                            <Row gutter={24}>
-                                <Col span={6}>
+                            <div className="form-row">
+                                <div className="form-col">
                                     <Form.Item label="视力减退">
                                         {getFieldDecorator("test")(<Input />)}
                                     </Form.Item>
-                                </Col>
-                                <Col span={18}>
-                                    <div className="sub-form-item">
+                                </div>
+                                <div className="form-col flex-1">
+                                    <div className="form-row sub-form-item">
                                         <Form.Item label="眼睛">
-                                            {getFieldDecorator("test")(<Input />)}
+                                            {getFieldDecorator("test")(
+                                                <Input />
+                                            )}
                                         </Form.Item>
                                         <Form.Item label="戴镜">
-                                            {getFieldDecorator("test")(<Input />)}
+                                            {getFieldDecorator("test")(
+                                                <Input />
+                                            )}
                                         </Form.Item>
                                         <Form.Item label="脱镜">
-                                            {getFieldDecorator("test")(<Input />)}
+                                            {getFieldDecorator("test")(
+                                                <Input />
+                                            )}
                                         </Form.Item>
-                                        <a className="control-btn"><Icon type="minus" /></a>
+                                        <a className="control-btn">
+                                            <Icon type="minus-circle" />
+                                        </a>
                                     </div>
-                                    <div className="sub-form-item">
+                                    <div className="form-row sub-form-item">
                                         <Form.Item label="眼睛">
-                                            {getFieldDecorator("test")(<Input />)}
+                                            {getFieldDecorator("test")(
+                                                <Input />
+                                            )}
                                         </Form.Item>
                                         <Form.Item label="戴镜">
-                                            {getFieldDecorator("test")(<Input />)}
+                                            {getFieldDecorator("test")(
+                                                <Input />
+                                            )}
                                         </Form.Item>
                                         <Form.Item label="脱镜">
-                                            {getFieldDecorator("test")(<Input />)}
+                                            {getFieldDecorator("test")(
+                                                <Input />
+                                            )}
                                         </Form.Item>
-                                        <a className="control-btn"><Icon type="minus" /></a>
+                                        <a className="control-btn">
+                                            <Icon type="plus-circle" />
+                                        </a>
                                     </div>
-                                </Col>
-                            </Row>
+                                </div>
+                            </div>
                             <hr />
-                            <Row gutter={24}>
-                                <Col span={6}>
+                            <div className="form-row">
+                                <div className="form-col">
                                     <Form.Item label="基本稳定">
                                         {getFieldDecorator("test")(<Input />)}
                                     </Form.Item>
-                                </Col>
-                                <Col span={18}>
-                                    <div className="sub-form-item">
+                                </div>
+                                <div className="form-col flex-1">
+                                    <div className="form-row sub-form-item">
                                         <Form.Item label="左眼">
-                                            {getFieldDecorator("test")(<Input />)}
+                                            {getFieldDecorator("test")(
+                                                <Inputs />
+                                            )}
                                         </Form.Item>
                                         <Form.Item label="右眼">
-                                            {getFieldDecorator("test")(<Input />)}
+                                            {getFieldDecorator("test")(
+                                                <Inputs />
+                                            )}
                                         </Form.Item>
                                     </div>
-                                </Col>
-                            </Row>
+                                </div>
+                            </div>
                             <hr />
                             <Form.Item label="严重干眼病史">
-
+                                {getFieldDecorator("heavyEye")(<CheckInput />)}
                             </Form.Item>
                             <Form.Item label="角膜炎病史">
-
+                                {getFieldDecorator("heavyEye")(<CheckInput />)}
                             </Form.Item>
                             <Form.Item label="家族病史">
-
+                                {getFieldDecorator("heavyEye")(<Select style={{ width: 100 }}>
+                                    <Option value="父亲">父亲</Option>
+                                    <Option value="母亲">母亲</Option>
+                                </Select>)}
                             </Form.Item>
                             <hr />
                             <Form.Item label="全身疾病史">
-
+                                {getFieldDecorator("heavyEye")(<CheckInput />)}
                             </Form.Item>
                             <Form.Item label="精神性病史">
-
+                                {getFieldDecorator("heavyEye")(<CheckInput />)}
                             </Form.Item>
                             <Form.Item label="手术史">
-
+                                {getFieldDecorator("heavyEye")(<CheckInput />)}
                             </Form.Item>
                             <Form.Item label="其他">
-
+                                {getFieldDecorator("heavyEye")(<CheckInput />)}
                             </Form.Item>
                         </div>
                     </Form>
-                </React.Fragment >
+                </React.Fragment>
             );
         }
     }
 );
 
-export default function (data) {
+export default function(data) {
     return new Promise(resolve => {
         let container = document.createElement("div");
         document.body.appendChild(container);

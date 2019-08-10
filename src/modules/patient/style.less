@@ -61,8 +61,8 @@
 
     .patient-form {
         display: flex;
+        height: 0;
         flex: 1;
-        padding: 0 20px;
     }
 
     .sub-title {
@@ -73,33 +73,54 @@
         color: #999;
     }
 
-    .form-col {
-        min-width: 500px;
+    .base-info,
+    .history {
+        flex: 1;
         overflow: auto;
+        padding: 0 10px;
+    }
 
-        &:first-child {
-            margin-right: 15px;
-            padding-right: 15px;
-            border-right: 1px solid #e5e5e5;
+    .base-info {
+        border-right: 1px solid #e5e5e5;
+
+        .form-row {
+            .form-col {
+                flex: 1;
+            }
+        }
+
+    }
+
+    .form-row {
+        display: flex;
+
+        .form-col {
+            width: 200px;
+
+            &.flex-1 {
+                flex: 1;
+            }
         }
     }
 
+
     .ant-form-item-label {
-        width: 72px;
+        width: 100px;
     }
 
     .sub-form-item {
         display: flex;
-        align-items: center;
 
-        .ant-form-item {
-            margin-bottom: 0;
+        .ant-form-item-label {
+            width: 60px;
         }
 
         .control-btn {
+            height: 40px;
+            line-height: 40px;
             margin-left: 10px;
         }
-        
+
     }
 
     .ant-form-item {
@@ -277,5 +298,14 @@
                 }
             }
         }
+    }
+}
+
+.inputs {
+    display: flex;
+    align-items: center;
+
+    span {
+        margin: 0 5px;
     }
 }
