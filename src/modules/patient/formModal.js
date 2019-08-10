@@ -29,9 +29,7 @@ const ModalForm = Form.create()(
         handleHideModal = e => {
             e.preventDefault();
             this.props.form.resetFields();
-            this.setState({ visible: false }, () => {
-                this.props.onAfterClose && this.props.onAfterClose();
-            });
+            this.props.onAfterClose && this.props.onAfterClose();
         };
         render() {
             const { data } = this.props;
@@ -54,7 +52,7 @@ const ModalForm = Form.create()(
                         }
                     />
                     <Form className="patient-form">
-                        <div className="base-info">
+                        <div className="patient-form-col">
                             <h4 className="sub-title">患者基本信息</h4>
                             <div className="form-row">
                                 <div className="form-col">
@@ -162,7 +160,7 @@ const ModalForm = Form.create()(
                                 {getFieldDecorator("address", {})(<TextArea />)}
                             </Form.Item>
                         </div>
-                        <div className="history">
+                        <div className="patient-form-col">
                             <h4 className="sub-title">既往病史</h4>
                             <div className="form-row">
                                 <div className="form-col">
@@ -174,7 +172,20 @@ const ModalForm = Form.create()(
                                     <div className="form-row sub-form-item">
                                         <Form.Item label="眼睛">
                                             {getFieldDecorator("test")(
-                                                <Input />
+                                                <Select style={{ width: 125 }}>
+                                                    <Option value="框架眼镜">
+                                                        框架眼镜
+                                                    </Option>
+                                                    <Option value="软片隐形眼镜">
+                                                        软片隐形眼镜
+                                                    </Option>
+                                                    <Option value="RGP">
+                                                        RGP
+                                                    </Option>
+                                                    <Option value="OK镜">
+                                                        OK镜
+                                                    </Option>
+                                                </Select>
                                             )}
                                         </Form.Item>
                                         <Form.Item label="戴镜">
@@ -194,7 +205,20 @@ const ModalForm = Form.create()(
                                     <div className="form-row sub-form-item">
                                         <Form.Item label="眼睛">
                                             {getFieldDecorator("test")(
-                                                <Input />
+                                                <Select style={{ width: 125 }}>
+                                                    <Option value="框架眼镜">
+                                                        框架眼镜
+                                                    </Option>
+                                                    <Option value="软片隐形眼镜">
+                                                        软片隐形眼镜
+                                                    </Option>
+                                                    <Option value="RGP">
+                                                        RGP
+                                                    </Option>
+                                                    <Option value="OK镜">
+                                                        OK镜
+                                                    </Option>
+                                                </Select>
                                             )}
                                         </Form.Item>
                                         <Form.Item label="戴镜">
@@ -243,10 +267,12 @@ const ModalForm = Form.create()(
                                 {getFieldDecorator("heavyEye")(<CheckInput />)}
                             </Form.Item>
                             <Form.Item label="家族病史">
-                                {getFieldDecorator("heavyEye")(<Select style={{ width: 100 }}>
-                                    <Option value="父亲">父亲</Option>
-                                    <Option value="母亲">母亲</Option>
-                                </Select>)}
+                                {getFieldDecorator("heavyEye")(
+                                    <Select style={{ width: 100 }}>
+                                        <Option value="父亲">父亲</Option>
+                                        <Option value="母亲">母亲</Option>
+                                    </Select>
+                                )}
                             </Form.Item>
                             <hr />
                             <Form.Item label="全身疾病史">
