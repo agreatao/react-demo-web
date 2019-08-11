@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Button, DatePicker, Form, Input, Radio, Select } from "antd";
+import { Button, DatePicker, Form, Input, Radio, Select, Upload } from "antd";
+import { Image } from "x-react-component";
 
 const { Option } = Select;
 
@@ -9,11 +10,12 @@ export default connect(state => ({ browser: state.browser }))(
         class extends React.Component {
             state = {
                 edit: false,
-                data: null
+                data: null,
+                imageUrl: null
             };
             render() {
                 const { height } = this.props.browser;
-                const { data, edit } = this.state;
+                const { data, edit, imageUrl } = this.state;
                 const { getFieldDecorator } = this.props.form;
                 const layout = {
                     labelCol: {
@@ -89,6 +91,79 @@ export default connect(state => ({ browser: state.browser }))(
                                 )
                             ) : (
                                 <span className="ant-form-text">左眼</span>
+                            )}
+                        </Form.Item>
+                        <Form.Item {...layout} label="医学影像">
+                            {edit ? (
+                                getFieldDecorator("image")(
+                                    <Upload
+                                        name="avatar"
+                                        listType="picture-card"
+                                        className="avatar-uploader"
+                                        showUploadList={false}
+                                        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                        beforeUpload={file => {
+                                            const isJpgOrPng =
+                                                file.type === "image/jpeg" ||
+                                                file.type === "image/png";
+                                            if (!isJpgOrPng) {
+                                                message.error(
+                                                    "You can only upload JPG/PNG file!"
+                                                );
+                                            }
+                                            const isLt2M =
+                                                file.size / 1024 / 1024 < 2;
+                                            if (!isLt2M) {
+                                                message.error(
+                                                    "Image must smaller than 2MB!"
+                                                );
+                                            }
+                                            return isJpgOrPng && isLt2M;
+                                        }}
+                                        onChange={info => {
+                                            function getBase64(img, callback) {
+                                                const reader = new FileReader();
+                                                reader.addEventListener(
+                                                    "load",
+                                                    () =>
+                                                        callback(reader.result)
+                                                );
+                                                reader.readAsDataURL(img);
+                                            }
+                                            if (
+                                                info.file.status === "uploading"
+                                            ) {
+                                                this.setState({
+                                                    loading: true
+                                                });
+                                                return;
+                                            }
+                                            if (info.file.status === "done") {
+                                                // Get this url from response in real world.
+                                                getBase64(
+                                                    info.file.originFileObj,
+                                                    imageUrl =>
+                                                        this.setState({
+                                                            imageUrl,
+                                                            loading: false
+                                                        })
+                                                );
+                                            }
+                                        }}
+                                    >
+                                        <Image
+                                            src={imageUrl}
+                                            width={100}
+                                            height={100}
+                                        />
+                                    </Upload>
+                                )
+                            ) : (
+                                <Image
+                                    src={imageUrl}
+                                    width={100}
+                                    height={100}
+                                />
                             )}
                         </Form.Item>
                         <hr />
@@ -275,7 +350,10 @@ export default connect(state => ({ browser: state.browser }))(
                             <div className="btn-group">
                                 <Button
                                     onClick={e =>
-                                        this.setState({ edit: false, data: null })
+                                        this.setState({
+                                            edit: false,
+                                            data: null
+                                        })
                                     }
                                 >
                                     返回
@@ -303,7 +381,9 @@ export default connect(state => ({ browser: state.browser }))(
                         <div className="btn-group">
                             <Button
                                 type="primary"
-                                onClick={e => this.setState({ data: {}, edit: true })}
+                                onClick={e =>
+                                    this.setState({ data: {}, edit: true })
+                                }
                             >
                                 添加特检报告
                             </Button>

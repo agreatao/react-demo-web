@@ -33,6 +33,7 @@ app.use(`${CONFIG.baseURL}/operationCheckAppointment`, express.static(path.join(
 
 // 后台数据请求代理
 app.all(`${CONFIG.baseURL}/**`, (req, res, next) => {
+    console.log(CONFIG.apiUrl + req.url);
     request({
             method: req.method,
             url: CONFIG.apiUrl + req.url,
@@ -41,6 +42,7 @@ app.all(`${CONFIG.baseURL}/**`, (req, res, next) => {
             rejectUnauthorized: false
         },
         (error, response, body) => {
+            console.log(body);
             if (error) {
                 next();
             } else {

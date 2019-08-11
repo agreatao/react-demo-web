@@ -14,8 +14,7 @@ const http = {};
             cancelList.push(callback);
         });
         if (method === "post" || method === "put") args[2] = options;
-        else
-            args[1] = options;
+        else args[1] = options;
 
         return axios[method](...args)
             .then(response => checkStatus(response))
@@ -26,13 +25,14 @@ const http = {};
 });
 
 function checkStatus(response) {
-    const {
-        status,
-        statusText,
-        data
-    } = response;
-    if (status && status === 200) return data;
+    const { status, statusText, data } = response;
+    if (status && status === 200) return checkSuccess(data);
     else throw statusText;
+}
+
+function checkSuccess(data) {
+    if (data.success) return data;
+    else throw data;
 }
 
 http.cancel = () => {
@@ -40,7 +40,7 @@ http.cancel = () => {
     cancelList = [];
 };
 
-http.form = (args) => {
+http.form = args => {
     let options = args[2] || {};
     options.headers = Object.assign({}, options.headers, {
         "Content-Type": "multipart/form-data"
@@ -49,12 +49,12 @@ http.form = (args) => {
     if (args[1]) {
         let formData = new FormData();
         for (let key in args[1]) {
-            formData.append(key, args[1][key])
+            formData.append(key, args[1][key]);
         }
         args[1] = formData;
     }
     return http.post(args);
-}
+};
 
 window.onunload = () => {
     http.cancel();

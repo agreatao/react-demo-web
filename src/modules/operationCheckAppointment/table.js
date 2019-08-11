@@ -1,34 +1,66 @@
+import { Button, Col, DatePicker, Form, Icon, Input, Row } from "antd";
+import { remove } from "components/alert";
+import Bars from "components/bars";
+import Pagination from "components/pagination";
+import Table from "components/table";
 import React from "react";
 import { connect } from "react-redux";
-import { Form, Icon, Input, DatePicker, Button, Row, Col } from "antd";
+import http from "utils/http";
+import appointmentFormModal from "./formModal";
 
 const { RangePicker } = DatePicker;
 
-import Bars from "components/bars";
-import Table from "components/table";
-import Pagination from "components/pagination";
-import { remove } from "components/alert";
-import appointmentFormModal from "./formModal";
-
 export default connect(state => ({ browser: state.browser, bars: state.bars }))(
     class extends React.Component {
+        state = {
+            page: 1,
+            pageSize: 10,
+            subscribeName: null,
+            startTime: null,
+            endTime: null
+        };
+        fetch(page, params) {
+            http.post("/sick/getSubscribeList", params, { params: page }).then(
+                data => {
+                    console.log(data);
+                    this.setState({
+                        tableData: data.result
+                    });
+                }
+            );
+        }
+        componentDidMount() {
+            const {
+                page,
+                pageSize,
+                subscribeName,
+                startTime,
+                endTime
+            } = this.state;
+            this.fetch(
+                { page, pageSize },
+                { subscribeName, startTime, endTime }
+            );
+        }
         handleAdd = e => {
             e.preventDefault();
-            appointmentFormModal().then(() => {
-
-            }).catch(() => { })
-        }
+            appointmentFormModal()
+                .then(() => {})
+                .catch(() => {});
+        };
         handleEdit = (data, e) => {
             e.preventDefault();
-            appointmentFormModal(data).then(() => {
-
-            }).catch(() => { })
-        }
+            appointmentFormModal(data)
+                .then(() => {})
+                .catch(() => {});
+        };
         handleDelete = (ids, e) => {
             e.preventDefault();
             if (ids && ids.length > 0)
-                remove().then(() => { }).catch(() => { })
-        }
+                remove()
+                    .then(() => {})
+                    .catch(() => {});
+        };
         render() {
             const { browser, bars } = this.props;
             return (
@@ -68,10 +100,24 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
                                 title: "操作",
                                 className: "actions",
                                 dataIndex: "id",
-                                render: (id, row) => <React.Fragment>
-                                    <a onClick={e => this.handleEdit(row, e)}>修改</a>
-                                    <a onClick={e => this.handleDelete([id], e)}>删除</a>
-                                </React.Fragment>
+                                render: (id, row) => (
+                                    <React.Fragment>
+                                        <a
+                                            onClick={e =>
+                                                this.handleEdit(row, e)
+                                            }
+                                        >
+                                            修改
+                                        </a>
+                                        <a
+                                            onClick={e =>
+                                                this.handleDelete([id], e)
+                                            }
+                                        >
+                                            删除
+                                        </a>
+                                    </React.Fragment>
+                                )
                             }
                         ]}
                     />
