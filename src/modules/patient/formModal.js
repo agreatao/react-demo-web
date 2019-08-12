@@ -17,6 +17,7 @@ import { Provider } from "react-redux";
 import CheckInput from "./common/checkInput";
 import Inputs from "./common/inputs";
 import store from "store";
+import http from "utils/http";
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -25,12 +26,27 @@ const ModalForm = Form.create()(
     class extends React.Component {
         componentDidMount() {
             this.props.onInit && this.props.onInit();
+            http.get("/sick/getRandomSickId").then(data => {
+                this.props.form.setFieldsValue({
+                    sickId: data.result
+                })
+            })
         }
         handleHideModal = e => {
             e.preventDefault();
             this.props.form.resetFields();
             this.props.onAfterClose && this.props.onAfterClose();
         };
+        handleSubmit = e => {
+            e.preventDefault();
+            this.props.form.validateFields((err, values) => {
+                if (err) return;
+
+
+
+                console.log(values);
+            })
+        }
         render() {
             const { data } = this.props;
             const { getFieldDecorator, getFieldValue } = this.props.form;
@@ -47,7 +63,7 @@ const ModalForm = Form.create()(
                         }
                         right={
                             <React.Fragment>
-                                <Button type="primary">提交</Button>
+                                <Button type="primary" onClick={this.handleSubmit}>{data != null ? "修改" : "保存"}</Button>
                             </React.Fragment>
                         }
                     />
@@ -57,14 +73,18 @@ const ModalForm = Form.create()(
                             <div className="form-row">
                                 <div className="form-col">
                                     <Form.Item label="病例号">
-                                        {getFieldDecorator("name", {})(
+                                        {getFieldDecorator("sickId", {
+                                            initialValue: data && data.sickId
+                                        })(
                                             <Input disabled />
                                         )}
                                     </Form.Item>
                                 </div>
                                 <div className="form-col">
                                     <Form.Item label="出生年月">
-                                        {getFieldDecorator("date", {})(
+                                        {getFieldDecorator("birth", {
+                                            initialValue: data && data.birth
+                                        })(
                                             <DatePicker
                                                 style={{ width: "100%" }}
                                             />
@@ -75,7 +95,9 @@ const ModalForm = Form.create()(
                             <div className="form-row">
                                 <div className="form-col">
                                     <Form.Item label="姓名">
-                                        {getFieldDecorator("name", {})(
+                                        {getFieldDecorator("sickName", {
+                                            initialValue: data && data.sickName
+                                        })(
                                             <Input />
                                         )}
                                     </Form.Item>
@@ -86,7 +108,7 @@ const ModalForm = Form.create()(
                                             disabled
                                             value={(() => {
                                                 let date = getFieldValue(
-                                                    "date"
+                                                    "birth"
                                                 );
                                                 if (date) {
                                                     let age = getAge(
@@ -108,14 +130,16 @@ const ModalForm = Form.create()(
                                         <Input
                                             disabled
                                             value={getFullChars(
-                                                getFieldValue("name")
+                                                getFieldValue("sickName")
                                             )}
                                         />
                                     </Form.Item>
                                 </div>
                                 <div className="form-col">
                                     <Form.Item label="联系方式">
-                                        {getFieldDecorator("name", {})(
+                                        {getFieldDecorator("phone", {
+                                            initialValue: data && data.phone
+                                        })(
                                             <Input />
                                         )}
                                     </Form.Item>
@@ -124,17 +148,21 @@ const ModalForm = Form.create()(
                             <div className="form-row">
                                 <div className="form-col">
                                     <Form.Item label="性别">
-                                        {getFieldDecorator("name", {})(
+                                        {getFieldDecorator("sickSex", {
+                                            initialValue: data && data.sickSex
+                                        })(
                                             <Select>
-                                                <Option value="1">男</Option>
-                                                <Option value="0">女</Option>
+                                                <Option value="男">男</Option>
+                                                <Option value="女">女</Option>
                                             </Select>
                                         )}
                                     </Form.Item>
                                 </div>
                                 <div className="form-col">
-                                    <Form.Item label="联系方式">
-                                        {getFieldDecorator("name", {})(
+                                    <Form.Item label="职业">
+                                        {getFieldDecorator("work", {
+                                            initialValue: data && data.work
+                                        })(
                                             <Input />
                                         )}
                                     </Form.Item>
@@ -143,21 +171,17 @@ const ModalForm = Form.create()(
                             <div className="form-row">
                                 <div className="form-col">
                                     <Form.Item label="身份证">
-                                        {getFieldDecorator("name", {})(
+                                        {getFieldDecorator("idcard", {})(
                                             <Input />
                                         )}
                                     </Form.Item>
                                 </div>
-                                <div className="form-col">
-                                    <Form.Item label="职业">
-                                        {getFieldDecorator("name", {})(
-                                            <Input />
-                                        )}
-                                    </Form.Item>
-                                </div>
+                                <div className="form-col"></div>
                             </div>
                             <Form.Item label="地址">
-                                {getFieldDecorator("address", {})(<TextArea />)}
+                                {getFieldDecorator("address", {
+                                    initialValue: data && data.address
+                                })(<TextArea />)}
                             </Form.Item>
                         </div>
                         <div className="patient-form-col">
@@ -295,7 +319,7 @@ const ModalForm = Form.create()(
     }
 );
 
-export default function(data) {
+export default function (data) {
     return new Promise(resolve => {
         let container = document.createElement("div");
         document.body.appendChild(container);

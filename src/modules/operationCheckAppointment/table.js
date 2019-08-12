@@ -13,56 +13,85 @@ const { RangePicker } = DatePicker;
 export default connect(state => ({ browser: state.browser, bars: state.bars }))(
     class extends React.Component {
         state = {
-            page: 1,
+            selectedIds: [],
+            currentPage: 1,
             pageSize: 10,
+            loading: false,
+
+            tableData: null,
+            total: 0
+        }
+
+        params = {
             subscribeName: null,
             startTime: null,
             endTime: null
-        };
-        fetch(page, params) {
-            http.post("/sick/getSubscribeList", params, { params: page }).then(
-                data => {
-                    console.log(data);
-                    this.setState({
-                        tableData: data.result
-                    });
-                }
-            );
+        }
+        fetch() {
+            const { currentPage, pageSize } = this.state;
+            const params = this.params;
+            this.setState({ loading: true }, () => {
+                http.post("/sick/getSubscribeList", params, {
+                    params: {
+                        currentPage, pageSize
+                    }
+                }).then(
+                    data => {
+                        this.setState({
+                            loading: false,
+                            tableData: data.result,
+                            total: data.total
+                        });
+                    }
+                );
+            })
+
         }
         componentDidMount() {
-            const {
-                page,
-                pageSize,
-                subscribeName,
-                startTime,
-                endTime
-            } = this.state;
-            this.fetch(
-                { page, pageSize },
-                { subscribeName, startTime, endTime }
-            );
+            this.fetch();
+        }
+        handleFilter = params => {
+            this.params = params;
+            this.fetch();
+        }
+        handlePageChange = (currentPage) => {
+            this.setState({ currentPage }, () => {
+                this.fetch();
+            })
         }
         handleAdd = e => {
             e.preventDefault();
             appointmentFormModal()
-                .then(() => {})
-                .catch(() => {});
+                .then(isUpdate => { isUpdate && this.fetch() })
+                .catch(() => { });
         };
         handleEdit = (data, e) => {
             e.preventDefault();
             appointmentFormModal(data)
-                .then(() => {})
-                .catch(() => {});
+                .then(isUpdate => { isUpdate && this.fetch() })
+                .catch(() => { });
         };
+        handleRowSelect = (selectedIds) => {
+            this.setState({ selectedIds })
+        }
         handleDelete = (ids, e) => {
             e.preventDefault();
             if (ids && ids.length > 0)
                 remove()
-                    .then(() => {})
-                    .catch(() => {});
+                    .then(() => {
+                        http.get("/sick/deleteSubscribe", { params: { id: ids.join(",") } }).then(() => {
+                            let { total, currentPage, pageSize } = this.state;
+                            currentPage = Math.min(currentPage, Math.ceil((total - 1) / pageSize));
+                            this.setState({ currentPage }, () => {
+                                this.fetch();
+                            })
+                        }).catch(e => { });
+                    })
+                    .catch(() => { });
         };
         render() {
             const { browser, bars } = this.props;
+            const { currentPage, pageSize, tableData, total, selectedIds, loading } = this.state;
             return (
                 <div className="appointment-table-data">
                     <Bars
@@ -72,29 +101,31 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
                                     <Icon type="plus" />
                                     新增预约
                                 </a>
-                                <a>
+                                <a onClick={e => this.handleDelete(this.state.selectedIds, e)}>
                                     <Icon type="delete" />
                                     删除
                                 </a>
                             </React.Fragment>
                         }
                     >
-                        <Filter />
+                        <Filter onFilter={this.handleFilter} />
                     </Bars>
                     <Table
+                        rowKey="id"
+                        loading={loading}
                         style={{ height: browser.height - bars.height - 100 }}
                         columns={[
                             {
                                 title: "姓名",
-                                dataIndex: "name"
+                                dataIndex: "subscribeName"
                             },
                             {
                                 title: "预约时间",
-                                dataIndex: "time"
+                                dataIndex: "date"
                             },
                             {
                                 title: "手机号码",
-                                dataIndex: "phone"
+                                dataIndex: "mobilePhone"
                             },
                             {
                                 title: "操作",
@@ -120,8 +151,18 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
                                 )
                             }
                         ]}
+                        dataSource={tableData}
+                        rowSelection={{
+                            selectedRowKeys: selectedIds,
+                            onChange: this.handleRowSelect
+                        }}
                     />
-                    <Pagination />
+                    <Pagination
+                        pageNo={currentPage}
+                        pageSize={pageSize}
+                        total={total}
+                        onPageChange={this.handlePageChange}
+                    />
                 </div>
             );
         }
@@ -130,14 +171,32 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
 
 const Filter = Form.create()(
     class extends React.Component {
+        handleSubmit = (e) => {
+            e.preventDefault();
+            this.props.form.validateFields((err, values) => {
+                this.props.onFilter && this.props.onFilter({
+                    subscribeName: values.subscribeName,
+                    startTime: values.rangeTime && values.rangeTime[0],
+                    endTime: values.rangeTime && values.rangeTime[1]
+                })
+            })
+        }
+        handleReset = () => {
+            this.props.form.resetFields();
+            this.props.onFilter && this.props.onFilter({
+                subscribeName: null,
+                startTime: null,
+                endTime: null
+            })
+        }
         render() {
             const { getFieldDecorator } = this.props.form;
             return (
-                <Form className="appointment-table-data-filter" layout="inline">
+                <Form className="appointment-table-data-filter" layout="inline" onSubmit={this.handleSubmit}>
                     <Row gutter={24}>
                         <Col span={6}>
                             <Form.Item label="姓名">
-                                {getFieldDecorator("name")(<Input />)}
+                                {getFieldDecorator("subscribeName")(<Input autoComplete="off" />)}
                             </Form.Item>
                         </Col>
                         <Col span={12}>

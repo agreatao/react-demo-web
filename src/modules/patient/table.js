@@ -14,25 +14,31 @@ export default connect(
     state => ({ browser: state.browser, bars: state.bars })
 )(class extends React.Component {
     state = {
-        pageNo: 1,
+        selectedIds: [],
+        currentPage: 1,
+        pageSize: 10,
         loading: false,
-        selectedRowKeys: null,
-        tableData: null
+
+        tableData: null,
+        total: 0
     }
-    fetch(params) {
+    params = {
+
+    }
+    fetch() {
+        const { currentPage, pageSize } = this.state;
         this.setState({ loading: true }, () => {
-            http.get("/url", { params }).then(data => {
+            http.post("/sick/getSickInfoList", this.params, { params: { currentPage, pageSize } }).then(data => {
                 this.setState({
                     loading: false,
-                    tableData: [{ id: 1 }, { id: 2 }]
+                    tableData: data.result,
+                    total: data.total
                 });
-            }).catch(e => {
-                this.setState({ loading: false, tableData: [{ id: 1 }, { id: 2 }] })
-            })
+            }).catch(e => { })
         })
     }
     componentDidMount() {
-        this.fetch({});
+        this.fetch();
     }
     handleRowClick(record, e) {
         e.preventDefault();
@@ -87,23 +93,23 @@ export default connect(
                     columns={[
                         {
                             title: '病历号',
-                            dataIndex: 'id'
+                            dataIndex: 'sickId'
                         },
                         {
                             title: '姓名',
-                            dataIndex: 'name'
+                            dataIndex: 'sickName'
                         },
                         {
                             title: '性别',
-                            dataIndex: 'sex'
+                            dataIndex: 'sickSex'
                         },
                         {
                             title: '年龄',
-                            dataIndex: 'age'
+                            dataIndex: 'sickAge'
                         },
                         {
                             title: '联系方式',
-                            dataIndex: 'contact'
+                            dataIndex: 'phone'
                         },
                         {
                             title: '就诊时间',
