@@ -23,7 +23,11 @@ export default connect(
         total: 0
     }
     params = {
-
+        startTime: null,
+        endTime: null,
+        sickName: null,
+        mobilePhone: null,
+        operation: null
     }
     fetch() {
         const { currentPage, pageSize } = this.state;
@@ -64,22 +68,24 @@ export default connect(
                 console.log(ids);
             }).catch(() => { })
     }
-    handleRowSelect = (selectedRowKeys) => {
-        this.setState({ selectedRowKeys })
+    handleRowSelect = (selectedIds) => {
+        this.setState({ selectedIds })
     }
-    handlePageChange = (pageNo) => {
-        this.setState({ pageNo });
+    handlePageChange = (currentPage) => {
+        this.setState({ currentPage }, () => {
+            this.fetch();
+        });
     }
     render() {
         const { browser, bars } = this.props;
-        const { pageNo, loading, tableData, selectedRowKeys } = this.state;
+        const { currentPage, pageSize, loading, tableData, total, selectedIds } = this.state;
         return (
             <div className="patient-table-data">
                 <Bars
                     left={
                         <React.Fragment>
                             <a onClick={this.handleAdd}><Icon type="plus" />新增患者</a>
-                            <a onClick={e => this.handleDelete(this.state.selectedRowKeys, e)}><Icon type="delete" />删除</a>
+                            <a onClick={e => this.handleDelete(this.state.selectedIds, e)}><Icon type="delete" />删除</a>
                         </React.Fragment>
                     }
                 >
@@ -131,14 +137,15 @@ export default connect(
                         onClick: e => this.handleRowClick(record, e)
                     })}
                     rowSelection={{
-                        selectedRowKeys,
+                        selectedRowKeys: selectedIds,
                         onChange: this.handleRowSelect,
                         onSelect: (record, selected, selectedRows, e) => e.stopPropagation()
                     }}
                 />
                 <Pagination
-                    total={100}
-                    pageNo={pageNo}
+                    pageNo={currentPage}
+                    pageSize={pageSize}
+                    total={total}
                     onPageChange={this.handlePageChange}
                 />
             </div>

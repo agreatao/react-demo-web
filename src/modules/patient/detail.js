@@ -10,14 +10,10 @@ import SpecialCheck from "./detailSpecialCheck";
 
 const { TabPane } = Tabs;
 
-function callback(key) {
-    console.log(key);
-}
-
 export default connect()(
     class extends React.Component {
         render() {
-            const { onClose } = this.props;
+            const { onClose, data } = this.props;
             return (
                 <div className="patient-detail">
                     <header>
@@ -26,18 +22,18 @@ export default connect()(
                             <Icon type="close" />
                         </a>
                     </header>
-                    <Tabs onChange={callback} type="card">
+                    <Tabs type="card">
                         <TabPane tab="基本信息" key="1">
-                            <BaseInfo />
+                            <BaseInfo data={data} />
                         </TabPane>
                         <TabPane tab="既往病史" key="2">
-                            <History />
+                            <History dataKey={data.sickId} />
                         </TabPane>
                         <TabPane tab="常规检查" key="3">
-                            <NormalCheck />
+                            <NormalCheck dataKey={data.sickId} />
                         </TabPane>
                         <TabPane tab="特检" key="4">
-                            <SpecialCheck />
+                            <SpecialCheck dataKey={data.sickId} />
                         </TabPane>
                     </Tabs>
                 </div>

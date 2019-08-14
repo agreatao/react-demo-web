@@ -39,13 +39,7 @@ const ModalForm = Form.create()(
         };
         handleSubmit = e => {
             e.preventDefault();
-            this.props.form.validateFields((err, values) => {
-                if (err) return;
-
-
-
-                console.log(values);
-            })
+            
         }
         render() {
             const { data } = this.props;
