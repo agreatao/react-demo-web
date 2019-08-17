@@ -3,7 +3,7 @@ import "./style";
 import React from "react";
 import entry from "utils/entry";
 import Master from "commons/master";
-import PatientTable from "./table";
+import PatientContent from "./content";
 import PatientDetail from "./detail";
 
 class PatientPage extends React.Component {
@@ -20,7 +20,7 @@ class PatientPage extends React.Component {
         const { detail } = this.state;
         return (
             <Master>
-                <PatientTable onRowSelect={this.showDetail} />
+                <PatientContent onRowSelect={this.showDetail} />
                 {
                     detail && <PatientDetail data={detail} onClose={this.hideDetail} />
                 }

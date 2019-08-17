@@ -131,7 +131,7 @@ export default connect(state => ({ browser: state.browser }))(
                                         initialValue: data && data.left5
                                     })(<Input autoComplete="off" />)}
                                 </Form.Item>
-                            </div> : <span className="ant-form-text">{data && data.left3} {data && data.left4} X {data && data.left5}</span>}
+                            </div> : <Form.Item><span className="ant-form-text">{data && data.left3} {data && data.left4} X {data && data.left5}</span></Form.Item>}
                         </div>
                         <label className="label">电脑验光</label>
                         <div className="right">
@@ -152,7 +152,7 @@ export default connect(state => ({ browser: state.browser }))(
                                         initialValue: data && data.right5
                                     })(<Input autoComplete="off" />)}
                                 </Form.Item>
-                            </div> : <span className="ant-form-text">{data && data.right3} {data && data.right4} X {data && data.right5}</span>}
+                            </div> : <Form.Item><span className="ant-form-text">{data && data.right3} {data && data.right4} X {data && data.right5}</span></Form.Item>}
                         </div>
                     </div>
                     <div className="check-form-item">
@@ -276,7 +276,7 @@ export default connect(state => ({ browser: state.browser }))(
                                             initialValue: data && data.left11
                                         })(<Input autoComplete="off" />)}
                                     </Form.Item>
-                                </div> : <span className="ant-form-text">{data && data.left9} {data && data.left10} X {data && data.left11}</span>}
+                                </div> : <Form.Item><span className="ant-form-text">{data && data.left9} {data && data.left10} X {data && data.left11}</span></Form.Item>}
                                 <div style={{ display: "flex" }}>
                                     <span className="name">远</span>
                                     <Form.Item>
@@ -317,7 +317,7 @@ export default connect(state => ({ browser: state.browser }))(
                                             initialValue: data && data.right11
                                         })(<Input autoComplete="off" />)}
                                     </Form.Item>
-                                </div> : <span className="ant-form-text">{data && data.right9} {data && data.right10} X {data && data.right11}</span>}
+                                </div> : <Form.Item><span className="ant-form-text">{data && data.right9} {data && data.right10} X {data && data.right11}</span></Form.Item>}
                                 <div style={{ display: "flex" }}>
                                     <span className="name">远</span>
                                     <Form.Item>

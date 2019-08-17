@@ -41,46 +41,58 @@ export default connect(
             }).catch(e => { })
         })
     }
+
     componentDidMount() {
         this.fetch();
     }
-    handleRowClick(record, e) {
-        e.preventDefault();
-        const { onRowSelect } = this.props;
-        onRowSelect && onRowSelect(record);
-    }
-    handleAdd = (e) => {
-        e.preventDefault();
-        patientFormModal().then(() => {
-
-        }).catch(() => { });
-    }
-    handleEdit(data, e) {
-        e && e.stopPropagation();
-        patientFormModal(data).then(() => {
-
-        }).catch(() => { });
-    }
-    handleDelete(ids, e) {
-        e && e.stopPropagation();
-        if (ids && ids.length > 0)
-            remove().then(() => {
-                console.log(ids);
-            }).catch(() => { })
-    }
-    handleRowSelect = (selectedIds) => {
-        this.setState({ selectedIds })
+    handleFilter = params => {
+        this.params = params;
+        this.fetch();
     }
     handlePageChange = (currentPage) => {
         this.setState({ currentPage }, () => {
             this.fetch();
         });
     }
+    handleRowClick(record, e) {
+        e.preventDefault();
+        const { onRowSelect } = this.props;
+        onRowSelect && onRowSelect(record);
+    }
+    handleAdd = e => {
+        e.preventDefault();
+        patientFormModal()
+            .then(isUpdate => { isUpdate && this.fetch(); })
+            .catch(() => { });
+    }
+    handleEdit = (data, e) => {
+        e && e.stopPropagation();
+        patientFormModal(data)
+            .then(isUpdate => { isUpdate && this.fetch(); })
+            .catch(() => { });
+    }
+    handleRowSelect = (selectedIds) => {
+        this.setState({ selectedIds })
+    }
+    handleDelete = (ids, e) => {
+        e && e.preventDefault();
+        e && e.stopPropagation();
+        if (ids && ids.length > 0)
+            remove().then(() => {
+                http.get("/sick/deleteSickInfo", { params: { ids: ids.join(",") } }).then(() => {
+                    let { total, currentPage, pageSize } = this.state;
+                    currentPage = Math.min(currentPage, Math.ceil((total - 1) / pageSize));
+                    this.setState({ currentPage }, () => {
+                        this.fetch();
+                    })
+                })
+            }).catch(() => { })
+    }
     render() {
         const { browser, bars } = this.props;
         const { currentPage, pageSize, loading, tableData, total, selectedIds } = this.state;
         return (
-            <div className="patient-table-data">
+            <div className="patient-content">
                 <Bars
                     left={
                         <React.Fragment>
@@ -89,7 +101,7 @@ export default connect(
                         </React.Fragment>
                     }
                 >
-                    <Filter />
+                    <Filter onFilter={this.handleFilter} />
                 </Bars>
                 <Table
                     className="patient-table"
@@ -115,7 +127,7 @@ export default connect(
                         },
                         {
                             title: '联系方式',
-                            dataIndex: 'phone'
+                            dataIndex: 'mobilePhone'
                         },
                         {
                             title: '就诊时间',
@@ -160,15 +172,25 @@ const Filter = Form.create()(
             this.props.form.validateFields((err, values) => {
                 if (err) return;
                 let startTime = null, endTime = null;
-                const { code, name, contact, rangeTime } = values;
+                const { sickId, sickName, mobilePhone, rangeTime } = values;
                 if (rangeTime) [startTime, endTime] = rangeTime;
-                console.log({
-                    code, name, contact, startTime, endTime
+                this.props.onFilter && this.props.onFilter({
+                    startTime, endTime,
+                    sickId,
+                    sickName,
+                    mobilePhone
                 })
             })
         }
         handleReset = () => {
             this.props.form.resetFields();
+            this.props.onFilter && this.props.onFilter({
+                startTime: null,
+                endTime: null,
+                sickId: null,
+                sickName: null,
+                mobilePhone: null
+            })
         }
         render() {
             const { getFieldDecorator } = this.props.form;
@@ -177,17 +199,17 @@ const Filter = Form.create()(
                     <Row gutter={24}>
                         <Col span={8}>
                             <Form.Item label="病例号">
-                                {getFieldDecorator("code")(<Input placeholder="请输入病历号" autoComplete="off" />)}
+                                {getFieldDecorator("sickId")(<Input placeholder="请输入病历号" autoComplete="off" />)}
                             </Form.Item>
                         </Col>
                         <Col span={8}>
                             <Form.Item label="姓名">
-                                {getFieldDecorator("name")(<Input placeholder="请输入姓名" autoComplete="off" />)}
+                                {getFieldDecorator("sickName")(<Input placeholder="请输入姓名" autoComplete="off" />)}
                             </Form.Item>
                         </Col>
                         <Col span={8}>
                             <Form.Item label="联系方式">
-                                {getFieldDecorator("contact")(<Input placeholder="请输入联系方式" autoComplete="off" />)}
+                                {getFieldDecorator("mobilePhone")(<Input placeholder="请输入联系方式" autoComplete="off" />)}
                             </Form.Item>
                         </Col>
                         <Col span={16}>
