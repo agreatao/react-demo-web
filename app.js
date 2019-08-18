@@ -29,6 +29,7 @@ app.use(`${CONFIG.baseURL}/`, express.static(path.join(__dirname, "dist/static")
 app.use(`${CONFIG.baseURL}/patient`, express.static(path.join(__dirname, "dist/templates", "patient.html")));
 app.use(`${CONFIG.baseURL}/operationCheckAppointment`, express.static(path.join(__dirname, "dist/templates", "operationCheckAppointment.html")));
 app.use(`${CONFIG.baseURL}/medicine`, express.static(path.join(__dirname, "dist/templates", "medicine.html")));
+app.use(`${CONFIG.baseURL}/doctor`, express.static(path.join(__dirname, "dist/templates", "doctor.html")));
 
 
 

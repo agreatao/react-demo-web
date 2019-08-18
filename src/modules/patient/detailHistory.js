@@ -58,7 +58,7 @@ export default connect(state => ({ browser: state.browser }))(
                             <span className="ant-form-text">{data && data.glassYear}</span>
                         </Form.Item>
                         <Form.Item style={{ flex: 1 }} {...subLayout} label="脱镜">
-                            <span className="ant-form-text">1年半</span>
+                            <span className="ant-form-text"></span>
                         </Form.Item>
                     </div>
                     <hr />
@@ -72,6 +72,7 @@ export default connect(state => ({ browser: state.browser }))(
                     <div className="check-form-item">
                         <div className="left">
                             <div className="eye">
+
                                 <span>{data && data.degreeL1}</span>
                                 <span>{data && data.degreeL2}</span>
                                 /

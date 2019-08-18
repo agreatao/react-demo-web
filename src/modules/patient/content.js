@@ -130,10 +130,6 @@ export default connect(
                             dataIndex: 'mobilePhone'
                         },
                         {
-                            title: '就诊时间',
-                            dataIndex: 'time'
-                        },
-                        {
                             title: "操作",
                             key: "action",
                             dataIndex: "id",

@@ -50,7 +50,17 @@ const ModalForm = Form.create()(
             e.preventDefault();
             this.props.form.validateFields((err, values) => {
                 if (err) return;
+                const { data } = this.props;
+                const { history } = this.state;
                 console.log(values);
+                Promise.all([
+                    http.post(data ? "/sick/updateSickInfo" : "/sick/addSickInfo", { ...values, id: data && data.id }),
+                    http.post(history ? "/sick/updateSickHistory" : "/sick/addSickHistory", { ...values, id: history && history.id })
+                ]).then(([baseInfo, history]) => {
+
+                }).catch(e => {
+
+                })
             })
         }
         render() {

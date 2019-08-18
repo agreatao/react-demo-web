@@ -349,9 +349,9 @@ export default connect(state => ({ browser: state.browser }))(
                                 <Button onClick={e => this.setState({ edit: true })} type="primary">编辑</Button>
                             </div>
                     }
-                </Form > : <div className="btn-group">
-                        <Button onClick={this.handleCreate} type="primary">创建常规检查</Button>
-                    </div>
+                </Form > : <div className="tab-page"><div className="btn-group">
+                    <Button onClick={this.handleCreate} type="primary">创建常规检查</Button>
+                </div></div>
             }
         }
     )
