@@ -127,12 +127,15 @@ const ModalForm = Form.create()(
                             <div className="form-row">
                                 <div className="form-col">
                                     <Form.Item label="姓名拼音">
-                                        <Input
+                                        {getFieldDecorator("sickChinaName", {
+                                            initialValue: data && data.sickChinaName
+                                        })(<Input autoComplete="off" disabled={data?true:false} />)}
+                                        {/*<Input
                                             disabled
                                             value={getFullChars(
-                                                getFieldValue("sickName")
+                                                getFieldValue("sickChinaName")
                                             )}
-                                        />
+                                        />*/}
                                     </Form.Item>
                                 </div>
                                 <div className="form-col">
@@ -165,7 +168,9 @@ const ModalForm = Form.create()(
                             <div className="form-row">
                                 <div className="form-col">
                                     <Form.Item label="身份证">
-                                        <Input autoComplete="off" />
+                                        {getFieldDecorator("chinaId", {
+                                            initialValue: data && data.chinaId
+                                        })(<Input autoComplete="off" />)}
                                     </Form.Item>
                                 </div>
                                 <div className="form-col"></div>
