@@ -16,7 +16,7 @@ import "moment/locale/zh-cn";
 import moment from "moment";
 moment.locale("zh-cn");
 
-export default function entry(ReactNode) {
+export default function entry(ReactNode, container) {
     render(
         <Provider store={store}>
             <ConfigProvider locale={zhCN}>
@@ -25,6 +25,6 @@ export default function entry(ReactNode) {
                 </React.Fragment>
             </ConfigProvider>
         </Provider>,
-        document.getElementById("app")
+        container || document.getElementById("app")
     );
 }

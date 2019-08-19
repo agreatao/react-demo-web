@@ -92,7 +92,7 @@ export default connect(
         const { browser, bars } = this.props;
         const { currentPage, pageSize, loading, tableData, total, selectedIds } = this.state;
         return (
-            <div className="patient-content">
+            <div>
                 <Bars
                     left={
                         <React.Fragment>
@@ -191,7 +191,7 @@ const Filter = Form.create()(
         render() {
             const { getFieldDecorator } = this.props.form;
             return (
-                <Form className="patient-table-data-filter" onSubmit={this.handleSubmit}>
+                <Form onSubmit={this.handleSubmit}>
                     <Row gutter={24}>
                         <Col span={8}>
                             <Form.Item label="病例号">

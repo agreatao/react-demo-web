@@ -20,32 +20,30 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
 
             tableData: null,
             total: 0
-        }
+        };
 
         params = {
             subscribeName: null,
             startTime: null,
             endTime: null
-        }
+        };
         fetch() {
             const { currentPage, pageSize } = this.state;
             const params = this.params;
             this.setState({ loading: true }, () => {
                 http.post("/sick/getSubscribeList", params, {
                     params: {
-                        currentPage, pageSize
+                        currentPage,
+                        pageSize
                     }
-                }).then(
-                    data => {
-                        this.setState({
-                            loading: false,
-                            tableData: data.result,
-                            total: data.total
-                        });
-                    }
-                );
-            })
-
+                }).then(data => {
+                    this.setState({
+                        loading: false,
+                        tableData: data.result,
+                        total: data.total
+                    });
+                });
+            });
         }
         componentDidMount() {
             this.fetch();
@@ -53,47 +51,69 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
         handleFilter = params => {
             this.params = params;
             this.fetch();
-        }
-        handlePageChange = (currentPage) => {
+        };
+        handlePageChange = currentPage => {
             this.setState({ currentPage }, () => {
                 this.fetch();
-            })
-        }
+            });
+        };
         handleAdd = e => {
             e.preventDefault();
             appointmentFormModal()
-                .then(isUpdate => { isUpdate && this.fetch() })
-                .catch(() => { });
+                .then(isUpdate => {
+                    isUpdate && this.fetch();
+                })
+                .catch(() => {});
         };
         handleEdit = (data, e) => {
             e.preventDefault();
             appointmentFormModal(data)
-                .then(isUpdate => { isUpdate && this.fetch() })
-                .catch(() => { });
+                .then(isUpdate => {
+                    isUpdate && this.fetch();
+                })
+                .catch(() => {});
         };
-        handleRowSelect = (selectedIds) => {
-            this.setState({ selectedIds })
-        }
+        handleRowSelect = selectedIds => {
+            this.setState({ selectedIds });
+        };
         handleDelete = (ids, e) => {
             e && e.preventDefault();
             if (ids && ids.length > 0)
                 remove()
                     .then(() => {
-                        http.get("/sick/deleteSubscribe", { params: { ids: ids.join(",") } }).then(() => {
-                            let { total, currentPage, pageSize } = this.state;
-                            currentPage = Math.min(currentPage, Math.ceil((total - 1) / pageSize));
-                            this.setState({ currentPage }, () => {
-                                this.fetch();
+                        http.get("/sick/deleteSubscribe", {
+                            params: { ids: ids.join(",") }
+                        })
+                            .then(() => {
+                                let {
+                                    total,
+                                    currentPage,
+                                    pageSize
+                                } = this.state;
+                                currentPage = Math.min(
+                                    currentPage,
+                                    Math.ceil((total - 1) / pageSize)
+                                );
+                                this.setState({ currentPage }, () => {
+                                    this.fetch();
+                                });
                             })
-                        }).catch(e => { });
+                            .catch(e => {});
                     })
-                    .catch(() => { });
+                    .catch(() => {});
         };
         render() {
             const { browser, bars } = this.props;
-            const { currentPage, pageSize, tableData, total, selectedIds, loading } = this.state;
+            const {
+                currentPage,
+                pageSize,
+                tableData,
+                total,
+                selectedIds,
+                loading
+            } = this.state;
             return (
-                <div className="appointment-content">
+                <div>
                     <Bars
                         left={
                             <React.Fragment>
@@ -101,7 +121,14 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
                                     <Icon type="plus" />
                                     新增预约
                                 </a>
-                                <a onClick={e => this.handleDelete(this.state.selectedIds, e)}>
+                                <a
+                                    onClick={e =>
+                                        this.handleDelete(
+                                            this.state.selectedIds,
+                                            e
+                                        )
+                                    }
+                                >
                                     <Icon type="delete" />
                                     删除
                                 </a>
@@ -171,32 +198,36 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
 
 const Filter = Form.create()(
     class extends React.Component {
-        handleSubmit = (e) => {
+        handleSubmit = e => {
             e.preventDefault();
             this.props.form.validateFields((err, values) => {
-                this.props.onFilter && this.props.onFilter({
-                    subscribeName: values.subscribeName,
-                    startTime: values.rangeTime && values.rangeTime[0],
-                    endTime: values.rangeTime && values.rangeTime[1]
-                })
-            })
-        }
+                this.props.onFilter &&
+                    this.props.onFilter({
+                        subscribeName: values.subscribeName,
+                        startTime: values.rangeTime && values.rangeTime[0],
+                        endTime: values.rangeTime && values.rangeTime[1]
+                    });
+            });
+        };
         handleReset = () => {
             this.props.form.resetFields();
-            this.props.onFilter && this.props.onFilter({
-                subscribeName: null,
-                startTime: null,
-                endTime: null
-            })
-        }
+            this.props.onFilter &&
+                this.props.onFilter({
+                    subscribeName: null,
+                    startTime: null,
+                    endTime: null
+                });
+        };
         render() {
             const { getFieldDecorator } = this.props.form;
             return (
-                <Form className="appointment-table-data-filter" layout="inline" onSubmit={this.handleSubmit}>
+                <Form layout="inline" onSubmit={this.handleSubmit}>
                     <Row gutter={24}>
                         <Col span={6}>
                             <Form.Item label="姓名">
-                                {getFieldDecorator("subscribeName")(<Input autoComplete="off" />)}
+                                {getFieldDecorator("subscribeName")(
+                                    <Input autoComplete="off" />
+                                )}
                             </Form.Item>
                         </Col>
                         <Col span={12}>
@@ -206,7 +237,7 @@ const Filter = Form.create()(
                                 )}
                             </Form.Item>
                         </Col>
-                        <Col span={6} className="filter-button">
+                        <Col span={6}>
                             <Button type="primary" htmlType="submit">
                                 查询
                             </Button>
