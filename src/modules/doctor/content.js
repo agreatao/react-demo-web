@@ -61,7 +61,7 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
             this.setState({ selectedIds });
         };
         handleDelete = (ids, e) => {
-            e && e.preventDefault();
+            e.preventDefault();
             if (ids && ids.length > 0)
                 remove()
                     .then(() => {

@@ -1,18 +1,17 @@
+import { Icon } from "antd";
+import { remove } from "components/alert";
+import Bars from "components/bars";
+import Pagination from "components/pagination";
+import Table from "components/table";
 import React from "react";
 import { connect } from "react-redux";
-import { Row, Col, Icon, Form, Input, DatePicker, Button } from "antd";
-import Bars from "components/bars";
-import Table from "components/table";
-import Pagination from "components/pagination";
-import { remove } from "components/alert";
 import http from "utils/http";
-import patientFormModal from "./formModal";
-
-const { RangePicker } = DatePicker;
+import Filter from "./filter";
+import form from "./form";
 
 export default connect(
     state => ({ browser: state.browser, bars: state.bars })
-)(class extends React.Component {
+)(class Content extends React.Component {
     state = {
         selectedIds: [],
         currentPage: 1,
@@ -41,7 +40,6 @@ export default connect(
             }).catch(e => { })
         })
     }
-
     componentDidMount() {
         this.fetch();
     }
@@ -61,53 +59,49 @@ export default connect(
     }
     handleAdd = e => {
         e.preventDefault();
-        patientFormModal()
-            .then(isUpdate => { isUpdate && this.fetch(); })
-            .catch(() => { });
+        form()
+            .then(isUpdate => { isUpdate && this.fetch(); });
     }
     handleEdit = (data, e) => {
         e && e.stopPropagation();
-        patientFormModal(data)
-            .then(isUpdate => { isUpdate && this.fetch(); })
-            .catch(() => { });
+        form(data)
+            .then(isUpdate => { isUpdate && this.fetch(); });
     }
     handleRowSelect = (selectedIds) => {
         this.setState({ selectedIds })
     }
     handleDelete = (ids, e) => {
-        e && e.preventDefault();
-        e && e.stopPropagation();
+        e.preventDefault();
+        e.stopPropagation();
         if (ids && ids.length > 0)
-            remove().then(() => {
-                http.get("/sick/deleteSickInfo", { params: { ids: ids.join(",") } }).then(() => {
-                    let { total, currentPage, pageSize } = this.state;
-                    currentPage = Math.min(currentPage, Math.ceil((total - 1) / pageSize));
-                    this.setState({ currentPage }, () => {
-                        this.fetch();
-                    })
+            remove()
+                .then(() => {
+                    http.get("/sick/deleteSickInfo", { params: { ids: ids.join(",") } })
+                        .then(() => {
+                            let { total, currentPage, pageSize } = this.state;
+                            currentPage = Math.min(currentPage, Math.ceil((total - 1) / pageSize));
+                            this.setState({ currentPage }, () => {
+                                this.fetch();
+                            })
+                        })
                 })
-            }).catch(() => { })
     }
     render() {
         const { browser, bars } = this.props;
         const { currentPage, pageSize, loading, tableData, total, selectedIds } = this.state;
         return (
-            <div>
+            <div style={{ flex: 1 }}>
                 <Bars
                     left={
                         <React.Fragment>
                             <a onClick={this.handleAdd}><Icon type="plus" />新增患者</a>
                             <a onClick={e => this.handleDelete(this.state.selectedIds, e)}><Icon type="delete" />删除</a>
                         </React.Fragment>
-                    }
-                >
+                    }>
                     <Filter onFilter={this.handleFilter} />
                 </Bars>
                 <Table
-                    className="patient-table"
-                    loading={loading}
                     style={{ height: browser.height - bars.height - 100 }}
-                    rowKey="id"
                     columns={[
                         {
                             title: '病历号',
@@ -131,24 +125,25 @@ export default connect(
                         },
                         {
                             title: "操作",
-                            key: "action",
-                            dataIndex: "id",
                             className: "actions",
+                            dataIndex: "id",
                             render: (id, row) => <React.Fragment>
                                 <a onClick={e => this.handleEdit(row, e)}>编辑</a>
                                 <a onClick={e => this.handleDelete([id], e)}>删除</a>
                             </React.Fragment>
                         }
                     ]}
-                    dataSource={tableData}
-                    onRow={record => ({
-                        onClick: e => this.handleRowClick(record, e)
-                    })}
                     rowSelection={{
                         selectedRowKeys: selectedIds,
                         onChange: this.handleRowSelect,
                         onSelect: (record, selected, selectedRows, e) => e.stopPropagation()
                     }}
+                    onRow={record => ({
+                        onClick: e => this.handleRowClick(record, e)
+                    })}
+                    rowKey="id"
+                    dataSource={tableData}
+                    loading={loading}
                 />
                 <Pagination
                     pageNo={currentPage}
@@ -159,67 +154,4 @@ export default connect(
             </div>
         );
     }
-})
-
-const Filter = Form.create()(
-    class extends React.Component {
-        handleSubmit = (e) => {
-            e.preventDefault();
-            this.props.form.validateFields((err, values) => {
-                if (err) return;
-                let startTime = null, endTime = null;
-                const { sickId, sickName, mobilePhone, rangeTime } = values;
-                if (rangeTime) [startTime, endTime] = rangeTime;
-                this.props.onFilter && this.props.onFilter({
-                    startTime, endTime,
-                    sickId,
-                    sickName,
-                    mobilePhone
-                })
-            })
-        }
-        handleReset = () => {
-            this.props.form.resetFields();
-            this.props.onFilter && this.props.onFilter({
-                startTime: null,
-                endTime: null,
-                sickId: null,
-                sickName: null,
-                mobilePhone: null
-            })
-        }
-        render() {
-            const { getFieldDecorator } = this.props.form;
-            return (
-                <Form onSubmit={this.handleSubmit}>
-                    <Row gutter={24}>
-                        <Col span={8}>
-                            <Form.Item label="病例号">
-                                {getFieldDecorator("sickId")(<Input placeholder="请输入病历号" autoComplete="off" />)}
-                            </Form.Item>
-                        </Col>
-                        <Col span={8}>
-                            <Form.Item label="姓名">
-                                {getFieldDecorator("sickName")(<Input placeholder="请输入姓名" autoComplete="off" />)}
-                            </Form.Item>
-                        </Col>
-                        <Col span={8}>
-                            <Form.Item label="联系方式">
-                                {getFieldDecorator("mobilePhone")(<Input placeholder="请输入联系方式" autoComplete="off" />)}
-                            </Form.Item>
-                        </Col>
-                        <Col span={16}>
-                            <Form.Item label="起始时间">
-                                {getFieldDecorator("rangeTime")(<RangePicker showTime />)}
-                            </Form.Item>
-                        </Col>
-                        <Col span={8} className="filter-button">
-                            <Button type="primary" htmlType="submit">查询</Button>
-                            <Button onClick={this.handleReset}>重置</Button>
-                        </Col>
-                    </Row>
-                </Form>
-            );
-        }
-    }
-);
+});
