@@ -5,7 +5,7 @@ import entry from "utils/entry";
 
 const IS_REACT_16 = !!ReactDOM.createPortal;
 
-export default function confirm() {
+export default function confirm(ChildNode) {
     const div = document.createElement("div");
     document.body.appendChild(div);
 
@@ -21,14 +21,16 @@ export default function confirm() {
     function render(props) {
         entry(
             <Modal
+                className="modal-form"
                 centered
-                bodyStyle={{ padding: 28 }}
                 getContainer={false}
                 footer={false}
                 maskClosable={false}
                 onCancel={close}
                 {...props}
-            />,
+            >
+                {ChildNode}
+            </Modal>,
             div
         );
     }
@@ -46,4 +48,8 @@ export default function confirm() {
     }
 
     render(currentConfig);
+
+    return {
+        close
+    }
 }

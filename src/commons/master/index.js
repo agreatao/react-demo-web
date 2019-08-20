@@ -14,7 +14,7 @@ export default connect(state => ({ browser: state.browser }))(
                     <Header />
                     <Sidebar />
                     <section
-                        className="page-view"
+                        className="page-container"
                         style={{ height: height - 50 }}
                     >
                         {this.props.children}

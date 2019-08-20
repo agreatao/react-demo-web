@@ -3,6 +3,14 @@ import React from "react";
 import "./style";
 
 class Page extends React.Component {
+    static getDerivedStateFromProps(props) {
+        return {
+            pageNo: props.pageNo,
+            pageSize: props.pageSize,
+            total: props.total,
+            jumpPageNo: props.pageNo
+        }
+    }
     constructor(props) {
         super(props);
         this.state = {
@@ -11,16 +19,6 @@ class Page extends React.Component {
             pageSize: props.pageSize,
             total: props.total
         };
-    }
-    componentWillReceiveProps(nextProps) {
-        if (nextProps) {
-            this.setState({
-                pageNo: nextProps.pageNo,
-                pageSize: nextProps.pageSize,
-                total: nextProps.total,
-                jumpPageNo: nextProps.pageNo
-            });
-        }
     }
     onChange(pageNo) {
         const { pageSize } = this.state;

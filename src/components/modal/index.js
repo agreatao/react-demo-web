@@ -1,6 +1,4 @@
 import Close from './close';
-import './style.less';
+import './style';
 
-export {
-    Close
-}
+export { Close };

@@ -1,9 +1,9 @@
-import "./style";
-
+import { Icon } from "antd";
+import classnames from "classnames";
 import React from "react";
 import { connect } from "react-redux";
-import classnames from "classnames";
-import { Icon } from "antd";
+import { barsResize } from "store/actions/bars";
+import "./style";
 
 class Bars extends React.Component {
     constructor(props) {
@@ -48,7 +48,6 @@ class Bars extends React.Component {
     }
 }
 
-import { barsResize } from "store/actions/bars";
 
 export default connect(
     null,

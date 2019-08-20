@@ -1,4 +1,5 @@
 import { Modal } from "antd";
+import _confirm from "./confirm";
 
 const centered = true;
 
@@ -59,6 +60,5 @@ export function remove() {
     });
 }
 
-import _confirm from "./confirm";
 
 export const confirm = _confirm;

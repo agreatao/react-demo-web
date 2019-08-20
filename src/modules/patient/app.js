@@ -3,10 +3,10 @@ import "./style";
 import React from "react";
 import entry from "utils/entry";
 import Master from "commons/master";
-import PatientContent from "./content";
-import PatientDetail from "./detail";
+import Content from "./content";
+import Detail from "./detail";
 
-class PatientPage extends React.Component {
+class Page extends React.Component {
     state = {
         detail: null
     }
@@ -20,13 +20,15 @@ class PatientPage extends React.Component {
         const { detail } = this.state;
         return (
             <Master>
-                <PatientContent onRowSelect={this.showDetail} />
-                {
-                    detail && <PatientDetail data={detail} onClose={this.hideDetail} />
-                }
+                <div style={{ display: "flex" }}>
+                    <Content onRowSelect={this.showDetail} />
+                    {
+                        detail && <Detail data={detail} onClose={this.hideDetail} />
+                    }
+                </div>
             </Master>
         );
     }
 }
 
-entry(<PatientPage />);
+entry(<Page />);

@@ -20,9 +20,7 @@ export default function entry(ReactNode, container) {
     render(
         <Provider store={store}>
             <ConfigProvider locale={zhCN}>
-                <React.Fragment>
-                    {ReactNode}
-                </React.Fragment>
+                {ReactNode}
             </ConfigProvider>
         </Provider>,
         container || document.getElementById("app")

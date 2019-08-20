@@ -1,4 +1,4 @@
-import { Button, Col, Form, Icon, Input, Row } from "antd";
+import { Icon } from "antd";
 import { remove } from "components/alert";
 import Bars from "components/bars";
 import Pagination from "components/pagination";
@@ -6,10 +6,11 @@ import Table from "components/table";
 import React from "react";
 import { connect } from "react-redux";
 import http from "utils/http";
-import medicineFormModal from "./formModal";
+import Filter from "./filter";
+import form from "./form";
 
 export default connect(state => ({ browser: state.browser, bars: state.bars }))(
-    class extends React.Component {
+    class Content extends React.Component {
         state = {
             selectedIds: [],
             currentPage: 1,
@@ -24,20 +25,15 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
         };
         fetch() {
             const { currentPage, pageSize } = this.state;
-            const params = this.params;
             this.setState({ loading: true }, () => {
-                http.post("/drug/queryDrugInfoList", params, {
-                    params: {
-                        currentPage,
-                        pageSize
-                    }
-                }).then(data => {
-                    this.setState({
-                        loading: false,
-                        tableData: data.result,
-                        total: data.total
+                http.post("/drug/queryDrugInfoList", this.params, { params: { currentPage, pageSize } })
+                    .then(data => {
+                        this.setState({
+                            loading: false,
+                            tableData: data.result,
+                            total: data.total
+                        });
                     });
-                });
             });
         }
         componentDidMount() {
@@ -54,87 +50,53 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
         };
         handleAdd = e => {
             e.preventDefault();
-            medicineFormModal()
+            form()
                 .then(isUpdate => {
                     isUpdate && this.fetch();
                 })
-                .catch(() => {});
+                .catch(() => { });
         };
         handleEdit = (data, e) => {
             e.preventDefault();
-            medicineFormModal(data)
+            form(data)
                 .then(isUpdate => {
                     isUpdate && this.fetch();
                 })
-                .catch(() => {});
+                .catch(() => { });
         };
         handleRowSelect = selectedIds => {
             this.setState({ selectedIds });
         };
         handleDelete = (ids, e) => {
-            e && e.preventDefault();
+            e.preventDefault();
             if (ids && ids.length > 0)
                 remove()
                     .then(() => {
-                        http.get("/drug/deleteDrugInfo", {
-                            params: { ids: ids.join(",") }
-                        })
+                        http.get("/drug/deleteDrugInfo", { params: { ids: ids.join(",") } })
                             .then(() => {
-                                let {
-                                    total,
-                                    currentPage,
-                                    pageSize
-                                } = this.state;
-                                currentPage = Math.min(
-                                    currentPage,
-                                    Math.ceil((total - 1) / pageSize)
-                                );
+                                let { total, currentPage, pageSize } = this.state;
+                                currentPage = Math.min(currentPage, Math.ceil((total - 1) / pageSize));
                                 this.setState({ currentPage }, () => {
                                     this.fetch();
                                 });
                             })
-                            .catch(e => {});
                     })
-                    .catch(() => {});
         };
         render() {
             const { browser, bars } = this.props;
-            const {
-                currentPage,
-                pageSize,
-                tableData,
-                total,
-                selectedIds,
-                loading
-            } = this.state;
+            const { currentPage, pageSize, tableData, total, selectedIds, loading } = this.state;
             return (
                 <div>
                     <Bars
                         left={
                             <React.Fragment>
-                                <a onClick={this.handleAdd}>
-                                    <Icon type="plus" />
-                                    新增药品
-                                </a>
-                                <a
-                                    onClick={e =>
-                                        this.handleDelete(
-                                            this.state.selectedIds,
-                                            e
-                                        )
-                                    }
-                                >
-                                    <Icon type="delete" />
-                                    删除
-                                </a>
+                                <a onClick={this.handleAdd}><Icon type="plus" />新增药品</a>
+                                <a onClick={e => this.handleDelete(this.state.selectedIds, e)}><Icon type="delete" />批量删除</a>
                             </React.Fragment>
-                        }
-                    >
+                        }>
                         <Filter onFilter={this.handleFilter} />
                     </Bars>
                     <Table
-                        rowKey="id"
-                        loading={loading}
                         style={{ height: browser.height - bars.height - 100 }}
                         scroll={{
                             y: browser.height - bars.height - 155,
@@ -170,31 +132,19 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
                                 className: "actions",
                                 dataIndex: "id",
                                 width: 100,
-                                render: (id, row) => (
-                                    <React.Fragment>
-                                        <a
-                                            onClick={e =>
-                                                this.handleEdit(row, e)
-                                            }
-                                        >
-                                            修改
-                                        </a>
-                                        <a
-                                            onClick={e =>
-                                                this.handleDelete([id], e)
-                                            }
-                                        >
-                                            删除
-                                        </a>
-                                    </React.Fragment>
-                                )
+                                render: (id, row) => <React.Fragment>
+                                    <a onClick={e => this.handleEdit(row, e)}>修改</a>
+                                    <a onClick={e => this.handleDelete([id], e)}>删除</a>
+                                </React.Fragment>
                             }
                         ]}
-                        dataSource={tableData}
                         rowSelection={{
                             selectedRowKeys: selectedIds,
                             onChange: this.handleRowSelect
                         }}
+                        rowKey="id"
+                        dataSource={tableData}
+                        loading={loading}
                     />
                     <Pagination
                         pageNo={currentPage}
@@ -203,46 +153,6 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
                         onPageChange={this.handlePageChange}
                     />
                 </div>
-            );
-        }
-    }
-);
-
-const Filter = Form.create()(
-    class extends React.Component {
-        handleSubmit = e => {
-            e.preventDefault();
-            this.props.form.validateFields((err, values) => {
-                this.props.onFilter && this.props.onFilter(values);
-            });
-        };
-        handleReset = () => {
-            this.props.form.resetFields();
-            this.props.onFilter &&
-                this.props.onFilter({
-                    drugName: null
-                });
-        };
-        render() {
-            const { getFieldDecorator } = this.props.form;
-            return (
-                <Form layout="inline" onSubmit={this.handleSubmit}>
-                    <Row gutter={24}>
-                        <Col span={18}>
-                            <Form.Item label="药品名称">
-                                {getFieldDecorator("drugName")(
-                                    <Input autoComplete="off" />
-                                )}
-                            </Form.Item>
-                        </Col>
-                        <Col span={6} className="filter-button">
-                            <Button type="primary" htmlType="submit">
-                                查询
-                            </Button>
-                            <Button onClick={this.handleReset}>重置</Button>
-                        </Col>
-                    </Row>
-                </Form>
             );
         }
     }

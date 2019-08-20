@@ -6,12 +6,13 @@ import Table from "components/table";
 import React from "react";
 import { connect } from "react-redux";
 import http from "utils/http";
-import appointmentFormModal from "./formModal";
+import Filter from "./filter";
+import form from "./form";
 
 const { RangePicker } = DatePicker;
 
 export default connect(state => ({ browser: state.browser, bars: state.bars }))(
-    class extends React.Component {
+    class Content extends React.Component {
         state = {
             selectedIds: [],
             currentPage: 1,
@@ -21,7 +22,6 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
             tableData: null,
             total: 0
         };
-
         params = {
             subscribeName: null,
             startTime: null,
@@ -29,20 +29,15 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
         };
         fetch() {
             const { currentPage, pageSize } = this.state;
-            const params = this.params;
             this.setState({ loading: true }, () => {
-                http.post("/sick/getSubscribeList", params, {
-                    params: {
-                        currentPage,
-                        pageSize
-                    }
-                }).then(data => {
-                    this.setState({
-                        loading: false,
-                        tableData: data.result,
-                        total: data.total
+                http.post("/sick/getSubscribeList", this.params, { params: { currentPage, pageSize } })
+                    .then(data => {
+                        this.setState({
+                            loading: false,
+                            tableData: data.result,
+                            total: data.total
+                        });
                     });
-                });
             });
         }
         componentDidMount() {
@@ -59,19 +54,19 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
         };
         handleAdd = e => {
             e.preventDefault();
-            appointmentFormModal()
+            form()
                 .then(isUpdate => {
                     isUpdate && this.fetch();
                 })
-                .catch(() => {});
+                .catch(() => { });
         };
         handleEdit = (data, e) => {
             e.preventDefault();
-            appointmentFormModal(data)
+            form(data)
                 .then(isUpdate => {
                     isUpdate && this.fetch();
                 })
-                .catch(() => {});
+                .catch(() => { });
         };
         handleRowSelect = selectedIds => {
             this.setState({ selectedIds });
@@ -85,61 +80,29 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
                             params: { ids: ids.join(",") }
                         })
                             .then(() => {
-                                let {
-                                    total,
-                                    currentPage,
-                                    pageSize
-                                } = this.state;
-                                currentPage = Math.min(
-                                    currentPage,
-                                    Math.ceil((total - 1) / pageSize)
-                                );
+                                let { total, currentPage, pageSize } = this.state;
+                                currentPage = Math.min(currentPage, Math.ceil((total - 1) / pageSize));
                                 this.setState({ currentPage }, () => {
                                     this.fetch();
                                 });
                             })
-                            .catch(e => {});
                     })
-                    .catch(() => {});
         };
         render() {
             const { browser, bars } = this.props;
-            const {
-                currentPage,
-                pageSize,
-                tableData,
-                total,
-                selectedIds,
-                loading
-            } = this.state;
+            const { currentPage, pageSize, tableData, total, selectedIds, loading } = this.state;
             return (
                 <div>
                     <Bars
                         left={
                             <React.Fragment>
-                                <a onClick={this.handleAdd}>
-                                    <Icon type="plus" />
-                                    新增预约
-                                </a>
-                                <a
-                                    onClick={e =>
-                                        this.handleDelete(
-                                            this.state.selectedIds,
-                                            e
-                                        )
-                                    }
-                                >
-                                    <Icon type="delete" />
-                                    删除
-                                </a>
+                                <a onClick={this.handleAdd}><Icon type="plus" />新增预约</a>
+                                <a onClick={e => this.handleDelete(this.state.selectedIds, e)}><Icon type="delete" />批量删除</a>
                             </React.Fragment>
-                        }
-                    >
+                        }>
                         <Filter onFilter={this.handleFilter} />
                     </Bars>
                     <Table
-                        rowKey="id"
-                        loading={loading}
                         style={{ height: browser.height - bars.height - 100 }}
                         columns={[
                             {
@@ -160,29 +123,19 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
                                 dataIndex: "id",
                                 render: (id, row) => (
                                     <React.Fragment>
-                                        <a
-                                            onClick={e =>
-                                                this.handleEdit(row, e)
-                                            }
-                                        >
-                                            修改
-                                        </a>
-                                        <a
-                                            onClick={e =>
-                                                this.handleDelete([id], e)
-                                            }
-                                        >
-                                            删除
-                                        </a>
+                                        <a onClick={e => this.handleEdit(row, e)}>修改</a>
+                                        <a onClick={e => this.handleDelete([id], e)}>删除</a>
                                     </React.Fragment>
                                 )
                             }
                         ]}
-                        dataSource={tableData}
                         rowSelection={{
                             selectedRowKeys: selectedIds,
                             onChange: this.handleRowSelect
                         }}
+                        rowKey="id"
+                        dataSource={tableData}
+                        loading={loading}
                     />
                     <Pagination
                         pageNo={currentPage}
@@ -191,60 +144,6 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
                         onPageChange={this.handlePageChange}
                     />
                 </div>
-            );
-        }
-    }
-);
-
-const Filter = Form.create()(
-    class extends React.Component {
-        handleSubmit = e => {
-            e.preventDefault();
-            this.props.form.validateFields((err, values) => {
-                this.props.onFilter &&
-                    this.props.onFilter({
-                        subscribeName: values.subscribeName,
-                        startTime: values.rangeTime && values.rangeTime[0],
-                        endTime: values.rangeTime && values.rangeTime[1]
-                    });
-            });
-        };
-        handleReset = () => {
-            this.props.form.resetFields();
-            this.props.onFilter &&
-                this.props.onFilter({
-                    subscribeName: null,
-                    startTime: null,
-                    endTime: null
-                });
-        };
-        render() {
-            const { getFieldDecorator } = this.props.form;
-            return (
-                <Form layout="inline" onSubmit={this.handleSubmit}>
-                    <Row gutter={24}>
-                        <Col span={6}>
-                            <Form.Item label="姓名">
-                                {getFieldDecorator("subscribeName")(
-                                    <Input autoComplete="off" />
-                                )}
-                            </Form.Item>
-                        </Col>
-                        <Col span={12}>
-                            <Form.Item label="起始时间">
-                                {getFieldDecorator("rangeTime")(
-                                    <RangePicker />
-                                )}
-                            </Form.Item>
-                        </Col>
-                        <Col span={6}>
-                            <Button type="primary" htmlType="submit">
-                                查询
-                            </Button>
-                            <Button onClick={this.handleReset}>重置</Button>
-                        </Col>
-                    </Row>
-                </Form>
             );
         }
     }

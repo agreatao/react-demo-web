@@ -1,18 +1,17 @@
-import "./style";
-
+import Master from "commons/master";
 import React from "react";
 import entry from "utils/entry";
-import Master from "commons/master";
-import MedicineContent from "./content";
+import Content from "./content";
+import "./style";
 
-class MedicinePage extends React.Component {
+class Page extends React.Component {
     render() {
         return (
             <Master>
-                <MedicineContent />
+                <Content />
             </Master>
         );
     }
 }
 
-entry(<MedicinePage />);
+entry(<Page />);

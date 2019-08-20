@@ -1,6 +1,6 @@
-import { Table, Empty } from "antd";
+import { Empty, Table } from "antd";
 import React from "react";
-import "./style.less";
+import "./style";
 
 class CTable extends React.Component {
     render() {

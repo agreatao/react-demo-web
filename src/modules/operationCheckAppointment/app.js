@@ -1,18 +1,17 @@
-import "./style";
-
+import Master from "commons/master";
 import React from "react";
 import entry from "utils/entry";
-import Master from "commons/master";
-import AppointmentContent from "./content";
+import Content from "./content";
+import "./style";
 
-class OperationCheckAppointmentPage extends React.Component {
+class Page extends React.Component {
     render() {
         return (
             <Master>
-                <AppointmentContent />
+                <Content />
             </Master>
         );
     }
 }
 
-entry(<OperationCheckAppointmentPage />);
+entry(<Page />);

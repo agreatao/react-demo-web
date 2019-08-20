@@ -1,6 +1,6 @@
-import React from "react";
-import Notification from "rc-notification";
 import classnames from "classnames";
+import Notification from "rc-notification";
+import React from "react";
 import "./style";
 
 let defaultDuration = 3;

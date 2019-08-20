@@ -1,6 +1,6 @@
 import { Icon } from "antd";
-import React from "react";
 import classnames from "classnames";
+import React from "react";
 import { createPortal } from "react-dom";
 
 class Close extends React.Component {
