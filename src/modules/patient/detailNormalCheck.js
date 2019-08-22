@@ -12,7 +12,7 @@ export default connect(state => ({ browser: state.browser }))(
                 edit: false,
             }
             loadData(sickId) {
-                http.get("/sick/querySickNormalCheck", { params: { sickInfoId: sickId } }).then(data => {
+                http.get("/sick/querySickNormalCheck", { params: { sickId } }).then(data => {
                     this.data = data.result;
                     this.setState({ data: data.result, edit: false })
                 }).catch(e => { })

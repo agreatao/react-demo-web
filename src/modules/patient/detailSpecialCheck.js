@@ -17,7 +17,7 @@ export default connect(state => ({ browser: state.browser }))(
                 imageUrl: null
             };
             loadData(sickId) {
-                http.get("/sick/querySickSpecialCheck", { params: { sickInfoId: sickId } }).then(data => {
+                http.get("/sick/querySickSpecialCheck", { params: { sickId } }).then(data => {
                     this.data = data.result;
                     this.setState({ data: data.result, edit: false });
                 }).catch(e => { });
@@ -102,11 +102,11 @@ export default connect(state => ({ browser: state.browser }))(
                         <Form.Item {...layout} label="医学影像">
                             {edit ? getFieldDecorator("image")(
                                 <Upload
-                                    name="avatar"
+                                    name="file"
                                     listType="picture-card"
                                     className="avatar-uploader"
                                     showUploadList={false}
-                                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                    action={"/msk/sick/imageUpload?sickInfoId=" + this.props.dataKey}
                                     beforeUpload={file => {
                                         const isJpgOrPng =
                                             file.type === "image/jpeg" ||

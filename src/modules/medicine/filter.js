@@ -21,14 +21,14 @@ export default Form.create()(
             return (
                 <Form className="filter-form" onSubmit={this.handleSubmit}>
                     <Row gutter={24}>
-                        <Col span={4}>
+                        <Col span={6}>
                             <Form.Item label="药品名称">
                                 {getFieldDecorator("drugName")(
                                     <Input autoComplete="off" />
                                 )}
                             </Form.Item>
                         </Col>
-                        <Col span={20} className="filter-form-button">
+                        <Col span={18} className="filter-form-button">
                             <Button type="primary" htmlType="submit">查询</Button>
                             <Button onClick={this.handleReset}>重置</Button>
                         </Col>

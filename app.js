@@ -31,12 +31,40 @@ app.use(`${CONFIG.baseURL}/operationCheckAppointment`, express.static(path.join(
 app.use(`${CONFIG.baseURL}/medicine`, express.static(path.join(__dirname, "dist/templates", "medicine.html")));
 app.use(`${CONFIG.baseURL}/doctor`, express.static(path.join(__dirname, "dist/templates", "doctor.html")));
 
+app.post(`${CONFIG.baseURL}/sick/imageUpload`, multipartMiddleware, (req, res, next) => {
+    let formData = {};
+    for (let key in req.files) {
+        console.log(req.files[key].path);
+        formData[key] = fs.createReadStream(req.files[key].path);
+        console.log(formData[key]);
+    }
+    request.post({
+        url: CONFIG.apiUrl + req.url,
+        formData,
+        json: true,
+        body: req.body,
+        rejectUnauthorized: false,
+        headers: {
+            "content-type": req.headers['content-type']
+        }
+    }, (error, response, body) => {
+        console.log("-----------------------------")
+        console.log(response);
+        if (error) {
+            next();
+        } else {
+            let contentType = response.headers["content-type"];
+            res.set("content-type", contentType);
+            res.send(body);
+        }
+    })
+})
 
 
 // 后台数据请求代理
 app.all(`${CONFIG.baseURL}/**`, (req, res, next) => {
-    console.log(CONFIG.apiUrl + req.url);
-    console.log(req.body);
+    // console.log(CONFIG.apiUrl + req.url);
+    // console.log(req.body);
     request({
         method: req.method,
         url: CONFIG.apiUrl + req.url,

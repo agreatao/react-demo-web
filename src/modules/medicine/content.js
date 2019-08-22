@@ -100,7 +100,7 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
                         style={{ height: browser.height - bars.height - 100 }}
                         scroll={{
                             y: browser.height - bars.height - 155,
-                            x: 1500
+                            x: browser.width
                         }}
                         columns={[
                             {

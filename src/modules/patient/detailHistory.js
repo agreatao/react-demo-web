@@ -9,7 +9,7 @@ export default connect(state => ({ browser: state.browser }))(
             data: null
         }
         loadData(sickId) {
-            http.post("/sick/querySickHistory", { sickInfoId: sickId }).then(data => {
+            http.get("/sick/querySickHistory", { params: { sickId } }).then(data => {
                 this.setState({ data: data.result })
             }).catch(e => { })
         }

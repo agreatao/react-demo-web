@@ -9,7 +9,7 @@ export default function confirm(ChildNode) {
     const div = document.createElement("div");
     document.body.appendChild(div);
 
-    let currentConfig = { visible: true };
+    let currentConfig = { visible: true, children: ChildNode };
 
     function destroy() {
         const unmountResult = ReactDOM.unmountComponentAtNode(div);
@@ -28,9 +28,7 @@ export default function confirm(ChildNode) {
                 maskClosable={false}
                 onCancel={close}
                 {...props}
-            >
-                {ChildNode}
-            </Modal>,
+            />,
             div
         );
     }
