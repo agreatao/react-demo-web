@@ -19,7 +19,7 @@ const http = {};
         return axios[method](...args)
             .then(response => checkStatus(response))
             .catch(e => {
-                if (!axios.isCancel()) throw e;
+                if (!axios.isCancel(e)) throw e;
             });
     };
 });

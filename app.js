@@ -33,23 +33,14 @@ app.use(`${CONFIG.baseURL}/doctor`, express.static(path.join(__dirname, "dist/te
 
 app.post(`${CONFIG.baseURL}/sick/imageUpload`, multipartMiddleware, (req, res, next) => {
     let formData = {};
-    for (let key in req.files) {
-        console.log(req.files[key].path);
+    for (let key in req.files)
         formData[key] = fs.createReadStream(req.files[key].path);
-        console.log(formData[key]);
-    }
     request.post({
         url: CONFIG.apiUrl + req.url,
         formData,
-        json: true,
         body: req.body,
-        rejectUnauthorized: false,
-        headers: {
-            "content-type": req.headers['content-type']
-        }
+        rejectUnauthorized: false
     }, (error, response, body) => {
-        console.log("-----------------------------")
-        console.log(response);
         if (error) {
             next();
         } else {
