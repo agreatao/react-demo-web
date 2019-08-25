@@ -15,7 +15,7 @@ const Login = Form.create({ name: 'normal_login' })(class NormalLoginForm extend
         this.props.form.validateFields((err, values) => {
             if (err) return;
             http.post("/login/loginCheck", values).then(data => {
-                Cookie.set("nickName", data.result.userInfo.nickName, { expires: 1 });
+                Cookie.set("user", data.result.userInfo, { expires: 1 });
                 Cookie.set("token", data.result.tokenId, { expires: 1 });
                 window.location.href = CONFIG.baseURL + "/patient";
             })

@@ -65,8 +65,7 @@ export default connect(state => ({ browser: state.browser }))(
                                     showTime
                                     style={{ width: "100%" }}
                                 />
-                            )
-                            : <span className="ant-form-text">{data && data.checkTime}</span>}
+                            ) : <span className="ant-form-text">{data && data.checkTime}</span>}
                     </Form.Item>
                     <hr />
                     <div className="check-icon">
