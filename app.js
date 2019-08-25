@@ -21,6 +21,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
 app.use(cookieParser());
 
 // 静态资源
@@ -30,6 +31,7 @@ app.use(`${CONFIG.baseURL}/patient`, express.static(path.join(__dirname, "dist/t
 app.use(`${CONFIG.baseURL}/operationCheckAppointment`, express.static(path.join(__dirname, "dist/templates", "operationCheckAppointment.html")));
 app.use(`${CONFIG.baseURL}/medicine`, express.static(path.join(__dirname, "dist/templates", "medicine.html")));
 app.use(`${CONFIG.baseURL}/doctor`, express.static(path.join(__dirname, "dist/templates", "doctor.html")));
+app.use(`${CONFIG.baseURL}/login`, express.static(path.join(__dirname, "dist/templates", "login.html")));
 
 app.post(`${CONFIG.baseURL}/sick/imageUpload`, multipartMiddleware, (req, res, next) => {
     let formData = {};
@@ -38,7 +40,8 @@ app.post(`${CONFIG.baseURL}/sick/imageUpload`, multipartMiddleware, (req, res, n
     request.post({
         url: CONFIG.apiUrl + req.url,
         formData,
-        body: req.body,
+        // body: req.body,
+        headers: { Token: req.headers.Token },
         rejectUnauthorized: false
     }, (error, response, body) => {
         if (error) {

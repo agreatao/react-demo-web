@@ -5,6 +5,8 @@ const CancelToken = axios.CancelToken;
 
 const http = {};
 
+import Cookie from "js-cookie";
+
 ["get", "post", "put", "delete"].forEach(method => {
     http[method] = (...args) => {
         args[0] = CONFIG.baseURL + args[0];
@@ -13,13 +15,21 @@ const http = {};
         options.cancelToken = new CancelToken(function executor(callback) {
             cancelList.push(callback);
         });
+        
+        let Token = Cookie.get("token");
+        options.headers = Object.assign({}, options.headers, { Token })
+
         if (method === "post" || method === "put") args[2] = options;
         else args[1] = options;
 
         return axios[method](...args)
             .then(response => checkStatus(response))
             .catch(e => {
+                const { status } = e.response;
                 if (!axios.isCancel(e)) throw e;
+                else if (status && status == 403) {
+                    window.location.href = CONFIG.baseURL + "/login";
+                }
             });
     };
 });
