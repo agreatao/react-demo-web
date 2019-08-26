@@ -7,7 +7,7 @@ import "./style";
 class Page extends React.Component {
     render() {
         return (
-            <Master activePage="operationcheckAppointment" activeSubmenu="appointment">
+            <Master activePage="operationAppointment" activeSubmenu="appointment">
                 <Content />
             </Master>
         );

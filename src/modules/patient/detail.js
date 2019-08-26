@@ -7,6 +7,8 @@ import BaseInfo from "./detailBaseinfo";
 import History from "./detailHistory";
 import NormalCheck from "./detailNormalCheck";
 import SpecialCheck from "./detailSpecialCheck";
+import OptProgress from "./detailOptProgress";
+import OptAssessment from "./detailOptAssessment";
 
 const { TabPane } = Tabs;
 
@@ -34,6 +36,12 @@ export default connect()(
                         </TabPane>
                         <TabPane tab="特检" key="4">
                             <SpecialCheck dataKey={data.sickId} />
+                        </TabPane>
+                        <TabPane tab="手术评估记录" key="5">
+                            <OptAssessment dataKey={data.sickId} />
+                        </TabPane>
+                        <TabPane tab="手术过程记录" key="6">
+                            <OptProgress dataKey={data.sickId} />
                         </TabPane>
                     </Tabs>
                 </div>

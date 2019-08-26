@@ -1,4 +1,4 @@
-import { Icon } from "antd";
+import { Button, Col, DatePicker, Form, Icon, Input, Row } from "antd";
 import { remove } from "components/alert";
 import Bars from "components/bars";
 import Pagination from "components/pagination";
@@ -8,6 +8,8 @@ import { connect } from "react-redux";
 import http from "utils/http";
 import Filter from "./filter";
 import form from "./form";
+
+const { RangePicker } = DatePicker;
 
 export default connect(state => ({ browser: state.browser, bars: state.bars }))(
     class Content extends React.Component {
@@ -21,12 +23,14 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
             total: 0
         };
         params = {
-            drugName: null
+            subscribeName: null,
+            startTime: null,
+            endTime: null
         };
         fetch() {
             const { currentPage, pageSize } = this.state;
             this.setState({ loading: true }, () => {
-                http.post("/drug/queryDrugInfoList", this.params, { params: { currentPage, pageSize } })
+                http.post("/sick/getSubscribeList", this.params, { params: { currentPage, pageSize } })
                     .then(data => {
                         this.setState({
                             loading: false,
@@ -72,7 +76,9 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
             if (ids && ids.length > 0)
                 remove()
                     .then(() => {
-                        http.get("/drug/deleteDrugInfo", { params: { ids: ids.join(",") } })
+                        http.get("/sick/deleteSubscribe", {
+                            params: { ids: ids.join(",") }
+                        })
                             .then(() => {
                                 let { total, currentPage, pageSize } = this.state;
                                 currentPage = Math.min(currentPage, Math.ceil((total - 1) / pageSize));
@@ -90,7 +96,7 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
                     <Bars
                         left={
                             <React.Fragment>
-                                <a onClick={this.handleAdd}><Icon type="plus" />新增药品</a>
+                                <a onClick={this.handleAdd}><Icon type="plus" />新增预约</a>
                                 <a onClick={e => this.handleDelete(this.state.selectedIds, e)}><Icon type="delete" />批量删除</a>
                             </React.Fragment>
                         }>
@@ -98,44 +104,29 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
                     </Bars>
                     <Table
                         style={{ height: browser.height - bars.height - 100 }}
-                        scroll={{
-                            y: browser.height - bars.height - 155,
-                            x: browser.width - 200
-                        }}
                         columns={[
                             {
-                                title: "药品名称",
-                                dataIndex: "drugName",
-                                width: 150
+                                title: "姓名",
+                                dataIndex: "subscribeName"
                             },
                             {
-                                title: "规格",
-                                dataIndex: "norms",
-                                width: 100
+                                title: "预约时间",
+                                dataIndex: "date"
                             },
                             {
-                                title: "形状",
-                                dataIndex: "drugShape",
-                                width: 200
-                            },
-                            {
-                                title: "适应症",
-                                dataIndex: "suitType"
-                            },
-                            {
-                                title: "成份",
-                                dataIndex: "composition",
-                                width: 325
+                                title: "手机号码",
+                                dataIndex: "mobilePhone"
                             },
                             {
                                 title: "操作",
                                 className: "actions",
                                 dataIndex: "id",
-                                width: 100,
-                                render: (id, row) => <React.Fragment>
-                                    <a onClick={e => this.handleEdit(row, e)}>修改</a>
-                                    <a onClick={e => this.handleDelete([id], e)}>删除</a>
-                                </React.Fragment>
+                                render: (id, row) => (
+                                    <React.Fragment>
+                                        <a onClick={e => this.handleEdit(row, e)}>修改</a>
+                                        <a onClick={e => this.handleDelete([id], e)}>删除</a>
+                                    </React.Fragment>
+                                )
                             }
                         ]}
                         rowSelection={{

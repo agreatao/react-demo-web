@@ -9,22 +9,20 @@ import Detail from "./detail";
 class Page extends React.Component {
     state = {
         detail: null
-    }
-    showDetail = (detail) => {
-        this.setState({ detail })
-    }
+    };
+    showDetail = detail => {
+        this.setState({ detail });
+    };
     hideDetail = () => {
-        this.setState({ detail: null })
-    }
+        this.setState({ detail: null });
+    };
     render() {
         const { detail } = this.state;
         return (
-            <Master>
+            <Master activePage="patient">
                 <div style={{ display: "flex" }}>
                     <Content onRowSelect={this.showDetail} />
-                    {
-                        detail && <Detail data={detail} onClose={this.hideDetail} />
-                    }
+                    {detail && <Detail data={detail} onClose={this.hideDetail} />}
                 </div>
             </Master>
         );

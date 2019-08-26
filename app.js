@@ -18,9 +18,11 @@ app.set("views", path.join(__dirname, "dist/templates"));
 
 app.use(logger("dev"));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+app.use(
+    bodyParser.urlencoded({
+        extended: true
+    })
+);
 
 app.use(cookieParser());
 
@@ -29,43 +31,45 @@ app.use(`${CONFIG.baseURL}/`, express.static(path.join(__dirname, "dist/static")
 
 app.use(`${CONFIG.baseURL}/patient`, express.static(path.join(__dirname, "dist/templates", "patient.html")));
 app.use(`${CONFIG.baseURL}/operationCheckAppointment`, express.static(path.join(__dirname, "dist/templates", "operationCheckAppointment.html")));
+app.use(`${CONFIG.baseURL}/operationAppointment`, express.static(path.join(__dirname, "dist/templates", "operationAppointment.html")));
 app.use(`${CONFIG.baseURL}/medicine`, express.static(path.join(__dirname, "dist/templates", "medicine.html")));
 app.use(`${CONFIG.baseURL}/doctor`, express.static(path.join(__dirname, "dist/templates", "doctor.html")));
 app.use(`${CONFIG.baseURL}/login`, express.static(path.join(__dirname, "dist/templates", "login.html")));
 
 app.post(`${CONFIG.baseURL}/sick/imageUpload`, multipartMiddleware, (req, res, next) => {
     let formData = {};
-    for (let key in req.files)
-        formData[key] = fs.createReadStream(req.files[key].path);
-    request.post({
-        url: CONFIG.apiUrl + req.url,
-        formData,
-        // body: req.body,
-        headers: { Token: req.headers.Token },
-        rejectUnauthorized: false
-    }, (error, response, body) => {
-        if (error) {
-            next();
-        } else {
-            let contentType = response.headers["content-type"];
-            res.set("content-type", contentType);
-            res.send(body);
+    for (let key in req.files) formData[key] = fs.createReadStream(req.files[key].path);
+    request.post(
+        {
+            url: CONFIG.apiUrl + req.url,
+            formData: { ...formData, ...req.body },
+            headers: { Token: req.headers.token },
+            rejectUnauthorized: false
+        },
+        (error, response, body) => {
+            if (error) {
+                next();
+            } else {
+                let contentType = response.headers["content-type"];
+                res.set("content-type", contentType);
+                res.send(body);
+            }
         }
-    })
-})
-
+    );
+});
 
 // 后台数据请求代理
 app.all(`${CONFIG.baseURL}/**`, (req, res, next) => {
     // console.log(CONFIG.apiUrl + req.url);
     // console.log(req.body);
-    request({
-        method: req.method,
-        url: CONFIG.apiUrl + req.url,
-        json: true,
-        body: req.body,
-        rejectUnauthorized: false
-    },
+    request(
+        {
+            method: req.method,
+            url: CONFIG.apiUrl + req.url,
+            json: true,
+            body: req.body,
+            rejectUnauthorized: false
+        },
         (error, response, body) => {
             if (error) {
                 next();

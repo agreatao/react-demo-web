@@ -15,10 +15,8 @@ import Cookie from "js-cookie";
         options.cancelToken = new CancelToken(function executor(callback) {
             cancelList.push(callback);
         });
-        
         let Token = Cookie.get("token");
-        options.headers = Object.assign({}, options.headers, { Token })
-
+        options.headers = Object.assign({}, options.headers, { Token });
         if (method === "post" || method === "put") args[2] = options;
         else args[1] = options;
 
@@ -50,7 +48,7 @@ http.cancel = () => {
     cancelList = [];
 };
 
-http.form = args => {
+http.form = (...args) => {
     let options = args[2] || {};
     options.headers = Object.assign({}, options.headers, {
         "Content-Type": "multipart/form-data"
@@ -62,8 +60,9 @@ http.form = args => {
             formData.append(key, args[1][key]);
         }
         args[1] = formData;
+        console.log(formData);
     }
-    return http.post(args);
+    return http.post(...args);
 };
 
 window.onunload = () => {
