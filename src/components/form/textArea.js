@@ -22,11 +22,11 @@ export default class CustomTextArea extends React.Component {
         this.props.onChange && this.props.onChange(e.target.value);
     }
     render() {
-        const { max } = this.props;
+        const { max, rows } = this.props;
         const { value } = this.state;
         return <div className="c-text-area">
             <TextArea
-                rows={3}
+                rows={rows || 3}
                 style={{ resize: "none" }}
                 value={value}
                 onChange={this.handleChange}

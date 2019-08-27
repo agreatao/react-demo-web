@@ -24,7 +24,7 @@
     },
     "devDependencies": {
         "add-dom-event-listener": "^1.0.2",
-        "antd": "^3.21.2",
+        "antd": "^3.22.1",
         "autoprefixer": "^9.0.2",
         "axios": "^0.18.0",
         "babel-core": "^6.26.3",

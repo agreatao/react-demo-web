@@ -1,5 +1,5 @@
 import { Modal } from "antd";
-import _confirm from "./confirm";
+import _dialog from "./dialog";
 
 const centered = true;
 
@@ -60,5 +60,18 @@ export function remove() {
     });
 }
 
+export function confirm(content) {
+    return new Promise((resolve, reject) => {
+        Modal.confirm({
+            title: content,
+            content: "",
+            okText: "确定",
+            cancelText: "取消",
+            centered,
+            onOk: () => resolve(),
+            onCancel: () => reject()
+        });
+    });
+}
 
-export const confirm = _confirm;
+export const dialog = _dialog;

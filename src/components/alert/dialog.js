@@ -5,7 +5,7 @@ import entry from "utils/entry";
 
 const IS_REACT_16 = !!ReactDOM.createPortal;
 
-export default function confirm(ChildNode) {
+export default function dialog(ChildNode) {
     const div = document.createElement("div");
     document.body.appendChild(div);
 
@@ -21,7 +21,7 @@ export default function confirm(ChildNode) {
     function render(props) {
         entry(
             <Modal
-                className="modal-form"
+                className="dialog-form"
                 centered
                 getContainer={false}
                 footer={false}
@@ -35,6 +35,7 @@ export default function confirm(ChildNode) {
 
     function close() {
         currentConfig = {
+            ...currentConfig,            
             visible: false,
             afterClose: destroy.bind(this)
         };

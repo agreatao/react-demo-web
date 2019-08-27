@@ -29,12 +29,18 @@ app.use(cookieParser());
 // 静态资源
 app.use(`${CONFIG.baseURL}/`, express.static(path.join(__dirname, "dist/static")));
 
+app.use(`${CONFIG.baseURL}/login`, express.static(path.join(__dirname, "dist/templates", "login.html")));
+
+app.use(`${CONFIG.baseURL}/appointRegister/search`, express.static(path.join(__dirname, "dist/templates", "appointRegisterSearch.html")));
+app.use(`${CONFIG.baseURL}/appointRegister/today`, express.static(path.join(__dirname, "dist/templates", "appointRegisterToday.html")));
+app.use(`${CONFIG.baseURL}/appointOperationCheck/search`, express.static(path.join(__dirname, "dist/templates", "appointOperationCheckSearch.html")));
+app.use(`${CONFIG.baseURL}/appointOperationCheck/today`, express.static(path.join(__dirname, "dist/templates", "appointOperationCheckToday.html")));
+app.use(`${CONFIG.baseURL}/appointOperation/search`, express.static(path.join(__dirname, "dist/templates", "appointOperationSearch.html")));
+app.use(`${CONFIG.baseURL}/appointOperation/today`, express.static(path.join(__dirname, "dist/templates", "appointOperationToday.html")));
+
 app.use(`${CONFIG.baseURL}/patient`, express.static(path.join(__dirname, "dist/templates", "patient.html")));
-app.use(`${CONFIG.baseURL}/operationCheckAppointment`, express.static(path.join(__dirname, "dist/templates", "operationCheckAppointment.html")));
-app.use(`${CONFIG.baseURL}/operationAppointment`, express.static(path.join(__dirname, "dist/templates", "operationAppointment.html")));
 app.use(`${CONFIG.baseURL}/medicine`, express.static(path.join(__dirname, "dist/templates", "medicine.html")));
 app.use(`${CONFIG.baseURL}/doctor`, express.static(path.join(__dirname, "dist/templates", "doctor.html")));
-app.use(`${CONFIG.baseURL}/login`, express.static(path.join(__dirname, "dist/templates", "login.html")));
 
 app.post(`${CONFIG.baseURL}/sick/imageUpload`, multipartMiddleware, (req, res, next) => {
     let formData = {};
