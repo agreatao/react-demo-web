@@ -1,16 +1,17 @@
-import { Menu } from "antd";
-import Master from "commons/master";
+import { Icon } from "antd";
+import { confirm } from "components/alert";
+import Bars from "components/bars";
 import Pagination from "components/pagination";
 import Table from "components/table";
 import React from "react";
 import { connect } from "react-redux";
-import entry from "utils/entry";
 import http from "utils/http";
-import { columns } from "./config";
-import Filter from "./filter";
+import { columns } from "../config/today";
+import { addOrEdit } from "../dialog";
+import Filter from "../filter/today";
 
-const Page = connect(state => ({ browser: state.browser }))(
-    class Page extends React.Component {
+export default connect(state => ({ browser: state.browser, bars: state.bars }))(
+    class Today extends React.Component {
         state = {
             currentPage: 1,
             pageSize: 10,
@@ -25,7 +26,7 @@ const Page = connect(state => ({ browser: state.browser }))(
         fetch = () => {
             const { currentPage, pageSize } = this.state;
             this.setState({ loading: true }, () => {
-                http.post("/appoint/appointRegisterSearch", this.params, { params: { currentPage, pageSize } })
+                http.post("/appoint/appointOperationCheckSearch", this.params, { params: { currentPage, pageSize } })
                     .then(data => {
                         this.setState({
                             tableData: data.result,
@@ -48,36 +49,50 @@ const Page = connect(state => ({ browser: state.browser }))(
         componentDidMount() {
             this.fetch();
         }
-        handleReAppoint = (patient, e) => {
+        handleAdd = e => {
             e.preventDefault();
+            addOrEdit().then(this.fetch);
         };
+        handleUpdate = (patient, e) => {
+            e.preventDefault();
+            addOrEdit(patient).then(this.fetch);
+        };
+        handleCancel = (patient, e) => {
+            e.preventDefault();
+            confirm("确定要取消预约吗？")
+                .then(() => {})
+                .catch(() => {});
+        };
+        componentWillUnmount() {
+            http.cancel();
+        }
         render() {
-            const { browser } = this.props;
+            const { browser, bars } = this.props;
             const { currentPage, pageSize, tableData, total, loading } = this.state;
             return (
-                <Master activePage="appointOperation" activeSubmenu="appoint">
-                    <Menu mode="horizontal" selectedKeys={["search"]}>
-                        <Menu.Item key="today">
-                            <a href={`${CONFIG.baseURL}/appointOperation/today`}>今日预约</a>
-                        </Menu.Item>
-                        <Menu.Item key="search">预约查询</Menu.Item>
-                    </Menu>
-                    <div className="filter-container">
-                        <Filter onFilter={this.handleFilter} />
-                    </div>
+                <React.Fragment>
+                    <Bars
+                        left={[
+                            <a onClick={this.handleAdd} key="add">
+                                <Icon type="plus" />
+                                新增术前检查预约
+                            </a>
+                        ]}
+                    >
+                        <Filter onSubmit={this.handleFilter} />
+                    </Bars>
                     <Table
-                        style={{ height: browser.height - 200 }}
+                        style={{ height: browser.height - bars.height - 150 }}
                         columns={columns({
-                            onReAppoint: this.handleReAppoint
+                            onUpdate: this.handleUpdate,
+                            onCancel: this.handleCancel
                         })}
                         dataSource={tableData}
                         loading={loading}
                     />
                     <Pagination pageNo={currentPage} pageSize={pageSize} total={total} onPageChange={this.handlePageChagne} />
-                </Master>
+                </React.Fragment>
             );
         }
     }
 );
-
-entry(<Page />);

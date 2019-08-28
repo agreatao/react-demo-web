@@ -37,7 +37,7 @@ export default connect(state => ({ browser: state.browser }))(
             let pathnames = window.location.pathname.split("/");
             if (pathnames.indexOf(key) > -1) return;
             let today = "";
-            if (key === "appointRegister" || key === "appointOperationCheck" || key === "appointOperation") today = "/today";
+            if (key === "appointRegister" || key === "appointOperationCheck" || key === "appointOperation") today = "#/today";
             window.location.href = CONFIG.baseURL + "/" + key + today;
         }
         render() {

@@ -1,16 +1,14 @@
-import { Menu } from "antd";
-import Master from "commons/master";
 import Pagination from "components/pagination";
 import Table from "components/table";
 import React from "react";
 import { connect } from "react-redux";
-import entry from "utils/entry";
 import http from "utils/http";
-import { columns } from "./config";
-import Filter from "./filter";
+import { columns } from "../config/search";
+import { addOrEdit } from "../dialog";
+import Filter from "../filter/search";
 
-const Page = connect(state => ({ browser: state.browser }))(
-    class Page extends React.Component {
+export default connect(state => ({ browser: state.browser }))(
+    class Search extends React.Component {
         state = {
             currentPage: 1,
             pageSize: 10,
@@ -20,10 +18,7 @@ const Page = connect(state => ({ browser: state.browser }))(
         };
         params = {
             name: null,
-            phone: null,
-            startDate: null,
-            endDate: null,
-            appointTime: null
+            phone: null
         };
         fetch = () => {
             const { currentPage, pageSize } = this.state;
@@ -51,25 +46,23 @@ const Page = connect(state => ({ browser: state.browser }))(
         componentDidMount() {
             this.fetch();
         }
-        handleReAppoint = (patient, e) => {
+        handleReAppoint = (appoint, e) => {
             e.preventDefault();
+            addOrEdit(appoint).then(this.fetch);
         };
+        componentWillUnmount() {
+            http.cancel();
+        }
         render() {
             const { browser } = this.props;
             const { currentPage, pageSize, tableData, total, loading } = this.state;
             return (
-                <Master activePage="appointRegister" activeSubmenu="appoint">
-                    <Menu mode="horizontal" selectedKeys={["search"]}>
-                        <Menu.Item key="today">
-                            <a href={`${CONFIG.baseURL}/appointRegister/today`}>今日预约</a>
-                        </Menu.Item>
-                        <Menu.Item key="search">预约查询</Menu.Item>
-                    </Menu>
+                <React.Fragment>
                     <div className="filter-container">
                         <Filter onFilter={this.handleFilter} />
                     </div>
                     <Table
-                        style={{ height: browser.height - 241 }}
+                        style={{ height: browser.height - 200 }}
                         columns={columns({
                             onReAppoint: this.handleReAppoint
                         })}
@@ -77,10 +70,8 @@ const Page = connect(state => ({ browser: state.browser }))(
                         loading={loading}
                     />
                     <Pagination pageNo={currentPage} pageSize={pageSize} total={total} onPageChange={this.handlePageChagne} />
-                </Master>
+                </React.Fragment>
             );
         }
     }
 );
-
-entry(<Page />);

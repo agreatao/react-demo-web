@@ -1,15 +1,16 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux';
-import thunk from 'redux-thunk';
-import reducers from './reducers';
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import thunk from "redux-thunk";
+import { createLogger } from "redux-logger";
+import reducers, { initialState } from "./reducers";
 
-
-function createCustomStore(preloadedState = {}) {
+const logger = createLogger();
+function createCustomStore() {
     return createStore(
         combineReducers({
             ...reducers
-        })
-        , preloadedState
-        , applyMiddleware(thunk)
+        }),
+        initialState,
+        applyMiddleware(thunk, logger)
     );
 }
 

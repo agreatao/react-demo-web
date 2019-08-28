@@ -8,7 +8,6 @@ export const columns = ({ onReAppoint }) => {
         { title: "预约时间", dataIndex: "appointTime" },
         { title: "主治医生", dataIndex: "doctorName" },
         { title: "手术内容", dataIndex: "operationContent" },
-        { title: "状态", dataIndex: "status" },
         {
             title: "操作",
             className: "actions",

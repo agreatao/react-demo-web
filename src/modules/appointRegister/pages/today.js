@@ -1,18 +1,17 @@
-import { Icon, Menu } from "antd";
-import Master from "commons/master";
+import { Icon } from "antd";
 import { confirm } from "components/alert";
 import Bars from "components/bars";
 import Pagination from "components/pagination";
 import Table from "components/table";
+import moment from "moment";
 import React from "react";
 import { connect } from "react-redux";
-import entry from "utils/entry";
 import http from "utils/http";
-import { columns } from "./config";
-import { addOrEdit } from "./dialog";
-import Filter from "./filter";
+import { columns } from "../config/today";
+import Filter from "../filter/today";
+import { addOrEdit, toQueue } from "../dialog";
 
-const Page = connect(state => ({ browser: state.browser, bars: state.bars }))(
+export default connect(state => ({ browser: state.browser, bars: state.bars }))(
     class Page extends React.Component {
         state = {
             currentPage: 1,
@@ -28,7 +27,11 @@ const Page = connect(state => ({ browser: state.browser, bars: state.bars }))(
         fetch = () => {
             const { currentPage, pageSize } = this.state;
             this.setState({ loading: true }, () => {
-                http.post("/appoint/appointOperationSearch", this.params, { params: { currentPage, pageSize } })
+                http.post(
+                    "/appoint/appointRegister/search",
+                    { ...this.params, startDate: moment().format("YYYY-MM-DD"), status: 1, appointTime: moment().get("hour") < 12 ? 0 : 1 },
+                    { params: { currentPage, pageSize } }
+                )
                     .then(data => {
                         this.setState({
                             tableData: data.result,
@@ -55,32 +58,40 @@ const Page = connect(state => ({ browser: state.browser, bars: state.bars }))(
             e.preventDefault();
             addOrEdit().then(this.fetch);
         };
-        handleUpdate = (patient, e) => {
+        handleCall = (appoint, e) => {
             e.preventDefault();
-            addOrEdit(patient).then(this.fetch);
+            toQueue(appoint).then(() => {
+                const { currentPage, pageSize, total } = this.state;
+                let page = Math.min(currentPage, Math.ceil((total - 1) / pageSize));
+                this.setState({ currentPage: page }, this.fetch);
+            });
         };
-        handleCancel = (patient, e) => {
+        handleUpdate = (appoint, e) => {
+            e.preventDefault();
+            addOrEdit(appoint).then(this.fetch);
+        };
+        handleCancel = (appoint, e) => {
             e.preventDefault();
             confirm("确定要取消预约吗？")
-                .then(() => {})
+                .then(() => {
+                    http.get("/appoint/appointRegister/cancel", { params: { id: appoint.id } }).then(() => {
+                        const { currentPage, pageSize, total } = this.state;
+                        let page = Math.min(currentPage, Math.ceil((total - 1) / pageSize));
+                        this.setState({ currentPage: page }, this.fetch);
+                    });
+                })
                 .catch(() => {});
         };
         render() {
             const { browser, bars } = this.props;
             const { currentPage, pageSize, tableData, total, loading } = this.state;
             return (
-                <Master activePage="appointOperation" activeSubmenu="appoint">
-                    <Menu mode="horizontal" selectedKeys={["today"]}>
-                        <Menu.Item key="today">今日预约</Menu.Item>
-                        <Menu.Item key="search">
-                            <a href={`${CONFIG.baseURL}/appointOperation/search`}>预约查询</a>
-                        </Menu.Item>
-                    </Menu>
+                <React.Fragment>
                     <Bars
                         left={[
                             <a onClick={this.handleAdd} key="add">
                                 <Icon type="plus" />
-                                新增手术预约
+                                新增挂号预约
                             </a>
                         ]}
                     >
@@ -89,6 +100,7 @@ const Page = connect(state => ({ browser: state.browser, bars: state.bars }))(
                     <Table
                         style={{ height: browser.height - bars.height - 150 }}
                         columns={columns({
+                            onCall: this.handleCall,
                             onUpdate: this.handleUpdate,
                             onCancel: this.handleCancel
                         })}
@@ -96,10 +108,8 @@ const Page = connect(state => ({ browser: state.browser, bars: state.bars }))(
                         loading={loading}
                     />
                     <Pagination pageNo={currentPage} pageSize={pageSize} total={total} onPageChange={this.handlePageChagne} />
-                </Master>
+                </React.Fragment>
             );
         }
     }
 );
-
-entry(<Page />);

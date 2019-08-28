@@ -2,56 +2,58 @@ import { Icon } from "antd";
 import classnames from "classnames";
 import React from "react";
 import { connect } from "react-redux";
-import { barsResize } from "store/actions/bars";
+import { barsResize, toggleFilter } from "store/actions/bars";
 import "./style";
 
-class Bars extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            visible: false
+export default connect(
+    state => ({ bars: state.bars }),
+    dispatch => ({
+        barsResize: payload => dispatch(barsResize(payload)),
+        toggleFilter: () => dispatch(toggleFilter())
+    })
+)(
+    class Bars extends React.Component {
+        constructor(props) {
+            super(props);
+            this.filter = React.createRef();
+        }
+        shouldComponentUpdate(nextProps) {
+            return this.props.bars.visible != nextProps.bars.visible;
+        }
+        componentDidUpdate() {
+            const { children, barsResize } = this.props;
+            const { visible } = this.props.bars;
+            barsResize({
+                height: visible && children ? 50 + this.filter.current.offsetHeight : 50
+            });
+        }
+        toggleFilter = e => {
+            e.preventDefault();
+            this.props.toggleFilter();
+        };
+        render() {
+            const { left, right, children } = this.props;
+            const { visible } = this.props.bars;
+            return (
+                <div className="bars">
+                    <div className="bars-inner">
+                        <div className="bars-left">{left}</div>
+                        <div className="bars-right">
+                            {right}
+                            {children && (
+                                <a onClick={this.toggleFilter} className={classnames("filter-btn", { active: visible })}>
+                                    <Icon type="filter" theme="filled" />
+                                </a>
+                            )}
+                        </div>
+                    </div>
+                    {children && visible && (
+                        <div ref={this.filter} className="bars-filter">
+                            {children}
+                        </div>
+                    )}
+                </div>
+            );
         }
     }
-    toggleFilter(e) {
-        e.preventDefault();
-        this.setState(prev => ({
-            visible: !prev.visible
-        }))
-    }
-    shouldComponentUpdate(_nextProps, nextState) {
-        return this.state.visible != nextState.visible;
-    }
-    componentDidUpdate() {
-        const { children, barsResize } = this.props;
-        const { visible } = this.state;
-        barsResize({
-            height: visible && children ? 50 + this.refs.filter.offsetHeight : 50
-        })
-    }
-    render() {
-        const { left, right, children } = this.props;
-        const { visible } = this.state;
-        return (
-            <div className="bars">
-                <div className="bars-inner">
-                    <div className="bars-left">{left}</div>
-                    <div className="bars-right">
-                        {right}
-                        {children && (
-                            <a onClick={e => this.toggleFilter(e)} className={classnames("filter-btn", { active: visible })}><Icon type="filter" theme="filled" /></a>
-                        )}
-                    </div>
-                </div>
-                {children && visible && <div ref="filter" className="bars-filter">{children}</div>}
-            </div>
-        );
-    }
-}
-
-
-export default connect(
-    null,
-    dispatch => ({
-        barsResize: (payload) => dispatch(barsResize(payload))
-    })
-)(Bars);
+);
