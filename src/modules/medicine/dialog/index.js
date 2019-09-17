@@ -2,6 +2,7 @@ import { Form, Input, Button } from "antd";
 import { dialog } from "components/alert";
 import React from "react";
 import http from "utils/http";
+import { Editor, EditorState } from "draft-js";
 
 const { TextArea } = Input;
 

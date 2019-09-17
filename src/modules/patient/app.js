@@ -94,7 +94,7 @@ const Page = connect(
                     <Bars
                         left={
                             <React.Fragment>
-                                <a onClick={this.handleAdd}><Icon type="plus" />新增患者</a>
+                                <a onClick={this.handleAdd}><Icon type="plus" />新增</a>
                                 <a onClick={e => this.handleDelete(this.state.selectedIds, e)}><Icon type="delete" />删除</a>
                             </React.Fragment>
                         }>

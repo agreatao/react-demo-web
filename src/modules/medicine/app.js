@@ -84,8 +84,8 @@ const Page = connect(state => ({ browser: state.browser, bars: state.bars }))(
                     <Bars
                         left={
                             <React.Fragment>
-                                <a onClick={this.handleAdd}><Icon type="plus" />新增药品</a>
-                                <a onClick={e => this.handleDelete(this.state.selectedIds, e)}><Icon type="delete" />批量删除</a>
+                                <a onClick={this.handleAdd}><Icon type="plus" />新增</a>
+                                <a onClick={e => this.handleDelete(this.state.selectedIds, e)}><Icon type="delete" />删除</a>
                             </React.Fragment>
                         }>
                         <Filter onFilter={this.handleFilter} />

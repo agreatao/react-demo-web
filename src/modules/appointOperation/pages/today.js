@@ -60,8 +60,8 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
         handleCancel = (patient, e) => {
             e.preventDefault();
             confirm("确定要取消预约吗？")
-                .then(() => {})
-                .catch(() => {});
+                .then(() => { })
+                .catch(() => { });
         };
         componentWillUnmount() {
             http.cancel();
@@ -73,10 +73,7 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
                 <React.Fragment>
                     <Bars
                         left={[
-                            <a onClick={this.handleAdd} key="add">
-                                <Icon type="plus" />
-                                新增术前检查预约
-                            </a>
+                            <a onClick={this.handleAdd} key="add"><Icon type="plus" />新增</a>
                         ]}
                     >
                         <Filter onSubmit={this.handleFilter} />

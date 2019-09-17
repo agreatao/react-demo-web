@@ -80,7 +80,7 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
                         this.setState({ currentPage: page }, this.fetch);
                     });
                 })
-                .catch(() => {});
+                .catch(() => { });
         };
         render() {
             const { browser, bars } = this.props;
@@ -89,10 +89,7 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
                 <React.Fragment>
                     <Bars
                         left={[
-                            <a onClick={this.handleAdd} key="add">
-                                <Icon type="plus" />
-                                新增挂号预约
-                            </a>
+                            <a onClick={this.handleAdd} key="add"><Icon type="plus" />新增</a>
                         ]}
                     >
                         <Filter onSubmit={this.handleFilter} />

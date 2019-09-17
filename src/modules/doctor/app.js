@@ -81,7 +81,7 @@ const Page = connect(state => ({ browser: state.browser, bars: state.bars }))(
                 <Master activePage="doctor">
                     <Bars
                         left={
-                            <a onClick={e => this.handleDelete(this.state.selectedIds, e)}><Icon type="delete" />批量删除</a>
+                            <a onClick={e => this.handleDelete(this.state.selectedIds, e)}><Icon type="delete" />删除</a>
                         }>
                         <Filter onFilter={this.handleFilter} />
                     </Bars>
