@@ -39,7 +39,7 @@ const AddOrEditForm = Form.create()(
             const { getFieldDecorator } = this.props.form;
             return (
                 <Form>
-                    <div className="dialog-title">{data ? "修改" : "新增"}挂号预约</div>
+                    <div className="form-modal-title">{data ? "修改" : "新增"}挂号预约</div>
                     <Form.Item {...layout} label="手机">
                         {getFieldDecorator("phone", {})(<Input autoComplete="off" />)}
                     </Form.Item>
@@ -70,7 +70,7 @@ const AddOrEditForm = Form.create()(
                     <Form.Item {...layout} label="备注">
                         {getFieldDecorator("remark", {})(<TextArea max={100} rows={5} />)}
                     </Form.Item>
-                    <div className="dialog-button">
+                    <div className="form-modal-button">
                         <Button type="primary" onClick={this.handleSubmit}>
                             {data ? "修改" : "保存"}
                         </Button>

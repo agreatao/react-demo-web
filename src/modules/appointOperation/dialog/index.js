@@ -32,33 +32,29 @@ const AddOrEditForm = Form.create()(
         render() {
             const { data } = this.props;
             const { getFieldDecorator } = this.props.form;
-            return (
-                <Form>
-                    <div className="dialog-title">{data ? "修改" : "新增"}手术预约</div>
-                    <Form.Item {...layout} label="手机">
-                        {getFieldDecorator("phone", {})(<Input autoComplete="off" />)}
-                    </Form.Item>
-                    <Form.Item {...layout} label="姓名">
-                        {getFieldDecorator("name", {})(<Input autoComplete="off" disabled={!!data} />)}
-                    </Form.Item>
-                    <Form.Item {...layout} label="预约时间">
-                        {getFieldDecorator("appointTime", {})(<DatePicker showTime={{ format: "HH:mm" }} style={{ width: "100%" }} />)}
-                    </Form.Item>
-                    <Form.Item {...layout} label="预约医生">
-                        {getFieldDecorator("doctorId", {})(
-                            <Select>
-                                <Option value="">请选择</Option>
-                            </Select>
-                        )}
-                    </Form.Item>
-                    <div className="dialog-button">
-                        <Button type="primary" onClick={this.handleSubmit}>
-                            {data ? "修改" : "保存"}
-                        </Button>
-                        <Button onClick={this.handleReset}>取消</Button>
-                    </div>
-                </Form>
-            );
+            return <Form>
+                <div className="form-modal-title">{data ? "修改" : "新增"}手术预约</div>
+                <Form.Item {...layout} label="手机">
+                    {getFieldDecorator("phone", {})(<Input autoComplete="off" />)}
+                </Form.Item>
+                <Form.Item {...layout} label="姓名">
+                    {getFieldDecorator("name", {})(<Input autoComplete="off" disabled={!!data} />)}
+                </Form.Item>
+                <Form.Item {...layout} label="预约时间">
+                    {getFieldDecorator("appointTime", {})(<DatePicker showTime={{ format: "HH:mm" }} style={{ width: "100%" }} />)}
+                </Form.Item>
+                <Form.Item {...layout} label="预约医生">
+                    {getFieldDecorator("doctorId", {})(
+                        <Select>
+                            <Option value="">请选择</Option>
+                        </Select>
+                    )}
+                </Form.Item>
+                <div className="form-modal-button">
+                    <Button type="primary" onClick={this.handleSubmit}>{data ? "修改" : "保存"}</Button>
+                    <Button onClick={this.handleReset}>取消</Button>
+                </div>
+            </Form>
         }
     }
 );

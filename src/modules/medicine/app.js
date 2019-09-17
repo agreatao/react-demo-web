@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import entry from "utils/entry";
 import http from "utils/http";
 import Filter from "./filter";
-import form from "./form";
+import { addOrEdit } from "./dialog";
 
 const Page = connect(state => ({ browser: state.browser, bars: state.bars }))(
     class Page extends React.Component {
@@ -52,19 +52,11 @@ const Page = connect(state => ({ browser: state.browser, bars: state.bars }))(
         };
         handleAdd = e => {
             e.preventDefault();
-            form()
-                .then(isUpdate => {
-                    isUpdate && this.fetch();
-                })
-                .catch(() => { });
+            addOrEdit().then(this.fetch);
         };
         handleEdit = (data, e) => {
             e.preventDefault();
-            form(data)
-                .then(isUpdate => {
-                    isUpdate && this.fetch();
-                })
-                .catch(() => { });
+            addOrEdit(data).then(this.fetch);
         };
         handleRowSelect = selectedIds => {
             this.setState({ selectedIds });

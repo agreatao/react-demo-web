@@ -102,6 +102,10 @@ const Page = connect(
                     </Bars>
                     <Table
                         style={{ height: browser.height - bars.height - 100 }}
+                        scroll={{
+                            y: browser.height - bars.height - 155,
+                            x: browser.width - 200
+                        }}
                         columns={[
                             {
                                 title: '病历号',

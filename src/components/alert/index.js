@@ -60,18 +60,4 @@ export function remove() {
     });
 }
 
-export function confirm(content) {
-    return new Promise((resolve, reject) => {
-        Modal.confirm({
-            title: content,
-            content: "",
-            okText: "确定",
-            cancelText: "取消",
-            centered,
-            onOk: () => resolve(),
-            onCancel: () => reject()
-        });
-    });
-}
-
 export const dialog = _dialog;

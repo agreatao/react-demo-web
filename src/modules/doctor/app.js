@@ -1,15 +1,15 @@
-import Master from "commons/master";
-import entry from "utils/entry";
 import { Icon } from "antd";
+import Master from "commons/master";
 import { remove } from "components/alert";
 import Bars from "components/bars";
 import Pagination from "components/pagination";
 import Table from "components/table";
 import React from "react";
 import { connect } from "react-redux";
+import entry from "utils/entry";
 import http from "utils/http";
+import { addOrEdit } from "./dialog";
 import Filter from "./filter";
-import form from "./form";
 
 const Page = connect(state => ({ browser: state.browser, bars: state.bars }))(
     class Page extends React.Component {
@@ -55,9 +55,7 @@ const Page = connect(state => ({ browser: state.browser, bars: state.bars }))(
         };
         handleEdit = (data, e) => {
             e.preventDefault();
-            form(data).then(() => {
-                this.fetch();
-            });
+            addOrEdit(data).then(this.fetch);
         };
         handleRowSelect = selectedIds => {
             this.setState({ selectedIds });
@@ -89,6 +87,10 @@ const Page = connect(state => ({ browser: state.browser, bars: state.bars }))(
                     </Bars>
                     <Table
                         style={{ height: browser.height - bars.height - 100 }}
+                        scroll={{
+                            y: browser.height - bars.height - 155,
+                            x: browser.width - 200
+                        }}
                         columns={[
                             {
                                 title: "姓名",

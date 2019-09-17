@@ -5,11 +5,11 @@ import entry from "utils/entry";
 
 const IS_REACT_16 = !!ReactDOM.createPortal;
 
-export default function dialog(ChildNode) {
+export default function dialog(ChildNode, dialogProps) {
     const div = document.createElement("div");
     document.body.appendChild(div);
 
-    let currentConfig = { visible: true, children: ChildNode };
+    let currentConfig = { ...dialogProps, visible: true, children: ChildNode };
 
     function destroy() {
         const unmountResult = ReactDOM.unmountComponentAtNode(div);
@@ -21,7 +21,7 @@ export default function dialog(ChildNode) {
     function render(props) {
         entry(
             <Modal
-                className="dialog-form"
+                className="form-modal"
                 centered
                 getContainer={false}
                 footer={false}
@@ -35,7 +35,7 @@ export default function dialog(ChildNode) {
 
     function close() {
         currentConfig = {
-            ...currentConfig,            
+            ...currentConfig,
             visible: false,
             afterClose: destroy.bind(this)
         };
@@ -49,6 +49,7 @@ export default function dialog(ChildNode) {
     render(currentConfig);
 
     return {
+        update: props => render({ ...currentConfig, ...props }),
         close
     }
 }
