@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import entry from "utils/entry";
 import http from "utils/http";
 import Filter from "./filter";
-import viewDetail from "./viewDetail";
+import { viewDetail } from "./dialog";
 import "./style";
 
 const Page = connect(
@@ -66,7 +66,7 @@ const Page = connect(
         }
         handleViewDetail = (data, e) => {
             e.preventDefault();
-            viewDetail(data.id);
+            viewDetail(data);
         }
         handleRowSelect = (selectedIds) => {
             this.setState({ selectedIds })
@@ -109,23 +109,29 @@ const Page = connect(
                         columns={[
                             {
                                 title: '病历号',
-                                dataIndex: 'sickId'
+                                dataIndex: 'sickId',
+                                width: 200
                             },
                             {
                                 title: '姓名',
-                                dataIndex: 'sickName'
+                                dataIndex: 'sickName',
+                                width: 140
                             },
                             {
                                 title: '性别',
-                                dataIndex: 'sickSex'
+                                dataIndex: 'sickSex',
+                                width: 120,
+                                render: sex => sex == 1 ? "男" : "女"
                             },
                             {
                                 title: '年龄',
-                                dataIndex: 'sickAge'
+                                dataIndex: 'sickAge',
+                                width: 120
                             },
                             {
                                 title: '联系方式',
-                                dataIndex: 'mobilePhone'
+                                dataIndex: 'mobilePhone',
+                                width: 180
                             },
                             {
                                 title: "操作",
