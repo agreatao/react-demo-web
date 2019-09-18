@@ -1,1 +1,5 @@
-{}
+{
+    "/mock/msk/sick/getSickInfoList?currentPage=:page&pageSize=:pageSize": "/getSickInfoList",
+    "/mock/msk/sick/querySickInfo?sickInfoId=:sickInfoId": "/querySickInfo",
+    "/mock/msk/sick/querySickHistory?sickInfoId=:sickInfoId": "/querySickHistory"
+}

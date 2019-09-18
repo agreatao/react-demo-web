@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import entry from "utils/entry";
 import http from "utils/http";
 import Filter from "./filter";
-import { viewDetail } from "./dialog";
+import { viewSickHistory, addOrEdit } from "./dialog";
 import "./style";
 
 const Page = connect(
@@ -63,10 +63,15 @@ const Page = connect(
         }
         handleAdd = e => {
             e.preventDefault();
+            addOrEdit().then(this.fetch);
         }
-        handleViewDetail = (data, e) => {
+        handleViewSickHistory = (id, e) => {
             e.preventDefault();
-            viewDetail(data);
+            viewSickHistory(id);
+        }
+        handleEdit = (data, e) => {
+            e.preventDefault();
+            addOrEdit(data).then(this.fetch);
         }
         handleRowSelect = (selectedIds) => {
             this.setState({ selectedIds })
@@ -138,7 +143,8 @@ const Page = connect(
                                 className: "actions",
                                 dataIndex: "id",
                                 render: (id, row) => <React.Fragment>
-                                    <a onClick={e => this.handleViewDetail(row, e)}>查看详情</a>
+                                    <a onClick={e => this.handleViewSickHistory(id, e)}>查询病史</a>
+                                    <a onClick={e => this.handleEdit(row, e)}>编辑</a>
                                     <a onClick={e => this.handleDelete([id], e)}>删除</a>
                                 </React.Fragment>
                             }

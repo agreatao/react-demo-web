@@ -11,5 +11,5 @@ module.exports = {
         "queue"
     ],
     title: "",
-    apiUrl: "http://localhost:8060" // 接口
+    apiUrl: "http://localhost:8000/mock" // 接口
 };

@@ -1,40 +1,24 @@
-export default function (strBirthday) {
-    if (!strBirthday) return -1;
-    var returnAge;
-    var strBirthdayArr = strBirthday.split("-");
-    var birthYear = strBirthdayArr[0];
-    var birthMonth = strBirthdayArr[1];
-    var birthDay = strBirthdayArr[2];
-
-    let d = new Date();
-    var nowYear = d.getFullYear();
-    var nowMonth = d.getMonth() + 1;
-    var nowDay = d.getDate();
-
-    if (nowYear == birthYear) {
-        returnAge = 0; //同年 则为0岁
-    } else {
-        var ageDiff = nowYear - birthYear; //年之差
-        if (ageDiff > 0) {
-            if (nowMonth == birthMonth) {
-                var dayDiff = nowDay - birthDay; //日之差
-                if (dayDiff < 0) {
-                    returnAge = ageDiff - 1;
-                } else {
-                    returnAge = ageDiff;
-                }
-            } else {
-                var monthDiff = nowMonth - birthMonth; //月之差
-                if (monthDiff < 0) {
-                    returnAge = ageDiff - 1;
-                } else {
-                    returnAge = ageDiff;
-                }
-            }
+export default function computeAge(birthday) {
+    if (birthday instanceof Date) {
+        let birthYear = birthday.getFullYear(),
+            birthMonth = birthday.getMonth() + 1,
+            birthDate = birthday.getDate(),
+            now = new Date(),
+            nowYear = now.getFullYear(),
+            nowMonth = now.getMonth() + 1,
+            nowDate = now.getDate();
+        if (new Date(birthYear, birthMonth - 1, birthDate).getTime() > new Date(nowYear, nowMonth - 1, nowDate).getTime())
+            throw "the birthday must be smaller than now";
+        if (nowYear == birthYear) return 0;
+        let age = nowYear - birthYear;
+        if (nowMonth == birthMonth) {
+            let dateDiff = nowDate - birthDate;
+            if (dateDiff < 0) return age - 1;
+            else return age;
         } else {
-            returnAge = -1; //返回-1 表示出生日期输入错误 晚于今天
+            let monthDiff = nowMonth - birthMonth;
+            if (monthDiff < 0) return age - 1;
+            else return age;
         }
-    }
-
-    return returnAge; //返回周岁年龄
+    } else throw "the param birthday must be a Date";
 }

@@ -1,30 +1,24 @@
-import React from "react";
 import { dialog } from "components/alert";
-import http from "utils/http";
+import React from "react";
+import SickHistory from "./sickHistory";
+import AddOrEditForm from "./addOrEditForm";
 
-class Detail extends React.Component {
-    componentDidMount() {
-        const { data } = this.props;
-        http.post("/sick/querySickInfo", data).then(result => {
-            console.log(result);
-        })
-        http.get("/sick/querySickHistory", { sickInfoId: data.sickId }).then(result => {
-            console.log(result);
-        })
-        http.get("/sick/querySickNormalCheck", { sickInfoId: data.sickId }).then(result => {
-            console.log(result);
-        })
-        http.get("/sick/querySickSpecialCheck", { sickInfoId: data.sickId }).then(result => {
-            console.log(result);
-        })
-    }
-    render() {
-        return <div>
-
-        </div>
-    }
+export const viewSickHistory = id => {
+    dialog(<SickHistory sickInfoId={id} />, { width: 989 });
 }
 
-export const viewDetail = data => {
-    dialog(<Detail data={data} />, { width: 989 });
-}
+export const addOrEdit = data =>
+    new Promise(resolve => {
+        const { close } = dialog(<AddOrEditForm data={data} onSuccess={handleSuccess} onCancel={handleCancel} />, {
+            width: 800
+        });
+
+        function handleSuccess() {
+            close();
+            resolve();
+        }
+
+        function handleCancel() {
+            close();
+        }
+    });
