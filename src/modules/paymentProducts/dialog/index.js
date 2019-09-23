@@ -22,7 +22,7 @@ const AddOrEditForm = Form.create()(
             this.props.form.validateFields((err, values) => {
                 if (err) return;
                 const { data } = this.props;
-                http.post(data ? "/drug/updateDrugInfo" : "/drug/addDrugInfo", {
+                http.post(data ? "/payments/updateCheckType" : "/payments/addCheckType", {
                     ...values,
                     id: data && data.id
                 }).then(() => {
@@ -39,37 +39,27 @@ const AddOrEditForm = Form.create()(
             const { data } = this.props;
             const { getFieldDecorator } = this.props.form;
             return <Form>
-                <div className="form-modal-title">{data != null ? "编辑药品" : "新增药品"}</div>
-                <Form.Item {...layout} label="药品名称">
-                    {getFieldDecorator("drugName", {
+                <div className="form-modal-title">{data != null ? "编辑收费项目" : "新增收费项目"}</div>
+                <Form.Item {...layout} label="收费项目名称">
+                    {getFieldDecorator("checkTypeName", {
                         rules: [
-                            { required: true, message: "药品名称是必填字段！" }
+                            { required: true, message: "收费项目名称是必填字段！" }
                         ],
-                        initialValue: data && data.drugName
+                        initialValue: data && data.checkTypeName
                     })(<Input autoComplete="off" />)}
                 </Form.Item>
-                <Form.Item {...layout} label="规格">
-                    {getFieldDecorator("norms", {
+                <Form.Item {...layout} label="单位">
+                    {getFieldDecorator("unit", {
                         rules: [
-                            { required: true, message: "药品规格是必填字段" }
+                            { required: true, message: "单位是必填字段" }
                         ],
-                        initialValue: data && data.norms
+                        initialValue: data && data.unit
                     })(<Input autoComplete="off" />)}
                 </Form.Item>
-                <Form.Item {...layout} label="形状">
-                    {getFieldDecorator("drugShape", {
-                        initialValue: data && data.mobilePhone
+                <Form.Item {...layout} label="金额">
+                    {getFieldDecorator("amount", {
+                        initialValue: data && data.amount
                     })(<Input autoComplete="off" />)}
-                </Form.Item>
-                <Form.Item {...layout} label="适应症">
-                    {getFieldDecorator("suitType", {
-                        initialValue: data && data.suitType
-                    })(<TextArea rows={4} />)}
-                </Form.Item>
-                <Form.Item {...layout} label="成份">
-                    {getFieldDecorator("composition", {
-                        initialValue: data && data.composition
-                    })(<TextArea rows={4} />)}
                 </Form.Item>
                 <div className="form-modal-button">
                     <Button type="primary" onClick={this.handleSubmit}>{data ? "修改" : "保存"}</Button>
@@ -82,9 +72,7 @@ const AddOrEditForm = Form.create()(
 
 export const addOrEdit = data =>
     new Promise(resolve => {
-        const { close } = dialog(<AddOrEditForm data={data} onSuccess={handleSuccess} onCancel={handleCancel} />, {
-            width: 800
-        });
+        const { close } = dialog(<AddOrEditForm data={data} onSuccess={handleSuccess} onCancel={handleCancel} />);
 
         function handleSuccess() {
             close();

@@ -80,7 +80,6 @@ export default connect(state => ({ browser: state.browser }))(
                             <Menu.Item key="appointOperationCheck">术前检查预约</Menu.Item>
                             <Menu.Item key="appointOperation">手术预约</Menu.Item>
                         </SubMenu>
-
                         <Menu.Item key="medicine">
                             <Icon type="medicine-box" />
                             <span>药品管理</span>
@@ -89,6 +88,18 @@ export default connect(state => ({ browser: state.browser }))(
                             <Icon component={Doctor} />
                             <span>医生管理</span>
                         </Menu.Item>
+                        <SubMenu
+                            key="payment"
+                            title={
+                                <span>
+                                    <Icon type="pay-circle" />
+                                    <span>收费管理</span>
+                                </span>
+                            }
+                        >
+                            <Menu.Item key="paymentNotices">通知单管理</Menu.Item>
+                            <Menu.Item key="paymentProducts">项目管理</Menu.Item>
+                        </SubMenu>
                     </Menu>
                 </div>
             );

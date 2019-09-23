@@ -22,7 +22,7 @@ const AddOrEditForm = Form.create()(
             this.props.form.validateFields((err, values) => {
                 if (err) return;
                 const { data } = this.props;
-                http.post(data ? "/drug/updateDrugInfo" : "/drug/addDrugInfo", {
+                http.post(data ? "/payments/updateChargeNotice" : "/payments/addChargeNotice", {
                     ...values,
                     id: data && data.id
                 }).then(() => {
@@ -40,37 +40,22 @@ const AddOrEditForm = Form.create()(
             const { getFieldDecorator } = this.props.form;
             return <Form>
                 <div className="form-modal-title">{data != null ? "编辑药品" : "新增药品"}</div>
-                <Form.Item {...layout} label="药品名称">
-                    {getFieldDecorator("drugName", {
-                        rules: [
-                            { required: true, message: "药品名称是必填字段！" }
-                        ],
-                        initialValue: data && data.drugName
-                    })(<Input autoComplete="off" />)}
-                </Form.Item>
-                <Form.Item {...layout} label="规格">
-                    {getFieldDecorator("norms", {
-                        rules: [
-                            { required: true, message: "药品规格是必填字段" }
-                        ],
-                        initialValue: data && data.norms
-                    })(<Input autoComplete="off" />)}
-                </Form.Item>
-                <Form.Item {...layout} label="形状">
-                    {getFieldDecorator("drugShape", {
-                        initialValue: data && data.mobilePhone
-                    })(<Input autoComplete="off" />)}
-                </Form.Item>
-                <Form.Item {...layout} label="适应症">
-                    {getFieldDecorator("suitType", {
-                        initialValue: data && data.suitType
-                    })(<TextArea rows={4} />)}
-                </Form.Item>
-                <Form.Item {...layout} label="成份">
-                    {getFieldDecorator("composition", {
-                        initialValue: data && data.composition
-                    })(<TextArea rows={4} />)}
-                </Form.Item>
+                <div style={{ display: "flex" }}>
+                    <div style={{ flex: 1 }}>
+                        <Form.Item {...layout} label="姓名">
+                            {getFieldDecorator("sickName", {
+                                initialValue: data && data.sickName
+                            })(<Input autoComplete="off" />)}
+                        </Form.Item>
+                    </div>
+                    <div style={{ flex: 1 }}>
+                        <Form.Item {...layout} label="开票日期">
+                            {getFieldDecorator("billingDate", {
+                                initialValue: data && data.billingDate
+                            })(<Input autoComplete="off" />)}
+                        </Form.Item>
+                    </div>
+                </div>
                 <div className="form-modal-button">
                     <Button type="primary" onClick={this.handleSubmit}>{data ? "修改" : "保存"}</Button>
                     <Button onClick={this.handleReset}>返回</Button>

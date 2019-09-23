@@ -30,6 +30,7 @@ export default class CustomTextArea extends React.Component {
                 style={{ resize: "none" }}
                 value={value}
                 onChange={this.handleChange}
+                {...this.props}
             />
             {max != null && <span className="c-text-area-length">{max - (value && value.length || 0)}</span>}
         </div>

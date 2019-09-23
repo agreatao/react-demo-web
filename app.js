@@ -40,6 +40,10 @@ app.use(`${CONFIG.baseURL}/medicine`, express.static(path.join(__dirname, "dist/
 app.use(`${CONFIG.baseURL}/doctor`, express.static(path.join(__dirname, "dist/templates", "doctor.html")));
 app.use(`${CONFIG.baseURL}/queue`, express.static(path.join(__dirname, "dist/templates", "queue.html")));
 
+
+app.use(`${CONFIG.baseURL}/paymentNotices`, express.static(path.join(__dirname, "dist/templates", "paymentNotices.html")));
+app.use(`${CONFIG.baseURL}/paymentProducts`, express.static(path.join(__dirname, "dist/templates", "paymentProducts.html")));
+
 app.post(`${CONFIG.baseURL}/sick/imageUpload`, multipartMiddleware, (req, res, next) => {
     let formData = {};
     for (let key in req.files) formData[key] = fs.createReadStream(req.files[key].path);

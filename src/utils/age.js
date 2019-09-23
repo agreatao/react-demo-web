@@ -1,4 +1,4 @@
-export default function computeAge(birthday) {
+export const computeAge = (birthday) => {
     if (birthday instanceof Date) {
         let birthYear = birthday.getFullYear(),
             birthMonth = birthday.getMonth() + 1,

@@ -1,17 +1,19 @@
 import { dialog } from "components/alert";
 import React from "react";
 import SickHistory from "./sickHistory";
-import AddOrEditForm from "./addOrEditForm";
+import SickInfo from "./sickInfo";
 
 export const viewSickHistory = id => {
-    dialog(<SickHistory sickInfoId={id} />, { width: 989 });
+    const { close } = dialog(<SickHistory sickInfoId={id} onCancel={handleCancel} />, { width: 989 });
+
+    function handleCancel() {
+        close();
+    }
 }
 
 export const addOrEdit = data =>
     new Promise(resolve => {
-        const { close } = dialog(<AddOrEditForm data={data} onSuccess={handleSuccess} onCancel={handleCancel} />, {
-            width: 800
-        });
+        const { close } = dialog(<SickInfo data={data} onSuccess={handleSuccess} onCancel={handleCancel} />, { width: 720 });
 
         function handleSuccess() {
             close();

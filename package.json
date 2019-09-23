@@ -7,7 +7,7 @@
         "server": "node app",
         "start": "cross-env NODE_ENV=development webpack --progress --colors --watch --display-depth",
         "build": "cross-env NODE_ENV=production webpack --progress",
-        "mock": "json-server --port 8000 --middlewares mock/middlewares.js --routes mock/routes.json --watch mock/faker-data.js"
+        "mock": "json-server --port 8800 --middlewares mock/middlewares.js --routes mock/routes.json --watch mock/faker-data.js"
     },
     "keywords": [],
     "author": "",
