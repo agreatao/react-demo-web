@@ -60,4 +60,17 @@ export function remove() {
     });
 }
 
+export function confirm(title) {
+    return new Promise(resolve => {
+        Modal.confirm({
+            title,
+            content: "",
+            okText: "确定",
+            cancelText: "取消",
+            centered,
+            onOk: () => resolve()
+        });
+    });
+}
+
 export const dialog = _dialog;

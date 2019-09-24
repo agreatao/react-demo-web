@@ -45,9 +45,7 @@ const AddOrEditForm = Form.create()(
                 </Form.Item>
                 <Form.Item {...layout} label="预约医生">
                     {getFieldDecorator("doctorId", {})(
-                        <Select>
-                            <Option value="">请选择</Option>
-                        </Select>
+                        <Select></Select>
                     )}
                 </Form.Item>
                 <div className="form-modal-button">

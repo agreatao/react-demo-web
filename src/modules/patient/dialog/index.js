@@ -3,7 +3,7 @@ import React from "react";
 import SickHistory from "./sickHistory";
 import SickInfo from "./sickInfo";
 
-export const viewSickHistory = id => {
+export const sickHistoryDialog = id => {
     const { close } = dialog(<SickHistory sickInfoId={id} onCancel={handleCancel} />, { width: 989 });
 
     function handleCancel() {
@@ -11,7 +11,7 @@ export const viewSickHistory = id => {
     }
 }
 
-export const addOrEdit = data =>
+export const sickInfoDialog = data =>
     new Promise(resolve => {
         const { close } = dialog(<SickInfo data={data} onSuccess={handleSuccess} onCancel={handleCancel} />, { width: 720 });
 

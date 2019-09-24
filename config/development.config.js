@@ -13,5 +13,6 @@ module.exports = {
         "paymentProducts"
     ],
     title: "",
-    apiUrl: "http://localhost:8060" // 接口
+    apiUrl: "http://localhost:8800/mock"
+    // apiUrl: "http://localhost:8060" // 接口
 };

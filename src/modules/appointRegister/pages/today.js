@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import http from "utils/http";
 import { columns } from "../config/today";
 import Filter from "../filter/today";
-import { addOrEdit, toQueue } from "../dialog";
+import { appointRegisterDialog, toQueue } from "../dialog";
 
 export default connect(state => ({ browser: state.browser, bars: state.bars }))(
     class Page extends React.Component {
@@ -56,7 +56,7 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
         }
         handleAdd = e => {
             e.preventDefault();
-            addOrEdit().then(this.fetch);
+            appointRegisterDialog().then(this.fetch);
         };
         handleCall = (appoint, e) => {
             e.preventDefault();
@@ -68,7 +68,7 @@ export default connect(state => ({ browser: state.browser, bars: state.bars }))(
         };
         handleUpdate = (appoint, e) => {
             e.preventDefault();
-            addOrEdit(appoint).then(this.fetch);
+            appointRegisterDialog(appoint).then(this.fetch);
         };
         handleCancel = (appoint, e) => {
             e.preventDefault();

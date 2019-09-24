@@ -4,6 +4,7 @@ import { Form, Button, Input, Select, Radio, Icon } from "antd";
 import { glassTypes } from "lib/dic";
 import { TextArea, Eye, CheckTextArea } from "components/form";
 const { Option } = Select;
+import "./sickHistory.less";
 
 export default Form.create()(class SickHistory extends React.Component {
     state = {
@@ -49,12 +50,12 @@ export default Form.create()(class SickHistory extends React.Component {
                                 {glassTypes.map(item => <Option value={item.value} key={item.value}>{item.text}</Option>)}
                             </Select>)}
                         </Form.Item>
-                        <Form.Item colon={false} className="short-label" label="戴镜">
+                        <Form.Item colon={false} className="label-sm" label="戴镜">
                             {getFieldDecorator(`sickHistoryItems[${key}].glassesYear`, {
                                 initialValue: item.glassesYear
                             })(<Input autoComplete="off" disabled={!isEdit} />)}
                         </Form.Item>
-                        <Form.Item colon={false} className="short-label" label="脱镜">
+                        <Form.Item colon={false} className="label-sm" label="脱镜">
                             {getFieldDecorator(`sickHistoryItems[${key}].tjYear`, {
                                 initialValue: item.tjYear
                             })(<Input autoComplete="off" disabled={!isEdit} />)}
@@ -97,14 +98,6 @@ export default Form.create()(class SickHistory extends React.Component {
                         })(<Eye label="右眼" disabled={!isEdit} />)}
                     </Form.Item>
                     <div style={{ display: "flex" }}>
-                        <Form.Item colon={false} className="long-label" label="严重干眼病史">
-                            {getFieldDecorator("isYzgybs", {
-                                initialValue: data && data.isYzgybs
-                            })(<Radio.Group disabled={!isEdit}>
-                                <Radio value={1}>是</Radio>
-                                <Radio value={0}>否</Radio>
-                            </Radio.Group>)}
-                        </Form.Item>
                         <Form.Item colon={false} label="角膜炎病史">
                             {getFieldDecorator("isJmybs", {
                                 initialValue: data && data.isJmybs
@@ -113,30 +106,38 @@ export default Form.create()(class SickHistory extends React.Component {
                                 <Radio value={0}>否</Radio>
                             </Radio.Group>)}
                         </Form.Item>
+                        <Form.Item colon={false} className="label-lg" label="严重干眼病史">
+                            {getFieldDecorator("isYzgybs", {
+                                initialValue: data && data.isYzgybs
+                            })(<Radio.Group disabled={!isEdit}>
+                                <Radio value={1}>是</Radio>
+                                <Radio value={0}>否</Radio>
+                            </Radio.Group>)}
+                        </Form.Item>
                     </div>
-                    <Form.Item colon={false} className="long-label" label="家族近视">
+                    <Form.Item colon={false} label="家族近视">
                         {getFieldDecorator("glassFamily", {
                             initialValue: data && data.glassFamily
                         })(<Input autoComplete="off" disabled={!isEdit} />)}
                     </Form.Item>
                 </div>
                 <div style={{ flex: 1, marginLeft: 8 }}>
-                    <Form.Item colon={false} className="long-label" label="全身疾病史">
+                    <Form.Item colon={false} className="label-lg" label="全身疾病史">
                         {getFieldDecorator("qsjbs", {
                             initialValue: [data && data.isQsjbs, data && data.qsjbsNote]
                         })(<CheckTextArea disabled={!isEdit} rows={5} max={300} />)}
                     </Form.Item>
-                    <Form.Item colon={false} className="long-label" label="精神性病史">
+                    <Form.Item colon={false} className="label-lg" label="精神性病史">
                         {getFieldDecorator("jsxbs", {
                             initialValue: [data && data.isJsxbs, data && data.jsxbsNote]
                         })(<CheckTextArea disabled={!isEdit} rows={5} max={300} />)}
                     </Form.Item>
-                    <Form.Item colon={false} className="long-label" label="手术史">
+                    <Form.Item colon={false} className="label-lg" label="手术史">
                         {getFieldDecorator("sss", {
                             initialValue: [data && data.isSss, data && data.sssNote]
                         })(<CheckTextArea disabled={!isEdit} rows={5} max={300} />)}
                     </Form.Item>
-                    <Form.Item colon={false} className="long-label" label="其他">
+                    <Form.Item colon={false} className="label-lg" label="其他">
                         {getFieldDecorator("qt", {
                             initialValue: [data && data.isQt, data && data.qtNote]
                         })(<CheckTextArea disabled={!isEdit} rows={5} max={300} />)}

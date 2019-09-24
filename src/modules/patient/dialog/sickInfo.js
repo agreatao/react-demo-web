@@ -5,6 +5,7 @@ import { Address } from "components/form";
 import http from "utils/http";
 import { getFullChars } from "utils/pinyin";
 import { computeAge } from "utils/age";
+import "./sickInfo.less";
 
 
 const { Option } = Select;

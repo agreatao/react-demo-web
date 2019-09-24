@@ -9,8 +9,7 @@ import { connect } from "react-redux";
 import entry from "utils/entry";
 import http from "utils/http";
 import Filter from "./filter";
-import { viewSickHistory, addOrEdit } from "./dialog";
-import "./style";
+import { sickHistoryDialog, sickInfoDialog } from "./dialog";
 
 const Page = connect(
     state => ({ browser: state.browser, bars: state.bars })
@@ -63,15 +62,15 @@ const Page = connect(
         }
         handleAdd = e => {
             e.preventDefault();
-            addOrEdit().then(this.fetch);
+            sickInfoDialog().then(this.fetch);
         }
         handleViewSickHistory = (id, e) => {
             e.preventDefault();
-            viewSickHistory(id);
+            sickHistoryDialog(id);
         }
         handleEdit = (data, e) => {
             e.preventDefault();
-            addOrEdit(data).then(this.fetch);
+            sickInfoDialog(data).then(this.fetch);
         }
         handleRowSelect = (selectedIds) => {
             this.setState({ selectedIds })
