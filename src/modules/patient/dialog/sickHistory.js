@@ -1,7 +1,7 @@
 import React from "react";
 import http from "utils/http";
 import { Form, Button, Input, Select, Radio, Icon } from "antd";
-import { glassTypes } from "lib/dic";
+import { glassTypes } from "dic";
 import { TextArea, Eye, CheckTextArea } from "components/form";
 const { Option } = Select;
 import "./sickHistory.less";

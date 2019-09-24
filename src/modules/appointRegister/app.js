@@ -1,6 +1,6 @@
 import { Menu } from "antd";
-import Loading from "commons/loading";
-import Master from "commons/master";
+import Loading from "components/loading";
+import Master from "components/master";
 import { createHashHistory } from "history";
 import React, { lazy, Suspense } from "react";
 import { connect } from "react-redux";

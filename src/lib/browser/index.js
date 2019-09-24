@@ -1,14 +1,13 @@
-import store from 'store';
-import { bindActionCreators } from 'redux';
 import addEventListener from 'add-dom-event-listener';
-
+import { bindActionCreators } from 'redux';
+import store from 'store';
 import { browserResize, browserScroll } from 'store/actions/browser';
 
-var boundActionCreators = bindActionCreators({ browserResize, browserScroll }, store.dispatch);
-var _browserResize = boundActionCreators.browserResize;
-var _browserScroll = boundActionCreators.browserScroll;
+const boundActionCreators = bindActionCreators({ browserResize, browserScroll }, store.dispatch);
+const _browserResize = boundActionCreators.browserResize;
+const _browserScroll = boundActionCreators.browserScroll;
 
-var browsers = (function (window, { documentElement, body }) {
+((window, { documentElement, body }) => {
     // 节流函数
     function throttle(func, wait, mustRun) {
         var timeout,
@@ -47,5 +46,3 @@ var browsers = (function (window, { documentElement, body }) {
 
     addEventListener(window, 'resize', throttle(onResize, 100, 500))
 })(window, document);
-
-export default browsers;

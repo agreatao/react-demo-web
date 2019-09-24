@@ -1,7 +1,7 @@
 import { Cascader } from "antd";
 import React from "react";
 import CTextArea from "./textArea";
-import { provinces } from "lib/dic";
+import { provinces } from "dic";
 
 export default class Address extends React.Component {
     static getDerivedStateFromProps(nextProps) {

@@ -1,10 +1,10 @@
-import Master from "commons/master";
+import { Button } from "antd";
+import Master from "components/master";
+import Table from "components/table";
 import React from "react";
 import entry from "utils/entry";
-import Table from "components/table";
-import "./style";
-import { Button } from "antd";
 import PatientCard from "./components/patientCard";
+import "./style";
 
 class Page extends React.Component {
     render() {

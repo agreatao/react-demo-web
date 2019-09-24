@@ -81,7 +81,6 @@ module.exports = {
         alias: {
             "@": path.join(__dirname, "src"),
             api: path.join(__dirname, "src/api"),
-            commons: path.join(__dirname, "src/commons"),
             components: path.join(__dirname, "src/components"),
             dic: path.join(__dirname, "src/dic"),
             images: path.join(__dirname, "src/images"),
@@ -89,8 +88,7 @@ module.exports = {
             modules: path.join(__dirname, "src/modules"),
             store: path.join(__dirname, "src/store"),
             theme: path.join(__dirname, "src/theme"),
-            utils: path.join(__dirname, "src/utils"),
-            hgis: path.join(__dirname, "src/hgis")
+            utils: path.join(__dirname, "src/utils")
         }
     },
     module: {
@@ -102,19 +100,16 @@ module.exports = {
             },
             {
                 test: /\.(png|jpe?g|svg|gif|ico)$/,
-                include: [path.join(__dirname, "src/images")],
+                include: path.join(__dirname, "src/images"),
                 loader: "file-loader",
                 options: {
                     limit: 512,
-                    name: "images/[name].[hash].[ext]"
+                    name: "images/[name].[ext]"
                 }
             },
             {
                 test: /\.svg$/,
-                include: [
-                    path.join(__dirname, "src/components/tree_icon"),
-                    path.join(__dirname, "src/components/lida_icon")
-                ],
+                include: path.join(__dirname, "src/svg"),
                 loader: "raw-loader"
             },
             {
@@ -123,11 +118,7 @@ module.exports = {
             },
             {
                 test: /\.(woff2?|svg|ttf|eot)$/,
-                exclude: [
-                    path.join(__dirname, "src/components/tree_icon"),
-                    path.join(__dirname, "src/components/lida_icon"),
-                    path.join(__dirname, "src/images")
-                ],
+                include: path.join(__dirname, "src/theme"),
                 loader: "file-loader",
                 options: {
                     name: "fonts/[name].[ext]"
@@ -193,11 +184,9 @@ module.exports = {
             },
             {
                 test: /\.less/,
-                include: [
-                    path.join(__dirname, "src/commons"),
-                    path.join(__dirname, "src/components"),
-                    path.join(__dirname, "src/modules"),
-                    path.join(__dirname, "src/hgis")
+                exclude: [
+                    path.join(__dirname, "src/theme"),
+                    path.join(__dirname, "node_modules")
                 ],
                 loader: PROJECT_LESS.extract({
                     fallback: "style-loader",

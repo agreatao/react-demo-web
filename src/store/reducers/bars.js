@@ -1,11 +1,11 @@
-import { BARS_RESIZE, SET_VISIBLE } from "../actionTypes/bars";
+import { BARS_RESIZE, SET_VISIBLE } from "../types/bars";
 
-export const barsInitialState = {
+const barsInitialState = {
     visible: false,
     height: 50
 };
 
-export default function(state = barsInitialState, { type, payload }) {
+export default function bars(state = barsInitialState, { type, payload }) {
     switch (type) {
         case BARS_RESIZE:
             return { ...state, ...payload };

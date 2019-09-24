@@ -1,15 +1,14 @@
 import { Icon } from "antd";
-import Master from "commons/master";
-import { remove } from "components/alert";
 import Bars from "components/bars";
+import Master from "components/master";
 import Pagination from "components/pagination";
 import Table from "components/table";
 import React from "react";
 import { connect } from "react-redux";
 import entry from "utils/entry";
 import http from "utils/http";
-import Filter from "./filter";
 import { addOrEdit } from "./dialog";
+import Filter from "./filter";
 
 const Page = connect(state => ({ browser: state.browser, bars: state.bars }))(
     class Page extends React.Component {

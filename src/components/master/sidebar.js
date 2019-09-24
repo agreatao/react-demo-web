@@ -1,8 +1,6 @@
+import { Icon, Menu } from "antd";
 import React from "react";
 import { connect } from "react-redux";
-import classnames from "classnames";
-
-import { Menu, Icon } from "antd";
 
 const { SubMenu } = Menu;
 

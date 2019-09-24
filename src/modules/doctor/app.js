@@ -1,5 +1,5 @@
 import { Icon } from "antd";
-import Master from "commons/master";
+import Master from "components/master";
 import { remove } from "components/alert";
 import Bars from "components/bars";
 import Pagination from "components/pagination";

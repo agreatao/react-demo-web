@@ -1,14 +1,9 @@
-import browser, { browserInitialState } from "./browser";
-import bars, { barsInitialState } from "./bars";
+import bars from "./bars";
+import browser from "./browser";
 
 const reducers = {
     browser,
     bars
-};
-
-export const initialState = {
-    bars: barsInitialState,
-    browser: browserInitialState
 };
 
 export default reducers;

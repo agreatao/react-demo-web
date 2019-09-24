@@ -1,12 +1,9 @@
-import React from "react";
-
-import "./style";
-import entry from "utils/entry";
-
-import { Form, Icon, Input, Button, Checkbox } from "antd";
-import http from "utils/http";
-
+import { Button, Form, Icon, Input } from "antd";
 import Cookie from "js-cookie";
+import React from "react";
+import entry from "utils/entry";
+import http from "utils/http";
+import "./style";
 
 const Login = Form.create({ name: "normal_login" })(
     class NormalLoginForm extends React.Component {

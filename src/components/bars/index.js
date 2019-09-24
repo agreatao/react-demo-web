@@ -2,15 +2,13 @@ import { Icon } from "antd";
 import classnames from "classnames";
 import React from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { barsResize, toggleFilter } from "store/actions/bars";
 import "./style";
 
 export default connect(
     state => ({ bars: state.bars }),
-    dispatch => ({
-        barsResize: payload => dispatch(barsResize(payload)),
-        toggleFilter: () => dispatch(toggleFilter())
-    })
+    dispatch => bindActionCreators({ barsResize, toggleFilter }, dispatch)
 )(
     class Bars extends React.Component {
         constructor(props) {

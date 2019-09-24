@@ -1,5 +1,5 @@
 import { Button, Col, DatePicker, Form, Input, Row, Select } from "antd";
-import { appointTimes } from "lib/dic";
+import { appointTimes } from "dic";
 import React from "react";
 
 const { RangePicker } = DatePicker;

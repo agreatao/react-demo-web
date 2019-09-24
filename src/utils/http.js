@@ -1,11 +1,10 @@
 import axios from "axios";
+import Cookie from "js-cookie";
 
 let cancelList = [];
 const CancelToken = axios.CancelToken;
 
 const http = {};
-
-import Cookie from "js-cookie";
 
 ["get", "post", "put", "delete"].forEach(method => {
     http[method] = (...args) => {

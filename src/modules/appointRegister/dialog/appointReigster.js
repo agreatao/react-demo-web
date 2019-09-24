@@ -1,6 +1,6 @@
 import { Button, DatePicker, Form, Input, Select, Spin } from "antd";
 import { TextArea } from "components/form";
-import { appointTimes } from "lib/dic";
+import { appointTimes } from "dic";
 import React from "react";
 import http from "utils/http";
 import debounce from 'lodash/debounce';

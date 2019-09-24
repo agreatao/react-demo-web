@@ -1,4 +1,4 @@
-import { BARS_RESIZE, SET_VISIBLE } from "../actionTypes/bars";
+import { BARS_RESIZE, SET_VISIBLE } from "../types/bars";
 
 export const barsResize = payload => ({ type: BARS_RESIZE, payload });
 
