@@ -1,27 +1,70 @@
-import { Empty, Table } from "antd";
 import React from "react";
-import "./style";
+import { Table, Modal, Button, Pagination } from "antd";
+import "./index.less";
 
-class CTable extends React.Component {
-    render() {
-        const { emptyText, style, rowKey } = this.props;
-        let height = null;
-        if (style && style.height) height = style.height - 54;
-        return (
-            <Table
-                {...this.props}
-                rowKey={rowKey || "id"}
-                pagination={false}
-                locale={{
-                    emptyText: <Empty className="empty-table" description={emptyText} style={{ height }} />
-                }}
-            />
-        );
+function XTable(props) {
+    const { onEdit, onDelete, operations, onPageChange, list, total, columns, currentPage, pageSize } = props;
+    const tableProps = Object.assign({}, props, {
+        onDelete: undefined,
+        onEdit: undefined,
+        operations: undefined,
+        columns: undefined,
+        onPageChange: undefined,
+        list: undefined,
+        total: undefined
+    });
+
+    const _columns = (columns || []).concat([{
+        title: "操作",
+        width: operations && operations.width,
+        className: "operation",
+        dataIndex: tableProps.rowKey,
+        render: (rowKey, row, index) => <React.Fragment>
+            {operations && operations.others && operations.others(rowKey, row, index)}
+            {onEdit && <a onClick={() => onEdit(row)}>编辑</a>}
+            {onDelete && <a onClick={() => handleDelete(rowKey)}>删除</a>}
+        </React.Fragment>
+    }]);
+
+    function handleDelete(rowKey) {
+        Modal.confirm({
+            title: "确定要删除吗？",
+            centered: true,
+            okText: "删除",
+            cancelText: "取消",
+            onOk: () => onDelete(rowKey)
+        })
     }
+
+    return <React.Fragment>
+        <Table
+            className="x-table"
+            {...tableProps}
+            dataSource={list}
+            size="small"
+            pagination={false}
+            columns={_columns}
+        />
+        {onPageChange &&
+            <Pagination
+                className="x-table-pagination"
+                showQuickJumper={{
+                    goButton: <Button size="small">跳转</Button>
+                }}
+                size="small"
+                defaultCurrent={1}
+                current={currentPage}
+                pageSize={pageSize}
+                defaultPageSize={10}
+                total={total}
+                showTotal={(total) => `共 ${total} 条`}
+                onChange={onPageChange}
+            />}
+    </React.Fragment>
 }
 
-CTable.defaultProps = {
-    emptyText: "暂无数据"
-};
+XTable.defaultProps = {
+    rowKey: "id"
+}
 
-export default CTable;
+export default XTable;

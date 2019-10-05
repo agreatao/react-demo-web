@@ -1,10 +1,6 @@
-import "./style";
-import CustomTextArea from "./textArea";
-import CustomEye from "./eye";
-import CustomAddress from "./address";
-import CustomCheckTextArea from "./checkTextArea";
+import "./index.less";
 
-export const TextArea = CustomTextArea;
-export const Eye = CustomEye;
-export const CheckTextArea = CustomCheckTextArea;
-export const Address = CustomAddress;
+export TextArea from "./TextArea";
+export Eye from "./Eye";
+export Address from "./Address";
+export CheckTextArea from "./CheckTextArea";

@@ -1,0 +1,48 @@
+import Control from "components/Control";
+import Table from "components/Table";
+import { connect } from "dva";
+import React from "react";
+import createSickNormalCheckDialog from "../components/createSickNormalCheckDialog";
+import { SickNormalCheckFilter } from "../components/Filter";
+
+function Index({ height, loading, total, list, page, dispatch }) {
+    return <div className="sick-normal-check">
+        <Control
+            onAdd={() => createSickNormalCheckDialog()}
+            onDelete={() => console.log("delete")}
+            filter={<SickNormalCheckFilter onFilter={filter => dispatch({ type: "sickNormalCheck/filterChange", filter })} />}
+        />
+        <Table
+            columns={[
+                { title: '病历号', dataIndex: 'sickId', width: 200 },
+                { title: '姓名', dataIndex: 'sickName', width: 140 },
+                { title: '性别', dataIndex: 'sickSex', width: 120, render: sex => sex == 1 ? "男" : "女" },
+                { title: '年龄', dataIndex: 'sickAge', width: 120 },
+                { title: '检查时间', dataIndex: 'checkTime', width: 180 }
+            ]}
+            operations={{
+                others: (id, row, index) => <React.Fragment>
+                    <a onClick={() => createSickNormalCheckDialog(row)}>查看明细</a>
+                </React.Fragment>
+            }}
+            loading={loading}
+            style={{ height }}
+            list={list}
+            total={total}
+            currentPage={page.currentPage}
+            pageSize={page.pageSize}
+            onPageChange={(currentPage, pageSize) => dispatch({ type: "sickNormalCheck/pageChange", page: { currentPage, pageSize } })}
+            onDelete={(id) => dispatch({ type: "sickNormalCheck/remove", ids: [id] })}
+        />
+    </div>
+}
+
+export default connect(
+    ({ browser, sickNormalCheck, control, loading }) => ({
+        height: browser.height - control.height - 95,
+        loading: loading.effects["sickNormalCheck/search"],
+        total: sickNormalCheck.total,
+        list: sickNormalCheck.list,
+        page: sickNormalCheck.page
+    })
+)(Index);

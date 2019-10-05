@@ -1,18 +1,19 @@
 module.exports = {
     baseURL: "/msk",
     pages: [
-        "login",
-        "appointRegister",
-        "appointOperationCheck",
-        "appointOperation",
+        // "login",
+        // "appointRegister",
+        // "appointOperationCheck",
+        // "appointOperation",
         "patient",
-        "medicine",
-        "doctor",
-        "queue",
-        "paymentNotices",
-        "paymentProducts"
+        "sickNormalCheck"
+        // "medicine",
+        // "doctor",
+        // "queue",
+        // "paymentNotices",
+        // "paymentProducts"
     ],
     title: "",
-    apiUrl: "http://localhost:8800/mock"
+    apiUrl: "http://localhost:8060"
     // apiUrl: "http://localhost:8060" // 接口
 };
