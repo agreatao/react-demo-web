@@ -22,12 +22,10 @@ function Index({ height, loading, total, list, page, dispatch }) {
                 { title: '年龄', dataIndex: 'sickAge', width: 120 },
                 { title: '联系方式', dataIndex: 'mobilePhone', width: 180 }
             ]}
-            operations={{
-                others: (id, row, index) => <React.Fragment>
-                    <a onClick={() => dispatch({ type: "patient/showCheck", filter: { sickInfoId: id } })}>查看检查记录</a>
-                    <a onClick={() => createSickHistoryDialog(row)}>查看病史</a>
-                </React.Fragment>
-            }}
+            operations={(id, row, index) => <React.Fragment>
+                <a onClick={() => dispatch({ type: "patient/showCheck", filter: { sickInfoId: id } })}>查看检查记录</a>
+                <a onClick={() => createSickHistoryDialog(row)}>查看病史</a>
+            </React.Fragment>}
             loading={loading}
             style={{ height }}
             list={list}

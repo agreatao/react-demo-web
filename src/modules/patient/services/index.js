@@ -16,13 +16,13 @@ export const remove = (ids) => {
 }
 
 export const fetchNormalCheck = (page, filter) => {
-    return http.post("/sick/querySickNormalCheck", filter, { params: page }).then(data => {
+    return http.post("/sick/getSickNormalCheckList", filter, { params: page }).then(data => {
         return { list: data.result, total: data.total }
     })
 }
 
 export const fetchSpecialCheck = (page, filter) => {
-    return http.post("/sick/querySickSpecialCheck", filter, { params: page }).then(data => {
+    return http.post("/sick/getSickSpecialCheckList", filter, { params: page }).then(data => {
         return { list: data.result, total: data.total }
     })
 }

@@ -7,7 +7,7 @@ export default {
         list: [],
         page: {
             currentPage: 1,
-            pageSize: 20
+            pageSize: 10
         },
         filter: {
             sickId: null,
