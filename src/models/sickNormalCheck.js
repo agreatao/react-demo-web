@@ -1,7 +1,7 @@
-import { fetch, remove } from "../services";
+import { fetchNormalCheck } from "services/sickNormalCheck";
 
 export default {
-    namespace: 'search',
+    namespace: 'sickNormalCheck',
     state: {
         total: 0,
         list: [],
@@ -10,11 +10,13 @@ export default {
             pageSize: 10
         },
         filter: {
-
+            sickInfoId: null,
+            sickName: null,
+            mobilePhone: null
         }
     },
     reducers: {
-        'fetch'(state, { total, list }) {
+        'fetch'(state, { list, total }) {
             return { ...state, total, list };
         },
         'param'(state, { page, filter }) {
@@ -23,12 +25,12 @@ export default {
                 page: { ...state.page, ...page },
                 filter: { ...state.filter, ...filter }
             };
-        },
+        }
     },
     effects: {
-        *search(action, { call, put, select }) {
-            let { page, filter } = yield select(state => state.search);
-            let { total, list } = yield call(fetch, page, filter);
+        *search(action, { put, call, select }) {
+            let { page, filter } = yield select(state => state.sickNormalCheck);
+            let { total, list } = yield call(fetchNormalCheck, page, filter);
             yield put({ type: 'fetch', total, list });
         },
         *pageChange(action, { put }) {
@@ -40,20 +42,6 @@ export default {
             const { filter } = action;
             yield put({ type: "param", filter });
             yield put({ type: "search" });
-        },
-        *remove(action, { call, put, select }) {
-            const { ids } = action;
-            let result = yield call(remove, ids);
-            if (result) {
-                let { page, total } = yield select(state => state.search);
-                page.currentPage = Math.min(page.currentPage, Math.ceil((total - ids.length) / page.pageSize));
-                yield put({ type: "pageChange", page });
-            }
-        }
-    },
-    subscriptions: {
-        setup({ dispatch }) {
-            dispatch({ type: "search" });
         }
     }
 };

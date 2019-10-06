@@ -1,8 +1,7 @@
-import { createXDialog } from "../index";
+import { Button, Form, Input, Radio } from "antd";
+import { SickCheckItems, TextArea } from "components/form";
 import React from "react";
-import { Form, Input, Radio, Icon, Button } from "antd";
-import { TextArea } from "components/form";
-import "./createCheckInfoDialog.less";
+import { createXDialog } from "../index";
 
 const CheckInfoForm = Form.create({
     mapPropsToFields: (props) => {
@@ -132,52 +131,9 @@ const CheckInfoForm = Form.create({
                 </Form.Item>
             </div>
             <div className="check-info-row">
-                <div className="check-info-left">
-                    <div>
-                        <Form.Item>
-                            {getFieldDecorator("left9")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                        <Form.Item>
-                            {getFieldDecorator("left10")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                        <span className="check-info-span">X</span>
-                        <Form.Item>
-                            {getFieldDecorator("left11")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="远">
-                            {getFieldDecorator("left12")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                        <Form.Item label="近">
-                            {getFieldDecorator("left13")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                </div>
-                <label className="check-info-label">主觉验光</label>
-                <div className="check-info-right">
-                    <div>
-                        <Form.Item>
-                            {getFieldDecorator("right9")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                        <Form.Item>
-                            {getFieldDecorator("right10")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                        <span className="check-info-span">X</span>
-                        <Form.Item>
-                            {getFieldDecorator("right11")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="远">
-                            {getFieldDecorator("right12")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                        <Form.Item label="近">
-                            {getFieldDecorator("right13")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                        <Form.Item><Icon type="plus-circle" /></Form.Item>
-                    </div>
-                </div>
+                <Form.Item>
+                    {getFieldDecorator("sickNormalCheckItems")(<SickCheckItems />)}
+                </Form.Item>
             </div>
             <div className="check-info-row">
                 <div className="check-info-left">

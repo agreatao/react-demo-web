@@ -1,7 +1,7 @@
 import { fetchSickInfo } from "services/sickInfo";
 
 export default {
-    namespace: 'patient',
+    namespace: 'sickInfo',
     state: {
         total: 0,
         list: [],
@@ -13,9 +13,7 @@ export default {
             sickId: null,
             sickName: null,
             mobilePhone: null
-        },
-
-        checkDialogVisible: false
+        }
     },
     reducers: {
         'fetch'(state, { list, total }) {
@@ -27,17 +25,11 @@ export default {
                 page: { ...state.page, ...page },
                 filter: { ...state.filter, ...filter }
             };
-        },
-        'toggleCheckDialog'(state, { checkDialogVisible }) {
-            return {
-                ...state,
-                checkDialogVisible
-            }
         }
     },
     effects: {
         *search(action, { put, call, select }) {
-            let { page, filter } = yield select(state => state.patient);
+            let { page, filter } = yield select(state => state.sickInfo);
             let { total, list } = yield call(fetchSickInfo, page, filter);
             yield put({ type: 'fetch', total, list });
         },
@@ -50,27 +42,6 @@ export default {
             const { filter } = action;
             yield put({ type: "param", filter });
             yield put({ type: "search" });
-        },
-        *remove(action, { call, put, select }) {
-            const { ids } = action;
-            let result = null; // yield call(remove, ids);
-            if (result) {
-                let { page, total } = yield select(state => state.patient);
-                page.currentPage = Math.min(page.currentPage, Math.ceil((total - ids.length) / page.pageSize));
-                yield put({ type: "pageChange", page });
-            }
-        },
-        *showCheck(action, { put }) {
-            const { filter } = action;
-            yield put({ type: "toggleCheckDialog", checkDialogVisible: true })
-            yield put({ type: "normalCheck/filterChange", filter });
-            yield put({ type: "specialCheck/filterChange", filter });
-        }
-
-    },
-    subscriptions: {
-        setup({ dispatch }) {
-            dispatch({ type: "search" });
         }
     }
 };

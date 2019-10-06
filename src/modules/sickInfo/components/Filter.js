@@ -1,7 +1,7 @@
 import { Button, Form, Input } from "antd";
 import React from "react";
 
-export const PatientFilter = Form.create()(
+export const SickInfoFilter = Form.create()(
     ({ form, onFilter }) => {
         const { getFieldDecorator } = form;
 

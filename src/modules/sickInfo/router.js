@@ -3,9 +3,13 @@ import zhCN from 'antd/es/locale/zh_CN';
 import Master from "components/Master";
 import dynamic from "dva/dynamic";
 import { Route, Router, Switch } from 'dva/router';
+import sickInfoModel from "models/sickInfo";
+import sickNormalCheckModel from "models/sickNormalCheck";
+import sickSpecialCheckModel from "models/sickSpecialCheck";
 import moment from "moment";
 import "moment/locale/zh-cn";
 import React from 'react';
+import modelExtend from "utils/dvaModelExtend";
 moment.locale("zh-cn");
 
 function RouterConfig({ history, app }) {
@@ -20,9 +24,34 @@ function RouterConfig({ history, app }) {
                             component={dynamic({
                                 app,
                                 models: () => [
-                                    import("./models/specialCheck"),
-                                    import("./models/normalCheck"),
-                                    import('./models/index'),
+                                    sickNormalCheckModel,
+                                    sickSpecialCheckModel,
+                                    modelExtend(sickInfoModel, {
+                                        state: {
+                                            checkDialogVisible: false
+                                        },
+                                        reducers: {
+                                            'toggleCheckDialog'(state, { checkDialogVisible }) {
+                                                return {
+                                                    ...state,
+                                                    checkDialogVisible
+                                                }
+                                            }
+                                        },
+                                        effects: {
+                                            *showCheck(action, { put }) {
+                                                const { filter } = action;
+                                                yield put({ type: "toggleCheckDialog", checkDialogVisible: true })
+                                                yield put({ type: "sickNormalCheck/filterChange", filter });
+                                                yield put({ type: "sickSpecialCheck/filterChange", filter });
+                                            }
+                                        },
+                                        subscriptions: {
+                                            setup({ dispatch }) {
+                                                dispatch({ type: "search" });
+                                            }
+                                        }
+                                    })
                                 ],
                                 component: () => import("./routes/Index")
                             })}

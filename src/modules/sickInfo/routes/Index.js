@@ -4,15 +4,15 @@ import { connect } from "dva";
 import React from "react";
 import createSickHistoryDialog from "../components/createSickHistoryDialog";
 import createSickInfoDialog from "../components/createSickInfoDialog";
-import { PatientFilter } from "../components/Filter";
+import { SickInfoFilter } from "../components/Filter";
 import SickCheckDialog from "../components/SickCHeckDialog";
 
 function Index({ height, loading, total, list, page, dispatch }) {
-    return <div className="patient">
+    return <div className="sickInfo">
         <Control
             onAdd={() => createSickInfoDialog()}
             onDelete={() => console.log("delete")}
-            filter={<PatientFilter onFilter={filter => dispatch({ type: "patient/filterChange", filter })} />}
+            filter={<SickInfoFilter onFilter={filter => dispatch({ type: "sickInfo/filterChange", filter })} />}
         />
         <Table
             columns={[
@@ -23,7 +23,7 @@ function Index({ height, loading, total, list, page, dispatch }) {
                 { title: '联系方式', dataIndex: 'mobilePhone', width: 180 }
             ]}
             operations={(id, row, index) => <React.Fragment>
-                <a onClick={() => dispatch({ type: "patient/showCheck", filter: { sickInfoId: id } })}>查看检查记录</a>
+                <a onClick={() => dispatch({ type: "sickInfo/showCheck", filter: { sickInfoId: id } })}>查看检查记录</a>
                 <a onClick={() => createSickHistoryDialog(row)}>查看病史</a>
             </React.Fragment>}
             loading={loading}
@@ -32,8 +32,8 @@ function Index({ height, loading, total, list, page, dispatch }) {
             total={total}
             currentPage={page.currentPage}
             pageSize={page.pageSize}
-            onPageChange={(currentPage, pageSize) => dispatch({ type: "patient/pageChange", page: { currentPage, pageSize } })}
-            onDelete={(id) => dispatch({ type: "patient/remove", ids: [id] })}
+            onPageChange={(currentPage, pageSize) => dispatch({ type: "sickInfo/pageChange", page: { currentPage, pageSize } })}
+            onDelete={(id) => dispatch({ type: "sickInfo/remove", ids: [id] })}
             onEdit={(data) => createSickInfoDialog(data)}
         />
         <SickCheckDialog />
@@ -41,11 +41,11 @@ function Index({ height, loading, total, list, page, dispatch }) {
 }
 
 export default connect(
-    ({ browser, patient, control, loading }) => ({
+    ({ browser, sickInfo, control, loading }) => ({
         height: browser.height - control.height - 95,
-        loading: loading.effects["patient/search"],
-        total: patient.total,
-        list: patient.list,
-        page: patient.page
+        loading: loading.effects["sickInfo/search"],
+        total: sickInfo.total,
+        list: sickInfo.list,
+        page: sickInfo.page
     })
 )(Index);
