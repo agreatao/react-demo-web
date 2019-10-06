@@ -1,4 +1,4 @@
-import { fetch, remove } from "../services";
+import { fetchSickInfo } from "services/sickInfo";
 
 export default {
     namespace: 'patient',
@@ -38,7 +38,7 @@ export default {
     effects: {
         *search(action, { put, call, select }) {
             let { page, filter } = yield select(state => state.patient);
-            let { total, list } = yield call(fetch, page, filter);
+            let { total, list } = yield call(fetchSickInfo, page, filter);
             yield put({ type: 'fetch', total, list });
         },
         *pageChange(action, { put }) {
@@ -53,14 +53,14 @@ export default {
         },
         *remove(action, { call, put, select }) {
             const { ids } = action;
-            let result = yield call(remove, ids);
+            let result = null; // yield call(remove, ids);
             if (result) {
                 let { page, total } = yield select(state => state.patient);
                 page.currentPage = Math.min(page.currentPage, Math.ceil((total - ids.length) / page.pageSize));
                 yield put({ type: "pageChange", page });
             }
         },
-        *showCheck(action, { put, select }) {
+        *showCheck(action, { put }) {
             const { filter } = action;
             yield put({ type: "toggleCheckDialog", checkDialogVisible: true })
             yield put({ type: "normalCheck/filterChange", filter });

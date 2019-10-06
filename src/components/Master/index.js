@@ -35,7 +35,7 @@ const XMaster = ({ children, height, routes }) => {
                         <Menu.Item key="7">Option 7</Menu.Item>
                         <Menu.Item key="8">Option 8</Menu.Item>
                     </SubMenu> */}
-                    <Menu.Item key="patient"><Patient /><span>患者信息管理</span></Menu.Item>
+                    <Menu.Item key="sickInfo"><Patient /><span>患者信息管理</span></Menu.Item>
                     <SubMenu key="check"
                         title={<span><Icon type="solution" /><span>检查管理</span></span>}>
                         <Menu.Item key="sickNormalCheck">常规检查</Menu.Item>

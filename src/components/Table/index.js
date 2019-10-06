@@ -1,5 +1,5 @@
-import React from "react";
-import { Table, Modal, Button, Pagination } from "antd";
+import React, { useState } from "react";
+import { Table, Modal, Button, Pagination, Input } from "antd";
 import "./index.less";
 
 function XTable(props) {
@@ -11,7 +11,9 @@ function XTable(props) {
         columns: undefined,
         onPageChange: undefined,
         list: undefined,
-        total: undefined
+        total: undefined,
+        currentPage: undefined,
+        pageSize: undefined
     });
 
     const _columns = (columns || []).concat([{
@@ -36,6 +38,26 @@ function XTable(props) {
         })
     }
 
+    const [jumpPage, setJumpPage] = useState(null);
+
+    function handleJumpInputChange(e) {
+        try {
+            let page = parseInt(e.target.value);
+            if (isNaN(page)) {
+                throw "page is not number";
+            }
+            setJumpPage(Math.min(page, Math.ceil(total / pageSize)));
+        } catch {
+            setJumpPage(null);
+        }
+    }
+
+    function hangleJumpToPage(e) {
+        e.preventDefault();
+        onPageChange(jumpPage, pageSize);
+        setJumpPage(null);
+    }
+
     return <React.Fragment>
         <Table
             className="x-table"
@@ -46,25 +68,27 @@ function XTable(props) {
             columns={_columns}
         />
         {onPageChange &&
-            <Pagination
-                className="x-table-pagination"
-                showQuickJumper={{
-                    goButton: <Button size="small">跳转</Button>
-                }}
-                size="small"
-                defaultCurrent={1}
-                current={currentPage}
-                pageSize={pageSize}
-                defaultPageSize={10}
-                total={total}
-                showTotal={(total) => `共 ${total} 条`}
-                onChange={onPageChange}
-            />}
+            <div className="x-table-pagination">
+                <div className="x-table-pagination-total">共<span>{total}</span>条</div>
+                {total > 0 && <div className="x-table-pagination-control">
+                    <Pagination
+                        size="small"
+                        current={currentPage}
+                        pageSize={pageSize}
+                        total={total}
+                        onChange={onPageChange}
+                    />
+                    <Input disabled={total === 0} size="small" className="x-table-pagination-jump-input" value={jumpPage} onChange={handleJumpInputChange} />
+                    <Button disabled={total === 0} size="small" className="x-table-pagination-jump-btn" onClick={hangleJumpToPage}>跳转</Button>
+                </div>}
+            </div>}
     </React.Fragment>
 }
 
 XTable.defaultProps = {
-    rowKey: "id"
+    rowKey: "id",
+    currentPage: 1,
+    pageSize: 10
 }
 
 export default XTable;

@@ -2,13 +2,9 @@ const ENV = process.env.NODE_ENV;
 const path = require("path");
 const webpack = require("webpack");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
-const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CONFIG = require(`./config/${ENV}.config`);
-
-const DEFAULT_LESS = new ExtractTextWebpackPlugin({ filename: "css/default.css", allChunks: true });
-const ANTD_LESS = new ExtractTextWebpackPlugin({ filename: "css/antd-[name].css", allChunks: true });
-const PROJECT_LESS = new ExtractTextWebpackPlugin({ filename: "css/[name].css", allChunks: true });
 
 const LOADERS = [
     {
@@ -75,101 +71,53 @@ const LOADERS = [
         }
     },
     {
-        test: /\.less/,
-        include: path.join(__dirname, "src/theme"),
-        loader: DEFAULT_LESS.extract({
-            fallback: "style-loader",
-            use: [
-                {
-                    loader: "css-loader",
-                    options: {
-                        sourceMap: true
-                    }
+        test: /\.less$/,
+        use: [
+            {
+                loader: MiniCssExtractPlugin.loader,
+                options: {
+                    publicPath: `${CONFIG.baseURL}/`,
+                    hmr: ENV === 'development',
                 },
-                {
-                    loader: "postcss-loader",
-                    options: {
-                        sourceMap: true,
-                        plugins: [require("autoprefixer")]
-                    }
-                },
-                {
-                    loader: "less-loader",
-                    options: {
-                        sourceMap: true,
-                        javascriptEnabled: true
+            },
+            {
+                loader: "css-loader",
+                options: {
+                    sourceMap: true
+                }
+            },
+            {
+                loader: "postcss-loader",
+                options: {
+                    sourceMap: true,
+                    plugins: [require("autoprefixer")]
+                }
+            },
+            {
+                loader: "less-loader",
+                options: {
+                    sourceMap: true,
+                    javascriptEnabled: true,
+                    modifyVars: {
+                        "border-radius-base": "2px"
                     }
                 }
-            ]
-        })
-    },
-    {
-        test: /\.less/,
-        include: path.join(__dirname, "node_modules/antd"),
-        loader: ANTD_LESS.extract({
-            fallback: "style-loader",
-            use: [
-                {
-                    loader: "css-loader",
-                    options: {
-                        sourceMap: true
-                    }
-                },
-                {
-                    loader: "postcss-loader",
-                    options: {
-                        sourceMap: true,
-                        plugins: [require("autoprefixer")]
-                    }
-                },
-                {
-                    loader: "less-loader",
-                    options: {
-                        sourceMap: true,
-                        javascriptEnabled: true
-                    }
-                }
-            ]
-        })
-    },
-    {
-        test: /\.less/,
-        exclude: [path.join(__dirname, "src/theme"), path.join(__dirname, "node_modules")],
-        loader: PROJECT_LESS.extract({
-            fallback: "style-loader",
-            use: [
-                {
-                    loader: "css-loader",
-                    options: {
-                        sourceMap: true
-                    }
-                },
-                {
-                    loader: "postcss-loader",
-                    options: {
-                        sourceMap: true,
-                        plugins: [require("autoprefixer")]
-                    }
-                },
-                {
-                    loader: "less-loader",
-                    options: {
-                        sourceMap: true,
-                        javascriptEnabled: true
-                    }
-                }
-            ]
-        })
+            }
+        ],
     }
 ];
 
-const STYLE_PLUGINS = [DEFAULT_LESS, ANTD_LESS, PROJECT_LESS];
+const STYLE_PLUGINS = [
+    new MiniCssExtractPlugin({
+        filename: 'css/[name].css'
+    })
+];
 const HTML_PLUGINS = [];
 const ENTRY = {
-    common: ["react", "react-dom", "antd", "dva"]
+    common: ["react", "react-dom", "dva"]
 };
 CONFIG.pages.forEach(name => {
-    ENTRY[name] = path.join(__dirname, "src/modules", name, "index");
+    ENTRY[name] = ["antd", path.join(__dirname, "src/modules", name, "index")];
     HTML_PLUGINS.push(new HtmlWebpackPlugin({
         title: CONFIG.title || "",
         template: path.join(__dirname, "src/templates", "index.html"),
@@ -187,7 +135,7 @@ module.exports = {
         path: path.resolve(__dirname, "dist/static"),
         publicPath: `${CONFIG.baseURL}/`,
         filename: "js/[name].js",
-        chunkFilename: "js/[name].[hash:8].chunk.js"
+        chunkFilename: "js/[name].js"
     },
     resolve: {
         extensions: [".js", ".jsx", ".json", ".less"],
@@ -199,6 +147,7 @@ module.exports = {
             images: path.join(__dirname, "src/images"),
             models: path.join(__dirname, "src/models"),
             modules: path.join(__dirname, "src/modules"),
+            services: path.join(__dirname, "src/services"),
             templates: path.join(__dirname, "src/templates"),
             theme: path.join(__dirname, "src/theme"),
             utils: path.join(__dirname, "src/utils"),
@@ -206,7 +155,14 @@ module.exports = {
     },
     optimization: {
         splitChunks: {
-            name: "common"
+            cacheGroups: {
+                common: {
+                    name: 'common', 
+                    chunks: 'initial',  
+                    minChunks: 2, // 表示提取公共部分最少的文件数
+                    minSize: 0  // 表示提取公共部分最小的大小 
+                }
+            }
         }
     },
     module: {

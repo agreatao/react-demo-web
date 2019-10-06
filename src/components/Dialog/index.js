@@ -27,6 +27,7 @@ export const createXDialog = (options) => {
         } else {
             destroy();
         }
+        options.onClose && options.onClose();
     }
 
     function destroy() {
@@ -55,6 +56,7 @@ export const createXDialog = (options) => {
     }
 
     render(currentConfig);
+    options.onOpen && options.onOpen();
 
     return {
         update: props => render({ ...currentConfig, ...props }),

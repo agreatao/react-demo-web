@@ -18,7 +18,7 @@ export const PatientFilter = Form.create()(
             onFilter && onFilter({ sickId: null, sickName: null, mobilePhone: null })
         }
 
-        return <Form layout="inline">
+        return <Form layout="inline" >
             <Form.Item label="病例号">
                 {getFieldDecorator("sickId")(<Input placeholder="请输入病历号" autoComplete="off" />)}
             </Form.Item>

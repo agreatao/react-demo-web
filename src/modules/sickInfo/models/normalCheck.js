@@ -1,4 +1,4 @@
-import { fetchNormalCheck } from "../services";
+import { fetchNormalCheck } from "services/sickNormalCheck";
 
 export default {
     namespace: 'normalCheck',
@@ -7,7 +7,7 @@ export default {
         list: [],
         page: {
             currentPage: 1,
-            pageSize: 20
+            pageSize: 10
         },
         filter: {
             sickInfoId: null

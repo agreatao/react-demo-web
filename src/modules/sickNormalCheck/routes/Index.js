@@ -2,13 +2,14 @@ import Control from "components/Control";
 import Table from "components/Table";
 import { connect } from "dva";
 import React from "react";
-import createSickNormalCheckDialog from "../components/createSickNormalCheckDialog";
+import createCheckInfoDialog from "components/Dialog/templates/createCheckInfoDialog";
+import createNewNormalCheckDialog from "../components/createNewNormalCheckDialog";
 import { SickNormalCheckFilter } from "../components/Filter";
 
 function Index({ height, loading, total, list, page, dispatch }) {
     return <div className="sick-normal-check">
         <Control
-            onAdd={() => createSickNormalCheckDialog()}
+            onAdd={() => createNewNormalCheckDialog()}
             onDelete={() => console.log("delete")}
             filter={<SickNormalCheckFilter onFilter={filter => dispatch({ type: "sickNormalCheck/filterChange", filter })} />}
         />
@@ -18,13 +19,9 @@ function Index({ height, loading, total, list, page, dispatch }) {
                 { title: '姓名', dataIndex: 'sickName', width: 140 },
                 { title: '性别', dataIndex: 'sickSex', width: 120, render: sex => sex == 1 ? "男" : "女" },
                 { title: '年龄', dataIndex: 'sickAge', width: 120 },
-                { title: '检查时间', dataIndex: 'checkTime', width: 180 }
+                { title: '检查时间', dataIndex: 'inspectDate', width: 180 }
             ]}
-            operations={{
-                others: (id, row, index) => <React.Fragment>
-                    <a onClick={() => createSickNormalCheckDialog(row)}>查看明细</a>
-                </React.Fragment>
-            }}
+            operations={(id, row, index) => <a onClick={() => createCheckInfoDialog(row)}>明细</a>}
             loading={loading}
             style={{ height }}
             list={list}

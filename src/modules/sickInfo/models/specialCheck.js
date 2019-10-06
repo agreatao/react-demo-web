@@ -1,4 +1,4 @@
-import { fetchSpecialCheck } from "../services";
+import { fetchSpecialCheck } from "services/sickSpecialCheck";
 
 export default {
     namespace: 'specialCheck',

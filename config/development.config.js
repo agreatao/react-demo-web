@@ -5,7 +5,7 @@ module.exports = {
         // "appointRegister",
         // "appointOperationCheck",
         // "appointOperation",
-        "patient",
+        "sickInfo",
         "sickNormalCheck"
         // "medicine",
         // "doctor",

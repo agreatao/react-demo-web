@@ -1,4 +1,4 @@
-import { fetch, remove } from "../services";
+import { fetchNormalCheck } from "services/sickNormalCheck";
 
 export default {
     namespace: 'sickNormalCheck',
@@ -7,7 +7,7 @@ export default {
         list: [],
         page: {
             currentPage: 1,
-            pageSize: 20
+            pageSize: 10
         },
         filter: {
             sickId: null,
@@ -30,7 +30,7 @@ export default {
     effects: {
         *search(action, { put, call, select }) {
             let { page, filter } = yield select(state => state.sickNormalCheck);
-            let { total, list } = yield call(fetch, page, filter);
+            let { total, list } = yield call(fetchNormalCheck, page, filter);
             yield put({ type: 'fetch', total, list });
         },
         *pageChange(action, { put }) {
@@ -45,7 +45,7 @@ export default {
         },
         *remove(action, { call, put, select }) {
             const { ids } = action;
-            let result = yield call(remove, ids);
+            let result = null; // yield call(remove, ids);
             if (result) {
                 let { page, total } = yield select(state => state.sickNormalCheck);
                 page.currentPage = Math.min(page.currentPage, Math.ceil((total - ids.length) / page.pageSize));
