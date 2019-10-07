@@ -1,0 +1,1 @@
+export SickInfoFilter from "./SickInfoFilter";

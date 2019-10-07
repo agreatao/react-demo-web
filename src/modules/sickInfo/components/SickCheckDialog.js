@@ -50,7 +50,6 @@ function SickCheckDialog({ dispatch, visible }) {
             <Tabs.TabPane tab="特殊检查" key="specialCheck">
                 <SpecialCheckTable />
             </Tabs.TabPane>
-
         </Tabs>
     </Modal>
 }

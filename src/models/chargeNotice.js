@@ -1,7 +1,7 @@
-import { fetchSickInfo } from "services/sickInfo";
+import { fetchChargeNotice } from "services/payments";
 
 export default {
-    namespace: 'sickInfo',
+    namespace: 'chargeNotice',
     state: {
         total: 0,
         list: [],
@@ -10,9 +10,9 @@ export default {
             pageSize: 10
         },
         filter: {
-            sickId: undefined,
             sickName: undefined,
-            mobilePhone: undefined
+            startTime: undefined,
+            endTime: undefined
         }
     },
     reducers: {
@@ -29,8 +29,8 @@ export default {
     },
     effects: {
         *search(action, { put, call, select }) {
-            let { page, filter } = yield select(state => state.sickInfo);
-            let { total, list } = yield call(fetchSickInfo, page, filter);
+            let { page, filter } = yield select(state => state.chargeNotice);
+            let { total, list } = yield call(fetchChargeNotice, page, filter);
             yield put({ type: 'fetch', total, list });
         },
         *pageChange(action, { put }) {

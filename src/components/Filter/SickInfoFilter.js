@@ -1,7 +1,7 @@
 import { Button, Form, Input } from "antd";
 import React from "react";
 
-export const SickNormalCheckFilter = Form.create()(
+const SickInfoFilter = Form.create()(
     ({ form, onFilter }) => {
         const { getFieldDecorator } = form;
 
@@ -10,12 +10,12 @@ export const SickNormalCheckFilter = Form.create()(
             form.validateFields((err, values) => {
                 if (err) return;
                 onFilter && onFilter(values)
-            })
+            });
         }
         function handleReset(e) {
             e.preventDefault();
             form.resetFields();
-            onFilter && onFilter({ sickId: null, sickName: null, mobilePhone: null })
+            onFilter && onFilter({ sickId: undefined, sickName: undefined, mobilePhone: undefined })
         }
 
         return <Form layout="inline">
@@ -37,3 +37,5 @@ export const SickNormalCheckFilter = Form.create()(
         </Form>
     }
 )
+
+export default SickInfoFilter;

@@ -3,14 +3,15 @@ import Table from "components/Table";
 import { connect } from "dva";
 import React from "react";
 import { createNormalCheckDialog } from "components/Dialog/templates";
-import { SickNormalCheckFilter } from "../components/Filter";
+import { SickInfoFilter } from "components/Filter";
+import NewNormalCheckDialog from "../components/NewNormalCheckDialog";
 
 function Index({ height, loading, total, list, page, dispatch }) {
     return <div className="sick-normal-check">
         <Control
-            onAdd={() => console.log("add")}
+            onAdd={() => dispatch({ type: "sickNormalCheck/showNewNormalCheck" })}
             onDelete={() => console.log("delete")}
-            filter={<SickNormalCheckFilter onFilter={filter => dispatch({ type: "sickNormalCheck/filterChange", filter })} />}
+            filter={<SickInfoFilter onFilter={filter => dispatch({ type: "sickNormalCheck/filterChange", filter })} />}
         />
         <Table
             columns={[
@@ -30,6 +31,7 @@ function Index({ height, loading, total, list, page, dispatch }) {
             onPageChange={(currentPage, pageSize) => dispatch({ type: "sickNormalCheck/pageChange", page: { currentPage, pageSize } })}
             onDelete={(id) => dispatch({ type: "sickNormalCheck/remove", ids: [id] })}
         />
+        <NewNormalCheckDialog />
     </div>
 }
 

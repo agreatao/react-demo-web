@@ -16,7 +16,7 @@ function XTable(props) {
         pageSize: undefined
     });
 
-    const _columns = (columns || []).concat([{
+    const _columns = (columns || []).concat((onEdit || onDelete || operations) ? [{
         title: "操作",
         width: operations && typeof operations !== 'function' && operations.width,
         className: "operation",
@@ -26,7 +26,7 @@ function XTable(props) {
             {onEdit && <a onClick={() => onEdit(row)}>编辑</a>}
             {onDelete && <a onClick={() => handleDelete(rowKey)}>删除</a>}
         </React.Fragment>
-    }]);
+    }] : []);
 
     function handleDelete(rowKey) {
         Modal.confirm({

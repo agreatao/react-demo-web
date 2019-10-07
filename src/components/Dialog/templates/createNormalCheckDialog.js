@@ -132,7 +132,9 @@ const CheckInfoForm = Form.create({
             </div>
             <div className="check-info-row">
                 <Form.Item>
-                    {getFieldDecorator("sickNormalCheckItems")(<SickCheckItems />)}
+                    {getFieldDecorator("sickNormalCheckItems", {
+                        initialValue: [{}]
+                    })(<SickCheckItems />)}
                 </Form.Item>
             </div>
             <div className="check-info-row">

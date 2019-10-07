@@ -1,17 +1,10 @@
 module.exports = {
     baseURL: "/msk",
     pages: [
-        // "login",
-        // "appointRegister",
-        // "appointOperationCheck",
-        // "appointOperation",
         "sickInfo",
-        "sickNormalCheck"
-        // "medicine",
-        // "doctor",
-        // "queue",
-        // "paymentNotices",
-        // "paymentProducts"
+        "sickNormalCheck",
+        "checkType",
+        "chargeNotice"
     ],
     title: "",
     apiUrl: "http://localhost:8060"

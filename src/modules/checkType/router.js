@@ -3,8 +3,7 @@ import zhCN from 'antd/es/locale/zh_CN';
 import Master from "components/Master";
 import dynamic from "dva/dynamic";
 import { Route, Router, Switch } from 'dva/router';
-import sickNormalCheckModel from "models/sickNormalCheck";
-import sickInfoModel from "models/sickInfo";
+import checkTypeModel from "models/checkType";
 import moment from "moment";
 import "moment/locale/zh-cn";
 import React from 'react';
@@ -23,31 +22,13 @@ function RouterConfig({ history, app }) {
                             component={dynamic({
                                 app,
                                 models: () => [
-                                    sickInfoModel,
-                                    modelExtend(sickNormalCheckModel, {
-                                        state: {
-                                            newNormalCheckVisible: false
-                                        },
-                                        reducers: {
-                                            'toggleNewNormalCheck'(state, { newNormalCheckVisible }) {
-                                                return {
-                                                    ...state,
-                                                    newNormalCheckVisible
-                                                }
-                                            }
-                                        },
-                                        effects: {
-                                            *showNewNormalCheck(action, { put }) {
-                                                yield put({ type: 'toggleNewNormalCheck', newNormalCheckVisible: true });
-                                                yield put({ type: "sickInfo/search" });
-                                            }
-                                        },
+                                    modelExtend(checkTypeModel, {
                                         subscriptions: {
                                             setup({ dispatch }) {
                                                 dispatch({ type: "search" });
                                             }
                                         }
-                                    }),
+                                    })
                                 ],
                                 component: () => import("./routes/Index")
                             })}

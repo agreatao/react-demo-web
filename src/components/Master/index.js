@@ -4,7 +4,7 @@ import { connect } from "dva";
 import { Link } from "dva/router";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import { Queue, Doctor, Patient } from "./icons";
+import { Patient } from "./icons";
 import "./index.less";
 
 const { Header, Sider, Content } = Layout;
@@ -21,25 +21,16 @@ const XMaster = ({ children, height, routes }) => {
         <Layout>
             <Sider collapsible collapsed={collapsed} onCollapse={() => setCollapsed(!collapsed)}>
                 <Menu style={{ height: height - 50 }} className="x-master-nav" theme="dark" mode="inline">
-                    {/* <SubMenu
-                        key="appoint"
-                        title={
-                            <span>
-                                <Icon type="clock-circle" />
-                                <span>预约管理</span>
-                            </span>
-                        }
-                    >
-                        <Menu.Item key="appointRegister">挂号预约</Menu.Item>
-                        <Menu.Item key="6">Option 6</Menu.Item>
-                        <Menu.Item key="7">Option 7</Menu.Item>
-                        <Menu.Item key="8">Option 8</Menu.Item>
-                    </SubMenu> */}
                     <Menu.Item key="sickInfo"><Patient /><span>患者信息管理</span></Menu.Item>
                     <SubMenu key="check"
                         title={<span><Icon type="solution" /><span>检查管理</span></span>}>
                         <Menu.Item key="sickNormalCheck">常规检查</Menu.Item>
-                        <Menu.Item key="sickSpecialCheck">常规检查</Menu.Item>
+                        <Menu.Item key="sickSpecialCheck">特征检查</Menu.Item>
+                    </SubMenu>
+                    <SubMenu key="payments"
+                        title={<span><Icon type="red-envelope" theme="filled" /><span>收费管理</span></span>}>
+                        <Menu.Item key="chargeNotice">通知单管理</Menu.Item>
+                        <Menu.Item key="checkTyoe">收费项目管理</Menu.Item>
                     </SubMenu>
                 </Menu>
             </Sider>

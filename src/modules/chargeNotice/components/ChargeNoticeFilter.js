@@ -1,7 +1,7 @@
 import { Button, Form, Input } from "antd";
 import React from "react";
 
-export const SickInfoFilter = Form.create()(
+const ChargeNoticeFilter = Form.create()(
     ({ form, onFilter }) => {
         const { getFieldDecorator } = form;
 
@@ -10,23 +10,18 @@ export const SickInfoFilter = Form.create()(
             form.validateFields((err, values) => {
                 if (err) return;
                 onFilter && onFilter(values)
-            })
+            });
         }
+
         function handleReset(e) {
             e.preventDefault();
             form.resetFields();
-            onFilter && onFilter({ sickId: null, sickName: null, mobilePhone: null })
+            onFilter && onFilter({ sickName: undefined });
         }
 
-        return <Form layout="inline" >
-            <Form.Item label="病例号">
-                {getFieldDecorator("sickId")(<Input placeholder="请输入病历号" autoComplete="off" />)}
-            </Form.Item>
-            <Form.Item label="姓名">
-                {getFieldDecorator("sickName")(<Input placeholder="请输入姓名" autoComplete="off" />)}
-            </Form.Item>
-            <Form.Item label="联系方式">
-                {getFieldDecorator("mobilePhone")(<Input placeholder="请输入联系方式" autoComplete="off" />)}
+        return <Form layout="inline">
+            <Form.Item label="患者姓名">
+                {getFieldDecorator("sickName")(<Input placeholder="请输入患者姓名" autoComplete="off" />)}
             </Form.Item>
             <Form.Item>
                 <Button.Group>
@@ -37,3 +32,5 @@ export const SickInfoFilter = Form.create()(
         </Form>
     }
 )
+
+export default ChargeNoticeFilter;

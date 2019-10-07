@@ -10,10 +10,10 @@ export default {
             pageSize: 10
         },
         filter: {
-            sickInfoId: null,
-            sickId: null,
-            sickName: null,
-            mobilePhone: null
+            sickInfoId: undefined,
+            sickId: undefined,
+            sickName: undefined,
+            mobilePhone: undefined
         }
     },
     reducers: {
