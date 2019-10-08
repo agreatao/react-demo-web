@@ -5,6 +5,7 @@ import { Address } from "components/form";
 import { getFullChars } from "utils/pinyin";
 import { computeAge } from "utils/age";
 import moment from "moment";
+import { getRandomSickId } from "services/sickInfo";
 
 const { Option } = Select;
 
@@ -19,14 +20,16 @@ const SickInfoForm = Form.create({
         return fields;
     }
 })(
-    ({ form, onCancel }) => {
+    ({ form, onCancel, onSubmit, data }) => {
         const { getFieldDecorator, setFieldsValue } = form;
 
         function handleSubmit(e) {
             e.preventDefault();
             form.validateFields((err, values) => {
                 if (err) return;
-                console.log(values);
+                if (data && data.id) values.id = data.id;
+                values.birthday = values.birthday && values.birthday.format("YYYY-MM-DD");
+                onSubmit && onSubmit(values);
             })
         }
 
@@ -39,6 +42,9 @@ const SickInfoForm = Form.create({
                         </Form.Item>
                         <Form.Item colon={false} label="姓名">
                             {getFieldDecorator("sickName", {
+                                rules: [
+                                    { required: true, message: "姓名是必填字段！" }
+                                ],
                                 onChange: (e) => {
                                     setFieldsValue({ sickChinaName: getFullChars(e.target.value) })
                                 }
@@ -48,13 +54,20 @@ const SickInfoForm = Form.create({
                             {getFieldDecorator("sickChinaName")(<Input autoComplete="off" disabled />)}
                         </Form.Item>
                         <Form.Item colon={false} label="性别">
-                            {getFieldDecorator("sickSex")(<Select>
+                            {getFieldDecorator("sickSex", {
+                                rules: [
+                                    { required: true, message: "性别是必选字段！" }
+                                ],
+                            })(<Select style={{ width: 100 }}>
                                 <Option value="1">男</Option>
                                 <Option value="2">女</Option>
                             </Select>)}
                         </Form.Item>
                         <Form.Item colon={false} label="出生年月">
                             {getFieldDecorator("birthday", {
+                                rules: [
+                                    { required: true, message: "出生年月是必选字段！" }
+                                ],
                                 onChange: value => {
                                     setFieldsValue({ sickAge: computeAge(value.toDate()) })
                                 }
@@ -69,15 +82,23 @@ const SickInfoForm = Form.create({
                             {getFieldDecorator("work")(<Input autoComplete="off" />)}
                         </Form.Item>
                         <Form.Item colon={false} label="地址">
-                            {getFieldDecorator("address")(<Address />)}
+                            {getFieldDecorator("address", {
+                                rules: [
+                                    { required: true, message: "地址是必填字段！" }
+                                ],
+                            })(<Address />)}
                         </Form.Item>
                         <Form.Item colon={false} label="联系方式">
-                            {getFieldDecorator("mobilePhone")(<Input autoComplete="off" />)}
+                            {getFieldDecorator("mobilePhone", {
+                                rules: [
+                                    { required: true, message: "联系方式是必填字段！" }
+                                ],
+                            })(<Input autoComplete="off" />)}
                         </Form.Item>
                     </div>
                 </div>
             </Form>
-            <div>
+            <div className="x-dialog-footer">
                 <Button onClick={onCancel}>取消</Button>
                 <Button type="primary" onClick={handleSubmit}>保存</Button>
             </div>
@@ -86,9 +107,27 @@ const SickInfoForm = Form.create({
 )
 
 export default function createSickInfoDialog(data) {
-    createXDialog({
-        width: 800,
-        title: data && data.id ? "编辑" : "新增",
-        children: ({ close }) => <SickInfoForm data={data} onCancel={close} />
+    return new Promise((resolve) => {
+
+        function show(data) {
+            createXDialog({
+                width: 700,
+                title: data && data.id ? "编辑" : "新增",
+                children: ({ close }) => <SickInfoForm onSubmit={data => {
+                    resolve(data);
+                    close();
+                }} data={data} onCancel={close} />,
+            })
+        }
+
+        if (data && typeof data.sickId === "string" && data.sickId != "") {
+            show(data);
+        } else {
+            getRandomSickId().then(sickId => {
+                show({ sickId });
+            })
+        }
+
     })
+
 }

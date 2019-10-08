@@ -8,9 +8,9 @@ import { SickInfoFilter } from "components/Filter";
 import SickCheckDialog from "../components/SickCHeckDialog";
 
 function Index({ height, loading, total, list, page, dispatch }) {
-    return <div className="sickInfo">
+    return <div className="sick-info">
         <Control
-            onAdd={() => createSickInfoDialog()}
+            onAdd={() => createSickInfoDialog().then(sickInfo => dispatch({ type: "sickInfo/saveOrUpdate", sickInfo }))}
             onDelete={() => console.log("delete")}
             filter={<SickInfoFilter onFilter={filter => dispatch({ type: "sickInfo/filterChange", filter })} />}
         />
@@ -34,7 +34,7 @@ function Index({ height, loading, total, list, page, dispatch }) {
             pageSize={page.pageSize}
             onPageChange={(currentPage, pageSize) => dispatch({ type: "sickInfo/pageChange", page: { currentPage, pageSize } })}
             onDelete={(id) => dispatch({ type: "sickInfo/remove", ids: [id] })}
-            onEdit={(data) => createSickInfoDialog(data)}
+            onEdit={(data) => createSickInfoDialog(data).then(sickInfo => dispatch({ type: "sickInfo/saveOrUpdate", sickInfo }))}
         />
         <SickCheckDialog />
     </div>

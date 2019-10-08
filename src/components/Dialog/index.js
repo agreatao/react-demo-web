@@ -3,6 +3,7 @@ import zhCN from 'antd/es/locale/zh_CN';
 import classnames from "classnames";
 import React from "react";
 import ReactDOM from "react-dom";
+import "./index.less";
 
 const IS_REACT_16 = !!ReactDOM.createPortal;
 

@@ -1,4 +1,5 @@
-import { fetchSickInfo } from "services/sickInfo";
+import { fetchSickInfo, saveSickInfo, updateSickInfo } from "services/sickInfo";
+import { info, error } from "components/alert";
 
 export default {
     namespace: 'sickInfo',
@@ -41,6 +42,13 @@ export default {
         *filterChange(action, { put }) {
             const { filter } = action;
             yield put({ type: "param", filter });
+            yield put({ type: "search" });
+        },
+        *saveOrUpdate(action, { put, call }) {
+            const { sickInfo } = action;
+            if (!sickInfo.id) yield call(saveSickInfo, sickInfo);
+            else yield call(updateSickInfo, sickInfo);
+            yield call(info, !sickInfo.id ? "添加成功" : "修改成功");
             yield put({ type: "search" });
         }
     }

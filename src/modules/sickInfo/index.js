@@ -9,6 +9,9 @@ import router from "./router";
 
 const app = dva({
     // onAction: createLogger()
+    onError: (e) => {
+        console.error(e);
+    }
 });
 
 app.use(createLoading());
