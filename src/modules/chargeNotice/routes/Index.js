@@ -3,6 +3,7 @@ import ChargeNoticeFilter from "../components/ChargeNoticeFilter";
 import Table from "components/Table";
 import { connect } from "dva";
 import React from "react";
+import createSickChargeNoticeInfosDialog from "../components/createSickChargeNoticeInfosDialog";
 
 function Index({ height, loading, total, list, page, dispatch }) {
     return <div className="charge-notice">
@@ -24,6 +25,7 @@ function Index({ height, loading, total, list, page, dispatch }) {
                     }
                 },
             ]}
+            operations={(id, row, index) => <a onClick={() => createSickChargeNoticeInfosDialog(row.sickChargeNoticeInfos)}>项目明细</a>}
             loading={loading}
             style={{ height }}
             list={list}
