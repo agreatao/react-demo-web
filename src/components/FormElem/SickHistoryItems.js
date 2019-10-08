@@ -52,17 +52,17 @@ export default class SickHistoryItems extends React.Component {
         return <div className="sick-history-items">
             {value.map((item, index) => <div key={index}>
                 <Form.Item colon={false} label="戴何种眼镜">
-                    <Select value={item.glassesType} onChange={_value => this.handleInputChange(index, 'glassesType', _value)}>
+                    <Select className="glass-type" value={item.glassesType} onChange={_value => this.handleInputChange(index, 'glassesType', _value)}>
                         {GLASS_TYPES.map(type => <Option value={type.value} key={type.value}>{type.text}</Option>)}
                     </Select>
                 </Form.Item>
-                <Form.Item colon={false} className="label-sm" label="戴镜">
+                <Form.Item colon={false} className="short-label" label="戴镜">
                     <Input autoComplete="off" value={item.glassesYear} onChange={e => this.handleInputChange(index, 'glassesYear', e.target.value)} />
                 </Form.Item>
-                <Form.Item colon={false} className="label-sm" label="脱镜">
+                <Form.Item colon={false} className="short-label" label="脱镜">
                     <Input autoComplete="off" value={item.tjYear} onChange={e => this.handleInputChange(index, 'tjYear', e.target.value)} />
                 </Form.Item>
-                <Form.Item>
+                <Form.Item className="sick-history-items-btn">
                     {
                         index === 0 ?
                             value.length < 5 && <Icon type="plus-circle" onClick={this.handleAdd} />

@@ -1,0 +1,77 @@
+.x-dialog {
+    .sick-history-form {
+        .ant-form-item {
+            .ant-form-item-label {
+                width: 80px;
+            }
+
+            &.short-label {
+                .ant-form-item-label {
+                    width: 50px;
+                }
+            }
+
+            &.long-label {
+                .ant-form-item-label {
+                    width: 100px;
+                }
+            }
+        }
+
+        .normal-input {
+            width: 100px;
+        }
+
+        .sick-history-items {
+            &>div {
+                display: flex;
+                align-items: center;
+
+                .ant-form-item {
+                    margin-bottom: 0;
+
+                    .glass-type {
+                        width: 130px;
+                    }
+                }
+
+                .sick-history-items-btn {
+                    margin-left: 10px;
+                    width: 15px;
+                    flex-shrink: 0;
+                }
+            }
+        }
+
+        .degree {
+            display: flex;
+
+            &>label {
+                display: block;
+                width: 40px;
+                flex-shrink: 0;
+                text-align: right;
+            }
+
+            &>span {
+                margin-left: 10px;
+            }
+
+            .ant-form-item {
+                margin-bottom: 0;
+                margin-left: 10px;
+
+                input.ant-input {
+                    width: 60px;
+                    text-align: center;
+                }
+            }
+        }
+
+        .bs {
+            .ant-form-item {
+                margin-bottom: 0;
+            }
+        }
+    }
+}

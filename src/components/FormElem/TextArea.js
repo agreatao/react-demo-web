@@ -32,7 +32,7 @@ export default class XTextArea extends React.Component {
                 onChange={this.handleChange}
                 {...this.props}
             />
-            {max != null && <span className="c-textarea-max">{max - (value && value.length || 0)}</span>}
+            {max != null && <span className="x-textarea-max">{max - (value && value.length || 0)}</span>}
         </div>
     }
 }

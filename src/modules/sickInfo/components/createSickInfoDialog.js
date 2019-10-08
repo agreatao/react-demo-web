@@ -1,6 +1,6 @@
 import { Button, DatePicker, Form, Input, Select } from "antd";
 import { createXDialog } from "components/Dialog";
-import { Address } from "components/form";
+import { Address } from "components/FormElem";
 import moment from "moment";
 import React from "react";
 import { getRandomSickId } from "services/sickInfo";

@@ -24,7 +24,7 @@ function Index({ height, loading, total, list, page, dispatch }) {
             ]}
             operations={(id, row, index) => <React.Fragment>
                 <a onClick={() => dispatch({ type: "sickInfo/showCheck", filter: { sickInfoId: id } })}>查看检查记录</a>
-                <a onClick={() => createSickHistoryDialog(row)}>查看病史</a>
+                <a onClick={() => createSickHistoryDialog(row).then(sickHistory => dispatch({ type: "sickHistory/saveOrUpdate", sickHistory }))}>查看病史</a>
             </React.Fragment>}
             loading={loading}
             style={{ height }}

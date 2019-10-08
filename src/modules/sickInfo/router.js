@@ -6,6 +6,7 @@ import { Route, Router, Switch } from 'dva/router';
 import sickInfoModel from "models/sickInfo";
 import sickNormalCheckModel from "models/sickNormalCheck";
 import sickSpecialCheckModel from "models/sickSpecialCheck";
+import sickHistoryModel from "models/sickHistory";
 import moment from "moment";
 import "moment/locale/zh-cn";
 import React from 'react';
@@ -26,6 +27,7 @@ function RouterConfig({ history, app }) {
                                 models: () => [
                                     sickNormalCheckModel,
                                     sickSpecialCheckModel,
+                                    sickHistoryModel,
                                     modelExtend(sickInfoModel, {
                                         state: {
                                             checkDialogVisible: false
