@@ -1,6 +1,6 @@
 import { Button, Form, Input, Radio } from "antd";
 import { createXDialog } from "components/Dialog";
-import { CheckTextArea, Eye, SickHistoryItems, TextArea } from "components/form";
+import { SickHistoryItems, TextArea } from "components/FormElem";
 import moment from "moment";
 import React from "react";
 import { querySickHistory } from "services/sickHistory";

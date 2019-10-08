@@ -1,11 +1,11 @@
-import { Button, Form, Input, Select, DatePicker } from "antd";
+import { Button, DatePicker, Form, Input, Select } from "antd";
 import { createXDialog } from "components/Dialog";
-import React from "react";
 import { Address } from "components/form";
-import { getFullChars } from "utils/pinyin";
-import { computeAge } from "utils/age";
 import moment from "moment";
+import React from "react";
 import { getRandomSickId } from "services/sickInfo";
+import { computeAge } from "utils/age";
+import { getFullChars } from "utils/pinyin";
 
 const { Option } = Select;
 

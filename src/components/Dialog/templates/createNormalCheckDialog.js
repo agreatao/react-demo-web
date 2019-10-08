@@ -1,5 +1,5 @@
 import { Button, Form, Input, Radio } from "antd";
-import { SickCheckItems, TextArea } from "components/form";
+import { SickCheckItems, TextArea } from "components/FormElem";
 import React from "react";
 import { createXDialog } from "../index";
 

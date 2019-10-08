@@ -8,7 +8,7 @@ import "./index.less";
 import router from "./router";
 
 const app = dva({
-    // onAction: createLogger()
+    onAction: createLogger(),
     onError: (e) => {
         console.error(e);
     }

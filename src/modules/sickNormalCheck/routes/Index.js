@@ -1,9 +1,9 @@
 import Control from "components/Control";
+import { createNormalCheckDialog } from "components/Dialog/templates";
+import { SickInfoFilter } from "components/Filter";
 import Table from "components/Table";
 import { connect } from "dva";
 import React from "react";
-import { createNormalCheckDialog } from "components/Dialog/templates";
-import { SickInfoFilter } from "components/Filter";
 import NewNormalCheckDialog from "../components/NewNormalCheckDialog";
 
 function Index({ height, loading, total, list, page, dispatch }) {

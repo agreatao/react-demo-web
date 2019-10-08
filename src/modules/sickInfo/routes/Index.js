@@ -1,10 +1,10 @@
 import Control from "components/Control";
+import { SickInfoFilter } from "components/Filter";
 import Table from "components/Table";
 import { connect } from "dva";
 import React from "react";
 import createSickHistoryDialog from "../components/createSickHistoryDialog";
 import createSickInfoDialog from "../components/createSickInfoDialog";
-import { SickInfoFilter } from "components/Filter";
 import SickCheckDialog from "../components/SickCHeckDialog";
 
 function Index({ height, loading, total, list, page, dispatch }) {

@@ -1,8 +1,8 @@
 import Control from "components/Control";
-import CheckTypeFilter from "../components/CheckTypeFilter";
 import Table from "components/Table";
 import { connect } from "dva";
 import React from "react";
+import CheckTypeFilter from "../components/CheckTypeFilter";
 
 function Index({ height, loading, total, list, page, dispatch }) {
     return <div className="check-type">

@@ -1,16 +1,16 @@
-import { connect } from "dva";
-import { Modal, Button } from "antd";
-import React from "react";
-import Table from "components/Table";
+import { Button, Modal } from "antd";
 import { createNormalCheckDialog } from "components/Dialog/templates";
 import { SickInfoFilter } from "components/Filter";
+import Table from "components/Table";
+import { connect } from "dva";
+import React from "react";
 
 function NewNormalCheckDialog({ dispatch, visible, list, total, page }) {
 
     function handleSelect(data) {
         dispatch({ type: "sickNormalCheck/toggleNewNormalCheck", newNormalCheckVisible: false });
         createNormalCheckDialog();
-        
+
     }
 
     return <Modal width={800} centered visible={visible} footer={null} onCancel={() => dispatch({ type: "sickNormalCheck/toggleNewNormalCheck", newNormalCheckVisible: false })}>

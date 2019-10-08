@@ -1,8 +1,8 @@
 import Control from "components/Control";
-import ChargeNoticeFilter from "../components/ChargeNoticeFilter";
 import Table from "components/Table";
 import { connect } from "dva";
 import React from "react";
+import ChargeNoticeFilter from "../components/ChargeNoticeFilter";
 import createSickChargeNoticeInfosDialog from "../components/createSickChargeNoticeInfosDialog";
 
 function Index({ height, loading, total, list, page, dispatch }) {
