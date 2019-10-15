@@ -3,14 +3,20 @@ import { createNormalCheckDialog } from "components/Dialog/templates";
 import { SickInfoFilter } from "components/Filter";
 import Table from "components/Table";
 import { connect } from "dva";
-import React from "react";
+import React, { useState } from "react";
+import { remove } from "components/alert";
 import NewNormalCheckDialog from "../components/NewNormalCheckDialog";
 
 function Index({ height, loading, total, list, page, dispatch }) {
+    const [selectedRowKeys, setSelectRowKeys] = useState([]);
+
     return <div className="sick-normal-check">
         <Control
             onAdd={() => dispatch({ type: "sickNormalCheck/showNewNormalCheck" })}
-            onDelete={() => console.log("delete")}
+            onDelete={() => selectedRowKeys && selectedRowKeys.length > 0 && remove().then(() => {
+                dispatch({ type: "sickNormalCheck/remove", ids: selectedRowKeys });
+                setSelectRowKeys([]);
+            })}
             filter={<SickInfoFilter onFilter={filter => dispatch({ type: "sickNormalCheck/filterChange", filter })} />}
         />
         <Table
@@ -21,7 +27,14 @@ function Index({ height, loading, total, list, page, dispatch }) {
                 { title: '年龄', dataIndex: 'sickInfo.sickAge', width: 120 },
                 { title: '检查时间', dataIndex: 'inspectDate', width: 180 }
             ]}
-            operations={(id, row, index) => <a onClick={() => createNormalCheckDialog(row)}>明细</a>}
+            operations={(id, row, index) => <a onClick={() => createNormalCheckDialog(row, (checkData, { close }) => {
+                dispatch({ type: "sickNormalCheck/saveOrUpdate", sickNormalCheck: checkData });
+                close();
+            })}>明细</a>}
+            rowSelection={{
+                selectedRowKeys,
+                onChange: (selectedRowKeys) => setSelectRowKeys(selectedRowKeys)
+            }}
             loading={loading}
             style={{ height }}
             list={list}

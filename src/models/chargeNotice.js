@@ -28,18 +28,16 @@ export default {
         }
     },
     effects: {
-        *search(action, { put, call, select }) {
+        *search(_, { put, call, select }) {
             let { page, filter } = yield select(state => state.chargeNotice);
             let { total, list } = yield call(fetchChargeNotice, page, filter);
             yield put({ type: 'fetch', total, list });
         },
-        *pageChange(action, { put }) {
-            const { page } = action;
+        *pageChange({ page }, { put }) {
             yield put({ type: "param", page });
             yield put({ type: "search" });
         },
-        *filterChange(action, { put }) {
-            const { filter } = action;
+        *filterChange({ filter }, { put }) {
             yield put({ type: "param", filter });
             yield put({ type: "search" });
         }

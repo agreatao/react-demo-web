@@ -8,6 +8,7 @@ import moment from "moment";
 import "moment/locale/zh-cn";
 import React from 'react';
 import modelExtend from "utils/dvaModelExtend";
+import sickInfoModel from "models/sickInfo";
 moment.locale("zh-cn");
 
 function RouterConfig({ history, app }) {
@@ -22,6 +23,7 @@ function RouterConfig({ history, app }) {
                             component={dynamic({
                                 app,
                                 models: () => [
+                                    sickInfoModel,
                                     modelExtend(chargeNoticeModel, {
                                         subscriptions: {
                                             setup({ dispatch }) {

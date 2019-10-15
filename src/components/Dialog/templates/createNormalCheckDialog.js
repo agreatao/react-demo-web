@@ -14,14 +14,15 @@ const CheckInfoForm = Form.create({
         return fields;
     }
 })(
-    ({ form, onCancel }) => {
+    ({ form, onCancel, onSubmit, data }) => {
         const { getFieldDecorator, validateFieldsAndScroll } = form;
 
         function handleSubmit(e) {
             e.preventDefault();
             validateFieldsAndScroll((err, values) => {
                 if (err) return;
-                console.log(values);
+                if (data.id) values.id = data.id;
+                onSubmit && onSubmit(values);
             })
         }
 
@@ -150,7 +151,7 @@ const CheckInfoForm = Form.create({
                     </Form.Item>
                 </div>
             </div>
-            <div>
+            <div className="x-dialog-footer">
                 <Button onClick={onCancel}>关闭</Button>
                 <Button type="primary" onClick={handleSubmit}>保存</Button>
             </div>
@@ -158,10 +159,13 @@ const CheckInfoForm = Form.create({
     }
 )
 
-function createCheckInfoDialog(data) {
-    createXDialog({
+function createCheckInfoDialog(data, resolve) {
+    return createXDialog({
+        title: "常规检查",
         width: 700,
-        children: ({ close }) => <CheckInfoForm data={data} onCancel={close} />
+        children: ({ close }) => <CheckInfoForm data={data} onCancel={close} onSubmit={checkData => {
+            typeof data === "function" ? data(checkData, { close }) : resolve && resolve(checkData, { close });
+        }} />
     })
 }
 

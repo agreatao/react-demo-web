@@ -1,4 +1,5 @@
-import { fetchNormalCheck } from "services/sickNormalCheck";
+import { info } from "components/alert";
+import { fetchNormalCheck, saveSickNormalCheck, updateSickNormalCheck, removeSickNormalCheck } from "services/sickNormalCheck";
 
 export default {
     namespace: 'sickNormalCheck',
@@ -29,20 +30,31 @@ export default {
         }
     },
     effects: {
-        *search(action, { put, call, select }) {
+        *search(_, { put, call, select }) {
             let { page, filter } = yield select(state => state.sickNormalCheck);
             let { total, list } = yield call(fetchNormalCheck, page, filter);
             yield put({ type: 'fetch', total, list });
         },
-        *pageChange(action, { put }) {
-            const { page } = action;
+        *pageChange({ page }, { put }) {
             yield put({ type: "param", page });
             yield put({ type: "search" });
         },
-        *filterChange(action, { put }) {
-            const { filter } = action;
+        *filterChange({ filter }, { put }) {
             yield put({ type: "param", filter });
             yield put({ type: "search" });
+        },
+        *saveOrUpdate({ sickNormalCheck }, { call, put }) {
+            if (sickNormalCheck.id) yield call(updateSickNormalCheck, sickNormalCheck);
+            else yield call(saveSickNormalCheck, sickNormalCheck);
+            yield call(info, !sickNormalCheck.id ? "添加成功" : "修改成功");
+            yield put({ type: "search" });
+        },
+        *remove({ ids }, { call, put, select }) {
+            yield call(removeSickNormalCheck, ids);
+            yield call(info, "删除成功");
+            let { page, total } = yield select(state => state.sickNormalCheck);
+            page.currentPage = Math.min(page.currentPage, Math.ceil((total - ids.length) / page.pageSize));
+            yield put({ type: "pageChange", page });
         }
     }
 };

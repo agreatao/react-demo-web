@@ -9,11 +9,15 @@ function NewNormalCheckDialog({ dispatch, visible, list, total, page }) {
 
     function handleSelect(data) {
         dispatch({ type: "sickNormalCheck/toggleNewNormalCheck", newNormalCheckVisible: false });
-        createNormalCheckDialog();
+        createNormalCheckDialog((checkData, { close }) => {
+            checkData.sickInfoId = data.id;
+            dispatch({ type: "sickNormalCheck/saveOrUpdate", sickNormalCheck: checkData });
+            close();
+        });
 
     }
 
-    return <Modal width={800} centered visible={visible} footer={null} onCancel={() => dispatch({ type: "sickNormalCheck/toggleNewNormalCheck", newNormalCheckVisible: false })}>
+    return <Modal destroyOnClose width={800} centered visible={visible} footer={null} onCancel={() => dispatch({ type: "sickNormalCheck/toggleNewNormalCheck", newNormalCheckVisible: false })}>
         <SickInfoFilter onFilter={filter => dispatch({ type: "sickInfo/filterChange", filter })} />
         <Table
             columns={[

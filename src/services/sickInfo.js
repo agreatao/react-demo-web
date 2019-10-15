@@ -10,3 +10,5 @@ export const getRandomSickId = () => http.get("/sick/getRandomSickId")
 export const saveSickInfo = sickInfo => http.post("/sick/addSickInfo", sickInfo);
 
 export const updateSickInfo = sickInfo => http.post("/sick/updateSickInfo", sickInfo);
+
+export const removeSickInfo = ids => http.get("/sick/deleteSickInfo", { params: { ids: ids.join(",") } });

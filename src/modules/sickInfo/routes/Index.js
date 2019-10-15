@@ -2,16 +2,21 @@ import Control from "components/Control";
 import { SickInfoFilter } from "components/Filter";
 import Table from "components/Table";
 import { connect } from "dva";
-import React from "react";
+import React, { useState } from "react";
 import createSickHistoryDialog from "../components/createSickHistoryDialog";
 import createSickInfoDialog from "../components/createSickInfoDialog";
 import SickCheckDialog from "../components/SickCHeckDialog";
+import { remove } from "components/alert";
 
 function Index({ height, loading, total, list, page, dispatch }) {
+    const [selectedRowKeys, setSelectRowKeys] = useState([]);
     return <div className="sick-info">
         <Control
             onAdd={() => createSickInfoDialog().then(sickInfo => dispatch({ type: "sickInfo/saveOrUpdate", sickInfo }))}
-            onDelete={() => console.log("delete")}
+            onDelete={() => selectedRowKeys && selectedRowKeys.length > 0 && remove().then(() => {
+                dispatch({ type: "sickInfo/remove", ids: selectedRowKeys });
+                setSelectRowKeys([]);
+            })}
             filter={<SickInfoFilter onFilter={filter => dispatch({ type: "sickInfo/filterChange", filter })} />}
         />
         <Table
@@ -26,6 +31,10 @@ function Index({ height, loading, total, list, page, dispatch }) {
                 <a onClick={() => dispatch({ type: "sickInfo/showCheck", filter: { sickInfoId: id } })}>查看检查记录</a>
                 <a onClick={() => createSickHistoryDialog(row).then(sickHistory => dispatch({ type: "sickHistory/saveOrUpdate", sickHistory }))}>查看病史</a>
             </React.Fragment>}
+            rowSelection={{
+                selectedRowKeys,
+                onChange: selectedRowKeys => setSelectRowKeys(selectedRowKeys)
+            }}
             loading={loading}
             style={{ height }}
             list={list}

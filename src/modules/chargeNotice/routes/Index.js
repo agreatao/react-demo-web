@@ -18,7 +18,7 @@ function Index({ height, loading, total, list, page, dispatch }) {
                 { title: '开票时间', dataIndex: 'billingDate', width: 400 },
                 { title: '开票人', dataIndex: 'billingPerson', width: 140 },
                 {
-                    title: '总金额', dataIndex: 'sickChargeNoticeInfos', width: 120, render: (infos) => {
+                    title: '总金额（元）', dataIndex: 'sickChargeNoticeInfos', width: 120, render: (infos) => {
                         let total = 0;
                         infos && infos.forEach(item => { total += item.chargeAmount })
                         return total;

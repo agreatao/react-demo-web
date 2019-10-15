@@ -10,8 +10,7 @@ export default {
 
     },
     effects: {
-        *saveOrUpdate(action, { put, call }) {
-            const { sickHistory } = action;
+        *saveOrUpdate({ sickHistory }, { call }) {
             if (!sickHistory.id) yield call(saveSickHistory, sickHistory);
             else yield call(updateSickHistory, sickHistory);
             yield call(info, !sickHistory.id ? "添加成功" : "修改成功");

@@ -1,5 +1,5 @@
-import { fetchSickInfo, saveSickInfo, updateSickInfo } from "services/sickInfo";
-import { info, error } from "components/alert";
+import { info } from "components/alert";
+import { fetchSickInfo, saveSickInfo, updateSickInfo, removeSickInfo } from "services/sickInfo";
 
 export default {
     namespace: 'sickInfo',
@@ -29,27 +29,31 @@ export default {
         }
     },
     effects: {
-        *search(action, { put, call, select }) {
+        *search(_, { put, call, select }) {
             let { page, filter } = yield select(state => state.sickInfo);
             let { total, list } = yield call(fetchSickInfo, page, filter);
             yield put({ type: 'fetch', total, list });
         },
-        *pageChange(action, { put }) {
-            const { page } = action;
+        *pageChange({ page }, { put }) {
             yield put({ type: "param", page });
             yield put({ type: "search" });
         },
-        *filterChange(action, { put }) {
-            const { filter } = action;
+        *filterChange({ filter }, { put }) {
             yield put({ type: "param", filter });
             yield put({ type: "search" });
         },
-        *saveOrUpdate(action, { put, call }) {
-            const { sickInfo } = action;
+        *saveOrUpdate({ sickInfo }, { put, call }) {
             if (!sickInfo.id) yield call(saveSickInfo, sickInfo);
             else yield call(updateSickInfo, sickInfo);
             yield call(info, !sickInfo.id ? "添加成功" : "修改成功");
             yield put({ type: "search" });
+        },
+        *remove({ ids }, { put, call, select }) {
+            yield call(removeSickInfo, ids);
+            yield call(info, "删除成功");
+            let { page, total } = yield select(state => state.sickInfo);
+            page.currentPage = Math.min(page.currentPage, Math.ceil((total - ids.length) / page.pageSize));
+            yield put({ type: "pageChange", page });
         }
     }
 };
