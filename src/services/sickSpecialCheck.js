@@ -4,4 +4,5 @@ export const fetchSpecialCheck = (page, filter) => http.post("/sick/getSpecialIn
     .then(data => ({ list: data.result, total: data.total }));
 
 export const getSpecialCheck = ({ specialId, reportType }) => http.post("/sick/getSickSpecialCheckListByType", { specialId, reportType })
-    .then(data => console.log(data.result));
+    .then(data => data.result);
+

@@ -160,7 +160,7 @@ const CheckInfoForm = Form.create({
 )
 
 function createCheckInfoDialog(data, resolve) {
-    return createXDialog({
+    createXDialog({
         title: "常规检查",
         width: 700,
         children: ({ close }) => <CheckInfoForm data={data} onCancel={close} onSubmit={checkData => {

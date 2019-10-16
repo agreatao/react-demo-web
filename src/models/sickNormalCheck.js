@@ -40,7 +40,7 @@ export default {
             yield put({ type: "search" });
         },
         *filterChange({ filter }, { put }) {
-            yield put({ type: "param", filter });
+            yield put({ type: "param", filter, page: { currentPage: 1, pageSize: 10 } });
             yield put({ type: "search" });
         },
         *saveOrUpdate({ sickNormalCheck }, { call, put }) {
