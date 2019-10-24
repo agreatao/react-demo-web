@@ -19,7 +19,6 @@ const SpecialJsjg = Form.create({
 })(
     ({ form, onCancel, onSubmit, data }) => {
         const { getFieldDecorator, validateFieldsAndScroll, getFieldValue } = form;
-        console.log(data);
         function handleSubmit(e) {
             e.preventDefault();
             validateFieldsAndScroll((err, values) => {
@@ -37,37 +36,24 @@ const SpecialJsjg = Form.create({
             <div className="check-info-row">
                 <div className="check-info-left">
                     <Form.Item label="远">
-                        {getFieldDecorator("laa1")(<Input autoComplete="off" />)}
-                    </Form.Item>
-                    <Form.Item label="近">
-                        {getFieldDecorator("laa2")(<Input autoComplete="off" />)}
-                    </Form.Item>
-                </div>
-                <label className="check-info-label">裸眼视力</label>
-                <div className="check-info-right">
-                    <Form.Item label="远">
                         {getFieldDecorator("raa1")(<Input autoComplete="off" />)}
                     </Form.Item>
                     <Form.Item label="近">
                         {getFieldDecorator("raa2")(<Input autoComplete="off" />)}
                     </Form.Item>
                 </div>
+                <label className="check-info-label">裸眼视力</label>
+                <div className="check-info-right">
+                    <Form.Item label="远">
+                        {getFieldDecorator("laa1")(<Input autoComplete="off" />)}
+                    </Form.Item>
+                    <Form.Item label="近">
+                        {getFieldDecorator("laa2")(<Input autoComplete="off" />)}
+                    </Form.Item>
+                </div>
             </div>
             <div className="check-info-row">
                 <div className="check-info-left">
-                    <Form.Item>
-                        {getFieldDecorator("lba1")(<Input autoComplete="off" />)}
-                    </Form.Item>
-                    <Form.Item>
-                        {getFieldDecorator("lba2")(<Input autoComplete="off" />)}
-                    </Form.Item>
-                    <span className="check-info-span">X</span>
-                    <Form.Item>
-                        {getFieldDecorator("lba3")(<Input autoComplete="off" />)}
-                    </Form.Item>
-                </div>
-                <label className="check-info-label">电脑验光</label>
-                <div className="check-info-right">
                     <Form.Item>
                         {getFieldDecorator("rb1")(<Input autoComplete="off" />)}
                     </Form.Item>
@@ -79,30 +65,43 @@ const SpecialJsjg = Form.create({
                         {getFieldDecorator("rb3")(<Input autoComplete="off" />)}
                     </Form.Item>
                 </div>
+                <label className="check-info-label">电脑验光</label>
+                <div className="check-info-right">
+                    <Form.Item>
+                        {getFieldDecorator("lba1")(<Input autoComplete="off" />)}
+                    </Form.Item>
+                    <Form.Item>
+                        {getFieldDecorator("lba2")(<Input autoComplete="off" />)}
+                    </Form.Item>
+                    <span className="check-info-span">X</span>
+                    <Form.Item>
+                        {getFieldDecorator("lba3")(<Input autoComplete="off" />)}
+                    </Form.Item>
+                </div>
             </div>
             <div className="check-info-row">
                 <div className="check-info-left">
                     <Form.Item>
-                        {getFieldDecorator("lbb")(<Input className="mm" autoComplete="off" suffix="mm" />)}
+                        {getFieldDecorator("rbb")(<Input className="mm" autoComplete="off" suffix="mm" />)}
                     </Form.Item>
                 </div>
                 <label className="check-info-label">瞳孔直径</label>
                 <div className="check-info-right">
                     <Form.Item>
-                        {getFieldDecorator("rbb")(<Input className="mm" autoComplete="off" suffix="mm" />)}
+                        {getFieldDecorator("lbb")(<Input className="mm" autoComplete="off" suffix="mm" />)}
                     </Form.Item>
                 </div>
             </div>
             <div className="check-info-row">
                 <div className="check-info-left">
                     <Form.Item>
-                        {getFieldDecorator("lbc")(<Input className="mmHg" autoComplete="off" suffix="mmHg" />)}
+                        {getFieldDecorator("rbc")(<Input className="mmHg" autoComplete="off" suffix="mmHg" />)}
                     </Form.Item>
                 </div>
                 <label className="check-info-label">眼压</label>
                 <div className="check-info-right">
                     <Form.Item>
-                        {getFieldDecorator("rbc")(<Input className="mmHg" autoComplete="off" suffix="mmHg" />)}
+                        {getFieldDecorator("lbc")(<Input className="mmHg" autoComplete="off" suffix="mmHg" />)}
                     </Form.Item>
                 </div>
             </div>
@@ -123,64 +122,6 @@ const SpecialJsjg = Form.create({
             </div>
             <div className="check-info-row">
                 <div className="check-info-left jmdxt">
-                    <div>
-                        <Form.Item label="Ks">
-                            {getFieldDecorator("lda1")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="Rs">
-                            <Input autoComplete="off" disabled value={(337.5 / getFieldValue("lda1")).toFixed(2)} />
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="@">
-                            {getFieldDecorator("lda2")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="Kf">
-                            {getFieldDecorator("lda3")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="Rf">
-                            <Input autoComplete="off" disabled value={(337.5 / getFieldValue("lda3")).toFixed(2)} />
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="R">
-                            <Input autoComplete="off" disabled value={((337.5 / getFieldValue("lda1") + 337.5 / getFieldValue("lda3")) / 2).toFixed(2)} />
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="HVID" className="hvid">
-                            {getFieldDecorator("lda4")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="X">
-                            {getFieldDecorator("lda6")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="Y">
-                            {getFieldDecorator("lda7")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="Ø">
-                            {getFieldDecorator("lda8")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="e">
-                            {getFieldDecorator("lda5")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                </div>
-                <label className="check-info-label">角膜地形图</label>
-                <div className="check-info-right jmdxt">
                     <div>
                         <Form.Item label="Ks">
                             {getFieldDecorator("rda1")(<Input autoComplete="off" />)}
@@ -237,6 +178,64 @@ const SpecialJsjg = Form.create({
                         </Form.Item>
                     </div>
                 </div>
+                <label className="check-info-label">角膜地形图</label>
+                <div className="check-info-right jmdxt">
+                    <div>
+                        <Form.Item label="Ks">
+                            {getFieldDecorator("lda1")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                    </div>
+                    <div>
+                        <Form.Item label="Rs">
+                            <Input autoComplete="off" disabled value={(337.5 / getFieldValue("lda1")).toFixed(2)} />
+                        </Form.Item>
+                    </div>
+                    <div>
+                        <Form.Item label="@">
+                            {getFieldDecorator("lda2")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                    </div>
+                    <div>
+                        <Form.Item label="Kf">
+                            {getFieldDecorator("lda3")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                    </div>
+                    <div>
+                        <Form.Item label="Rf">
+                            <Input autoComplete="off" disabled value={(337.5 / getFieldValue("lda3")).toFixed(2)} />
+                        </Form.Item>
+                    </div>
+                    <div>
+                        <Form.Item label="R">
+                            <Input autoComplete="off" disabled value={((337.5 / getFieldValue("lda1") + 337.5 / getFieldValue("lda3")) / 2).toFixed(2)} />
+                        </Form.Item>
+                    </div>
+                    <div>
+                        <Form.Item label="HVID" className="hvid">
+                            {getFieldDecorator("lda4")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                    </div>
+                    <div>
+                        <Form.Item label="X">
+                            {getFieldDecorator("lda6")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                    </div>
+                    <div>
+                        <Form.Item label="Y">
+                            {getFieldDecorator("lda7")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                    </div>
+                    <div>
+                        <Form.Item label="Ø">
+                            {getFieldDecorator("lda8")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                    </div>
+                    <div>
+                        <Form.Item label="e">
+                            {getFieldDecorator("lda5")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                    </div>
+                </div>
             </div>
             <div className="check-info-row">
                 <Form.Item>
@@ -248,57 +247,44 @@ const SpecialJsjg = Form.create({
             <div className="check-info-row">
                 <div className="check-info-left">
                     <Form.Item>
-                        {getFieldDecorator("lk")(<TextArea max={100} rows={4} />)}
+                        {getFieldDecorator("rk")(<TextArea max={100} rows={4} />)}
                     </Form.Item>
                 </div>
                 <label className="check-info-label">眼部检查</label>
                 <div className="check-info-right">
                     <Form.Item>
-                        {getFieldDecorator("rk")(<TextArea max={100} rows={4} />)}
+                        {getFieldDecorator("lk")(<TextArea max={100} rows={4} />)}
                     </Form.Item>
                 </div>
             </div>
             <div className="check-info-row">
                 <div className="check-info-left">
                     <Form.Item>
-                        {getFieldDecorator("ll")(<Input className="mm" autoComplete="off" suffix="um" />)}
+                        {getFieldDecorator("rl")(<Input className="mm" autoComplete="off" suffix="um" />)}
                     </Form.Item>
                 </div>
                 <label className="check-info-label">角膜厚度</label>
                 <div className="check-info-right">
                     <Form.Item>
-                        {getFieldDecorator("rl")(<Input className="mm" autoComplete="off" suffix="um" />)}
+                        {getFieldDecorator("ll")(<Input className="mm" autoComplete="off" suffix="um" />)}
                     </Form.Item>
                 </div>
             </div>
             <div className="check-info-row">
                 <div className="check-info-left">
                     <Form.Item>
-                        {getFieldDecorator("lm")(<Input className="mm" autoComplete="off" suffix="mm" />)}
+                        {getFieldDecorator("rm")(<Input className="mm" autoComplete="off" suffix="mm" />)}
                     </Form.Item>
                 </div>
                 <label className="check-info-label">眼轴长度</label>
                 <div className="check-info-right">
                     <Form.Item>
-                        {getFieldDecorator("rm")(<Input className="mm" autoComplete="off" suffix="mm" />)}
+                        {getFieldDecorator("lm")(<Input className="mm" autoComplete="off" suffix="mm" />)}
                     </Form.Item>
                 </div>
             </div>
             <div className="check-info-row">
                 <div className="check-info-left">
-                    <Form.Item>
-                        {getFieldDecorator("lna1")(<Input autoComplete="off" />)}
-                    </Form.Item>
-                    <Form.Item>
-                        {getFieldDecorator("lna2")(<Input autoComplete="off" />)}
-                    </Form.Item>
-                    <span className="check-info-span">X</span>
-                    <Form.Item>
-                        {getFieldDecorator("lna3")(<Input autoComplete="off" />)}
-                    </Form.Item>
-                </div>
-                <label className="check-info-label">散瞳验光</label>
-                <div className="check-info-right">
                     <Form.Item>
                         {getFieldDecorator("rna1")(<Input autoComplete="off" />)}
                     </Form.Item>
@@ -308,6 +294,19 @@ const SpecialJsjg = Form.create({
                     <span className="check-info-span">X</span>
                     <Form.Item>
                         {getFieldDecorator("rna3")(<Input autoComplete="off" />)}
+                    </Form.Item>
+                </div>
+                <label className="check-info-label">散瞳验光</label>
+                <div className="check-info-right">
+                    <Form.Item>
+                        {getFieldDecorator("lna1")(<Input autoComplete="off" />)}
+                    </Form.Item>
+                    <Form.Item>
+                        {getFieldDecorator("lna2")(<Input autoComplete="off" />)}
+                    </Form.Item>
+                    <span className="check-info-span">X</span>
+                    <Form.Item>
+                        {getFieldDecorator("lna3")(<Input autoComplete="off" />)}
                     </Form.Item>
                 </div>
             </div>
@@ -322,13 +321,13 @@ const SpecialJsjg = Form.create({
             <div className="check-info-row">
                 <div className="check-info-left">
                     <Form.Item>
-                        {getFieldDecorator("lo")(<TextArea max={100} rows={4} />)}
+                        {getFieldDecorator("ro")(<TextArea max={100} rows={4} />)}
                     </Form.Item>
                 </div>
                 <label className="check-info-label">眼底检查</label>
                 <div className="check-info-right">
                     <Form.Item>
-                        {getFieldDecorator("ro")(<TextArea max={100} rows={4} />)}
+                        {getFieldDecorator("lo")(<TextArea max={100} rows={4} />)}
                     </Form.Item>
                 </div>
             </div>
@@ -353,7 +352,6 @@ const SpecialIcl = Form.create({
 })(
     ({ form, onCancel, onSubmit, data }) => {
         const { getFieldDecorator, validateFieldsAndScroll, getFieldValue } = form;
-        console.log(data);
         function handleSubmit(e) {
             e.preventDefault();
             validateFieldsAndScroll((err, values) => {
@@ -371,78 +369,78 @@ const SpecialIcl = Form.create({
             <div className="check-info-row">
                 <div className="check-info-left">
                     <Form.Item label="远">
-                        {getFieldDecorator("laa1")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("ra1")(<Input autoComplete="off" />)}
                     </Form.Item>
                     <Form.Item label="近">
-                        {getFieldDecorator("laa2")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("ra2")(<Input autoComplete="off" />)}
                     </Form.Item>
                 </div>
                 <label className="check-info-label">裸眼视力</label>
                 <div className="check-info-right">
                     <Form.Item label="远">
-                        {getFieldDecorator("raa1")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("la1")(<Input autoComplete="off" />)}
                     </Form.Item>
                     <Form.Item label="近">
-                        {getFieldDecorator("raa2")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("la2")(<Input autoComplete="off" />)}
                     </Form.Item>
                 </div>
             </div>
             <div className="check-info-row">
                 <div className="check-info-left">
                     <Form.Item>
-                        {getFieldDecorator("lba1")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("rc1")(<Input autoComplete="off" />)}
                     </Form.Item>
                     <Form.Item>
-                        {getFieldDecorator("lba2")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("rc2")(<Input autoComplete="off" />)}
                     </Form.Item>
                     <span className="check-info-span">X</span>
                     <Form.Item>
-                        {getFieldDecorator("lba3")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("rc3")(<Input autoComplete="off" />)}
                     </Form.Item>
                 </div>
                 <label className="check-info-label">电脑验光</label>
                 <div className="check-info-right">
                     <Form.Item>
-                        {getFieldDecorator("rb1")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("lc1")(<Input autoComplete="off" />)}
                     </Form.Item>
                     <Form.Item>
-                        {getFieldDecorator("rb2")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("lc2")(<Input autoComplete="off" />)}
                     </Form.Item>
                     <span className="check-info-span">X</span>
                     <Form.Item>
-                        {getFieldDecorator("rb3")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("lc3")(<Input autoComplete="off" />)}
                     </Form.Item>
                 </div>
             </div>
             <div className="check-info-row">
                 <div className="check-info-left">
                     <Form.Item>
-                        {getFieldDecorator("lbb")(<Input className="mm" autoComplete="off" suffix="mm" />)}
+                        {getFieldDecorator("rd")(<Input className="mm" autoComplete="off" suffix="mm" />)}
                     </Form.Item>
                 </div>
                 <label className="check-info-label">瞳孔直径</label>
                 <div className="check-info-right">
                     <Form.Item>
-                        {getFieldDecorator("rbb")(<Input className="mm" autoComplete="off" suffix="mm" />)}
+                        {getFieldDecorator("ld")(<Input className="mm" autoComplete="off" suffix="mm" />)}
                     </Form.Item>
                 </div>
             </div>
             <div className="check-info-row">
                 <div className="check-info-left">
                     <Form.Item>
-                        {getFieldDecorator("lbc")(<Input className="mmHg" autoComplete="off" suffix="mmHg" />)}
+                        {getFieldDecorator("ree")(<Input className="mmHg" autoComplete="off" suffix="mmHg" />)}
                     </Form.Item>
                 </div>
                 <label className="check-info-label">眼压</label>
                 <div className="check-info-right">
                     <Form.Item>
-                        {getFieldDecorator("rbc")(<Input className="mmHg" autoComplete="off" suffix="mmHg" />)}
+                        {getFieldDecorator("lee")(<Input className="mmHg" autoComplete="off" suffix="mmHg" />)}
                     </Form.Item>
                 </div>
             </div>
             <div className="check-info-row">
                 <Form.Item>
-                    {getFieldDecorator("lc")(
+                    {getFieldDecorator("eyetype")(
                         <Radio.Group>
                             <div className="check-info-left">
                                 <Radio value={0}>OS</Radio>
@@ -459,57 +457,32 @@ const SpecialIcl = Form.create({
                 <div className="check-info-left jmdxt">
                     <div>
                         <Form.Item label="Ks">
-                            {getFieldDecorator("lda1")(<Input autoComplete="off" />)}
+                            {getFieldDecorator("rf")(<Input autoComplete="off" />)}
                         </Form.Item>
                     </div>
                     <div>
                         <Form.Item label="Rs">
-                            <Input autoComplete="off" disabled value={(337.5 / getFieldValue("lda1")).toFixed(2)} />
+                            <Input autoComplete="off" disabled value={(337.5 / getFieldValue("rf")).toFixed(2)} />
                         </Form.Item>
                     </div>
                     <div>
                         <Form.Item label="@">
-                            {getFieldDecorator("lda2")(<Input autoComplete="off" />)}
+                            {getFieldDecorator("rg")(<Input autoComplete="off" />)}
                         </Form.Item>
                     </div>
                     <div>
                         <Form.Item label="Kf">
-                            {getFieldDecorator("lda3")(<Input autoComplete="off" />)}
+                            {getFieldDecorator("rh")(<Input autoComplete="off" />)}
                         </Form.Item>
                     </div>
                     <div>
                         <Form.Item label="Rf">
-                            <Input autoComplete="off" disabled value={(337.5 / getFieldValue("lda3")).toFixed(2)} />
+                            <Input autoComplete="off" disabled value={(337.5 / getFieldValue("rh")).toFixed(2)} />
                         </Form.Item>
                     </div>
                     <div>
                         <Form.Item label="R">
-                            <Input autoComplete="off" disabled value={((337.5 / getFieldValue("lda1") + 337.5 / getFieldValue("lda3")) / 2).toFixed(2)} />
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="HVID" className="hvid">
-                            {getFieldDecorator("lda4")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="X">
-                            {getFieldDecorator("lda6")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="Y">
-                            {getFieldDecorator("lda7")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="Ø">
-                            {getFieldDecorator("lda8")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="e">
-                            {getFieldDecorator("lda5")(<Input autoComplete="off" />)}
+                            <Input autoComplete="off" disabled value={((337.5 / getFieldValue("rf") + 337.5 / getFieldValue("rh")) / 2).toFixed(2)} />
                         </Form.Item>
                     </div>
                 </div>
@@ -517,57 +490,72 @@ const SpecialIcl = Form.create({
                 <div className="check-info-right jmdxt">
                     <div>
                         <Form.Item label="Ks">
-                            {getFieldDecorator("rda1")(<Input autoComplete="off" />)}
+                            {getFieldDecorator("lf")(<Input autoComplete="off" />)}
                         </Form.Item>
                     </div>
                     <div>
                         <Form.Item label="Rs">
-                            <Input autoComplete="off" disabled value={(337.5 / getFieldValue("rda1")).toFixed(2)} />
+                            <Input autoComplete="off" disabled value={(337.5 / getFieldValue("lf")).toFixed(2)} />
                         </Form.Item>
                     </div>
                     <div>
                         <Form.Item label="@">
-                            {getFieldDecorator("rda2")(<Input autoComplete="off" />)}
+                            {getFieldDecorator("lg")(<Input autoComplete="off" />)}
                         </Form.Item>
                     </div>
                     <div>
                         <Form.Item label="Kf">
-                            {getFieldDecorator("rda3")(<Input autoComplete="off" />)}
+                            {getFieldDecorator("lh")(<Input autoComplete="off" />)}
                         </Form.Item>
                     </div>
                     <div>
                         <Form.Item label="Rf">
-                            <Input autoComplete="off" disabled value={(337.5 / getFieldValue("rda3")).toFixed(2)} />
+                            <Input autoComplete="off" disabled value={(337.5 / getFieldValue("lh")).toFixed(2)} />
                         </Form.Item>
                     </div>
                     <div>
                         <Form.Item label="R">
-                            <Input autoComplete="off" disabled value={((337.5 / getFieldValue("rda1") + 337.5 / getFieldValue("rda3")) / 2).toFixed(2)} />
+                            <Input autoComplete="off" disabled value={((337.5 / getFieldValue("lf") + 337.5 / getFieldValue("lh")) / 2).toFixed(2)} />
+                        </Form.Item>
+                    </div>
+                </div>
+            </div>
+            <div className="check-info-row">
+                <div className="check-info-left">
+                    <Form.Item>
+                        {getFieldDecorator("rk")(<Input autoComplete="off" />)}
+                    </Form.Item>
+                </div>
+                <label className="check-info-label">前房深度</label>
+                <div className="check-info-right">
+                    <Form.Item>
+                        {getFieldDecorator("lk")(<Input autoComplete="off" />)}
+                    </Form.Item>
+                </div>
+            </div>
+            <div className="check-info-row">
+                <div className="check-info-left">
+                    <div>
+                        <Form.Item label="内皮数" className="lb">
+                            {getFieldDecorator("rl1")(<Input autoComplete="off" />)}
                         </Form.Item>
                     </div>
                     <div>
-                        <Form.Item label="HVID" className="hvid">
-                            {getFieldDecorator("rda4")(<Input autoComplete="off" />)}
+                        <Form.Item label="百分比" className="lb">
+                            {getFieldDecorator("rl2")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                    </div>
+                </div>
+                <label className="check-info-label">角膜内皮</label>
+                <div className="check-info-right">
+                    <div>
+                        <Form.Item label="内皮数" className="lb">
+                            {getFieldDecorator("ll1")(<Input autoComplete="off" />)}
                         </Form.Item>
                     </div>
                     <div>
-                        <Form.Item label="X">
-                            {getFieldDecorator("rda6")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="Y">
-                            {getFieldDecorator("rda7")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="Ø">
-                            {getFieldDecorator("rda8")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="e">
-                            {getFieldDecorator("rda5")(<Input autoComplete="off" />)}
+                        <Form.Item label="百分比" className="lb">
+                            {getFieldDecorator("ll2")(<Input autoComplete="off" />)}
                         </Form.Item>
                     </div>
                 </div>
@@ -582,72 +570,136 @@ const SpecialIcl = Form.create({
             <div className="check-info-row">
                 <div className="check-info-left">
                     <Form.Item>
-                        {getFieldDecorator("lk")(<TextArea max={100} rows={4} />)}
+                        {getFieldDecorator("a1")(<TextArea max={100} rows={4} />)}
                     </Form.Item>
                 </div>
                 <label className="check-info-label">眼部检查</label>
                 <div className="check-info-right">
                     <Form.Item>
-                        {getFieldDecorator("rk")(<TextArea max={100} rows={4} />)}
+                        {getFieldDecorator("a2")(<TextArea max={100} rows={4} />)}
                     </Form.Item>
                 </div>
             </div>
             <div className="check-info-row">
                 <div className="check-info-left">
                     <Form.Item>
-                        {getFieldDecorator("ll")(<Input className="mm" autoComplete="off" suffix="um" />)}
+                        {getFieldDecorator("rq")(<Input className="mm" autoComplete="off" suffix="um" />)}
                     </Form.Item>
                 </div>
                 <label className="check-info-label">角膜厚度</label>
                 <div className="check-info-right">
                     <Form.Item>
-                        {getFieldDecorator("rl")(<Input className="mm" autoComplete="off" suffix="um" />)}
+                        {getFieldDecorator("lq")(<Input className="mm" autoComplete="off" suffix="um" />)}
                     </Form.Item>
                 </div>
             </div>
             <div className="check-info-row">
                 <div className="check-info-left">
                     <Form.Item>
-                        {getFieldDecorator("lm")(<Input className="mm" autoComplete="off" suffix="mm" />)}
+                        {getFieldDecorator("rr")(<Input className="mm" autoComplete="off" suffix="mm" />)}
                     </Form.Item>
                 </div>
                 <label className="check-info-label">眼轴长度</label>
                 <div className="check-info-right">
                     <Form.Item>
-                        {getFieldDecorator("rm")(<Input className="mm" autoComplete="off" suffix="mm" />)}
+                        {getFieldDecorator("lr")(<Input className="mm" autoComplete="off" suffix="mm" />)}
+                    </Form.Item>
+                </div>
+            </div>
+            <div className="check-info-row">
+                <div className="check-info-left">
+                    <div className="check-info-ubm">
+                        <Form.Item className="ubm-1">
+                            {getFieldDecorator("rt1")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                        <Form.Item className="ubm-2">
+                            {getFieldDecorator("rt2")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                        <Form.Item className="ubm-3">
+                            {getFieldDecorator("rt3")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                        <Form.Item className="ubm-4">
+                            {getFieldDecorator("rt4")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                    </div>
+                    <div>
+                        <Form.Item label="角膜横径" className="lb">
+                            {getFieldDecorator("ru")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                    </div>
+                </div>
+                <label className="check-info-label">UBM</label>
+                <div className="check-info-right">
+                    <div className="check-info-ubm">
+                        <Form.Item className="ubm-1">
+                            {getFieldDecorator("lt1")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                        <Form.Item className="ubm-2">
+                            {getFieldDecorator("lt2")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                        <Form.Item className="ubm-3">
+                            {getFieldDecorator("lt3")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                        <Form.Item className="ubm-4">
+                            {getFieldDecorator("lt4")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                    </div>
+                    <div>
+                        <Form.Item label="角膜横径" className="lb">
+                            {getFieldDecorator("lu")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                    </div>
+                </div>
+            </div>
+            <div className="check-info-row">
+                <div className="check-info-left">
+                    <Form.Item label="H">
+                        {getFieldDecorator("rv")(<Input autoComplete="off" />)}
+                    </Form.Item>
+                    <Form.Item label="V">
+                        {getFieldDecorator("rw")(<Input autoComplete="off" />)}
+                    </Form.Item>
+                </div>
+                <label className="check-info-label">沟到沟</label>
+                <div className="check-info-right">
+                    <Form.Item label="H">
+                        {getFieldDecorator("lv")(<Input autoComplete="off" />)}
+                    </Form.Item>
+                    <Form.Item label="V">
+                        {getFieldDecorator("lw")(<Input autoComplete="off" />)}
                     </Form.Item>
                 </div>
             </div>
             <div className="check-info-row">
                 <div className="check-info-left">
                     <Form.Item>
-                        {getFieldDecorator("lna1")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("rx1")(<Input autoComplete="off" />)}
                     </Form.Item>
                     <Form.Item>
-                        {getFieldDecorator("lna2")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("rx2")(<Input autoComplete="off" />)}
                     </Form.Item>
                     <span className="check-info-span">X</span>
                     <Form.Item>
-                        {getFieldDecorator("lna3")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("rx3")(<Input autoComplete="off" />)}
                     </Form.Item>
                 </div>
                 <label className="check-info-label">散瞳验光</label>
                 <div className="check-info-right">
                     <Form.Item>
-                        {getFieldDecorator("rna1")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("lx1")(<Input autoComplete="off" />)}
                     </Form.Item>
                     <Form.Item>
-                        {getFieldDecorator("rna2")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("lx2")(<Input autoComplete="off" />)}
                     </Form.Item>
                     <span className="check-info-span">X</span>
                     <Form.Item>
-                        {getFieldDecorator("rna3")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("lx3")(<Input autoComplete="off" />)}
                     </Form.Item>
                 </div>
             </div>
             <div className="check-info-row">
                 <Form.Item label="是否修正" className="lb">
-                    {getFieldDecorator("lp")(<Select>
+                    {getFieldDecorator("a3")(<Select style={{ width: 60 }}>
                         <Option value="1">是</Option>
                         <Option value="0">否</Option>
                     </Select>)}
@@ -660,6 +712,40 @@ const SpecialIcl = Form.create({
                     </Form.Item>
                 </div>
                 <label className="check-info-label">眼底检查</label>
+                <div className="check-info-right">
+                    <Form.Item>
+                        {getFieldDecorator("ro")(<TextArea max={100} rows={4} />)}
+                    </Form.Item>
+                </div>
+            </div>
+            <div className="check-info-row">
+                <div className="check-info-left">
+                    <Form.Item>
+                        {getFieldDecorator("a4")(<Input autoComplete="off" />)}
+                    </Form.Item>
+                </div>
+                <label className="check-info-label">确定度数</label>
+                <div className="check-info-right">
+                    <Form.Item>
+                        {getFieldDecorator("a5")(<Input autoComplete="off" />)}
+                    </Form.Item>
+                </div>
+            </div>
+            <div className="check-info-row">
+                <label className="check-info-label">注释</label>
+            </div>
+            <div className="check-info-row">
+                <Form.Item>
+                    {getFieldDecorator("a5")(<TextArea max={100} rows={4} />)}
+                </Form.Item>
+            </div>
+            <div className="check-info-row">
+                <div className="check-info-left">
+                    <Form.Item>
+                        {getFieldDecorator("lo")(<TextArea max={100} rows={4} />)}
+                    </Form.Item>
+                </div>
+                <label className="check-info-label">检查评估结论</label>
                 <div className="check-info-right">
                     <Form.Item>
                         {getFieldDecorator("ro")(<TextArea max={100} rows={4} />)}
@@ -705,85 +791,98 @@ const SpecialJmjcj = Form.create({
             <div className="check-info-row">
                 <div className="check-info-left">
                     <Form.Item label="远">
-                        {getFieldDecorator("laa1")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("ra1")(<Input autoComplete="off" />)}
                     </Form.Item>
                     <Form.Item label="近">
-                        {getFieldDecorator("laa2")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("ra2")(<Input autoComplete="off" />)}
                     </Form.Item>
                 </div>
                 <label className="check-info-label">裸眼视力</label>
                 <div className="check-info-right">
                     <Form.Item label="远">
-                        {getFieldDecorator("raa1")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("la1")(<Input autoComplete="off" />)}
                     </Form.Item>
                     <Form.Item label="近">
-                        {getFieldDecorator("raa2")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("la2")(<Input autoComplete="off" />)}
                     </Form.Item>
                 </div>
             </div>
             <div className="check-info-row">
                 <div className="check-info-left">
                     <Form.Item>
-                        {getFieldDecorator("lba1")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("rc1")(<Input autoComplete="off" />)}
                     </Form.Item>
                     <Form.Item>
-                        {getFieldDecorator("lba2")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("rc2")(<Input autoComplete="off" />)}
                     </Form.Item>
                     <span className="check-info-span">X</span>
                     <Form.Item>
-                        {getFieldDecorator("lba3")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("rc3")(<Input autoComplete="off" />)}
                     </Form.Item>
                 </div>
                 <label className="check-info-label">电脑验光</label>
                 <div className="check-info-right">
                     <Form.Item>
-                        {getFieldDecorator("rb1")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("lc1")(<Input autoComplete="off" />)}
                     </Form.Item>
                     <Form.Item>
-                        {getFieldDecorator("rb2")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("lc2")(<Input autoComplete="off" />)}
                     </Form.Item>
                     <span className="check-info-span">X</span>
                     <Form.Item>
-                        {getFieldDecorator("rb3")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("lc3")(<Input autoComplete="off" />)}
                     </Form.Item>
                 </div>
             </div>
             <div className="check-info-row">
                 <div className="check-info-left">
                     <Form.Item>
-                        {getFieldDecorator("lbb")(<Input className="mm" autoComplete="off" suffix="mm" />)}
+                        {getFieldDecorator("rd")(<Input className="mm" autoComplete="off" suffix="mm" />)}
+                    </Form.Item>
+                </div>
+                <label className="check-info-label">角膜直径</label>
+                <div className="check-info-right">
+                    <Form.Item>
+                        {getFieldDecorator("ld")(<Input className="mm" autoComplete="off" suffix="mm" />)}
+                    </Form.Item>
+                </div>
+            </div>
+            <div className="check-info-row">
+                <div className="check-info-left">
+                    <Form.Item>
+                        {getFieldDecorator("ree")(<Input className="mm" autoComplete="off" suffix="mm" />)}
                     </Form.Item>
                 </div>
                 <label className="check-info-label">瞳孔直径</label>
                 <div className="check-info-right">
                     <Form.Item>
-                        {getFieldDecorator("rbb")(<Input className="mm" autoComplete="off" suffix="mm" />)}
+                        {getFieldDecorator("lee")(<Input className="mm" autoComplete="off" suffix="mm" />)}
                     </Form.Item>
                 </div>
             </div>
             <div className="check-info-row">
                 <div className="check-info-left">
                     <Form.Item>
-                        {getFieldDecorator("lbc")(<Input className="mmHg" autoComplete="off" suffix="mmHg" />)}
+                        {getFieldDecorator("rf")(<Input className="mmHg" autoComplete="off" suffix="mmHg" />)}
                     </Form.Item>
                 </div>
                 <label className="check-info-label">眼压</label>
                 <div className="check-info-right">
                     <Form.Item>
-                        {getFieldDecorator("rbc")(<Input className="mmHg" autoComplete="off" suffix="mmHg" />)}
+                        {getFieldDecorator("lf")(<Input className="mmHg" autoComplete="off" suffix="mmHg" />)}
                     </Form.Item>
                 </div>
             </div>
             <div className="check-info-row">
                 <Form.Item>
-                    {getFieldDecorator("lc")(
+                    {getFieldDecorator("eyetype")(
                         <Radio.Group>
                             <div className="check-info-left">
-                                <Radio value={0}>OS</Radio>
+                                <Radio value={1}>OS</Radio>
                             </div>
                             <label className="check-info-label">主视眼</label>
                             <div className="check-info-right">
-                                <Radio value={1}>OD</Radio>
+                                <Radio value={0}>OD</Radio>
                             </div>
                         </Radio.Group>
                     )}
@@ -793,115 +892,72 @@ const SpecialJmjcj = Form.create({
                 <div className="check-info-left jmdxt">
                     <div>
                         <Form.Item label="Ks">
-                            {getFieldDecorator("lda1")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="Rs">
-                            <Input autoComplete="off" disabled value={(337.5 / getFieldValue("lda1")).toFixed(2)} />
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="@">
-                            {getFieldDecorator("lda2")(<Input autoComplete="off" />)}
+                            {getFieldDecorator("rl")(<Input autoComplete="off" />)}
                         </Form.Item>
                     </div>
                     <div>
                         <Form.Item label="Kf">
-                            {getFieldDecorator("lda3")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="Rf">
-                            <Input autoComplete="off" disabled value={(337.5 / getFieldValue("lda3")).toFixed(2)} />
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="R">
-                            <Input autoComplete="off" disabled value={((337.5 / getFieldValue("lda1") + 337.5 / getFieldValue("lda3")) / 2).toFixed(2)} />
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="HVID" className="hvid">
-                            {getFieldDecorator("lda4")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="X">
-                            {getFieldDecorator("lda6")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="Y">
-                            {getFieldDecorator("lda7")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="Ø">
-                            {getFieldDecorator("lda8")(<Input autoComplete="off" />)}
+                            {getFieldDecorator("rm")(<Input autoComplete="off" />)}
                         </Form.Item>
                     </div>
                     <div>
                         <Form.Item label="e">
-                            {getFieldDecorator("lda5")(<Input autoComplete="off" />)}
+                            {getFieldDecorator("rn")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                    </div>
+                    <div>
+                        <Form.Item label="e2">
+                            {getFieldDecorator("rg1")(<Input autoComplete="off" />)}
                         </Form.Item>
                     </div>
                 </div>
-                <label className="check-info-label">角膜地形图</label>
+                <label className="check-info-label">角膜形态</label>
                 <div className="check-info-right jmdxt">
                     <div>
                         <Form.Item label="Ks">
-                            {getFieldDecorator("rda1")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="Rs">
-                            <Input autoComplete="off" disabled value={(337.5 / getFieldValue("rda1")).toFixed(2)} />
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="@">
-                            {getFieldDecorator("rda2")(<Input autoComplete="off" />)}
+                            {getFieldDecorator("ll")(<Input autoComplete="off" />)}
                         </Form.Item>
                     </div>
                     <div>
                         <Form.Item label="Kf">
-                            {getFieldDecorator("rda3")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="Rf">
-                            <Input autoComplete="off" disabled value={(337.5 / getFieldValue("rda3")).toFixed(2)} />
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="R">
-                            <Input autoComplete="off" disabled value={((337.5 / getFieldValue("rda1") + 337.5 / getFieldValue("rda3")) / 2).toFixed(2)} />
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="HVID" className="hvid">
-                            {getFieldDecorator("rda4")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="X">
-                            {getFieldDecorator("rda6")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="Y">
-                            {getFieldDecorator("rda7")(<Input autoComplete="off" />)}
-                        </Form.Item>
-                    </div>
-                    <div>
-                        <Form.Item label="Ø">
-                            {getFieldDecorator("rda8")(<Input autoComplete="off" />)}
+                            {getFieldDecorator("lm")(<Input autoComplete="off" />)}
                         </Form.Item>
                     </div>
                     <div>
                         <Form.Item label="e">
-                            {getFieldDecorator("rda5")(<Input autoComplete="off" />)}
+                            {getFieldDecorator("ln")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                    </div>
+                    <div>
+                        <Form.Item label="e2">
+                            {getFieldDecorator("lg1")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                    </div>
+                </div>
+            </div>
+            <div className="check-info-row">
+                <div className="check-info-left">
+                    <div>
+                        <Form.Item label="内皮数" className="lb">
+                            {getFieldDecorator("rl1")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                    </div>
+                    <div>
+                        <Form.Item label="百分比" className="lb">
+                            {getFieldDecorator("rl2")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                    </div>
+                </div>
+                <label className="check-info-label">角膜内皮</label>
+                <div className="check-info-right">
+                    <div>
+                        <Form.Item label="内皮数" className="lb">
+                            {getFieldDecorator("ll1")(<Input autoComplete="off" />)}
+                        </Form.Item>
+                    </div>
+                    <div>
+                        <Form.Item label="百分比" className="lb">
+                            {getFieldDecorator("ll2")(<Input autoComplete="off" />)}
                         </Form.Item>
                     </div>
                 </div>
@@ -916,89 +972,76 @@ const SpecialJmjcj = Form.create({
             <div className="check-info-row">
                 <div className="check-info-left">
                     <Form.Item>
-                        {getFieldDecorator("lk")(<TextArea max={100} rows={4} />)}
-                    </Form.Item>
-                </div>
-                <label className="check-info-label">眼部检查</label>
-                <div className="check-info-right">
-                    <Form.Item>
-                        {getFieldDecorator("rk")(<TextArea max={100} rows={4} />)}
-                    </Form.Item>
-                </div>
-            </div>
-            <div className="check-info-row">
-                <div className="check-info-left">
-                    <Form.Item>
-                        {getFieldDecorator("ll")(<Input className="mm" autoComplete="off" suffix="um" />)}
-                    </Form.Item>
-                </div>
-                <label className="check-info-label">角膜厚度</label>
-                <div className="check-info-right">
-                    <Form.Item>
-                        {getFieldDecorator("rl")(<Input className="mm" autoComplete="off" suffix="um" />)}
-                    </Form.Item>
-                </div>
-            </div>
-            <div className="check-info-row">
-                <div className="check-info-left">
-                    <Form.Item>
-                        {getFieldDecorator("lm")(<Input className="mm" autoComplete="off" suffix="mm" />)}
-                    </Form.Item>
-                </div>
-                <label className="check-info-label">眼轴长度</label>
-                <div className="check-info-right">
-                    <Form.Item>
-                        {getFieldDecorator("rm")(<Input className="mm" autoComplete="off" suffix="mm" />)}
-                    </Form.Item>
-                </div>
-            </div>
-            <div className="check-info-row">
-                <div className="check-info-left">
-                    <Form.Item>
-                        {getFieldDecorator("lna1")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("rj1")(<Input autoComplete="off" />)}
                     </Form.Item>
                     <Form.Item>
-                        {getFieldDecorator("lna2")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("rj2")(<Input autoComplete="off" />)}
                     </Form.Item>
                     <span className="check-info-span">X</span>
                     <Form.Item>
-                        {getFieldDecorator("lna3")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("rj3")(<Input autoComplete="off" />)}
                     </Form.Item>
                 </div>
                 <label className="check-info-label">散瞳验光</label>
                 <div className="check-info-right">
                     <Form.Item>
-                        {getFieldDecorator("rna1")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("lj1")(<Input autoComplete="off" />)}
                     </Form.Item>
                     <Form.Item>
-                        {getFieldDecorator("rna2")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("lj2")(<Input autoComplete="off" />)}
                     </Form.Item>
                     <span className="check-info-span">X</span>
                     <Form.Item>
-                        {getFieldDecorator("rna3")(<Input autoComplete="off" />)}
+                        {getFieldDecorator("lj3")(<Input autoComplete="off" />)}
                     </Form.Item>
                 </div>
-            </div>
-            <div className="check-info-row">
-                <Form.Item label="是否修正" className="lb">
-                    {getFieldDecorator("lp")(<Select>
-                        <Option value="1">是</Option>
-                        <Option value="0">否</Option>
-                    </Select>)}
-                </Form.Item>
             </div>
             <div className="check-info-row">
                 <div className="check-info-left">
                     <Form.Item>
-                        {getFieldDecorator("lo")(<TextArea max={100} rows={4} />)}
+                        {getFieldDecorator("rk")(<Input className="mm" autoComplete="off" suffix="mm" />)}
                     </Form.Item>
                 </div>
-                <label className="check-info-label">眼底检查</label>
+                <label className="check-info-label">眼轴长度</label>
                 <div className="check-info-right">
                     <Form.Item>
-                        {getFieldDecorator("ro")(<TextArea max={100} rows={4} />)}
+                        {getFieldDecorator("lk")(<Input className="mm" autoComplete="off" suffix="mm" />)}
                     </Form.Item>
                 </div>
+            </div>
+            <div className="check-info-row">
+                <div className="check-info-left">
+                    <Form.Item>
+                        {getFieldDecorator("rh1")(<Input className="mm" autoComplete="off" suffix="mm" />)}
+                    </Form.Item>
+                </div>
+                <label className="check-info-label">眼轴厚度</label>
+                <div className="check-info-right">
+                    <Form.Item>
+                        {getFieldDecorator("lh1")(<Input className="mm" autoComplete="off" suffix="mm" />)}
+                    </Form.Item>
+                </div>
+            </div>
+            <div className="check-info-row">
+                <div className="check-info-left">
+                    <Form.Item>
+                        {getFieldDecorator("rb1")(<TextArea max={100} rows={4} />)}
+                    </Form.Item>
+                </div>
+                <label className="check-info-label">眼部检查</label>
+                <div className="check-info-right">
+                    <Form.Item>
+                        {getFieldDecorator("lb1")(<TextArea max={100} rows={4} />)}
+                    </Form.Item>
+                </div>
+            </div>
+            <div className="check-info-row">
+                <Form.Item label="试戴评估" className="lb">
+                    {getFieldDecorator("istry")(<Select>
+                        <Option value="1">是</Option>
+                        <Option value="0">否</Option>
+                    </Select>)}
+                </Form.Item>
             </div>
             <div className="x-dialog-footer">
                 <Button onClick={onCancel}>关闭</Button>
