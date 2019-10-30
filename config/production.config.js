@@ -1,14 +1,11 @@
 module.exports = {
     baseURL: "/msk",
     pages: [
-        "login",
-        "appointRegister",
-        "appointOperationCheck",
-        "appointOperation",
-        "patient",
-        "medicine",
-        "doctor",
-        "queue"
+        "sickInfo",
+        "sickSpecialCheck",
+        "sickNormalCheck",
+        "checkType",
+        "chargeNotice"
     ],
     title: ""
 };
