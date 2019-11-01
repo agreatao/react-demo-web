@@ -77,7 +77,7 @@ const XMaster = ({ children, height, routes }) => {
 
     return <Layout className="x-master">
         <Header className="x-master-header">
-            <div className="logo"></div>
+            <div className="logo">明世康眼科医院</div>
         </Header>
         <Layout>
             <Sider collapsible collapsed={collapsed} onCollapse={() => setCollapsed(!collapsed)}>

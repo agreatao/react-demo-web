@@ -99,7 +99,8 @@ const LOADERS = [
                     sourceMap: true,
                     javascriptEnabled: true,
                     modifyVars: {
-                        "border-radius-base": "2px"
+                        "border-radius-base": "2px",
+                        "primary-color": "#33cccc"
                     }
                 }
             }

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Table, Modal, Button, Pagination, Input } from "antd";
+import { Modal, Table } from "antd";
+import Pagination from "components/Pagination";
+import React from "react";
 import "./index.less";
 
 function XTable(props) {
@@ -38,26 +39,6 @@ function XTable(props) {
         })
     }
 
-    const [jumpPage, setJumpPage] = useState(null);
-
-    function handleJumpInputChange(e) {
-        try {
-            let page = parseInt(e.target.value);
-            if (isNaN(page)) {
-                throw "page is not number";
-            }
-            setJumpPage(Math.min(page, Math.ceil(total / pageSize)));
-        } catch {
-            setJumpPage(null);
-        }
-    }
-
-    function hangleJumpToPage(e) {
-        e.preventDefault();
-        onPageChange(jumpPage, pageSize);
-        setJumpPage(null);
-    }
-
     return <React.Fragment>
         <Table
             className="x-table"
@@ -67,21 +48,7 @@ function XTable(props) {
             pagination={false}
             columns={_columns}
         />
-        {onPageChange &&
-            <div className="x-table-pagination">
-                <div className="x-table-pagination-total">共<span>{total}</span>条</div>
-                {total > 0 && <div className="x-table-pagination-control">
-                    <Pagination
-                        size="small"
-                        current={currentPage}
-                        pageSize={pageSize}
-                        total={total}
-                        onChange={onPageChange}
-                    />
-                    <Input disabled={total === 0} size="small" className="x-table-pagination-jump-input" value={jumpPage} onChange={handleJumpInputChange} />
-                    <Button disabled={total === 0} size="small" className="x-table-pagination-jump-btn" onClick={hangleJumpToPage}>跳转</Button>
-                </div>}
-            </div>}
+        {onPageChange && <Pagination {...{ currentPage, pageSize, total, onPageChange, }} />}
     </React.Fragment>
 }
 

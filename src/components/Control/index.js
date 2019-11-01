@@ -29,7 +29,7 @@ function XControl({ dispatch, filter, onAdd, onDelete }) {
                             visible: filterVisible
                         })}
                         onClick={() => setFilterVisible(!filterVisible)}>
-                        <Icon type="filter" />
+                        <Icon type="filter" theme="filled" />
                     </a>
                 }
             </div>

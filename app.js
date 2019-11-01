@@ -22,7 +22,7 @@ app.use(cookieParser());
 
 // 静态资源
 app.use(`${CONFIG.baseURL}/`, express.static(path.join(__dirname, "dist/static")));
-// app.use(`${CONFIG.baseURL}/login`, express.static(path.join(__dirname, "dist/templates", "login.html")));
+app.use(`${CONFIG.baseURL}/login`, express.static(path.join(__dirname, "dist/templates", "login.html")));
 // app.use(`${CONFIG.baseURL}/appointRegister`, express.static(path.join(__dirname, "dist/templates", "appointRegister.html")));
 // app.use(`${CONFIG.baseURL}/appointOperationCheck`, express.static(path.join(__dirname, "dist/templates", "appointOperationCheck.html")));
 // app.use(`${CONFIG.baseURL}/appointOperation`, express.static(path.join(__dirname, "dist/templates", "appointOperation.html")));
