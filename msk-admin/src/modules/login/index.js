@@ -1,4 +1,3 @@
-import { createXControl } from "components/Control";
 import dva from "dva";
 import createLoading from 'dva-loading';
 import browserModel from "models/browser";
@@ -15,7 +14,6 @@ const app = dva({
 });
 
 app.use(createLoading());
-app.use(createXControl());
 
 app.model(browserModel);
 
