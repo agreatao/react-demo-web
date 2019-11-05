@@ -10,7 +10,6 @@ const app = dva({
     // onAction: createLogger(),
     onError: (e) => {
         console.error(e);
-        
     }
 });
 

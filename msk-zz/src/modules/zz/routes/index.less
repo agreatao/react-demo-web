@@ -1,0 +1,108 @@
+.zz {
+    .zz-header {
+        background-color: #33cccc;
+
+        .logo {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+        }
+    }
+
+    .zz-footer {
+        p {
+            margin: 0;
+            text-align: center;
+            color: #aaa;
+            user-select: none;
+        }
+    }
+
+    .zz-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .ant-form-item {
+            display: flex;
+
+            .ant-form-item-label {
+                width: 100px;
+                flex-shrink: 0;
+            }
+
+            .ant-form-item-control-wrapper {
+                flex: 1;
+            }
+        }
+
+        .zz-input {
+            width: 560px;
+            padding: 20px;
+            border: 1px solid #e5e5e5;
+            background-color: #ffffff;
+            border-radius: 2px;
+
+            .zz-input-form {
+                display: flex;
+
+                &>div {
+                    width: 280px;
+
+                    &.zz-col-2 {
+                        width: 240px;
+
+                        .ant-form-item {
+
+                            .ant-form-item-label {
+                                width: 60px;
+                            }
+
+                        }
+                    }
+                }
+            }
+
+            .zz-input-btns {
+                text-align: right;
+            }
+        }
+
+        .zz-output {
+            margin-left: 20px;
+            width: 560px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .zz-output-inner {
+                width: 280px;
+                padding: 20px;
+                background-color: #001529;
+                border-radius: 2px;
+
+                .ant-form-item {
+                    margin-bottom: 0;
+
+                    &+.ant-form-item {
+                        margin-top: 24px;
+                    }
+
+                    .ant-form-item-label {
+                        width: 120px;
+
+                        label {
+                            color: #fff;
+                        }
+                    }
+
+                    .ant-form-text {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+
+
+}
