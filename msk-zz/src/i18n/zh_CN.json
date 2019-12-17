@@ -1,0 +1,15 @@
+{
+    "INPUT": "输入",
+    "OUTPUT": "计算结果",
+    "CALCULATE": "计算",
+    "CLEAR": "清空",
+    "RULE_REQUIRED": "{label}是必填项",
+
+    "INSTRUCTIONS": "说明",
+    "NOTES": "注意事项",
+
+
+
+    "VR_INSTRUCTIONS": "用于补偿常规角膜矫正高阶像差时的屈光度",
+    "VR_NOTES": "C7~C13=准分子设备所选光区下的高阶像差，OSA 标准 (μm); Mani=显然验光数据; Correct=补偿后数据 (未进行Nomogramm)"
+}

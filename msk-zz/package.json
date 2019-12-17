@@ -62,6 +62,7 @@
         "raw-loader": "^3.1.0",
         "react": "^16.9.0",
         "react-dom": "^16.9.0",
+        "react-intl-universal": "^2.2.1",
         "redux-logger": "^3.0.6",
         "style-loader": "^1.0.0",
         "webpack": "^4.41.0",

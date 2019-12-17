@@ -1,9 +1,9 @@
 module.exports = {
-    baseURL: "/msk",
+    baseURL: "/zzcal",
     pages: [
-        "zz"
+        "v1_0_0"
     ],
-    title: "",
+    title: "明视康眼科医院",
     apiUrl: "http://localhost:8060"
     // apiUrl: "http://localhost:8060" // 接口
 };

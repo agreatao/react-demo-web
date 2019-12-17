@@ -22,7 +22,7 @@ app.use(cookieParser());
 
 // 静态资源
 app.use(`${CONFIG.baseURL}/`, express.static(path.join(__dirname, "dist/static")));
-app.use(`${CONFIG.baseURL}/zz`, express.static(path.join(__dirname, "dist/templates", "zz.html")));
+app.use(`${CONFIG.baseURL}/v1_0_0`, express.static(path.join(__dirname, "dist/templates", "v1_0_0.html")));
 
 app.all(`${CONFIG.baseURL}/**`, (req, res, next) => {
     request(

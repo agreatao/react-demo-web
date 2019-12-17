@@ -1,0 +1,15 @@
+{
+    "INPUT": "INPUT",
+    "OUTPUT": "OUTPUT",
+    "CALCULATE": "Calculate",
+    "CLEAR": "Clear",
+    "RULE_REQUIRED": "Please Input the {label}",
+    
+    "INSTRUCTIONS": "INSTRUCTIONS",
+    "NOTES": "NOTES",
+
+
+
+    "VR_INSTRUCTIONS": "To calculate the compensation diopter while correcting the above HOAs for virgin cornea.",
+    "VR_NOTES": "C7~C13=Corresponded HOAs under selected Opic Zone in the excimer device, Optical Society of America(OSA) Standard (μm); Mani=Manifested; Correct=After compensation (Nomogramm not included)"
+}

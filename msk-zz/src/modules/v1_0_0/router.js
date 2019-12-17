@@ -1,20 +1,41 @@
 import { ConfigProvider } from "antd";
-import zhCN from 'antd/es/locale/zh_CN';
+import zh_CN from 'antd/es/locale/zh_CN';
+import en_US from "antd/es/locale/en_US";
 import Master from "components/Master";
+import { connect } from "dva";
 import dynamic from "dva/dynamic";
-import { Redirect, Route, Router, Switch } from 'dva/router';
+import { Route, Router, Switch } from 'dva/router';
+import createModel from "models/calculate";
 import moment from "moment";
 import "moment/locale/zh-cn";
 import React from 'react';
-moment.locale("zh-cn");
+import nav from "./nav.config.js";
+import { vr } from "./services";
+
+const lang = {
+    zh_CN,
+    en_US
+}
+
+const App = connect(
+    ({ i18n }) => ({ i18n: i18n.lang })
+)(
+    ({ children, i18n }) => {
+        if (i18n === "zh_CN")
+            moment.locale("zh-cn");
+        return <ConfigProvider locale={lang[i18n]}>
+            {children}
+        </ConfigProvider>
+    })
+
 
 function RouterConfig({ history, app }) {
     return (
-        <ConfigProvider locale={zhCN}>
+        <App>
             <Router history={history}>
                 <Switch>
-                    <Master history={history}>
-                        <Redirect exact from="/" to="/VectorAnalysisCalculator1" />
+                    <Master history={history} nav={nav}>
+                        {/* <Redirect exact from="/" to="/VectorAnalysisCalculator1" /> */}
                         <Route
                             path="/VectorAnalysisCalculator1"
                             exact
@@ -47,7 +68,9 @@ function RouterConfig({ history, app }) {
                             exact
                             component={dynamic({
                                 app,
-                                models: () => [],
+                                models: () => [
+                                    createModel("vr", vr)
+                                ],
                                 component: () => import("./routes/VR")
                             })}
                         />
@@ -90,7 +113,7 @@ function RouterConfig({ history, app }) {
                     </Master>
                 </Switch>
             </Router>
-        </ConfigProvider>
+        </App>
     );
 }
 

@@ -58,11 +58,6 @@ const LOADERS = [
         loader: "raw-loader"
     },
     {
-        test: /\.json$/,
-        exclude: /node_modules/,
-        loader: "json-loader"
-    },
-    {
         test: /\.(woff2?|svg|ttf|eot)$/,
         include: path.join(__dirname, "src/theme"),
         loader: "file-loader",
@@ -130,7 +125,7 @@ CONFIG.pages.forEach(name => {
 
 module.exports = {
     mode: ENV,
-    devtool: 'source-map',
+    devtool: ENV === 'development' ? 'cheap-module-eval-source-map' : 'cheap-module-source-map',
     entry: ENTRY,
     output: {
         path: path.resolve(__dirname, "dist/static"),
@@ -145,6 +140,7 @@ module.exports = {
             '@': path.resolve(__dirname, "src"),
             components: path.join(__dirname, "src/components"),
             hooks: path.join(__dirname, "src/hooks"),
+            i18n: path.join(__dirname, "src/i18n"),
             images: path.join(__dirname, "src/images"),
             models: path.join(__dirname, "src/models"),
             modules: path.join(__dirname, "src/modules"),
@@ -158,8 +154,8 @@ module.exports = {
         splitChunks: {
             cacheGroups: {
                 common: {
-                    name: 'common', 
-                    chunks: 'initial',  
+                    name: 'common',
+                    chunks: 'initial',
                     minChunks: 2, // 表示提取公共部分最少的文件数
                     minSize: 0  // 表示提取公共部分最小的大小 
                 }
