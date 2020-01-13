@@ -2,7 +2,7 @@ import { Layout, Menu, Button, Select, Alert } from "antd";
 import { connect } from "dva";
 import React from "react";
 import "./index.less";
-import intl from "react-intl-universal";
+import { useIntl } from "react-intl";
 import { LANG } from "models/i18n";
 const { Option } = Select;
 
@@ -15,11 +15,7 @@ function Master({ children, history, nav, i18n, dispatch }) {
     }
 
     function handleVersionChange(e) {
-        let pathname = window.location.pathname;
-        if (pathname.indexOf(e.target.value) > -1) {
-            return;
-        }
-        window.location.href = "/msk/" + e.target.value;
+        // window.location.href = e.target.value;
     }
 
     return <Layout className="zz-layout">
@@ -28,12 +24,12 @@ function Master({ children, history, nav, i18n, dispatch }) {
             <div className="version">
                 <Select
                     onChange={handleVersionChange}
-                    defaultValue={window.location.pathname.replace(CONFIG.baseURL + "/", "")}
+                    defaultValue="index"
                     size="small"
                     dropdownClassName="ant-select-sm-dropdown"
                     style={{ width: 78 }}
                 >
-                    {CONFIG.pages.map(item => <Option key={item} value={item}>{item.replace("v", "").replace(/_/g, ".")}</Option>)}
+                    <Option key="index" value="index">v1.0.0</Option>
                 </Select>
                 <Select
                     defaultValue={i18n}
@@ -72,26 +68,27 @@ export default connect(
 )(Master);
 
 export const Container = ({ tip, form, result, onCaculate, onClear }) => {
+    const intl = useIntl();
     return <div className="zz-container">
         {tip && Object.keys(tip).map((item, index) =>
             <Alert key={index}
-                message={intl.get(item)}
+                message={intl.formatMessage({ id: item })}
                 description={tip[item]}
                 type={item === "INSTRUCTIONS" ? "success" : "error"}
             />)}
         <div className="zz-container-inner">
             <div className="zz-inner-container">
-                <div className="zz-title">{intl.get("INPUT")}</div>
+                <div className="zz-title">{intl.formatMessage({ id: "INPUT" })}</div>
                 <div className="zz-form">
                     {form}
                 </div>
                 <div className="zz-form-buttons">
-                    <Button type="primary" onClick={onCaculate}>{intl.get("CALCULATE")}</Button>
-                    <Button onClick={onClear}>{intl.get("CLEAR")}</Button>
+                    <Button type="primary" onClick={onCaculate}>{intl.formatMessage({ id: "CALCULATE" })}</Button>
+                    <Button onClick={onClear}>{intl.formatMessage({ id: "CLEAR" })}</Button>
                 </div>
             </div>
             <div className="zz-inner-container">
-                <div className="zz-title">{intl.get("OUTPUT")}</div>
+                <div className="zz-title">{intl.formatMessage({ id: "OUTPUT" })}</div>
                 <div className="zz-result">
                     {result}
                 </div>

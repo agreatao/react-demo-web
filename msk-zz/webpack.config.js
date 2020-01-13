@@ -4,6 +4,8 @@ const webpack = require("webpack");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+
 const CONFIG = require(`./config/${ENV}.config`);
 
 const LOADERS = [
@@ -105,33 +107,40 @@ const LOADERS = [
 
 const STYLE_PLUGINS = [
     new MiniCssExtractPlugin({
-        filename: 'css/[name].css'
+        filename: 'css/[name].[contenthash:8].css'
     })
 ];
 const HTML_PLUGINS = [];
 const ENTRY = {
-    common: ["react", "react-dom", "dva"]
+    common: ["react", "react-dom", "dva", "dva-loading", "axios", "react-intl", "moment", "add-dom-event-listener"],
 };
 CONFIG.pages.forEach(name => {
-    ENTRY[name] = ["antd", path.join(__dirname, "src/modules", name, "index")];
+    ENTRY[name] = [path.join(__dirname, "src/modules", name, "index")];
     HTML_PLUGINS.push(new HtmlWebpackPlugin({
         title: CONFIG.title || "",
         template: path.join(__dirname, "src/templates", "index.html"),
         filename: `../templates/${name}.html`,
         inject: true,
-        chunks: ["common", name]
+        chunks: ["runtime", `vendors~common~${name}`, "common", name, `vendors~${name}`],
+        minify: ENV === 'production' ? {
+            removeRedundantAttributes: true, // 删除多余的属性
+            collapseWhitespace: true, // 折叠空白区域
+            removeAttributeQuotes: true, // 移除属性的引号
+            removeComments: true, // 移除注释
+            collapseBooleanAttributes: true // 省略只有 boolean 值的属性值 例如：readonly checked
+        } : false
     }))
 })
 
 module.exports = {
     mode: ENV,
-    devtool: ENV === 'development' ? 'cheap-module-eval-source-map' : 'cheap-module-source-map',
+    devtool: ENV === 'development' ? 'cheap-module-eval-source-map' : false,
     entry: ENTRY,
     output: {
         path: path.resolve(__dirname, "dist/static"),
         publicPath: `${CONFIG.baseURL}/`,
-        filename: "js/[name].js",
-        chunkFilename: "js/[name].js"
+        filename: "js/[name].[contenthash:8].js",
+        chunkFilename: "js/[name].[contenthash:8].js"
     },
     resolve: {
         extensions: [".js", ".jsx", ".json", ".less"],
@@ -152,15 +161,17 @@ module.exports = {
     },
     optimization: {
         splitChunks: {
-            cacheGroups: {
-                common: {
-                    name: 'common',
-                    chunks: 'initial',
-                    minChunks: 2, // 表示提取公共部分最少的文件数
-                    minSize: 0  // 表示提取公共部分最小的大小 
-                }
-            }
-        }
+            chunks: 'all'
+        },
+        runtimeChunk: 'single'
+        // minimizer: ENV === 'production' ? [ // 用于配置 minimizers 和选项
+        //     new UglifyJsPlugin({
+        //         cache: true,
+        //         parallel: true,
+        //         sourceMap: true // set to true if you want JS source maps
+        //     }),
+        //     new OptimizeCSSAssetsPlugin({})
+        // ] : []
     },
     module: {
         rules: LOADERS
@@ -173,7 +184,22 @@ module.exports = {
             "CONFIG": JSON.stringify(CONFIG)
         }),
         new CleanWebpackPlugin(["dist"]),
+
         ...STYLE_PLUGINS,
+        new OptimizeCSSAssetsPlugin({
+            // 默认是全部的CSS都压缩，该字段可以指定某些要处理的文件
+            assetNameRegExp: /\.(sa|sc|c)ss$/g,
+            // 指定一个优化css的处理器，默认cssnano
+            cssProcessor: require('cssnano'),
+
+            cssProcessorPluginOptions: {
+                preset: ['default', {
+                    discardComments: { removeAll: true }, //对注释的处理
+                    normalizeUnicode: false // 建议false,否则在使用unicode-range的时候会产生乱码
+                }]
+            },
+            canPrint: true  // 是否打印编译过程中的日志
+        }),
         ...HTML_PLUGINS
     ]
 }

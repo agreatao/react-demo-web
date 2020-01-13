@@ -2,10 +2,10 @@ import React from "react";
 import { connect } from "dva";
 import { Form, Input, Row, Col } from "antd";
 import { Container } from "components/Master";
-import intl from 'react-intl-universal';
+import { useIntl } from 'react-intl';
 
 function VectorAnalysisCalculator1({ form, dispatch, params, result }) {
-
+    const intl = useIntl();
     const { getFieldDecorator, validateFieldsAndScroll, resetFields } = form;
 
     function handleCaculate() {
@@ -17,14 +17,15 @@ function VectorAnalysisCalculator1({ form, dispatch, params, result }) {
 
     function handleClear() {
         resetFields();
+        dispatch({ type: "vr/clearResult" })
     }
 
     const { correctSph, correctCyl, correctCylAxis } = result;
 
     return <Container
         tip={{
-            'INSTRUCTIONS': intl.get("VR_INSTRUCTIONS"),
-            'NOTES': intl.get("VR_NOTES")
+            'INSTRUCTIONS': intl.formatMessage({ id: "VR_INSTRUCTIONS" }),
+            'NOTES': intl.formatMessage({ id: "VR_NOTES" })
         }}
         form={<Form>
             <Row>
@@ -32,16 +33,37 @@ function VectorAnalysisCalculator1({ form, dispatch, params, result }) {
                     <Form.Item label="Optical Zone">
                         {getFieldDecorator("opicZone", {
                             rules: [{
-                                required: true, message: intl.get("RULE_REQUIRED", { label: 'Optical Zone' })
+                                required: true, message: intl.formatMessage({ id: "RULE_REQUIRED" }, { label: 'Optical Zone' })
                             }]
                         })(<Input autoComplete="off" />)}
                     </Form.Item>
                 </Col>
                 <Col span={12}>
-                    <Form.Item label="C7">
-                        {getFieldDecorator("c7", {
+                    <Form.Item label="Mani Sph">
+                        {getFieldDecorator("maniSph", {
                             rules: [{
-                                required: true, message: intl.get("RULE_REQUIRED", { label: 'C7' })
+                                required: true, message: intl.formatMessage({ id: "RULE_REQUIRED" }, { label: 'Mani Sph' })
+                            }]
+                        })(<Input autoComplete="off" />)}
+                    </Form.Item>
+                </Col>
+
+            </Row>
+            <Row>
+                <Col span={12}>
+                    <Form.Item label="Mani Cyl">
+                        {getFieldDecorator("maniCyl", {
+                            rules: [{
+                                required: true, message: intl.formatMessage({ id: "RULE_REQUIRED" }, { label: 'Mani Cyl' })
+                            }]
+                        })(<Input autoComplete="off" />)}
+                    </Form.Item>
+                </Col>
+                <Col span={12}>
+                    <Form.Item label="Mani Cyl Axis">
+                        {getFieldDecorator("maniCylAxis", {
+                            rules: [{
+                                required: true, message: intl.formatMessage({ id: "RULE_REQUIRED" }, { label: 'Mani Cyl Axis' })
                             }]
                         })(<Input autoComplete="off" />)}
                     </Form.Item>
@@ -49,10 +71,10 @@ function VectorAnalysisCalculator1({ form, dispatch, params, result }) {
             </Row>
             <Row>
                 <Col span={12}>
-                    <Form.Item label="Mani Sph">
-                        {getFieldDecorator("maniSph", {
+                    <Form.Item label="C7">
+                        {getFieldDecorator("c7", {
                             rules: [{
-                                required: true, message: intl.get("RULE_REQUIRED", { label: 'Mani Sph' })
+                                required: true, message: intl.formatMessage({ id: "RULE_REQUIRED" }, { label: 'C7' })
                             }]
                         })(<Input autoComplete="off" />)}
                     </Form.Item>
@@ -61,38 +83,18 @@ function VectorAnalysisCalculator1({ form, dispatch, params, result }) {
                     <Form.Item label="C8">
                         {getFieldDecorator("c8", {
                             rules: [{
-                                required: true, message: intl.get("RULE_REQUIRED", { label: 'C8' })
+                                required: true, message: intl.formatMessage({ id: "RULE_REQUIRED" }, { label: 'C8' })
                             }]
                         })(<Input autoComplete="off" />)}
                     </Form.Item>
                 </Col>
             </Row>
             <Row>
-                <Col span={12}>
-                    <Form.Item label="Mani Cyl">
-                        {getFieldDecorator("maniCyl", {
-                            rules: [{
-                                required: true, message: intl.get("RULE_REQUIRED", { label: 'Mani Cyl' })
-                            }]
-                        })(<Input autoComplete="off" />)}
-                    </Form.Item>
-                </Col>
                 <Col span={12}>
                     <Form.Item label="C11">
                         {getFieldDecorator("c11", {
                             rules: [{
-                                required: true, message: intl.get("RULE_REQUIRED", { label: 'C11' })
-                            }]
-                        })(<Input autoComplete="off" />)}
-                    </Form.Item>
-                </Col>
-            </Row>
-            <Row>
-                <Col span={12}>
-                    <Form.Item label="Mani Cyl Axis">
-                        {getFieldDecorator("maniCylAxis", {
-                            rules: [{
-                                required: true, message: intl.get("RULE_REQUIRED", { label: 'Mani Cyl Axis' })
+                                required: true, message: intl.formatMessage({ id: "RULE_REQUIRED" }, { label: 'C11' })
                             }]
                         })(<Input autoComplete="off" />)}
                     </Form.Item>
@@ -101,18 +103,18 @@ function VectorAnalysisCalculator1({ form, dispatch, params, result }) {
                     <Form.Item label="C12">
                         {getFieldDecorator("c12", {
                             rules: [{
-                                required: true, message: intl.get("RULE_REQUIRED", { label: 'C12' })
+                                required: true, message: intl.formatMessage({ id: "RULE_REQUIRED" }, { label: 'C12' })
                             }]
                         })(<Input autoComplete="off" />)}
                     </Form.Item>
                 </Col>
             </Row>
             <Row>
-                <Col span={12} offset={12}>
+                <Col span={12}>
                     <Form.Item label="C13">
                         {getFieldDecorator("c13", {
                             rules: [{
-                                required: true, message: intl.get("RULE_REQUIRED", { label: 'C13' })
+                                required: true, message: intl.formatMessage({ id: "RULE_REQUIRED" }, { label: 'C13' })
                             }]
                         })(<Input autoComplete="off" />)}
                     </Form.Item>

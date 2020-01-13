@@ -7,14 +7,22 @@ export default function (namespace, http) {
             result: {}
         },
         reducers: {
-            'setParams'(_, { params }) {
+            'setParams'(state, { params }) {
                 return {
+                    ...state,
                     params
                 }
             },
-            'fetchResult'(_, { result }) {
+            'fetchResult'(state, { result }) {
                 return {
+                    ...state,
                     result
+                }
+            },
+            'clearResult'() {
+                return {
+                    params: {},
+                    result: {}
                 }
             }
         },
@@ -22,7 +30,7 @@ export default function (namespace, http) {
             *calculate({ params }, { put, call }) {
                 yield put({ type: "setParams", params });
                 const result = yield call(http, params);
-                yield put({ type: "setResult", result });
+                yield put({ type: "fetchResult", result });
             }
         }
     }
