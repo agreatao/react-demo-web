@@ -47,7 +47,6 @@ function VectorAnalysisCalculator1({ form, dispatch, params, result }) {
                         })(<Input autoComplete="off" />)}
                     </Form.Item>
                 </Col>
-
             </Row>
             <Row>
                 <Col span={12}>
