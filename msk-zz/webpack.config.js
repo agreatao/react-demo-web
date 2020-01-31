@@ -32,7 +32,13 @@ CONFIG.version.forEach(v => {
 
 module.exports = {
     devServer: {
-        contentBase: path.join(__dirname, 'public')
+        contentBase: path.join(__dirname, 'public'),
+        historyApiFallback: true,
+        proxy: {
+            '/formulavr': {
+                target: 'http://localhost:80'
+            }
+        }
     },
     mode: ENV,
     devtool: ENV === 'development' ? 'cheap-module-eval-source-map' : false,
@@ -56,9 +62,7 @@ module.exports = {
             images: path.join(__dirname, "src/images"),
             locale: path.join(__dirname, "src/locale"),
             main: path.join(__dirname, 'src/main'),
-            models: path.join(__dirname, "src/models"),
-            modules: path.join(__dirname, "src/modules"),
-            services: path.join(__dirname, "src/services"),
+            store: path.join(__dirname, "src/store"),
             theme: path.join(__dirname, "src/theme"),
             utils: path.join(__dirname, "src/utils"),
         }

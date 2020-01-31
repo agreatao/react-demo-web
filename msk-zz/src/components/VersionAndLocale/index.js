@@ -1,21 +1,24 @@
 import { Button, Select } from 'antd';
 import React from 'react';
-import { connect } from 'react-redux';
+import { useHistory, useParams } from 'react-router';
 import './index.less';
 
 const { Option } = Select;
 
-export default connect(
-    ({ locale }) => ({ lang: locale.label })
-)(function VersionAndLocale({ lang, dispatch, onChange }) {
+export default function VersionAndLocale({ onChange }) {
+    const history = useHistory();
+    const { locale, method } = useParams();
 
     function setVersion(version) {
         onChange && onChange();
     }
 
     function toggleLang(e) {
-        dispatch({ type: 'TOGGLE' });
-        onChange && onChange(e);
+        e.preventDefault();
+        let _locale = locale === 'zh' ? 'en' : 'zh';
+        history.push(`/${_locale}/${method}`);
+        onChange && onChange();
+        window.location.reload();
     }
 
     return <React.Fragment>
@@ -23,7 +26,7 @@ export default connect(
             className="header-lang-button"
             size="small"
             onClick={toggleLang}
-        >{lang}</Button>
+        >{locale === 'en' ? '中文' : 'English'}</Button>
         <Select
             className="version"
             dropdownClassName="version-dropdown"
@@ -35,4 +38,4 @@ export default connect(
             <Option key="index" value="index">v1.0.0</Option>
         </Select>
     </React.Fragment>
-})
+}

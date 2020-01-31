@@ -8,7 +8,7 @@ const http = {};
 
 ["get", "post", "put", "delete"].forEach(method => {
     http[method] = (...args) => {
-        args[0] = CONFIG.baseURL + args[0];
+        args[0] = CONFIG.context + args[0];
         let options = args[1] || {};
         if (method === "post" || method === "put") options = args[2] || {};
         options.cancelToken = new CancelToken(function executor(callback) {
