@@ -43,7 +43,7 @@ module.exports = {
     mode: ENV,
     devtool: ENV === 'development' ? 'cheap-module-eval-source-map' : false,
     entry: {
-        common: ["react", "react-dom", "react-intl", "axios", "moment", "add-dom-event-listener"],
+        common: ["react", "react-dom", "react-router", "react-intl", "redux", "redux-thunk", "react-redux", "axios", "moment", "add-dom-event-listener"],
         ...version
     },
     output: {
