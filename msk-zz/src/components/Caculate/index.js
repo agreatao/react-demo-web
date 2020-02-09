@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { clearResult, fetchResult } from 'store/actions';
+import { lowerCase, upperFirst } from 'lodash';
 import './index.less';
 
 export default connect(
@@ -78,7 +79,7 @@ export default connect(
                     <div className="result">
                         {result && Object.keys(result).map(item =>
                             <div key={item}>
-                                <label>{item}: </label>
+                                <label>{lowerCase(item).split(' ').map(item => upperFirst(item)).join(' ')}: </label>
                                 <span>{result[item]}</span>
                             </div>)}
                     </div>
@@ -87,7 +88,7 @@ export default connect(
                     <div className="result">
                         {result && Object.keys(result).map(item =>
                             <div key={item}>
-                                <label>{item}: </label>
+                                <label>{lowerCase(item).split(' ').map(item => upperFirst(item)).join(' ')}: </label>
                                 <span>{result[item]}</span>
                             </div>)}
                     </div>

@@ -20,6 +20,20 @@
     width: 100%;
 }
 
+.result {
+    &> div {
+        display: flex;
+        align-items: center;
+        display: table-row;
+        label {
+            display: table-cell;
+        }
+        span {
+            margin-left: 20px;
+        }
+    }
+}
+
 @media (max-width: 768px) {
     .caculate {
         padding: 0;
