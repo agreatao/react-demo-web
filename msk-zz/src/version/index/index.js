@@ -346,7 +346,8 @@ const store = createStore(
                         rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Axis 2' } }]
                     }
                 ],
-                method: astigmatism
+                method: astigmatism,
+                format: false
             },
             ok: {
                 formItems: [

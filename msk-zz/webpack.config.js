@@ -37,6 +37,9 @@ module.exports = {
         proxy: {
             '/formulavr': {
                 target: 'http://localhost:80'
+            },
+            '/zzastigmatism': {
+                target: 'http://localhost:80'
             }
         }
     },

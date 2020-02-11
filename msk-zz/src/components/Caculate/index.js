@@ -8,13 +8,13 @@ import { lowerCase, upperFirst } from 'lodash';
 import './index.less';
 
 export default connect(
-    ({ caculate }) => ({ formItems: caculate.formItems, result: caculate.result, method: caculate.method }),
+    ({ caculate }) => ({ formItems: caculate.formItems, result: caculate.result, method: caculate.method, format: caculate.format }),
     dispatch => bindActionCreators({
         fetchResult,
         clearResult
     }, dispatch)
 )(Form.create()(
-    function Caculate({ form, formItems, method, result, fetchResult, clearResult }) {
+    function Caculate({ form, formItems, method, result, fetchResult, clearResult, format }) {
         const intl = useIntl();
 
         const { getFieldDecorator, validateFieldsAndScroll, resetFields } = form;
@@ -40,6 +40,16 @@ export default connect(
             resetFields();
             clearResult();
         }
+
+        const resultNode = <div className="result">
+            {result && Object.keys(result).map(item =>
+                <div key={item}>
+                    {format ?
+                        <label>{lowerCase(item).split(' ').map(text => upperFirst(text)).join(' ')}: </label>
+                        : <label>{item}</label>}
+                    <span>{result[item]}</span>
+                </div>)}
+        </div>;
 
         return <div className='caculate'>
             <Row gutter={{ xs: 0, sm: 0, md: 8, lg: 8 }}>
@@ -77,22 +87,10 @@ export default connect(
                     </Form>
                 </Col>
                 <Col xs={0} sm={0} md={10} lg={10} xl={10} xxl={10}>
-                    <div className="result">
-                        {result && Object.keys(result).map(item =>
-                            <div key={item}>
-                                <label>{lowerCase(item).split(' ').map(item => upperFirst(item)).join(' ')}: </label>
-                                <span>{result[item]}</span>
-                            </div>)}
-                    </div>
+                    {resultNode}
                 </Col>
                 <Modal visible={visible} footer={false} onCancel={() => clearResult()}>
-                    <div className="result">
-                        {result && Object.keys(result).map(item =>
-                            <div key={item}>
-                                <label>{lowerCase(item).split(' ').map(item => upperFirst(item)).join(' ')}: </label>
-                                <span>{result[item]}</span>
-                            </div>)}
-                    </div>
+                    {resultNode}
                 </Modal>
             </Row>
         </div>

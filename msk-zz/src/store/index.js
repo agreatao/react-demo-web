@@ -26,6 +26,7 @@ export default function (options = {}) {
                 case '@Locale/CHANGE': {
                     const { method } = props;
                     return {
+                        format: true,
                         ...options.caculate[method],
                         result: {}
                     };
