@@ -132,13 +132,13 @@ const store = createStore(
                     },
                     {
                         name: 'siaD',
-                        label: 'Sia D',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Sia D' } }]
+                        label: 'SIA D',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'SIA D' } }]
                     },
                     {
                         name: 'siaAxis',
-                        label: 'Sia Axis',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Sia Axis' } }]
+                        label: 'SIA Axis',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'SIA Axis' } }]
                     },
                 ],
                 method: ticl
@@ -152,44 +152,49 @@ const store = createStore(
                     },
                     {
                         name: 'k1',
-                        label: 'K1',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'K1' } }]
+                        label: 'K (A)',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'K (A)' } }]
                     },
                     {
                         name: 'correctD',
-                        label: 'correct D',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'correct D' } }]
+                        label: 'Correct D',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Correct D' } }]
                     },
                     {
                         name: 'e1',
-                        label: 'E1',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'E1' } }]
+                        label: 'e (A)',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'e (A)' } }]
                     },
                     {
                         name: 'postQ1',
-                        label: 'Post Q1',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Post Q1' } }]
+                        label: 'Post Q (A)',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Post Q (A)' } }]
                     },
                     {
                         name: 'k2',
-                        label: 'K2',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'K2' } }]
+                        label: 'K (P)',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'K (P)' } }]
                     },
                     {
                         name: 'd2',
-                        label: 'D2',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'D2' } }]
+                        label: 'D (P)',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'D (P)' } }]
                     },
                     {
                         name: 'e2',
-                        label: 'E2',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'E2' } }]
+                        label: 'e (P)',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'e (P)' } }]
                     },
                     {
                         name: 'postQ2',
-                        label: 'Post Q2',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Post Q2' } }]
+                        label: 'Post Q (P)',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Post Q (P)' } }]
                     },
+                    {
+                        name: 's',
+                        label: 's',
+                        default: 10000000
+                    }
                 ],
                 method: lsa
             },
@@ -202,32 +207,38 @@ const store = createStore(
                     },
                     {
                         name: 'targetD',
-                        label: 'target D',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'target D' } }]
+                        label: 'Target D',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Target D' } }]
                     },
                     {
                         name: 'ct',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'ct' } }]
+                        label: 'CT (μm)',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'CT' } }]
                     },
                     {
                         name: 'ac',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'ac' } }]
+                        label: 'AC (mm)',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'AC' } }]
                     },
                     {
                         name: 'kf',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'kf' } }]
+                        label: 'Kf',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Kf' } }]
                     },
                     {
                         name: 'kb',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'kb' } }]
+                        label: 'Kb',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Kb' } }]
                     },
                     {
                         name: 'al',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'al' } }]
+                        label: 'AL (mm)',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'AL' } }]
                     },
                     {
                         name: 'lt',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'lt' } }]
+                        label: 'LT (mm)',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'LT' } }]
                     }
                 ],
                 method: iol
@@ -236,58 +247,68 @@ const store = createStore(
                 formItems: [
                     {
                         name: 'aCons',
-                        label: 'A constant',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'A constant' } }]
+                        label: 'A cons',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'A cons' } }]
                     },
                     {
                         name: 'targetD',
-                        label: 'target D',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'target D' } }]
+                        label: 'Target D',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Target D' } }]
                     },
                     {
                         name: 'ct',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'ct' } }]
+                        label: 'CT (μm)',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'CT' } }]
                     },
                     {
                         name: 'ac',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'ac' } }]
+                        label: 'AC (mm)',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'AC' } }]
                     },
                     {
                         name: 'kf1',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'kf1' } }]
+                        label: 'Kf',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Kf' } }]
                     },
                     {
                         name: 'kf2',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'kf2' } }]
+                        label: 'Kf',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Kf' } }]
                     },
                     {
                         name: 'kb1',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'kb1' } }]
+                        label: 'Kb',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Kb' } }]
                     },
                     {
                         name: 'kb2',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'kb2' } }]
+                        label: 'Kb',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Kb' } }]
                     },
                     {
                         name: 'axis',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'axis' } }]
+                        label: 'Axis',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Axis' } }]
                     },
                     {
                         name: 'al',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'al' } }]
+                        label: 'AL (mm)',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'AL' } }]
                     },
                     {
                         name: 'lt',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'lt' } }]
+                        label: 'LT (mm)',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'LT' } }]
                     },
                     {
                         name: 'sia',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'sia' } }]
+                        label: 'SIA',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'SIA' } }]
                     },
                     {
                         name: 'siaAxis',
-                        label: 'Sia Axis',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Sia Axis' } }]
+                        label: 'SIA Axis',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'SIA Axis' } }]
                     }
                 ],
                 method: toriciol
@@ -296,27 +317,33 @@ const store = createStore(
                 formItems: [
                     {
                         name: 'sph1',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'sph1' } }]
+                        label: 'Sph 1',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Sph 1' } }]
                     },
                     {
                         name: 'cyl1',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'cyl1' } }]
+                        label: 'Cyl 1',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Cyl 1' } }]
                     },
                     {
                         name: 'axis1',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'axis1' } }]
+                        label: 'Axis 1',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Axis 1' } }]
                     },
                     {
                         name: 'sph2',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'sph2' } }]
+                        label: 'Sph 2',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Sph 2' } }]
                     },
                     {
                         name: 'cyl2',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'cyl2' } }]
+                        label: 'Cyl 2',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Cyl 2' } }]
                     },
                     {
                         name: 'axis2',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'axis2' } }]
+                        label: 'Axis 2',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Axis 2' } }]
                     }
                 ],
                 method: astigmatism
@@ -325,8 +352,8 @@ const store = createStore(
                 formItems: [
                     {
                         name: 'vertex',
-                        label: 'vertex',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'vertex' } }]
+                        label: 'Vertex',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'Vertex' } }]
                     },
                 ],
                 method: ok
@@ -335,11 +362,13 @@ const store = createStore(
                 formItems: [
                     {
                         name: 'r',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'r' } }]
+                        label: 'R',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'R' } }]
                     },
                     {
                         name: 'n',
-                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'n' } }]
+                        label: 'N',
+                        rules: [{ required: true, message: { id: "RULE_REQUIRED", label: 'N' } }]
                     },
                 ],
                 method: exopmi

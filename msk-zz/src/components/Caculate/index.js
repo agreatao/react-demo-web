@@ -51,6 +51,7 @@ export default connect(
                                     <Form.Item label={item.label || item.name}>
                                         {
                                             getFieldDecorator(item.name, {
+                                                initialValue: item.default,
                                                 rules: item.rules && item.rules.map(rule => {
                                                     const { message, ...props } = rule || {};
                                                     const { id, ...labels } = message || {};
