@@ -18,34 +18,34 @@ const store = createStore(
                 path: '/vr',
                 name: 'VR'
             },
-            {
-                path: '/ticl',
-                name: 'TICL'
-            },
-            {
-                path: '/lsa',
-                name: 'LSA'
-            },
-            {
-                path: '/iol',
-                name: 'Iol'
-            },
-            {
-                path: '/toriciol',
-                name: 'Toric Iol'
-            },
-            {
-                path: '/astigmatism',
-                name: 'Add.&Sub. of Astigmatism'
-            },
-            {
-                path: '/ok',
-                name: 'OK'
-            },
-            {
-                path: '/exopmi',
-                name: 'EX500 OPMI'
-            }
+            // {
+            //     path: '/ticl',
+            //     name: 'TICL'
+            // },
+            // {
+            //     path: '/lsa',
+            //     name: 'LSA'
+            // },
+            // {
+            //     path: '/iol',
+            //     name: 'Iol'
+            // },
+            // {
+            //     path: '/toriciol',
+            //     name: 'Toric Iol'
+            // },
+            // {
+            //     path: '/astigmatism',
+            //     name: 'Add.&Sub. of Astigmatism'
+            // },
+            // {
+            //     path: '/ok',
+            //     name: 'OK'
+            // },
+            // {
+            //     path: '/exopmi',
+            //     name: 'EX500 OPMI'
+            // }
         ],
         caculate: {
             vr: {
