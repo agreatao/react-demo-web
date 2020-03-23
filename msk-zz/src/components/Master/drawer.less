@@ -1,0 +1,145 @@
+.drawer {
+    position: fixed;
+    top: 0;
+    z-index: 999;
+}
+
+.drawer-left {
+    width: 0%;
+    height: 100%;
+
+    &.drawer-open {
+        width: 100%;
+    }
+}
+
+.drawer-mask {
+    background: #000;
+    opacity: 0;
+    width: 100%;
+    height: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition:
+        opacity 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
+        height 0s ease 0.3s;
+}
+
+.drawer-content-wrapper {
+    position: absolute;
+    transition:
+        transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
+        opacity 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
+        box-shadow 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
+        -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
+        -webkit-box-shadow 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+}
+
+.drawer-handle {
+    position: absolute;
+    top: 72px;
+    width: 41px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 0;
+    text-align: center;
+    line-height: 40px;
+    font-size: 16px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background: #fff;
+}
+
+.drawer-left {
+    left: 0;
+
+    .drawer-content-wrapper {
+        height: 100%;
+        transform: translateX(-100%);
+    }
+
+    .drawer-content {
+        height: 100%;
+        width: 215px;
+    }
+
+    .drawer-handle {
+        right: -40px;
+        -webkit-box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+        border-radius: 0 4px 4px 0;
+    }
+}
+
+.drawer-handle-icon {
+    width: 14px;
+    height: 2px;
+    background: #333;
+    position: relative;
+    transition: background 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+
+    &:before,
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        background: #333;
+        width: 100%;
+        height: 2px;
+        -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+        transition: -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+        transition: transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+        transition: transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+    }
+
+    &:before {
+        top: -5px;
+    }
+
+    &:after {
+        top: 5px;
+    }
+}
+
+.drawer-open {
+    .drawer-mask {
+        opacity: 0.3;
+        height: 100%;
+    }
+
+    .drawer-content-wrapper {
+        transform: translateX(0);
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .drawer-handle-icon {
+        background: transparent;
+
+        &:before {
+            transform: translateY(5px) rotate(45deg);
+        }
+
+        &:after {
+            transform: translateY(-5px) rotate(-45deg);
+        }
+    }
+}
+
+.drawer-content {
+    overflow: auto;
+    z-index: 1;
+    position: relative;
+    background-color: #fff;
+}
+
+.drawer-content {
+    padding: 40px 0;
+}

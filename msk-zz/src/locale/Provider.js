@@ -18,11 +18,11 @@ const lang = {
 }
 
 export default connect()(
-    function Antdi18n({ children, match, dispatch }) {
-        const { locale, method } = match.params;
-
+    function Locale({ children, match, dispatch }) {
+        const { locale } = match.params;
+        
         useEffect(() => {
-            dispatch({ type: '@Locale/CHANGE', locale, method })
+            dispatch({ type: '@Locale/CHANGE', lang: locale });
         })
 
         return <ConfigProvider locale={antd_lang[locale]}>

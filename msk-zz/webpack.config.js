@@ -8,37 +8,12 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const CONFIG = require(`./config/${ENV}.config`);
 
-const version = {}, plugins = [];
-
-CONFIG.version.forEach(v => {
-    version[v] = path.join(__dirname, 'src/version', v, 'index');
-    plugins.push(
-        new HtmlWebpackPlugin({
-            title: CONFIG.title || "",
-            template: path.join(__dirname, "public", "index.html"),
-            filename: ENV === 'production' ? `../templates/index.html` : 'index.html',
-            inject: true,
-            chunks: ["runtime", `vendors~common~${v}`, "common", v, `vendors~${v}`],
-            minify: ENV === 'production' ? {
-                removeRedundantAttributes: true, // 删除多余的属性
-                collapseWhitespace: true, // 折叠空白区域
-                removeAttributeQuotes: true, // 移除属性的引号
-                removeComments: true, // 移除注释
-                collapseBooleanAttributes: true // 省略只有 boolean 值的属性值 例如：readonly checked
-            } : false
-        })
-    );
-})
-
 module.exports = {
     devServer: {
         contentBase: path.join(__dirname, 'public'),
         historyApiFallback: true,
         proxy: {
-            '/formulavr': {
-                target: 'http://localhost:80'
-            },
-            '/zzastigmatism': {
+            '/calculate/**': {
                 target: 'http://localhost:80'
             }
         }
@@ -47,7 +22,7 @@ module.exports = {
     devtool: ENV === 'development' ? 'cheap-module-source-map' : false,
     entry: {
         common: ["react", "react-dom", "react-router", "react-intl", "redux", "redux-thunk", "react-redux", "axios", "moment", "add-dom-event-listener"],
-        ...version
+        index: path.join(__dirname, 'src/main/index')
     },
     output: {
         path: path.resolve(__dirname, "dist/static"),
@@ -87,26 +62,17 @@ module.exports = {
                     plugins: [
                         "@babel/transform-runtime",
                         ["import", { "libraryName": "antd", "style": true }],
-
-                        // // Stage 0
-                        // "@babel/plugin-proposal-function-bind",
-
-                        // // Stage 1
                         "@babel/plugin-proposal-export-default-from",
                         "@babel/plugin-proposal-logical-assignment-operators",
                         ["@babel/plugin-proposal-optional-chaining", { "loose": false }],
                         ["@babel/plugin-proposal-pipeline-operator", { "proposal": "minimal" }],
                         ["@babel/plugin-proposal-nullish-coalescing-operator", { "loose": false }],
                         "@babel/plugin-proposal-do-expressions",
-
-                        // // Stage 2
                         ["@babel/plugin-proposal-decorators", { "legacy": true }],
                         "@babel/plugin-proposal-function-sent",
                         "@babel/plugin-proposal-export-namespace-from",
                         "@babel/plugin-proposal-numeric-separator",
                         "@babel/plugin-proposal-throw-expressions",
-
-                        // // Stage 3
                         "@babel/plugin-syntax-dynamic-import",
                         "@babel/plugin-syntax-import-meta",
                         ["@babel/plugin-proposal-class-properties", { "loose": false }],
@@ -164,10 +130,10 @@ module.exports = {
                         options: {
                             sourceMap: true,
                             javascriptEnabled: true,
-                            modifyVars: {
-                                "border-radius-base": "2px",
-                                "primary-color": "#33cccc"
-                            }
+                            // modifyVars: {
+                            //     "border-radius-base": "2px",
+                            //     "primary-color": "#33cccc"
+                            // }
                         }
                     }
                 ],
@@ -199,6 +165,19 @@ module.exports = {
             },
             canPrint: true  // 是否打印编译过程中的日志
         }),
-        ...plugins
+        new HtmlWebpackPlugin({
+            title: CONFIG.title || "",
+            template: path.join(__dirname, "public", "index.html"),
+            filename: ENV === 'production' ? `../templates/index.html` : 'index.html',
+            inject: true,
+            chunks: ["runtime", `vendors~common~index`, "common", 'index', `vendors~index`],
+            minify: ENV === 'production' ? {
+                removeRedundantAttributes: true, // 删除多余的属性
+                collapseWhitespace: true, // 折叠空白区域
+                removeAttributeQuotes: true, // 移除属性的引号
+                removeComments: true, // 移除注释
+                collapseBooleanAttributes: true // 省略只有 boolean 值的属性值 例如：readonly checked
+            } : false
+        })
     ]
 }

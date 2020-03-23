@@ -1,51 +1,72 @@
-import { Col, Drawer, Icon, Row } from 'antd';
-import Caculate from 'components/Caculate';
-import Nav from 'components/Nav';
-import Tips from 'components/Tips';
-import VersionAndLocale from 'components/VersionAndLocale';
-import React, { useState } from 'react';
-import './index.less';
+import ZZ_EX500_OPMI from '@/pages/exop';
+import ZZ_IOL from '@/pages/iol';
+import ZZ_LSA from '@/pages/lsa';
+import ZZ_OK from '@/pages/ok';
+import ZZ_TICL_TORATION from '@/pages/ticl';
+import ZZ_TORIC_IOL from '@/pages/tiol';
+import VR from '@/pages/vr';
+import ZZ_VECTOR_SUM_SUB from '@/pages/vsas';
+import Master from 'components/Master';
+import { createBrowserHistory } from 'history';
+import LocaleProvider from 'locale/Provider';
+import React from 'react';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { Route, Router, Switch } from 'react-router';
+import createStore from 'store';
+import "theme/index.less";
+import browserBind from "./browserBind";
+import "./index.less";
 
-export default function Main() {
-    const [visible, setVisible] = useState(false);
-    return <React.Fragment>
-        <div id="header">
-            <div className="header-inner">
-                <Icon
-                    type="menu"
-                    className="nav-phone-icon"
-                    onClick={() => setVisible(true)}
+const history = createBrowserHistory();
+
+const store = createStore();
+
+browserBind(store);
+
+render(
+    <Provider store={store}>
+        <Router history={history}>
+            <Switch>
+                <Route
+                    path="/:locale"
+                    render={props => <LocaleProvider {...props}>
+                        <Master>
+                            {/* ZZ IOL */}
+                            <Route path="/:locale/iol" component={ZZ_IOL} />
+                            {/* ZZ TORIC IOL */}
+                            <Route path="/:locale/tiol" component={ZZ_TORIC_IOL} />
+
+                            {/* VR */}
+                            <Route path="/:locale/vr" component={VR} />
+                            {/* VR pro */}
+                            {/* <Route path="/:locale/vrp" component={VR_PRO} /> */}
+                            {/* ZZ LSA */}
+                            <Route path="/:locale/lsa" component={ZZ_LSA} />
+
+                            {/* ZZ ICL */}
+                            {/* <Route path="/:locale/icl" component={ZZ_ICL} /> */}
+                            {/* ZZ ICL Vault */}
+                            {/* <Route path="/:locale/iclvault" component={ZZ_ICL_VAULT} /> */}
+                            {/* ZZ TICL TORATION */}
+                            <Route path="/:locale/ticl" component={ZZ_TICL_TORATION} />
+
+                            {/* ZZ SIA */}
+                            {/* <Route path="/:locale/sia" component={ZZ_SIA} /> */}
+                            {/* ZZ Vector Sum & Sub */}
+                            <Route path="/:locale/vsas" component={ZZ_VECTOR_SUM_SUB} />
+                            {/* ZZ Mean±SD Vector */}
+                            {/* <Route path="/:locale/mean" component={ZZ_MEAN_SD_VECTOR} /> */}
+                            {/* ZZ OK  */}
+                            <Route path="/:locale/ok" component={ZZ_OK} />
+                            {/* ZZ EX500 OPMI */}
+                            <Route path="/:locale/exop" component={ZZ_EX500_OPMI} />
+                        </Master>
+                    </LocaleProvider>}
                 />
-                <Drawer
-                    className='nav-drawer'
-                    visible={visible}
-                    onClose={() => setVisible(false)}
-                >
-                    <div className='clearfix'>
-                        <VersionAndLocale onChange={() => setVisible(false)} />
-                    </div>
-                    <Nav onChange={() => setVisible(false)} />
-                </Drawer>
-                <Row gutter={0}>
-                    <Col xs={24} sm={24} md={24} lg={4} xl={4} xxl={4}>
-                        <div className="logo">ZZ Formula</div>
-                    </Col>
-                    <Col xs={0} sm={0} md={0} lg={20} xl={20} xxl={20}>
-                        <VersionAndLocale onChange={() => setVisible(false)} />
-                    </Col>
-                </Row>
-            </div>
-        </div>
-        <div className="content">
-            <Row gutter={0}>
-                <Col xs={0} sm={0} md={0} lg={4} xl={4} xxl={4}>
-                    <Nav onChange={() => setVisible(false)} />
-                </Col>
-                <Col xs={24} sm={24} md={24} lg={20} xl={20} xxl={20}>
-                    <Tips />
-                    <Caculate />
-                </Col>
-            </Row>
-        </div>
-    </React.Fragment>
-}
+            </Switch>
+        </Router>
+    </Provider>
+    ,
+    document.getElementById('app')
+)

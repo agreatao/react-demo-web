@@ -1,25 +1,25 @@
 import http from "utils/http";
 
 export const vr = (params) =>
-    http.post('/formulavr', params).then(({ result }) => result);
+    http.post('/calculate/formulavr', params).then(({ result }) => result);
 
 export const ticl = (params) =>
-    http.post('/zzticl', params).then(({ result }) => result);
+    http.post('/calculate/zzticl', params).then(({ result }) => result);
 
 export const lsa = (params) =>
-    http.post('/zzlsa', params).then(({ result }) => result);
+    http.post('/calculate/zzlsa', params).then(({ result }) => result);
 
 export const iol = (params) =>
-    http.post('/zziol', params).then(({ result }) => result);
+    http.post('/calculate/zziol', params).then(({ result }) => result);
 
-export const toriciol = (params) =>
-    http.post('/zztoriciol', params).then(({ result }) => result);
+export const tiol = (params) =>
+    http.post('/calculate/zztoriciol', params).then(({ result }) => result);
 
-export const astigmatism = (params) =>
-    http.post('/zzastigmatism', params).then(({ result }) => result);
+export const vsas = (params) =>
+    http.post('/calculate/zzastigmatism', params).then(({ result }) => result);
 
 export const ok = (params) =>
-    http.post('/zzok', params).then(({ result }) => result);
+    http.post('/calculate/zzok', params).then(({ result }) => result);
 
-export const exopmi = (params) =>
-    http.post('/zzexopmi', params).then(({ result }) => result);
+export const exop = (params) =>
+    http.post('/calculate/zzexopmi', params).then(({ result }) => result);

@@ -1,45 +1,5 @@
-#header {
-    background-color: #001529;
-
-    .header-inner {
-        max-width: 1200px;
-        width: 100%;
-        height: 64px;
-        margin: 0 auto;
-
-        .logo {
-            color: #fff;
-            height: 64px;
-            line-height: 64px;
-            font-size: 18px;
-            padding-left: 10px;
-        }
-
-        .nav-phone-icon {
-            display: none;
-            position: absolute;
-            top: 25px;
-            right: 30px;
-            z-index: 1;
-            color: #fff;
-            cursor: pointer;
-            font-size: 16px;
-
-            @media only screen and (max-width: 991px) {
-                & {
-                    display: block;
-                }
-            }
-        }
-    }
-}
-
-.clearfix {
-    clear: both;
-}
-
-.nav-drawer {
-    .ant-drawer-body {
-        padding: 36px 0;
-    }
+#app {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
