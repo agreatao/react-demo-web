@@ -25,7 +25,7 @@ export default function TIOL() {
     }
 
     return <React.Fragment>
-        <Tip method="TIOL" tips={['NOTES']} />
+        <Tip method="TIOL" tips={['NOTES', 'RAWDATA']} />
         <div className="calculate-wrapper">
             <Form onFinish={calculate}>
                 <Form.Item label="A Cons" name="aCons" rules={[{ required: true }]}>

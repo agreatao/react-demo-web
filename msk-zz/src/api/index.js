@@ -23,3 +23,15 @@ export const ok = (params) =>
 
 export const exop = (params) =>
     http.post('/calculate/zzexopmi', params).then(({ result }) => result);
+
+export const vrpro = (params) =>
+    http.post('/calculate/formulavrpro', params).then(({ result }) => result);
+
+export const icl = params =>
+    http.post('/calculate/zzicl', params).then(({ result }) => result);
+
+export const iclv = params =>
+    http.post('/calculate/zziclvault', params).then(({ result }) => result);
+
+export const sia = params =>
+    http.post('/calculate/zzsia', params).then(({ result }) => result);

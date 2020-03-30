@@ -31,31 +31,16 @@ export default function LSA() {
                 <Form.Item label="Opic Zone" name="opicZone" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="K (A)" name="k1" rules={[{ required: true }]}>
+                <Form.Item label="Vertex K" name="vertexK" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="Correct D" name="correctD" rules={[{ required: true }]}>
+                <Form.Item label="e" name="e" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="e (A)" name="e1" rules={[{ required: true }]}>
+                <Form.Item label="Correct Se" name="correctSe" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="Post Q (A)" name="postQ1" rules={[{ required: true }]}>
-                    <Input autoComplete="off" />
-                </Form.Item>
-                <Form.Item label="K (P)" name="k2" rules={[{ required: true }]}>
-                    <Input autoComplete="off" />
-                </Form.Item>
-                <Form.Item label="D (P)" name="d2" rules={[{ required: true }]}>
-                    <Input autoComplete="off" />
-                </Form.Item>
-                <Form.Item label="e (P)" name="e2" rules={[{ required: true }]}>
-                    <Input autoComplete="off" />
-                </Form.Item>
-                <Form.Item label="Post Q (P)" name="postQ2" rules={[{ required: true }]}>
-                    <Input autoComplete="off" />
-                </Form.Item>
-                <Form.Item label="s" name="s">
+                <Form.Item label="Expect Q" name="expectQ" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
             </Form>
@@ -64,28 +49,18 @@ export default function LSA() {
             {result.input &&
                 <Descriptions column={2} title={intl.formatMessage({ id: 'INPUT' })}>
                     <Descriptions.Item label="Optical Zone">{result.input.opicZone}</Descriptions.Item>
-                    <Descriptions.Item label="K (A)">{result.input.k1}</Descriptions.Item>
-                    <Descriptions.Item label="Correct D">{result.input.correctD}</Descriptions.Item>
-                    <Descriptions.Item label="e (A)">{result.input.e1}</Descriptions.Item>
-                    <Descriptions.Item label="Post Q (A)">{result.input.postQ1}</Descriptions.Item>
-                    <Descriptions.Item label="K (P)">{result.input.k2}</Descriptions.Item>
-                    <Descriptions.Item label="D (P)">{result.input.d2}</Descriptions.Item>
-                    <Descriptions.Item label="e (P)">{result.input.e2}</Descriptions.Item>
-                    <Descriptions.Item label="Post Q (P)">{result.input.postQ2}</Descriptions.Item>
-                    <Descriptions.Item label="s">{result.input.s}</Descriptions.Item>
+                    <Descriptions.Item label="Vertex K">{result.input.vertexK}</Descriptions.Item>
+                    <Descriptions.Item label="e">{result.input.e}</Descriptions.Item>
+                    <Descriptions.Item label="Correct Se">{result.input.correctSe}</Descriptions.Item>
+                    <Descriptions.Item label="Expect Q">{result.input.expectQ}</Descriptions.Item>
                 </Descriptions>}
             <div className="divider"></div>
             {result.output &&
-                <Descriptions column={1} title={intl.formatMessage({ id: 'OUTPUT' })}>
-                    <Descriptions.Item label="Q 1">{result.output.q1}</Descriptions.Item>
-                    <Descriptions.Item label="Lsa 1">{result.output.lsa1}</Descriptions.Item>
-                    <Descriptions.Item label="Post Lsa A">{result.output.postLsaA}</Descriptions.Item>
-                    <Descriptions.Item label="Q 2">{result.output.q2}</Descriptions.Item>
-                    <Descriptions.Item label="Lsa 2">{result.output.lsa2}</Descriptions.Item>
-                    <Descriptions.Item label="s">{result.output.s}</Descriptions.Item>
-                    <Descriptions.Item label="Q 3">{result.output.q3}</Descriptions.Item>
-                    <Descriptions.Item label="Lsa 3">{result.output.lsa3}</Descriptions.Item>
-                    <Descriptions.Item label="Post Lsa W">{result.output.postLsaW}</Descriptions.Item>
+                <Descriptions column={2} title={intl.formatMessage({ id: 'OUTPUT' })}>
+                    <Descriptions.Item label="far Q">{result.output.farQ}</Descriptions.Item>
+                    <Descriptions.Item label="near Q">{result.output.nearQ}</Descriptions.Item>
+                    <Descriptions.Item label="far Lsa">{result.output.farLsa}</Descriptions.Item>
+                    <Descriptions.Item label="near Lsa">{result.output.nearLsa}</Descriptions.Item>
                 </Descriptions>}
         </Result>
     </React.Fragment>

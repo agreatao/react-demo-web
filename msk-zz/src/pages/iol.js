@@ -25,7 +25,7 @@ export default function IOL() {
     }
 
     return <React.Fragment>
-        <Tip method="IOL" tips={['NOTES']} />
+        <Tip method="IOL" tips={['NOTES', 'RAWDATA']} />
         <div className="calculate-wrapper">
             <Form onFinish={calculate}>
                 <Form.Item label="A Constant" name="aConstant" rules={[{ required: true }]}>

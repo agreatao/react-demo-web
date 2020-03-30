@@ -60,12 +60,12 @@ export default function VSAS() {
                 </Descriptions>}
             <div className="divider"></div>
             {result.output &&
-                <Descriptions column={1} title={intl.formatMessage({ id: 'OUTPUT' })}>
+                <Descriptions column={2} title={intl.formatMessage({ id: 'OUTPUT' })}>
                     <Descriptions.Item label="Sph 1 + 2">{result.output.sph1add2}</Descriptions.Item>
-                    <Descriptions.Item label="Cyl 1 + 2">{result.output.cyl1add2}</Descriptions.Item>
-                    <Descriptions.Item label="Axis 1 + 2">{result.output.axis1add2}</Descriptions.Item>
                     <Descriptions.Item label="Sph 1 - 2">{result.output.sph1cut2}</Descriptions.Item>
+                    <Descriptions.Item label="Cyl 1 + 2">{result.output.cyl1add2}</Descriptions.Item>
                     <Descriptions.Item label="Cyl 1 - 2">{result.output.cyl1cut2}</Descriptions.Item>
+                    <Descriptions.Item label="Axis 1 + 2">{result.output.axis1add2}</Descriptions.Item>
                     <Descriptions.Item label="Axis 1 - 2">{result.output.axis1cut2}</Descriptions.Item>
                 </Descriptions>}
         </Result>

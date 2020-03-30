@@ -27,14 +27,14 @@ export default connect(
                 <Link disable onClick={go} path="tiol">ZZ Toric IOL</Link>
                 <div className="nav-title">近视</div>
                 <Link onClick={go} path="vr">VR</Link>
-                <Link disable onClick={go} path="vrp">VR pro</Link>
+                <Link onClick={go} path="vrp">VR pro</Link>
                 <Link onClick={go} path="lsa">ZZ LSA</Link>
                 <div className="nav-title">老化</div>
-                <Link disable onClick={go} path="icl">ZZ ICL</Link>
-                <Link disable onClick={go} path="iclv">ZZ ICL Vault</Link>
+                <Link onClick={go} path="icl">ZZ ICL</Link>
+                <Link onClick={go} path="iclv">ZZ ICL Vault</Link>
                 <Link onClick={go} path="ticl">ZZ TICL TORATION</Link>
                 <div className="nav-title">工具</div>
-                <Link disable onClick={go} path="sia">ZZ SIA</Link>
+                <Link onClick={go} path="sia">ZZ SIA</Link>
                 <Link onClick={go} path="vsas">ZZ Vector Sum &amp; Sub</Link>
                 <Link disable onClick={go} path="msdv">ZZ Mean&plusmn;SD Vector</Link>
                 <Link onClick={go} path="ok">ZZ OK</Link>
