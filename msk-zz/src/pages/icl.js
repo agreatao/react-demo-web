@@ -35,43 +35,46 @@ export default function ICL() {
                 <Form.Item label="Mani Cyl" name="maniCyl" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="Mani Cyl Axis" name="maniCylAxis" rules={[{ required: true }]}>
+                <Form.Item label="Mani Axis" name="maniCylAxis" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="sia D" name="siaD" rules={[{ required: true }]}>
+                <Form.Item label="SIA D" name="siaD" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="sia A" name="siaA" rules={[{ required: true }]}>
+                <Form.Item label="SIA A" name="siaA" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="Ct" name="ct" rules={[{ required: true }]}>
+                <Form.Item label="CT (μm)" name="ct" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="Ac" name="ac" rules={[{ required: true }]}>
+                <Form.Item label="AC (mm)" name="ac" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
                 <Form.Item label="Kf" name="kf" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="Lt" name="lt" rules={[{ required: true }]}>
+                <Form.Item label="LT (mm)" name="lt" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
                 <Form.Item label="Icl Diameter" name="iclDiameter" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="Sts H" name="stsH" rules={[{ required: true }]}>
+                <Form.Item label="H(0) to V(90)" name="htov" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="Sts V" name="stsV" rules={[{ required: true }]}>
+                <Form.Item label="STS-H (mm)" name="stsH" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="Icl S" name="iclS" rules={[{ required: true }]}>
+                <Form.Item label="STS-V (mm)" name="stsV" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="Icl C" name="iclC" rules={[{ required: true }]}>
+                <Form.Item label="ICL S" name="iclS" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="Icl A" name="iclA" rules={[{ required: true }]}>
+                <Form.Item label="ICL C" name="iclC" rules={[{ required: true }]}>
+                    <Input autoComplete="off" />
+                </Form.Item>
+                <Form.Item label="ICL A" name="iclA" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
             </Form>
@@ -81,30 +84,39 @@ export default function ICL() {
                 <Descriptions column={2} title={intl.formatMessage({ id: 'INPUT' })}>
                     <Descriptions.Item label="Mani Sph">{result.input.maniSph}</Descriptions.Item>
                     <Descriptions.Item label="Mani Cyl">{result.input.maniCyl}</Descriptions.Item>
-                    <Descriptions.Item label="Mani Cyl Axis">{result.input.maniCylAxis}</Descriptions.Item>
-                    <Descriptions.Item label="Sia D">{result.input.siaD}</Descriptions.Item>
-                    <Descriptions.Item label="Sia A">{result.input.siaA}</Descriptions.Item>
-                    <Descriptions.Item label="Ct">{result.input.ct}</Descriptions.Item>
-                    <Descriptions.Item label="Ac">{result.input.ac}</Descriptions.Item>
+                    <Descriptions.Item label="Mani Axis">{result.input.maniCylAxis}</Descriptions.Item>
+                    <Descriptions.Item label="SIA D">{result.input.siaD}</Descriptions.Item>
+                    <Descriptions.Item label="SIA A">{result.input.siaA}</Descriptions.Item>
+                    <Descriptions.Item label="CT (μm)">{result.input.ct}</Descriptions.Item>
+                    <Descriptions.Item label="AC (mm)">{result.input.ac}</Descriptions.Item>
                     <Descriptions.Item label="Kf">{result.input.kf}</Descriptions.Item>
-                    <Descriptions.Item label="Lt">{result.input.lt}</Descriptions.Item>
+                    <Descriptions.Item label="LT (mm)">{result.input.lt}</Descriptions.Item>
                     <Descriptions.Item label="Icl Diameter">{result.input.iclDiameter}</Descriptions.Item>
-                    <Descriptions.Item label="Sts H">{result.input.stsH}</Descriptions.Item>
-                    <Descriptions.Item label="Sts V">{result.input.stsV}</Descriptions.Item>
-                    <Descriptions.Item label="Icl S">{result.input.iclS}</Descriptions.Item>
-                    <Descriptions.Item label="Icl C">{result.input.iclC}</Descriptions.Item>
-                    <Descriptions.Item label="Icl A">{result.input.iclA}</Descriptions.Item>
+                    <Descriptions.Item label="H(0) to V(90)">{result.input.htov}</Descriptions.Item>
+                    <Descriptions.Item label="STS-H (mm)">{result.input.stsH}</Descriptions.Item>
+                    <Descriptions.Item label="STS-V (mm)">{result.input.stsV}</Descriptions.Item>
                 </Descriptions>}
             <div className="divider"></div>
             {result.output &&
                 <Descriptions column={1} title={intl.formatMessage({ id: 'OUTPUT' })}>
-                    <Descriptions.Item label="Icl S">{result.output.iclS}</Descriptions.Item>
-                    <Descriptions.Item label="Icl C">{result.output.iclC}</Descriptions.Item>
-                    <Descriptions.Item label="Icl A">{result.output.iclA}</Descriptions.Item>
+                    <Descriptions.Item label="ICL S">{result.output.iclS}</Descriptions.Item>
+                    <Descriptions.Item label="ICL C">{result.output.iclC}</Descriptions.Item>
+                    <Descriptions.Item label="ICL A">{result.output.iclA}</Descriptions.Item>
                     <Descriptions.Item label="Esti Vault">{result.output.estiVault}</Descriptions.Item>
-                    <Descriptions.Item label="Resi Dual S">{result.output.resiDualS}</Descriptions.Item>
-                    <Descriptions.Item label="Resi Dual C">{result.output.resiDualC}</Descriptions.Item>
-                    <Descriptions.Item label="Resi Dual A">{result.output.resiDualA}</Descriptions.Item>
+                </Descriptions>}
+            <div className="divider"></div>
+            {result.input &&
+                <Descriptions column={2} title={intl.formatMessage({ id: 'INPUT' })}>
+                    <Descriptions.Item label="ICL S">{result.input.iclS}</Descriptions.Item>
+                    <Descriptions.Item label="ICL C">{result.input.iclC}</Descriptions.Item>
+                    <Descriptions.Item label="ICL A">{result.input.iclA}</Descriptions.Item>
+                </Descriptions>}
+            <div className="divider"></div>
+            {result.output &&
+                <Descriptions column={1} title={intl.formatMessage({ id: 'OUTPUT' })}>
+                    <Descriptions.Item label="Residual S">{result.output.resiDualS}</Descriptions.Item>
+                    <Descriptions.Item label="Residual C">{result.output.resiDualC}</Descriptions.Item>
+                    <Descriptions.Item label="Residual A">{result.output.resiDualA}</Descriptions.Item>
                 </Descriptions>}
         </Result>
     </React.Fragment>

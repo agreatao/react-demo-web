@@ -46,10 +46,10 @@ export default function TICL() {
                 <Form.Item label="Resi Cyl Axis" name="resiCylAxis" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="Sia D" name="siaD" rules={[{ required: true }]}>
+                <Form.Item label="SIA D" name="siaD" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="Sia Axis" name="siaAxis" rules={[{ required: true }]}>
+                <Form.Item label="SIA Axis" name="siaAxis" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
             </Form>
@@ -63,13 +63,13 @@ export default function TICL() {
                     <Descriptions.Item label="Resi Sph">{result.input.resiSph}</Descriptions.Item>
                     <Descriptions.Item label="Resi Cyl">{result.input.resiCyl}</Descriptions.Item>
                     <Descriptions.Item label="Resi Cyl Axis">{result.input.resiCylAxis}</Descriptions.Item>
-                    <Descriptions.Item label="Sia D">{result.input.siaD}</Descriptions.Item>
-                    <Descriptions.Item label="Sia Axis">{result.input.siaAxis}</Descriptions.Item>
+                    <Descriptions.Item label="SIA D">{result.input.siaD}</Descriptions.Item>
+                    <Descriptions.Item label="SIA Axis">{result.input.siaAxis}</Descriptions.Item>
                 </Descriptions>}
             <div className="divider"></div>
             {result.output &&
                 <Descriptions column={1} title={intl.formatMessage({ id: 'OUTPUT' })}>
-                    <Descriptions.Item label="Anti Clockwise">{result.output.antiClockwise}</Descriptions.Item>
+                    <Descriptions.Item label="Anti-clockwise">{result.output.antiClockwise}</Descriptions.Item>
                     <Descriptions.Item label="Esti Cyl">{result.output.estiSph}</Descriptions.Item>
                     <Descriptions.Item label="Esti Cyl Axis">{result.output.estiCyl}</Descriptions.Item>
                     <Descriptions.Item label="Esti Cyl Axis">{result.output.estiCylAxis}</Descriptions.Item>

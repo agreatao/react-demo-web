@@ -56,11 +56,13 @@ export default function LSA() {
                 </Descriptions>}
             <div className="divider"></div>
             {result.output &&
-                <Descriptions column={2} title={intl.formatMessage({ id: 'OUTPUT' })}>
-                    <Descriptions.Item label="far Q">{result.output.farQ}</Descriptions.Item>
-                    <Descriptions.Item label="near Q">{result.output.nearQ}</Descriptions.Item>
-                    <Descriptions.Item label="far Lsa">{result.output.farLsa}</Descriptions.Item>
-                    <Descriptions.Item label="near Lsa">{result.output.nearLsa}</Descriptions.Item>
+                <Descriptions column={2} colon={false} title={intl.formatMessage({ id: 'OUTPUT' })}>
+                    <Descriptions.Item label="> 5m" span={2} />
+                    <Descriptions.Item label="Δ Q">{result.output.farQ}</Descriptions.Item>
+                    <Descriptions.Item label="Δ LSA">{result.output.farLsa}</Descriptions.Item>
+                    <Descriptions.Item label="33cm" span={2} />
+                    <Descriptions.Item label="Δ Q">{result.output.nearQ}</Descriptions.Item>
+                    <Descriptions.Item label="Δ LSA">{result.output.nearLsa}</Descriptions.Item>
                 </Descriptions>}
         </Result>
     </React.Fragment>

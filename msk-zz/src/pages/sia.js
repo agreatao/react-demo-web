@@ -37,10 +37,10 @@ export default function SIA() {
                 <Form.Item label="Mani Cyl Axis" name="maniCylAxis" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="Sia D" name="siaD" rules={[{ required: true }]}>
+                <Form.Item label="SIA D" name="siaD" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="Sia Axis" name="siaAxis" rules={[{ required: true }]}>
+                <Form.Item label="SIA Axis" name="siaAxis" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
             </Form>
@@ -51,8 +51,8 @@ export default function SIA() {
                     <Descriptions.Item label="Mani Sph">{result.input.maniSph}</Descriptions.Item>
                     <Descriptions.Item label="Mani Cyl">{result.input.maniCyl}</Descriptions.Item>
                     <Descriptions.Item label="Mani Cyl Axis">{result.input.maniCylAxis}</Descriptions.Item>
-                    <Descriptions.Item label="Sia D">{result.input.siaD}</Descriptions.Item>
-                    <Descriptions.Item label="Sia Axis">{result.input.siaAxis}</Descriptions.Item>
+                    <Descriptions.Item label="SIA D">{result.input.siaD}</Descriptions.Item>
+                    <Descriptions.Item label="SIA Axis">{result.input.siaAxis}</Descriptions.Item>
                 </Descriptions>}
             <div className="divider"></div>
             {result.output &&

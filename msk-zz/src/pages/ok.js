@@ -41,7 +41,7 @@ export default function OK() {
             <div className="divider"></div>
             {result.output &&
                 <Descriptions column={1} title={intl.formatMessage({ id: 'OUTPUT' })}>
-                    <Descriptions.Item label="Correct AC">{result.output.ac}</Descriptions.Item>
+                    <Descriptions.Item label="AC">{result.output.ac}</Descriptions.Item>
                 </Descriptions>}
         </Result>
     </React.Fragment>

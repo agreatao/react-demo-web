@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "serve": "cross-env NODE_ENV=development webpack-dev-server --hot",
+        "serve": "cross-env NODE_ENV=development webpack-dev-server --hot --open",
         "start": "cross-env NODE_ENV=development webpack --progress --colors --watch --display-depth",
         "build": "cross-env NODE_ENV=production webpack --progress --colors --display-depth"
     },

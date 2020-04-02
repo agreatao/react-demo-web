@@ -41,7 +41,7 @@ export default function EXOP() {
             <div className="divider"></div>
             {result.output &&
                 <Descriptions column={1} title={intl.formatMessage({ id: 'OUTPUT' })}>
-                    <Descriptions.Item label="GR">{result.output.gr}</Descriptions.Item>
+                    <Descriptions.Item label="G-R (μm)">{result.output.gr}</Descriptions.Item>
                 </Descriptions>}
         </Result>
     </React.Fragment>

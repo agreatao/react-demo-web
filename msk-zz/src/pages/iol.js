@@ -69,7 +69,7 @@ export default function IOL() {
             <div className="divider"></div>
             {result.output &&
                 <Descriptions column={1} title={intl.formatMessage({ id: 'OUTPUT' })}>
-                    <Descriptions.Item label="d">{result.output.d}</Descriptions.Item>
+                    <Descriptions.Item label="D">{result.output.d}</Descriptions.Item>
                 </Descriptions>}
         </Result>
     </React.Fragment>

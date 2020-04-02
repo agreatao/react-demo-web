@@ -46,6 +46,15 @@ export default function VRPRO() {
                 <Form.Item label="C13" name="c13" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
+                <Form.Item label="Mani Sph" name="maniSph" rules={[{ required: true }]}>
+                    <Input autoComplete="off" />
+                </Form.Item>
+                <Form.Item label="Mani Cyl" name="maniCyl" rules={[{ required: true }]}>
+                    <Input autoComplete="off" />
+                </Form.Item>
+                <Form.Item label="Mani Cyl Axis" name="maniCylAxis" rules={[{ required: true }]}>
+                    <Input autoComplete="off" />
+                </Form.Item>
             </Form>
         </div>
         <Result visible={result.visible} onClose={close}>
@@ -57,8 +66,11 @@ export default function VRPRO() {
                     <Descriptions.Item label="C11">{result.input.c11}</Descriptions.Item>
                     <Descriptions.Item label="C12">{result.input.c12}</Descriptions.Item>
                     <Descriptions.Item label="C13">{result.input.c13}</Descriptions.Item>
+                    <Descriptions.Item label="Mani Sph">{result.input.maniSph}</Descriptions.Item>
+                    <Descriptions.Item label="Mani Cyl">{result.input.maniCyl}</Descriptions.Item>
+                    <Descriptions.Item label="Mani Cyl Axis">{result.input.maniCylAxis}</Descriptions.Item>
                 </Descriptions>}
-                <div className="divider"></div>
+            <div className="divider"></div>
             {result.output &&
                 <Descriptions column={1} title={intl.formatMessage({ id: 'OUTPUT' })}>
                     <Descriptions.Item label="Correct Sph">{result.output.correctSph}</Descriptions.Item>

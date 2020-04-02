@@ -49,10 +49,10 @@ export default function ICLV() {
             {result.input &&
                 <Descriptions column={2} title={intl.formatMessage({ id: 'INPUT' })}>
                     <Descriptions.Item label="Icl Diameter">{result.input.iclDiameter}</Descriptions.Item>
-                    <Descriptions.Item label="Htov">{result.input.htov}</Descriptions.Item>
-                    <Descriptions.Item label="Lt">{result.input.lt}</Descriptions.Item>
-                    <Descriptions.Item label="Stsh">{result.input.stsh}</Descriptions.Item>
-                    <Descriptions.Item label="Stsv">{result.input.stsv}</Descriptions.Item>
+                    <Descriptions.Item label="H(0) to V(90)">{result.input.htov}</Descriptions.Item>
+                    <Descriptions.Item label="LT">{result.input.lt}</Descriptions.Item>
+                    <Descriptions.Item label="STS-H">{result.input.stsh}</Descriptions.Item>
+                    <Descriptions.Item label="STS-V">{result.input.stsv}</Descriptions.Item>
                 </Descriptions>}
             <div className="divider"></div>
             {result.output &&
