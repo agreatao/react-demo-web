@@ -69,9 +69,9 @@ export default function TICL() {
             <div className="divider"></div>
             {result.output &&
                 <Descriptions column={1} title={intl.formatMessage({ id: 'OUTPUT' })}>
-                    <Descriptions.Item label="Anti-clockwise">{result.output.antiClockwise}</Descriptions.Item>
+                    <Descriptions.Item label={result.output.type}>{result.output.antiClockwise}</Descriptions.Item>
                     <Descriptions.Item label="Esti Cyl">{result.output.estiSph}</Descriptions.Item>
-                    <Descriptions.Item label="Esti Cyl Axis">{result.output.estiCyl}</Descriptions.Item>
+                    <Descriptions.Item label="Esti Cyl">{result.output.estiCyl}</Descriptions.Item>
                     <Descriptions.Item label="Esti Cyl Axis">{result.output.estiCylAxis}</Descriptions.Item>
                 </Descriptions>}
         </Result>

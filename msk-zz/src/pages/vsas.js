@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import Tip from 'components/Tip';
-import { Input, Descriptions } from 'antd';
+import { Descriptions, Input } from 'antd';
+import { vsas } from 'api';
 import Form from 'components/Form';
 import Result from 'components/Result';
-import { vsas } from 'api';
+import Tip from 'components/Tip';
+import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
 
 export default function VSAS() {

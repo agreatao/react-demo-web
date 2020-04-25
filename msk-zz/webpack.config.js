@@ -5,6 +5,7 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const CONFIG = require(`./config/${ENV}.config`);
 
@@ -151,6 +152,9 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: 'css/[name].[hash:8].css'
         }),
+        new CopyWebpackPlugin([
+            { from: 'public/file', to: 'file' }
+        ]),
         new OptimizeCSSAssetsPlugin({
             // 默认是全部的CSS都压缩，该字段可以指定某些要处理的文件
             assetNameRegExp: /\.(sa|sc|c)ss$/g,

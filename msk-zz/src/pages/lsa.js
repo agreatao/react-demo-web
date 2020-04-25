@@ -28,7 +28,7 @@ export default function LSA() {
         <Tip method="LSA" />
         <div className="calculate-wrapper">
             <Form onFinish={calculate} initialValues={{ s: 10000000 }}>
-                <Form.Item label="Opic Zone" name="opicZone" rules={[{ required: true }]}>
+                <Form.Item label="Optic Zone" name="opicZone" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
                 <Form.Item label="Vertex K" name="vertexK" rules={[{ required: true }]}>
@@ -37,10 +37,7 @@ export default function LSA() {
                 <Form.Item label="e" name="e" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="Correct Se" name="correctSe" rules={[{ required: true }]}>
-                    <Input autoComplete="off" />
-                </Form.Item>
-                <Form.Item label="Expect Q" name="expectQ" rules={[{ required: true }]}>
+                <Form.Item label="Correct SE" name="correctSe" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
             </Form>
@@ -48,11 +45,10 @@ export default function LSA() {
         <Result visible={result.visible} onClose={close}>
             {result.input &&
                 <Descriptions column={2} title={intl.formatMessage({ id: 'INPUT' })}>
-                    <Descriptions.Item label="Optical Zone">{result.input.opicZone}</Descriptions.Item>
+                    <Descriptions.Item label="Optic Zone">{result.input.opicZone}</Descriptions.Item>
                     <Descriptions.Item label="Vertex K">{result.input.vertexK}</Descriptions.Item>
                     <Descriptions.Item label="e">{result.input.e}</Descriptions.Item>
-                    <Descriptions.Item label="Correct Se">{result.input.correctSe}</Descriptions.Item>
-                    <Descriptions.Item label="Expect Q">{result.input.expectQ}</Descriptions.Item>
+                    <Descriptions.Item label="Correct SE">{result.input.correctSe}</Descriptions.Item>
                 </Descriptions>}
             <div className="divider"></div>
             {result.output &&

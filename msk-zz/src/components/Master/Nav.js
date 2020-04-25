@@ -5,11 +5,13 @@ import './drawer.less';
 import './nav.less';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
+import { useIntl } from 'react-intl';
 
 export default connect(
     ({ browser, locale }) => ({ width: browser.width, lang: locale.lang })
 )(
     function Nav({ width, lang }) {
+        const intl = useIntl();
         const history = useHistory();
         let Component = ({ children }) => <div className="nav-wrapper">{children}</div>;
         if (width < 1024) {
@@ -22,23 +24,24 @@ export default connect(
 
         return <Component>
             <div className="nav">
-                <div className="nav-title">收费</div>
+                <div className="nav-title">{intl.formatMessage({ id: 'TITLE_CHARGE' })}</div>
                 <Link disable onClick={go} path="iol">ZZ IOL</Link>
                 <Link disable onClick={go} path="tiol">ZZ Toric IOL</Link>
-                <div className="nav-title">近视</div>
+                <div className="nav-title">{intl.formatMessage({ id: 'TITLE_RS' })}</div>
                 <Link onClick={go} path="vr">VR</Link>
-                <Link onClick={go} path="vrp">VR pro</Link>
+                <Link disable onClick={go} path="vrp">VR pro</Link>
                 <Link onClick={go} path="lsa">ZZ LSA</Link>
-                <div className="nav-title">老化</div>
+                <div className="nav-title">{intl.formatMessage({ id: 'TITLE_ICL' })}</div>
                 <Link onClick={go} path="icl">ZZ ICL</Link>
                 <Link onClick={go} path="iclv">ZZ ICL Vault</Link>
-                <Link onClick={go} path="ticl">ZZ TICL TORATION</Link>
-                <div className="nav-title">工具</div>
+                <Link onClick={go} path="ticl">ZZ TICL Rotation</Link>
+                <div className="nav-title">{intl.formatMessage({ id: 'TITLE_TOOLS' })}</div>
                 <Link onClick={go} path="sia">ZZ SIA</Link>
                 <Link onClick={go} path="vsas">ZZ Vector Sum &amp; Sub</Link>
-                <Link disable onClick={go} path="msdv">ZZ Mean&plusmn;SD Vector</Link>
-                <Link onClick={go} path="ok">ZZ OK</Link>
+                <Link onClick={go} path="mean">ZZ Mean&plusmn;SD Vector</Link>
                 <Link onClick={go} path="exop">ZZ EX500 OPMI</Link>
+                <div className="nav-title">{intl.formatMessage({ id: 'TITLE_KM' })}</div>
+                <Link onClick={go} path="ok">ZZ Ortho K</Link>
             </div>
         </Component>
     }

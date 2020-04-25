@@ -31,16 +31,16 @@ export default function ICLV() {
                 <Form.Item label="Icl Diameter" name="iclDiameter" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="Htov" name="htov" rules={[{ required: true }]}>
+                <Form.Item label="H(0) to V(90)" name="htov" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="Lt" name="lt" rules={[{ required: true }]}>
+                <Form.Item label="LT" name="lt" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="Stsh" name="stsh" rules={[{ required: true }]}>
+                <Form.Item label="STS-H" name="stsh" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="Stsv" name="stsv" rules={[{ required: true }]}>
+                <Form.Item label="STS-V" name="stsv" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
             </Form>

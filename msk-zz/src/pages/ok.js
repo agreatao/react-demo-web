@@ -28,7 +28,7 @@ export default function OK() {
         <Tip method="OK" tips={['INSTRUCTIONS', 'NOTES', 'STEP']} />
         <div className="calculate-wrapper">
             <Form onFinish={calculate}>
-                <Form.Item label="Vertex" name="vertex" rules={[{ required: true }]}>
+                <Form.Item label="K" name="k" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
             </Form>
@@ -36,7 +36,7 @@ export default function OK() {
         <Result visible={result.visible} onClose={close}>
             {result.input &&
                 <Descriptions column={2} title={intl.formatMessage({ id: 'INPUT' })}>
-                    <Descriptions.Item label="Vertex">{result.input.vertex}</Descriptions.Item>
+                    <Descriptions.Item label="K">{result.input.k}</Descriptions.Item>
                 </Descriptions>}
             <div className="divider"></div>
             {result.output &&

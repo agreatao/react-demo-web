@@ -28,7 +28,7 @@ export default function VR() {
         <Tip method="VR" />
         <div className="calculate-wrapper">
             <Form onFinish={calculate}>
-                <Form.Item label="Opic Zone" name="opicZone" rules={[{ required: true }]}>
+                <Form.Item label="Optic Zone" name="opicZone" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
                 <Form.Item label="C7" name="c7" rules={[{ required: true }]}>

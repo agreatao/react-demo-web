@@ -59,7 +59,6 @@ http.form = (...args) => {
             formData.append(key, args[1][key]);
         }
         args[1] = formData;
-        console.log(formData);
     }
     return http.post(...args);
 };

@@ -68,13 +68,13 @@ export default function ICL() {
                 <Form.Item label="STS-V (mm)" name="stsV" rules={[{ required: true }]}>
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="ICL S" name="iclS" rules={[{ required: true }]}>
+                <Form.Item group="extra" label="ICL S" name="iclS">
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="ICL C" name="iclC" rules={[{ required: true }]}>
+                <Form.Item group="extra" label="ICL C" name="iclC">
                     <Input autoComplete="off" />
                 </Form.Item>
-                <Form.Item label="ICL A" name="iclA" rules={[{ required: true }]}>
+                <Form.Item group="extra" label="ICL A" name="iclA">
                     <Input autoComplete="off" />
                 </Form.Item>
             </Form>

@@ -1,6 +1,11 @@
 {
     "INPUT": "输入",
     "OUTPUT": "计算结果",
+    "TITLE_CHARGE": "收费",
+    "TITLE_RS": "角膜屈光手术",
+    "TITLE_ICL": "ICL晶体屈光手术",
+    "TITLE_TOOLS": "小工具",
+    "TITLE_KM": "角膜塑形镜验配",
     "CALCULATE": "计算",
     "CLEAR": "清空",
     "RULE_REQUIRED": "此处是必填项",
@@ -13,9 +18,9 @@
     "TIOL_NOTES": "（目前尚不支持自主填写）\n需要上传A常数、目标屈光度、眼轴长度、晶体厚度（非必须）、术源性散光度数、术源性散光轴位和角膜断层扫描图的原始文档",
     "TIOL_RAWDATA": "目前仅支持CSO公司Sirius或Zeus设备下的.zcs文档（包含至少3次重复性好的检查结果）\n付费成功后，结果会在48小时内给出",
     "VR_INSTRUCTIONS": "用于补偿常规角膜矫正高阶像差时的屈光度",
-    "VR_NOTES": "C7~C13=准分子设备所选光区下的高阶像差，OSA 标准 (μm); Mani=显然验光数据; Correct=补偿后数据（未进行Nomogramm）",
+    "VR_NOTES": "C7~C13=准分子设备所选光区下的高阶像差，OSA 标准 (μm); Mani=显然验光数据; Correct=补偿后数据（未进行Nomogram）",
     "VRPRO_INSTRUCTIONS": "辅助角膜地形图引导/波前像差引导角膜屈光手术方案设计\n用于补偿特殊角膜矫正高阶像差时的屈光度",
-    "VRPRO_NOTES": "C7~C13=准分子设备所选光区下的高阶像差，OSA 标准 (μm); Mani=显然验光数据; Correct=补偿后数据 (未进行Nomogramm)",
+    "VRPRO_NOTES": "C7~C13=准分子设备所选光区下的高阶像差，OSA 标准 (μm); Mani=显然验光数据; Correct=补偿后数据 (未进行Nomogram)",
     "LSA_INSTRUCTIONS": "辅助Q值引导角膜屈光手术方案设计，定量改变LSA（纵向球差，D为单位）时，计算所需的Q值变量",
     "LSA_NOTES": "Vertex K=切向曲率；SE=等效球镜；e=角膜离心率值；",
     "ICL_INSTRUCTIONS": "辅助ICL晶体屈光度和直径的选择\n计算ICL屈光度并预期拱高",
@@ -31,5 +36,10 @@
     "OK_STEP": "数据→模拟分析→单变量求解 （目标单元格B3，变量A3）",
     "EXOP_INSTRUCTIONS": "计算EX500准分子设备居中消融的调整量",
     "EXOP_NOTES": "K=角膜垂直轴切向曲率",
-    "EXOP_STEP": "输入K值→数据→模拟分析→单变量求解 （目标单元格A3=6，变量C3）"
+    "EXOP_STEP": "输入K值→数据→模拟分析→单变量求解 （目标单元格A3=6，变量C3）",
+    "MEAN_INSTRUCTIONS": "用于计算屈光度的矢量均数和标准差",
+    "MEAN_NOTES": "需依数据量增加相应行数",
+    "MEAN_TIP_1": "您还可以从模板文件导入参数",
+    "MEAN_TIP_3": "点击",
+    "MEAN_TIP_4": "上传"
 }

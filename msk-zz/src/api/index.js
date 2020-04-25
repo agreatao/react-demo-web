@@ -35,3 +35,8 @@ export const iclv = params =>
 
 export const sia = params =>
     http.post('/calculate/zzsia', params).then(({ result }) => result);
+
+export const mean = params =>
+    http.post('/calculate/zzmeansdvector', params).then(({ result }) => result);
+
+export const meanUpload = (file) => http.form('/calculate/zzmeanexcel', { file });

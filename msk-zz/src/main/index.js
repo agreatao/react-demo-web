@@ -21,6 +21,7 @@ import createStore from 'store';
 import "theme/index.less";
 import browserBind from "./browserBind";
 import "./index.less";
+import ZZ_MEAN_SD_VECTOR from '@/pages/mean';
 
 const history = createBrowserHistory();
 
@@ -60,7 +61,7 @@ render(
                             {/* ZZ Vector Sum & Sub */}
                             <Route path="/:locale/vsas" component={ZZ_VECTOR_SUM_SUB} />
                             {/* ZZ Mean±SD Vector */}
-                            {/* <Route path="/:locale/mean" component={ZZ_MEAN_SD_VECTOR} /> */}
+                            <Route path="/:locale/mean" component={ZZ_MEAN_SD_VECTOR} />
                             {/* ZZ OK  */}
                             <Route path="/:locale/ok" component={ZZ_OK} />
                             {/* ZZ EX500 OPMI */}
