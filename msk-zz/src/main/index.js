@@ -1,77 +1,92 @@
-import ZZ_EX500_OPMI from '@/pages/exop';
-import ZZ_ICL from '@/pages/icl';
-import ZZ_ICL_VAULT from '@/pages/iclv';
-import ZZ_IOL from '@/pages/iol';
-import ZZ_LSA from '@/pages/lsa';
-import ZZ_OK from '@/pages/ok';
-import ZZ_SIA from '@/pages/sia';
-import ZZ_TICL_TORATION from '@/pages/ticl';
-import ZZ_TORIC_IOL from '@/pages/tiol';
-import VR from '@/pages/vr';
-import VR_PRO from '@/pages/vrpro';
-import ZZ_VECTOR_SUM_SUB from '@/pages/vsas';
+import { isLogin } from '@/api/user';
+import axios from 'axios';
+import LocaleProvider from 'components/Locale/Provider';
 import Master from 'components/Master';
 import { createBrowserHistory } from 'history';
-import LocaleProvider from 'locale/Provider';
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Route, Router, Switch } from 'react-router';
-import createStore from 'store';
+import store from 'store';
 import "theme/index.less";
+import asyncComponent from 'utils/asyncComponent';
 import browserBind from "./browserBind";
 import "./index.less";
-import ZZ_MEAN_SD_VECTOR from '@/pages/mean';
 
 const history = createBrowserHistory();
 
-const store = createStore();
-
 browserBind(store);
 
-render(
-    <Provider store={store}>
-        <Router history={history}>
-            <Switch>
-                <Route
-                    path="/:locale"
-                    render={props => <LocaleProvider {...props}>
-                        <Master>
-                            {/* ZZ IOL */}
-                            <Route path="/:locale/iol" component={ZZ_IOL} />
-                            {/* ZZ TORIC IOL */}
-                            <Route path="/:locale/tiol" component={ZZ_TORIC_IOL} />
+const { dispatch } = store;
 
-                            {/* VR */}
-                            <Route path="/:locale/vr" component={VR} />
-                            {/* VR pro */}
-                            <Route path="/:locale/vrp" component={VR_PRO} />
-                            {/* ZZ LSA */}
-                            <Route path="/:locale/lsa" component={ZZ_LSA} />
+Promise.all([
+    axios.get('/i18n/en_US.json').then(({ data }) => data),
+    axios.get('/i18n/zh_CN.json').then(({ data }) => data),
+]).then(([en_US, zh_CN]) => {
+    window.LANGUAGES = { en_US, zh_CN };
+    const { pathname } = history.location;
+    const defaultLang = pathname.split('/')[1] || 'en_US';
+    dispatch({ type: '@Locale/CHANGE', lang: defaultLang });
+    // 判断登录
+    isLogin.send()
+        .then(user => {
+            dispatch({ type: '@User/LOGIN', user });
+            return;
+        })
+        .catch(e => { return; })
+        .then(() => {
+            initApp();
+        });
+}).catch(e => console.error(e))
 
-                            {/* ZZ ICL */}
-                            <Route path="/:locale/icl" component={ZZ_ICL} />
-                            {/* ZZ ICL Vault */}
-                            <Route path="/:locale/iclv" component={ZZ_ICL_VAULT} />
-                            {/* ZZ TICL TORATION */}
-                            <Route path="/:locale/ticl" component={ZZ_TICL_TORATION} />
+function initApp() {
+    ReactDOM.render(
+        <Provider store={store}>
+            <LocaleProvider languages={window.LANGUAGES}>
+                <Router history={history}>
+                    <Switch>
+                        <Route path="/:locale/:context" render={props =>
+                            <Master {...props}>
+                                {/* ZZ IOL */}
+                                <Route exact path="/:locale/calc/iol" component={asyncComponent(() => import(/* webpackChunkName: 'iol' */'pages/calc/iol'))} />
+                                {/* ZZ TORIC IOL */}
+                                <Route exact path="/:locale/calc/tiol" component={asyncComponent(() => import(/* webpackChunkName: 'tiol' */'pages/calc/tiol'))} />
 
-                            {/* ZZ SIA */}
-                            <Route path="/:locale/sia" component={ZZ_SIA} />
-                            {/* ZZ Vector Sum & Sub */}
-                            <Route path="/:locale/vsas" component={ZZ_VECTOR_SUM_SUB} />
-                            {/* ZZ Mean±SD Vector */}
-                            <Route path="/:locale/mean" component={ZZ_MEAN_SD_VECTOR} />
-                            {/* ZZ OK  */}
-                            <Route path="/:locale/ok" component={ZZ_OK} />
-                            {/* ZZ EX500 OPMI */}
-                            <Route path="/:locale/exop" component={ZZ_EX500_OPMI} />
-                        </Master>
-                    </LocaleProvider>}
-                />
-            </Switch>
-        </Router>
-    </Provider>
-    ,
-    document.getElementById('app')
-)
+                                {/* VR */}
+                                <Route exact path="/:locale/calc/vr" component={asyncComponent(() => import(/* webpackChunkName: 'vr' */'pages/calc/vr'))} />
+                                {/* VR pro */}
+                                <Route exact path="/:locale/calc/vrpro" component={asyncComponent(() => import(/* webpackChunkName: 'vrpro' */'pages/calc/vrpro'))} />
+                                {/* ZZ LSA */}
+                                <Route exact path="/:locale/calc/lsa" component={asyncComponent(() => import(/* webpackChunkName: 'lsa' */'pages/calc/lsa'))} />
+
+                                {/* ZZ ICL */}
+                                <Route exact path="/:locale/calc/icl" component={asyncComponent(() => import(/* webpackChunkName: 'icl' */'pages/calc/icl'))} />
+                                {/* ZZ ICL Vault */}
+                                <Route exact path="/:locale/calc/iclv" component={asyncComponent(() => import(/* webpackChunkName: 'iclv' */'pages/calc/iclv'))} />
+                                {/* ZZ TICL TORATION */}
+                                <Route exact path="/:locale/calc/ticl" component={asyncComponent(() => import(/* webpackChunkName: 'ticl' */'pages/calc/ticl'))} />
+
+                                {/* ZZ SIA */}
+                                <Route exact path="/:locale/calc/sia" component={asyncComponent(() => import(/* webpackChunkName: 'sia' */'pages/calc/sia'))} />
+                                {/* ZZ Vector Sum & Sub */}
+                                <Route exact path="/:locale/calc/vsas" component={asyncComponent(() => import(/* webpackChunkName: 'vsas' */'pages/calc/vsas'))} />
+                                {/* ZZ Mean±SD Vector */}
+                                <Route exact path="/:locale/calc/mean" component={asyncComponent(() => import(/* webpackChunkName: 'mean' */'pages/calc/mean'))} />
+                                {/* ZZ OK  */}
+                                <Route exact path="/:locale/calc/ok" component={asyncComponent(() => import(/* webpackChunkName: 'ok' */'pages/calc/ok'))} />
+                                {/* ZZ EX500 OPMI */}
+                                <Route exact path="/:locale/calc/exop" component={asyncComponent(() => import(/* webpackChunkName: 'exop' */'pages/calc/exop'))} />
+
+                                {/* User List */}
+                                <Route exact path="/:locale/user/list" component={asyncComponent(() => import(/* webpackChunkName: 'userList' */'pages/user/list'))} />
+
+                            </Master>}
+                        />
+                    </Switch>
+                </Router>
+            </LocaleProvider>
+        </Provider>
+        ,
+        document.getElementById('app'),
+    )
+}

@@ -14,7 +14,13 @@ module.exports = {
         contentBase: path.join(__dirname, 'public'),
         historyApiFallback: true,
         proxy: {
-            '/calculate/**': {
+            '/calculate': {
+                target: 'http://localhost:80'
+            },
+            '/alibaba': {
+                target: 'http://localhost:80'
+            },
+            '/userInfo': {
                 target: 'http://localhost:80'
             }
         }
@@ -38,9 +44,9 @@ module.exports = {
             '@': path.resolve(__dirname, "src"),
             api: path.join(__dirname, 'src/api'),
             components: path.join(__dirname, "src/components"),
-            images: path.join(__dirname, "src/images"),
-            locale: path.join(__dirname, "src/locale"),
+            images: path.join(__dirname, "src/assets/images"),
             main: path.join(__dirname, 'src/main'),
+            pages: path.join(__dirname, 'src/pages'),
             store: path.join(__dirname, "src/store"),
             theme: path.join(__dirname, "src/theme"),
             utils: path.join(__dirname, "src/utils"),
@@ -153,7 +159,8 @@ module.exports = {
             filename: 'css/[name].[hash:8].css'
         }),
         new CopyWebpackPlugin([
-            { from: 'public/file', to: 'file' }
+            { from: 'public/file', to: 'file' },
+            { from: 'src/assets/i18n', to: 'i18n' }
         ]),
         new OptimizeCSSAssetsPlugin({
             // 默认是全部的CSS都压缩，该字段可以指定某些要处理的文件

@@ -1,9 +1,10 @@
 import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { Button, Descriptions, Form, Input, Table, Upload } from 'antd';
-import { mean, meanUpload } from 'api';
+import { calcMEAN, uploadMEAN } from 'api/calc';
 import Result from 'components/Result';
 import Tip from 'components/Tip';
-import React, { useEffect, useState } from 'react';
+import { debounce } from 'lodash';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 export default function MEAN() {
@@ -13,7 +14,7 @@ export default function MEAN() {
 
     function calculate() {
         const values = form.getFieldsValue();
-        mean(values)
+        calcMEAN.send(values)
             .then(data => {
                 console.log(data);
                 setResult({ visible: true, output: data, input: values.zzMeanInfos });
@@ -32,8 +33,10 @@ export default function MEAN() {
     }
 
     function upload({ file }) {
-        meanUpload(file).then(({ result }) => {
-            const { zzMeanInfos } = result;
+        const formData = new FormData();
+        formData.append('file', file);
+        uploadMEAN.send(formData).then(data => {
+            const { zzMeanInfos } = data;
             form.setFieldsValue({ zzMeanInfos });
         }).catch(e => { })
     }
@@ -54,13 +57,13 @@ export default function MEAN() {
                     <FormTable />
                 </Form.Item>
                 <div className="calculate-btn-group">
-                    <Button size="large" className="calculate-btn" type="primary" onClick={calculate}>{intl.formatMessage({ id: 'CALCULATE' })}</Button>
-                    <Button size="large" className="calculate-btn" onClick={reset}>{intl.formatMessage({ id: 'CLEAR' })}</Button>
+                    <Button size="large" className="calculate-btn" type="primary" onClick={calculate}>{intl.formatMessage({ id: 'BTN_CALCULATE' })}</Button>
+                    <Button size="large" className="calculate-btn" onClick={reset}>{intl.formatMessage({ id: 'BTN_CLEAR' })}</Button>
                 </div>
             </Form>
         </div>
         <Result visible={result.visible} onClose={close}>
-            <div className="calculate-title">{intl.formatMessage({ id: "INPUT" })}</div>
+            <div className="calculate-title">{intl.formatMessage({ id: "LABEL_INPUT" })}</div>
             {result.input && <Table
                 size="small"
                 pagination={false}
@@ -73,7 +76,7 @@ export default function MEAN() {
             />}
             <div className="divider"></div>
             {result.output &&
-                <Descriptions column={2} title={intl.formatMessage({ id: 'OUTPUT' })}>
+                <Descriptions column={2} title={intl.formatMessage({ id: 'LABEL_OUTPUT' })}>
                     <Descriptions.Item label="Mean Sph">{result.output.meanSph}</Descriptions.Item>
                     <Descriptions.Item label="Mean Cyl">{result.output.meanCyl}</Descriptions.Item>
                     <Descriptions.Item label="Mean Axis">{result.output.meanAxis}</Descriptions.Item>
@@ -84,6 +87,10 @@ export default function MEAN() {
     </React.Fragment>
 }
 
+
+/**
+ * TODO 需要优化
+ */
 function FormTable({ value = [], onChange }) {
     const [dataSource, setDataSource] = useState(value.map((item, key) => ({ ...item, key })));
 
@@ -92,22 +99,26 @@ function FormTable({ value = [], onChange }) {
     }, [value]);
 
     function handleChange(rowIndex, dataIndex, val) {
-        dataSource[rowIndex][dataIndex] = typeof val === 'string' && !isNaN(val) ? +val : null;
+        dataSource[rowIndex][dataIndex] = val;
         onChange(dataSource.map(({ key, ...item }) => item));
     }
 
     const Cell = ({ record, rowIndex, dataIndex, value, children, ...props }) => {
         const [_value, setValue] = useState(value);
+        const callChange = useCallback(debounce(handleChange, 500), []);
 
         function handleInputChange(e) {
             const _value = e.target.value;
             setValue(_value);
-            handleChange(rowIndex, dataIndex, _value);
+            callChange(rowIndex, dataIndex, _value);
         }
 
         if (dataIndex) {
             return <td {...props} style={{ padding: '5px' }}>
-                <Input value={_value} onChange={handleInputChange} />
+                <Input
+                    value={_value}
+                    onChange={handleInputChange}
+                />
             </td>
         }
         return <td {...props} style={{ padding: '5px 0' }}>{children}</td>

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import Tip from 'components/Tip';
-import { Input, Descriptions } from 'antd';
+import { Descriptions, Input } from 'antd';
+import { calcICLV } from 'api/calc';
 import Form from 'components/Form';
 import Result from 'components/Result';
-import { iclv } from 'api';
+import Tip from 'components/Tip';
+import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
 
 export default function ICLV() {
@@ -11,7 +11,7 @@ export default function ICLV() {
     const [result, setResult] = useState({ visible: false, output: null, input: null, error: null });
 
     function calculate(values) {
-        iclv(values)
+        calcICLV.send(values)
             .then(data => {
                 setResult({ visible: true, output: data, input: values });
             })
@@ -47,7 +47,7 @@ export default function ICLV() {
         </div>
         <Result visible={result.visible} onClose={close}>
             {result.input &&
-                <Descriptions column={2} title={intl.formatMessage({ id: 'INPUT' })}>
+                <Descriptions column={2} title={intl.formatMessage({ id: 'LABEL_INPUT' })}>
                     <Descriptions.Item label="Icl Diameter">{result.input.iclDiameter}</Descriptions.Item>
                     <Descriptions.Item label="H(0) to V(90)">{result.input.htov}</Descriptions.Item>
                     <Descriptions.Item label="LT">{result.input.lt}</Descriptions.Item>
@@ -56,7 +56,7 @@ export default function ICLV() {
                 </Descriptions>}
             <div className="divider"></div>
             {result.output &&
-                <Descriptions column={1} title={intl.formatMessage({ id: 'OUTPUT' })}>
+                <Descriptions column={1} title={intl.formatMessage({ id: 'LABEL_OUTPUT' })}>
                     <Descriptions.Item label="Esti Vault">{result.output.estiVault}</Descriptions.Item>
                 </Descriptions>}
         </Result>

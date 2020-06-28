@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import Tip from 'components/Tip';
-import { Input, Descriptions } from 'antd';
+import { Descriptions, Input } from 'antd';
+import { calcICL } from 'api/calc';
 import Form from 'components/Form';
 import Result from 'components/Result';
-import { icl } from 'api';
+import Tip from 'components/Tip';
+import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
 
 export default function ICL() {
@@ -11,9 +11,8 @@ export default function ICL() {
     const [result, setResult] = useState({ visible: false, output: null, input: null, error: null });
 
     function calculate(values) {
-        icl(values)
+        calcICL.send(values)
             .then(data => {
-                console.log(data);
                 setResult({ visible: true, output: data, input: values });
             })
             .catch(e => {
@@ -81,7 +80,7 @@ export default function ICL() {
         </div>
         <Result visible={result.visible} onClose={close}>
             {result.input &&
-                <Descriptions column={2} title={intl.formatMessage({ id: 'INPUT' })}>
+                <Descriptions column={2} title={intl.formatMessage({ id: 'LABEL_INPUT' })}>
                     <Descriptions.Item label="Mani Sph">{result.input.maniSph}</Descriptions.Item>
                     <Descriptions.Item label="Mani Cyl">{result.input.maniCyl}</Descriptions.Item>
                     <Descriptions.Item label="Mani Axis">{result.input.maniCylAxis}</Descriptions.Item>
@@ -98,7 +97,7 @@ export default function ICL() {
                 </Descriptions>}
             <div className="divider"></div>
             {result.output &&
-                <Descriptions column={1} title={intl.formatMessage({ id: 'OUTPUT' })}>
+                <Descriptions column={1} title={intl.formatMessage({ id: 'LABEL_OUTPUT' })}>
                     <Descriptions.Item label="ICL S">{result.output.iclS}</Descriptions.Item>
                     <Descriptions.Item label="ICL C">{result.output.iclC}</Descriptions.Item>
                     <Descriptions.Item label="ICL A">{result.output.iclA}</Descriptions.Item>
@@ -106,14 +105,14 @@ export default function ICL() {
                 </Descriptions>}
             <div className="divider"></div>
             {result.input &&
-                <Descriptions column={2} title={intl.formatMessage({ id: 'INPUT' })}>
+                <Descriptions column={2} title={intl.formatMessage({ id: 'LABEL_INPUT' })}>
                     <Descriptions.Item label="ICL S">{result.input.iclS}</Descriptions.Item>
                     <Descriptions.Item label="ICL C">{result.input.iclC}</Descriptions.Item>
                     <Descriptions.Item label="ICL A">{result.input.iclA}</Descriptions.Item>
                 </Descriptions>}
             <div className="divider"></div>
             {result.output &&
-                <Descriptions column={1} title={intl.formatMessage({ id: 'OUTPUT' })}>
+                <Descriptions column={1} title={intl.formatMessage({ id: 'LABEL_OUTPUT' })}>
                     <Descriptions.Item label="Residual S">{result.output.resiDualS}</Descriptions.Item>
                     <Descriptions.Item label="Residual C">{result.output.resiDualC}</Descriptions.Item>
                     <Descriptions.Item label="Residual A">{result.output.resiDualA}</Descriptions.Item>

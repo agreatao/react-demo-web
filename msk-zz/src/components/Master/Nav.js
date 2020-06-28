@@ -1,51 +1,61 @@
-import React, { useState } from 'react';
-import { createPortal } from 'react-dom';
 import classnames from 'classnames';
+import React, { useState, useMemo } from 'react';
+import { createPortal } from 'react-dom';
+import { useIntl } from 'react-intl';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import './drawer.less';
 import './nav.less';
-import { connect } from 'react-redux';
-import { useHistory } from 'react-router';
-import { useIntl } from 'react-intl';
 
-export default connect(
-    ({ browser, locale }) => ({ width: browser.width, lang: locale.lang })
-)(
-    function Nav({ width, lang }) {
-        const intl = useIntl();
-        const history = useHistory();
-        let Component = ({ children }) => <div className="nav-wrapper">{children}</div>;
-        if (width < 1024) {
-            Component = Drawer;
-        }
 
-        function go(path) {
-            history.push(`/${lang}/${path}`);
-        }
+const nav = {
+    calc: [
+        //
+        { label: 'ZZ IOL', path: 'calc/iol', title: 'TITLE_CHARGE' },
+        { label: 'ZZ Toric IOL', path: 'calc/tiol' },
+        //
+        { label: 'VR', path: 'calc/vr', title: 'TITLE_RS' },
+        { disable: true, label: 'VR pro', path: 'calc/vrpro' },
+        { label: 'ZZ LSA', path: 'calc/lsa' },
+        //
+        { label: 'ZZ ICL', path: 'calc/icl', title: 'TITLE_ICL' },
+        { label: 'ZZ ICL Vault', path: 'calc/iclv' },
+        { label: 'ZZ TICL Rotation', path: 'calc/ticl' },
+        //
+        { label: 'ZZ SIA', path: 'calc/sia', title: 'TITLE_TOOLS' },
+        { label: 'ZZ Vector Sum & Sub', path: 'calc/vsas' },
+        { label: 'ZZ Mean ± SD Vector', path: 'calc/mean' },
+        { label: 'ZZ EX500 OPMI', path: 'calc/exop' },
+        //
+        { label: 'ZZ Ortho-K Glasses', path: 'calc/ok', title: 'TITLE_KM' },
+    ],
+    // user: [
+    //     { label: '返回', path: 'calc/iol' }
+    // ],
+}
 
-        return <Component>
-            <div className="nav">
-                <div className="nav-title">{intl.formatMessage({ id: 'TITLE_CHARGE' })}</div>
-                <Link disable onClick={go} path="iol">ZZ IOL</Link>
-                <Link disable onClick={go} path="tiol">ZZ Toric IOL</Link>
-                <div className="nav-title">{intl.formatMessage({ id: 'TITLE_RS' })}</div>
-                <Link onClick={go} path="vr">VR</Link>
-                <Link disable onClick={go} path="vrp">VR pro</Link>
-                <Link onClick={go} path="lsa">ZZ LSA</Link>
-                <div className="nav-title">{intl.formatMessage({ id: 'TITLE_ICL' })}</div>
-                <Link onClick={go} path="icl">ZZ ICL</Link>
-                <Link onClick={go} path="iclv">ZZ ICL Vault</Link>
-                <Link onClick={go} path="ticl">ZZ TICL Rotation</Link>
-                <div className="nav-title">{intl.formatMessage({ id: 'TITLE_TOOLS' })}</div>
-                <Link onClick={go} path="sia">ZZ SIA</Link>
-                <Link onClick={go} path="vsas">ZZ Vector Sum &amp; Sub</Link>
-                <Link onClick={go} path="mean">ZZ Mean&plusmn;SD Vector</Link>
-                <Link onClick={go} path="exop">ZZ EX500 OPMI</Link>
-                <div className="nav-title">{intl.formatMessage({ id: 'TITLE_KM' })}</div>
-                <Link onClick={go} path="ok">ZZ Ortho K</Link>
-            </div>
-        </Component>
+export default function Nav({ context }) {
+    const { width, lang } = useSelector(state => ({ lang: state.locale.lang, width: state.browser.width }));
+    const intl = useIntl();
+    const history = useHistory();
+    const Component = useMemo(() => width < 1024 ? Drawer : ({ children }) => <div className="nav-wrapper">{children}</div>, [width]);
+
+    function go(path) {
+        history.push(`/${lang}/${path}`);
     }
-)
+
+    return nav[context] ? <Component>
+        <div className="nav">
+            {nav[context].map(({ disable, path, label, title }) => {
+                return <React.Fragment key={path}>
+                    {title && <div className="nav-title">{intl.formatMessage({ id: title })}</div>}
+                    <Link disable={disable} onClick={go} path={path}>{label}</Link>
+                </React.Fragment>
+            })}
+        </div>
+    </Component>
+        : <React.Fragment />
+}
 
 function Link({ children, path, disable = false, onClick }) {
     const history = useHistory();
@@ -57,9 +67,8 @@ function Link({ children, path, disable = false, onClick }) {
 
     let pathname = history.location.pathname;
     pathname = pathname.substring(pathname.lastIndexOf("/") + 1);
-    return <a onClick={go} className={classnames('nav-item', { 'disable': disable, 'active': pathname === path })}>{children}</a>
+    return <a onClick={go} className={classnames('nav-item', { 'disable': disable, 'active': pathname === path.split('/')[1] })}>{children}</a>
 }
-
 
 function Drawer({ children }) {
     const [open, setOpen] = useState(false);

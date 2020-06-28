@@ -1,5 +1,5 @@
 import { Descriptions, Input } from 'antd';
-import { vsas } from 'api';
+import { calcVSAS } from 'api/calc';
 import Form from 'components/Form';
 import Result from 'components/Result';
 import Tip from 'components/Tip';
@@ -11,7 +11,7 @@ export default function VSAS() {
     const [result, setResult] = useState({ visible: false, output: null, input: null, error: null });
 
     function calculate(values) {
-        vsas(values)
+        calcVSAS.send(values)
             .then(data => {
                 setResult({ visible: true, output: data, input: values });
             })
@@ -50,7 +50,7 @@ export default function VSAS() {
         </div>
         <Result visible={result.visible} onClose={close}>
             {result.input &&
-                <Descriptions column={2} title={intl.formatMessage({ id: 'INPUT' })}>
+                <Descriptions column={2} title={intl.formatMessage({ id: 'LABEL_INPUT' })}>
                     <Descriptions.Item label="Sph 1">{result.input.sph1}</Descriptions.Item>
                     <Descriptions.Item label="Cyl 1">{result.input.cyl1}</Descriptions.Item>
                     <Descriptions.Item label="Axis 1">{result.input.axis1}</Descriptions.Item>
@@ -60,7 +60,7 @@ export default function VSAS() {
                 </Descriptions>}
             <div className="divider"></div>
             {result.output &&
-                <Descriptions column={2} title={intl.formatMessage({ id: 'OUTPUT' })}>
+                <Descriptions column={2} title={intl.formatMessage({ id: 'LABEL_OUTPUT' })}>
                     <Descriptions.Item label="Sph 1 + 2">{result.output.sph1add2}</Descriptions.Item>
                     <Descriptions.Item label="Sph 1 - 2">{result.output.sph1cut2}</Descriptions.Item>
                     <Descriptions.Item label="Cyl 1 + 2">{result.output.cyl1add2}</Descriptions.Item>

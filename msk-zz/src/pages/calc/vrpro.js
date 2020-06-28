@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import Tip from 'components/Tip';
-import { Input, Descriptions } from 'antd';
+import { Descriptions, Input } from 'antd';
+import { calcVRPRO } from 'api/calc';
 import Form from 'components/Form';
 import Result from 'components/Result';
-import { vrpro } from 'api';
+import Tip from 'components/Tip';
+import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
 
 export default function VRPRO() {
@@ -11,7 +11,7 @@ export default function VRPRO() {
     const [result, setResult] = useState({ visible: false, output: null, input: null, error: null });
 
     function calculate(values) {
-        vrpro(values)
+        calcVRPRO.send(values)
             .then(data => {
                 setResult({ visible: true, output: data, input: values });
             })
@@ -59,7 +59,7 @@ export default function VRPRO() {
         </div>
         <Result visible={result.visible} onClose={close}>
             {result.input &&
-                <Descriptions column={2} title={intl.formatMessage({ id: 'INPUT' })}>
+                <Descriptions column={2} title={intl.formatMessage({ id: 'LABEL_INPUT' })}>
                     <Descriptions.Item label="Optical Zone">{result.input.opicZone}</Descriptions.Item>
                     <Descriptions.Item label="C7">{result.input.c7}</Descriptions.Item>
                     <Descriptions.Item label="C8">{result.input.c8}</Descriptions.Item>
@@ -72,7 +72,7 @@ export default function VRPRO() {
                 </Descriptions>}
             <div className="divider"></div>
             {result.output &&
-                <Descriptions column={1} title={intl.formatMessage({ id: 'OUTPUT' })}>
+                <Descriptions column={1} title={intl.formatMessage({ id: 'LABEL_OUTPUT' })}>
                     <Descriptions.Item label="Correct Sph">{result.output.correctSph}</Descriptions.Item>
                     <Descriptions.Item label="Correct Cyl">{result.output.correctCyl}</Descriptions.Item>
                     <Descriptions.Item label="Correct Cyl Axis">{result.output.correctCylAxis}</Descriptions.Item>
