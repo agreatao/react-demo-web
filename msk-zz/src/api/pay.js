@@ -1,8 +1,10 @@
 import Http from 'utils/http';
 
-// export const pay = ({ outTradeNo, type }) => http.post('/alibaba/pay', {
-//     outTradeNo, type
-// });
+// 调起支付
+export const pay = Http.post('/alibaba/pay');
+
+// 查询支付状态
+export const payStatus = Http.post('/alibaba/query');
 
 export const uploadIOL = Http.upload('/alibaba/fileUpload');
 

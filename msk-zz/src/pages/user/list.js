@@ -1,13 +1,14 @@
 import { HomeOutlined } from '@ant-design/icons';
-import { Breadcrumb, Button, Form, Input, Select, Table } from 'antd';
+import { Breadcrumb, Button, Empty, Form, Input, Select, Table } from 'antd';
 import { download, fetchIolList } from 'api/pay';
 import { userList } from 'api/user';
+import { go } from 'components/User';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
-import { useDebounce } from 'utils/hooks';
 import { useHistory } from 'react-router';
+import { useDebounce } from 'utils/hooks';
 import './list.less';
 
 const { Option } = Select;
@@ -83,6 +84,10 @@ export default function IolList() {
             dataIndex: 'zzType',
         },
         {
+            title: intl.formatMessage({ id: 'ATTR_UPLOADER' }),
+            dataIndex: 'user'
+        },
+        {
             title: intl.formatMessage({ id: 'ATTR_CREATEDATE' }),
             dataIndex: 'createDate',
             render: date => moment(date).format("YYYY-MM-DD HH:mm:ss")
@@ -97,7 +102,8 @@ export default function IolList() {
             key: 'operation',
             render: () => <React.Fragment>
                 <a>{intl.formatMessage({ id: 'BTN_GET_RESULT' })}</a>
-                {!!user?.isAdmin && <a>{intl.formatMessage({ id: 'BTN_INPUT_RESULT' })}</a>}
+                {!!user?.isAdmin ? <a>{intl.formatMessage({ id: 'BTN_INPUT_RESULT' })}</a>
+                    : <a>{intl.formatMessage({ id: 'BTN_APPLYREFUND' })}</a>}
             </React.Fragment>
         }
     ]
@@ -144,6 +150,11 @@ export default function IolList() {
                 onChange(page) {
                     setCurrentPage(page);
                 }
+            }}
+            locale={{
+                emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={intl.formatMessage({ id: user ? 'TEXT_DEFAULT_EMPTY' : 'TEXT_NOSIGNIN_EMPTY' })}>
+                    {!user && <Button type='primary' onClick={() => go('login')}>{intl.formatMessage({ id: 'BTN_LOGIN' })}</Button>}
+                </Empty>
             }}
         />
     </React.Fragment>

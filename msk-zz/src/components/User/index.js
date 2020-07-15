@@ -42,21 +42,23 @@ const LoginForm = ({ form }) => {
 };
 
 const RegisterForm = ({ form }) => {
+    const intl = useIntl();
+
     return <Form form={form} {...formItemLayout}>
         <Form.Item name="username"
-            label="Username"
+            label={intl.formatMessage({ id: 'ATTR_USERNAME' })}
             rules={[{ required: true, message: 'Please input your Username!' }]}
         >
             <Input autoComplete="off" />
         </Form.Item>
         <Form.Item name="password"
-            label="Password"
+            label={intl.formatMessage({ id: "ATTR_PASSWORD" })}
             rules={[{ required: true, message: 'Please input your Password!' }]}>
             <Input.Password />
         </Form.Item>
         <Form.Item
             name="confirmPassword"
-            label="Confirm Password"
+            label={intl.formatMessage({ id: "ATTR_CONFIRMPASSWORD" })}
             dependencies={['password']}
             rules={[
                 { required: true, message: 'Please input your Password!' },
@@ -74,7 +76,7 @@ const RegisterForm = ({ form }) => {
         <Form.Item name="nickname"
             label={
                 <span>
-                    Nickname&nbsp;
+                    {intl.formatMessage({ id: "ATTR_NICKNAME" })}&nbsp;
                     <Tooltip title="What do you want others to call you?">
                         <QuestionCircleOutlined />
                     </Tooltip>
@@ -85,7 +87,7 @@ const RegisterForm = ({ form }) => {
             <Input autoComplete="off" />
         </Form.Item>
         <Form.Item name="email"
-            label="E-mail"
+            label={intl.formatMessage({ id: 'ATTR_EMAIL' })}
             rules={[
                 { type: 'email', message: 'The input is not valid E-mail!' },
                 { required: true, message: 'Please input your E-mail!' }
@@ -94,7 +96,7 @@ const RegisterForm = ({ form }) => {
             <Input autoComplete="off" />
         </Form.Item>
         <Form.Item name="phone"
-            label="Phone Number"
+            label={intl.formatMessage({ id: "ATTR_PHONE" })}
             rules={[{ required: true, message: 'Please input your Phone!' }]}
         >
             <Input

@@ -3,9 +3,10 @@ import Tip from 'components/Tip';
 import { Input, Button, Upload, Form } from 'antd';
 import { useIntl } from 'react-intl';
 import { go } from 'components/User';
-import { uploadIOL } from 'api/pay';
+import { uploadIOL, pay, payStatus } from 'api/pay';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import moment from 'moment';
 
 export default function IOL() {
     const intl = useIntl();
@@ -13,30 +14,61 @@ export default function IOL() {
     const [file, setFile] = useState(null);
     const lang = useSelector(state => state.locale.lang);
 
-    function upload() {
-        go().then(user => {
+    /**
+     * 获取订单支付状态的轮询
+     */
+    function getPayStatus(outTradeNo) {
+        return new Promise((resolve, reject) => {
+            let timer;
+            function loop() {
+                timer = setTimeout(() => {
+                    clearTimeout(timer);
+                    payStatus
+                        .send({ outTradeNo })
+                        .then(({ status }) => {
+                            if (status === 'WAIT_BUYER_PAY') // 等待付款
+                                loop();
+                            else if (status === 'TRADE_SUCCESS') // 完成付款
+                                resolve(status);
+                            else reject(status);
+                        })
+                        .catch(e =>
+                            reject(e)
+                        )
+                }, 3000);
+            }
+
+            loop();
+        })
+    }
+
+    async function upload() {
+        try {
+            // 判断是否登录
+            const user = await go();
+            // 付费
+            const type = "IOL";
+            const outTradeNo = moment().format('yyMMddHHmmssSSS');
+            let form = await pay.send({ outTradeNo, type });
+            const formWrapper = document.createElement('div');
+            document.body.append(formWrapper);
+            formWrapper.innerHTML = form;
+            form = document.getElementsByName('punchout_form');
+            form[0].setAttribute('target', '_blank');
+            form[0].submit();
+            // 调起支付后，每3s获取一次订单状态，直到支付完成结束轮询
+            await getPayStatus(outTradeNo);
+            // 上传文件
             const formData = new FormData();
             formData.append('file', file);
+            formData.append('outTradeNo', outTradeNo);
             formData.append('userId', user.id);
-            uploadIOL.send(formData)
-                .then(data => {
-                    console.log(data);
-                });
-            // console.log(user);
-            // 上传文件
-            // console.log(values);
-            // 支付
-
-            // 计算
-
-            // pay({ outTradeNo: new Date().getTime() }).then(data => {
-            //     console.log(data);
-            //     const formWrapper = document.createElement('div');
-            //     document.body.append(formWrapper);
-            //     formWrapper.innerHTML = data.result;
-            //     document.forms[1].submit()
-            // })
-        }).catch(e => { });
+            formData.append('type', type);
+            const uploader = await uploadIOL.send(formData);
+            console.log(uploader);
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     function beforeUpload(file) {
@@ -60,12 +92,12 @@ export default function IOL() {
                         rules={[{ required: true, message: '请上传文件' }]}
                     >
                         <Upload beforeUpload={beforeUpload} customRequest={() => { }} showUploadList={false}>
-                            <Input readOnly />
+                            <Input readOnly value={file?.name} />
                         </Upload>
                     </Form.Item>
-                    <Button type="primary" htmlType='submit'>上传</Button>
+                    <Button type="primary" htmlType='submit'>{intl.formatMessage({ id: 'BTN_UPLOAD' })}</Button>
                 </Button.Group>
-                <Button type="link" onClick={goPage}>查询结果</Button>
+                <Button type="link" onClick={goPage}>{intl.formatMessage({ id: "BTN_SEARCH_RESULT" })}</Button>
             </Form>
         </div>
     </React.Fragment>
