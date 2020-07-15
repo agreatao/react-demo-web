@@ -1,0 +1,30 @@
+#header {
+    position: relative;
+    z-index: 10;
+    max-width: 100%;
+    background: #fff;
+    box-shadow: 0 2px 8px #f0f1f2;
+    margin-bottom: 20px;
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+}
+
+.section {
+    height: 0;
+    flex: 1;
+    display: flex;
+
+    .content {
+        flex: 1;
+        padding: 20px 72px 0 64px;
+    }
+
+    @media (max-width: 576px) {
+        .content {
+            padding: 0 20px;
+        }
+    }
+}
