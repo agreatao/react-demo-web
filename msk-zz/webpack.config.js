@@ -53,10 +53,9 @@ module.exports = {
         }
     },
     optimization: {
-        splitChunks: {
-            chunks: 'all'
-        },
-        runtimeChunk: 'single'
+        runtimeChunk: {
+            name: 'runtime'
+        }
     },
     module: {
         rules: [
@@ -89,7 +88,7 @@ module.exports = {
             },
             {
                 test: /\.(png|jpe?g|svg|gif|ico)$/,
-                include: path.join(__dirname, "src/images"),
+                include: path.join(__dirname, "src/assets/images"),
                 loader: "file-loader",
                 options: {
                     limit: 512,
@@ -181,7 +180,7 @@ module.exports = {
             template: path.join(__dirname, "public", "index.html"),
             filename: ENV === 'production' ? `../templates/index.html` : 'index.html',
             inject: true,
-            chunks: ["runtime", `vendors~common~index`, "common", 'index', `vendors~index`],
+            chunks: ["runtime", "common", 'index'],
             minify: ENV === 'production' ? {
                 removeRedundantAttributes: true, // 删除多余的属性
                 collapseWhitespace: true, // 折叠空白区域
