@@ -1,14 +1,31 @@
-import { Descriptions, Input } from 'antd';
+import { Form, Descriptions, Input, Button, Radio, Row, Col } from 'antd';
 import { calcVSAS } from 'api/calc';
-import Form from 'components/Form';
 import Result from 'components/Result';
 import Tip from 'components/Tip';
 import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
+import Polar from 'components/Chart/Polar';
+import { useSelector } from 'react-redux';
+
+const layout = {
+    xs: 24,
+    sm: 8
+}
+
+const formLayout = {
+    labelCol: {
+        sm: 10
+    },
+    wrapperCol: {
+        sm: 14
+    }
+}
 
 export default function VSAS() {
+    const width = useSelector(state => state.browser.width);
     const intl = useIntl();
     const [result, setResult] = useState({ visible: false, output: null, input: null, error: null });
+    const [chartType, setChartType] = useState('single');
 
     function calculate(values) {
         calcVSAS.send(values)
@@ -27,47 +44,88 @@ export default function VSAS() {
     return <React.Fragment>
         <Tip method="VSAS" tips={["INSTRUCTIONS"]} />
         <div className="calculate-wrapper">
-            <Form onFinish={calculate}>
-                <Form.Item label="Sph 1" name="sph1" rules={[{ required: true }]}>
-                    <Input autoComplete="off" />
-                </Form.Item>
-                <Form.Item label="Cyl 1" name="cyl1" rules={[{ required: true }]}>
-                    <Input autoComplete="off" />
-                </Form.Item>
-                <Form.Item label="Axis 1" name="axis1" rules={[{ required: true }]}>
-                    <Input autoComplete="off" />
-                </Form.Item>
-                <Form.Item label="Sph 2" name="sph2" rules={[{ required: true }]}>
-                    <Input autoComplete="off" />
-                </Form.Item>
-                <Form.Item label="Cyl 2" name="cyl2" rules={[{ required: true }]}>
-                    <Input autoComplete="off" />
-                </Form.Item>
-                <Form.Item label="Axis 2" name="axis2" rules={[{ required: true }]}>
-                    <Input autoComplete="off" />
+            <Form {...formLayout} onFinish={calculate} className="calculate-form">
+                <Row gutter={24}>
+                    <Col {...layout}>
+                        <Form.Item label="Sph A" name="sph1" rules={[{ required: true }]}>
+                            <Input autoComplete="off" />
+                        </Form.Item>
+                    </Col>
+                    <Col {...layout}>
+                        <Form.Item label="Cyl A" name="cyl1" rules={[{ required: true }]}>
+                            <Input autoComplete="off" />
+                        </Form.Item>
+                    </Col>
+                    <Col {...layout}>
+                        <Form.Item label="Axis A" name="axis1" rules={[{ required: true }]}>
+                            <Input autoComplete="off" />
+                        </Form.Item>
+                    </Col>
+                    <Col {...layout}>
+                        <Form.Item label="Sph B" name="sph2" rules={[{ required: true }]}>
+                            <Input autoComplete="off" />
+                        </Form.Item>
+                    </Col>
+                    <Col {...layout}>
+                        <Form.Item label="Cyl B" name="cyl2" rules={[{ required: true }]}>
+                            <Input autoComplete="off" />
+                        </Form.Item>
+                    </Col>
+                    <Col {...layout}>
+                        <Form.Item label="Axis B" name="axis2" rules={[{ required: true }]}>
+                            <Input autoComplete="off" />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Form.Item wrapperCol={{
+                    sm: { span: 20, offset: 4 }
+                }}>
+                    <Button className="calculate-btn" type="primary" htmlType="submit">{intl.formatMessage({ id: "BTN_CALCULATE" })}</Button>
+                    <Button className="calculate-btn">{intl.formatMessage({ id: "BTN_CLEAR" })}</Button>
                 </Form.Item>
             </Form>
+
         </div>
         <Result visible={result.visible} onClose={close}>
             {result.input &&
-                <Descriptions column={2} title={intl.formatMessage({ id: 'LABEL_INPUT' })}>
-                    <Descriptions.Item label="Sph 1">{result.input.sph1}</Descriptions.Item>
-                    <Descriptions.Item label="Cyl 1">{result.input.cyl1}</Descriptions.Item>
-                    <Descriptions.Item label="Axis 1">{result.input.axis1}</Descriptions.Item>
-                    <Descriptions.Item label="Sph 2">{result.input.sph2}</Descriptions.Item>
-                    <Descriptions.Item label="Cyl 2">{result.input.cyl2}</Descriptions.Item>
-                    <Descriptions.Item label="Axis 2">{result.input.axis2}</Descriptions.Item>
+                <Descriptions size="small" bordered colon={false} column={3} title={intl.formatMessage({ id: 'LABEL_INPUT' })} layout="vertical">
+                    <Descriptions.Item label="Sph A">{result.input.sph1}</Descriptions.Item>
+                    <Descriptions.Item label="Cyl A">{result.input.cyl1}</Descriptions.Item>
+                    <Descriptions.Item label="Axis A">{result.input.axis1}</Descriptions.Item>
+                    <Descriptions.Item label="Sph B">{result.input.sph2}</Descriptions.Item>
+                    <Descriptions.Item label="Cyl B">{result.input.cyl2}</Descriptions.Item>
+                    <Descriptions.Item label="Axis B">{result.input.axis2}</Descriptions.Item>
                 </Descriptions>}
-            <div className="divider"></div>
             {result.output &&
-                <Descriptions column={2} title={intl.formatMessage({ id: 'LABEL_OUTPUT' })}>
-                    <Descriptions.Item label="Sph 1 + 2">{result.output.sph1add2}</Descriptions.Item>
-                    <Descriptions.Item label="Sph 1 - 2">{result.output.sph1cut2}</Descriptions.Item>
-                    <Descriptions.Item label="Cyl 1 + 2">{result.output.cyl1add2}</Descriptions.Item>
-                    <Descriptions.Item label="Cyl 1 - 2">{result.output.cyl1cut2}</Descriptions.Item>
-                    <Descriptions.Item label="Axis 1 + 2">{result.output.axis1add2}</Descriptions.Item>
-                    <Descriptions.Item label="Axis 1 - 2">{result.output.axis1cut2}</Descriptions.Item>
+                <Descriptions size="small" bordered colon={false} column={3} title={intl.formatMessage({ id: 'LABEL_OUTPUT' })} layout="vertical">
+                    <Descriptions.Item label="Sph A + B">{result.output.sph1add2}</Descriptions.Item>
+                    <Descriptions.Item label="Cyl A + B">{result.output.cyl1add2}</Descriptions.Item>
+                    <Descriptions.Item label="Axis A + B">{result.output.axis1add2}</Descriptions.Item>
+                    <Descriptions.Item label="Sph A - B">{result.output.sph1cut2}</Descriptions.Item>
+                    <Descriptions.Item label="Cyl A - B">{result.output.cyl1cut2}</Descriptions.Item>
+                    <Descriptions.Item label="Axis A - B">{result.output.axis1cut2}</Descriptions.Item>
                 </Descriptions>}
+            <div>
+                <Radio.Group
+                    options={[{ label: intl.formatMessage({ id: 'BTN_SINGLE' }), value: 'single' }, { label: intl.formatMessage({ id: 'BTN_DOUBLE' }), value: 'double' }]}
+                    onChange={e => setChartType(e.target.value)}
+                    value={chartType}
+                    optionType="button"
+                />
+            </div>
+            <div>
+                <Polar
+                    type={chartType}
+                    data={result.input && result.output ? [
+                        [+result.input.cyl1, +result.input.axis1, 'A'],
+                        [+result.input.cyl2, +result.input.axis2, 'B'],
+                        [result.output.cyl1add2, result.output.axis1add2, 'A+B'],
+                        [result.output.cyl1cut2, result.output.axis1cut2, 'A-B'],
+                    ] : []}
+                    width={width < 576 ? 320 : 400}
+                    height={width < 576 ? 320 : 400}
+                />
+            </div>
         </Result>
     </React.Fragment>
 }

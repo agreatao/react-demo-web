@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef, useImperativeHandle, forwardRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
@@ -39,12 +39,14 @@ export default function Nav({ context }) {
     const intl = useIntl();
     const history = useHistory();
     const Component = useMemo(() => width < 1024 ? Drawer : ({ children }) => <div className="nav-wrapper">{children}</div>, [width]);
+    const drawer = useRef();
 
     function go(path) {
         history.push(`/${lang}/${path}`);
+        typeof drawer.current?.close == 'function' && drawer.current.close();
     }
 
-    return nav[context] ? <Component>
+    return nav[context] ? <Component ref={drawer}>
         <div className="nav">
             {nav[context].map(({ disable, path, label, title }) => {
                 return <React.Fragment key={path}>
@@ -70,17 +72,25 @@ function Link({ children, path, disable = false, onClick }) {
     return <a onClick={go} className={classnames('nav-item', { 'disable': disable, 'active': pathname === path.split('/')[1] })}>{children}</a>
 }
 
-function Drawer({ children }) {
-    const [open, setOpen] = useState(false);
-    return createPortal(<div className="drawer-wrapper">
-        <div className={classnames("drawer", "drawer-left", { "drawer-open": open })}>
-            <div className="drawer-mask"></div>
-            <div className="drawer-content-wrapper">
-                <div className="drawer-content">{children}</div>
-                <div className="drawer-handle" onClick={() => setOpen(!open)}>
-                    <i className="drawer-handle-icon" />
+const Drawer = forwardRef(
+    function ({ children }, ref) {
+        const [open, setOpen] = useState(false);
+
+        useImperativeHandle(ref, () => ({
+            close() {
+                setOpen(false);
+            }
+        }))
+
+        return createPortal(<div className="drawer-wrapper">
+            <div className={classnames("drawer", "drawer-left", { "drawer-open": open })}>
+                <div className="drawer-mask"></div>
+                <div className="drawer-content-wrapper">
+                    <div className="drawer-content">{children}</div>
+                    <div className="drawer-handle" onClick={() => setOpen(!open)}>
+                        <i className="drawer-handle-icon" />
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>, document.body);
-}
+        </div>, document.body);
+    })

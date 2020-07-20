@@ -51,6 +51,8 @@
     "BTN_SEARCH": "搜索",
     "BTN_BACK": "返回",
     "BTN_UPLOAD": "上传",
+    "BTN_SINGLE": "单倍",
+    "BTN_DOUBLE": "双倍",
     "BTN_SEARCH_RESULT": "查询结果",
     "BTN_GET_RESULT": "获取结果",
     "BTN_INPUT_RESULT": "录入结果",

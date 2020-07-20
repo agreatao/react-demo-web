@@ -21,3 +21,34 @@
     font-size: 16px;
     line-height: 1.5715;
 }
+
+.calculate-form {
+    width: 625px;
+    margin: 0 auto;
+}
+
+.calculate-btn {
+    width: 110px;
+
+    &+.calculate-btn {
+        margin-left: 20px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .calculate-form {
+        width: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .calculate-btn {
+        display: block;
+        width: 100%;
+
+        &+.calculate-btn {
+            margin-top: 8px;
+            margin-left: 0;
+        }
+    }
+}

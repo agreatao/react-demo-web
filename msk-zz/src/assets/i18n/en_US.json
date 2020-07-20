@@ -51,6 +51,8 @@
     "BTN_SEARCH": "Search",
     "BTN_BACK": "Back",
     "BTN_UPLOAD": "Upload",
+    "BTN_SINGLE": "Single",
+    "BTN_DOUBLE": "Double",
     "BTN_SEARCH_RESULT": "Search Result",
     "BTN_GET_RESULT": "Get Result",
     "BTN_INPUT_RESULT": "Input Result",
