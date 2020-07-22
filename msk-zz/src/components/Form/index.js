@@ -16,7 +16,7 @@ function CForm(props) {
     }, [lang])
 
     const validateMessages = {
-        required: intl.formatMessage({ id: 'FORM_RULE_REQUIRED' })
+        required: intl.formatMessage({ id: 'form.rules.required' })
     }
 
     function reset() {
@@ -57,8 +57,8 @@ function CForm(props) {
             </Row>
         )}
         <Form.Item {...formLastLayout}>
-            <Button size="large" className="calculate-btn" htmlType="submit" type="primary">{intl.formatMessage({ id: 'BTN_CALCULATE' })}</Button>
-            <Button size="large" className="calculate-btn" onClick={reset}>{intl.formatMessage({ id: 'BTN_CLEAR' })}</Button>
+            <Button size="large" className="calculate-btn" htmlType="submit" type="primary">{intl.formatMessage({ id: 'btn.calc' })}</Button>
+            <Button size="large" className="calculate-btn" onClick={reset}>{intl.formatMessage({ id: 'btn.clear' })}</Button>
         </Form.Item>
     </Form>
 }

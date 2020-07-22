@@ -7,27 +7,26 @@ import { useHistory } from 'react-router';
 import './drawer.less';
 import './nav.less';
 
-
 const nav = {
     calc: [
         //
-        { label: 'ZZ IOL', path: 'calc/iol', title: 'TITLE_CHARGE' },
-        { label: 'ZZ Toric IOL', path: 'calc/tiol' },
+        { label: 'ZZ IOL', path: 'calc/iol', title: 'charge' },
+        { disable: true, label: 'ZZ Toric IOL', path: 'calc/tiol' },
         //
-        { label: 'VR', path: 'calc/vr', title: 'TITLE_RS' },
-        { disable: true, label: 'VR pro', path: 'calc/vrpro' },
+        { label: 'ZZ VR', path: 'calc/vr', title: 'rs' },
+        { disable: true, label: 'ZZ VR pro', path: 'calc/vrpro' },
         { label: 'ZZ LSA', path: 'calc/lsa' },
         //
-        { label: 'ZZ ICL', path: 'calc/icl', title: 'TITLE_ICL' },
+        { label: 'ZZ ICL', path: 'calc/icl', title: 'icl' },
         { label: 'ZZ ICL Vault', path: 'calc/iclv' },
         { label: 'ZZ TICL Rotation', path: 'calc/ticl' },
         //
-        { label: 'ZZ SIA', path: 'calc/sia', title: 'TITLE_TOOLS' },
+        { label: 'ZZ SIA', path: 'calc/sia', title: 'tools' },
         { label: 'ZZ Vector Sum & Sub', path: 'calc/vsas' },
         { label: 'ZZ Mean ± SD Vector', path: 'calc/mean' },
         { label: 'ZZ EX500 OPMI', path: 'calc/exop' },
         //
-        { label: 'ZZ Ortho-K Glasses', path: 'calc/ok', title: 'TITLE_KM' },
+        { label: 'ZZ Ortho-K Glasses', path: 'calc/ok', title: 'ok' },
     ],
     // user: [
     //     { label: '返回', path: 'calc/iol' }
@@ -38,7 +37,7 @@ export default function Nav({ context }) {
     const { width, lang } = useSelector(state => ({ lang: state.locale.lang, width: state.browser.width }));
     const intl = useIntl();
     const history = useHistory();
-    const Component = useMemo(() => width < 1024 ? Drawer : ({ children }) => <div className="nav-wrapper">{children}</div>, [width]);
+    const Component = useMemo(() => width < 1024 ? Drawer : forwardRef(({ children }, ref) => <div className="nav-wrapper">{children}</div>), [width]);
     const drawer = useRef();
 
     function go(path) {
@@ -50,7 +49,7 @@ export default function Nav({ context }) {
         <div className="nav">
             {nav[context].map(({ disable, path, label, title }) => {
                 return <React.Fragment key={path}>
-                    {title && <div className="nav-title">{intl.formatMessage({ id: title })}</div>}
+                    {title && <div className="nav-title">{intl.formatMessage({ id: `nav.title.${title}` })}</div>}
                     <Link disable={disable} onClick={go} path={path}>{label}</Link>
                 </React.Fragment>
             })}

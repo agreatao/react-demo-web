@@ -12,9 +12,8 @@ const antd_lang = {
 
 export default function LocaleProvider({ children, languages = {} }) {
     const lang = useSelector(state => state.locale.lang);
-    
     return <ConfigProvider locale={antd_lang[lang]}>
-        <IntlProvider locale='en' messages={languages[lang]}>
+        <IntlProvider locale='en' messages={languages[lang]} onError={(e) => { }}>
             {children}
         </IntlProvider>
     </ConfigProvider>

@@ -28,14 +28,16 @@ const formItemLayout = {
 };
 
 const LoginForm = ({ form }) => {
+    const intl = useIntl();
+
     return <Form form={form}>
         <Form.Item name="username"
-            rules={[{ required: true, message: 'Please input your Username!' }]}
+            rules={[{ required: true, message: intl.formatMessage({ id: 'form.rules.required.username' }) }]}
         >
             <Input prefix={<UserOutlined className="site-form-item-icon" />} autoComplete="off" />
         </Form.Item>
         <Form.Item name="password"
-            rules={[{ required: true, message: 'Please input your Password!' }]}>
+            rules={[{ required: true, message: intl.formatMessage({ id: 'form.rules.required.password' }) }]}>
             <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} autoComplete="off" />
         </Form.Item>
     </Form>
@@ -46,28 +48,29 @@ const RegisterForm = ({ form }) => {
 
     return <Form form={form} {...formItemLayout}>
         <Form.Item name="username"
-            label={intl.formatMessage({ id: 'ATTR_USERNAME' })}
-            rules={[{ required: true, message: 'Please input your Username!' }]}
+            label={intl.formatMessage({ id: 'form.field.username' })}
+            rules={[{ required: true, message: intl.formatMessage({ id: 'form.rules.required.username' }) }]}
         >
             <Input autoComplete="off" />
         </Form.Item>
         <Form.Item name="password"
-            label={intl.formatMessage({ id: "ATTR_PASSWORD" })}
-            rules={[{ required: true, message: 'Please input your Password!' }]}>
+            label={intl.formatMessage({ id: "form.field.password" })}
+            rules={[{ required: true, message: intl.formatMessage({ id: 'form.rules.required.password' }) }]}>
             <Input.Password />
         </Form.Item>
         <Form.Item
             name="confirmPassword"
-            label={intl.formatMessage({ id: "ATTR_CONFIRMPASSWORD" })}
+            label={intl.formatMessage({ id: "form.field.confirmPassword" })}
             dependencies={['password']}
             rules={[
-                { required: true, message: 'Please input your Password!' },
+                { required: true, message: intl.formatMessage({ id: 'form.rules.required.confirmPassword' }) },
                 ({ getFieldValue }) => ({
                     validator(rule, value) {
                         if (!value || getFieldValue('password') === value) {
                             return Promise.resolve();
                         }
-                        return Promise.reject('The two passwords that you entered do not match!');
+                        //'The two passwords that you entered do not match!'
+                        return Promise.reject(intl.formatMessage({ id: "form.rules.confirmPassword.different" }));
                     },
                 }),
             ]}>
@@ -76,28 +79,28 @@ const RegisterForm = ({ form }) => {
         <Form.Item name="nickname"
             label={
                 <span>
-                    {intl.formatMessage({ id: "ATTR_NICKNAME" })}&nbsp;
-                    <Tooltip title="What do you want others to call you?">
+                    {intl.formatMessage({ id: "form.field.nickname" })}&nbsp;
+                    <Tooltip title={intl.formatMessage({ id: "form.field.nickname.tooltip" })}>
                         <QuestionCircleOutlined />
                     </Tooltip>
                 </span>
             }
-            rules={[{ required: true, message: 'Please input your Nickname!', whitespace: true }]}
+            rules={[{ required: true, message: intl.formatMessage({ id: "form.rules.required.nickname" }), whitespace: true }]}
         >
             <Input autoComplete="off" />
         </Form.Item>
         <Form.Item name="email"
-            label={intl.formatMessage({ id: 'ATTR_EMAIL' })}
+            label={intl.formatMessage({ id: 'form.field.email' })}
             rules={[
-                { type: 'email', message: 'The input is not valid E-mail!' },
-                { required: true, message: 'Please input your E-mail!' }
+                { required: true, message: intl.formatMessage({ id: "form.rules.required.email" }) },
+                { type: 'email', message: intl.formatMessage({ id: "form.rules.email.valid" }) }, //'The input is not valid E-mail!'
             ]}
         >
             <Input autoComplete="off" />
         </Form.Item>
         <Form.Item name="phone"
-            label={intl.formatMessage({ id: "ATTR_PHONE" })}
-            rules={[{ required: true, message: 'Please input your Phone!' }]}
+            label={intl.formatMessage({ id: "form.field.phone" })}
+            rules={[{ required: true, message: intl.formatMessage({ id: "form.rules.required.phone" }) }]}
         >
             <Input
                 addonBefore="+86"
@@ -165,10 +168,10 @@ export default function UserModal({ defaultActiveTab = 'login', onCancel, onLogi
 
     return <Modal width={480} centered destroyOnClose visible={visible} onCancel={handleCancel} onOk={handleSubmit}>
         <Tabs activeKey={activeTab} onChange={handleTabChange}>
-            <Tabs.TabPane tab={intl.formatMessage({ id: 'BTN_LOGIN' })} key="login">
+            <Tabs.TabPane tab={intl.formatMessage({ id: 'btn.login' })} key="login">
                 <LoginForm form={loginForm} />
             </Tabs.TabPane>
-            <Tabs.TabPane tab={intl.formatMessage({ id: 'BTN_REGISTER' })} key="register">
+            <Tabs.TabPane tab={intl.formatMessage({ id: 'btn.register' })} key="register">
                 <RegisterForm form={registerForm} />
             </Tabs.TabPane>
         </Tabs>

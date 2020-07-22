@@ -131,7 +131,7 @@ export default function Polar({
             .text(d => d[2]);
 
         current.g.selectAll(".point")
-            .data(data)
+            .data(data.filter(item => item[0] > 0))
             .enter()
             .append("line")
             .attr("class", "point")

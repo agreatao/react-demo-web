@@ -7,25 +7,26 @@ import { useIntl } from 'react-intl';
 import Polar from 'components/Chart/Polar';
 import { useSelector } from 'react-redux';
 
-const layout = {
-    xs: 24,
-    sm: 8
-}
-
-const formLayout = {
-    labelCol: {
-        sm: 10
-    },
-    wrapperCol: {
-        sm: 14
-    }
-}
-
 export default function VSAS() {
+    const [form] = Form.useForm();
     const width = useSelector(state => state.browser.width);
     const intl = useIntl();
     const [result, setResult] = useState({ visible: false, output: null, input: null, error: null });
     const [chartType, setChartType] = useState('single');
+
+    const layout = {
+        xs: 24,
+        sm: 8
+    }
+
+    const formLayout = {
+        labelCol: {
+            sm: 10
+        },
+        wrapperCol: {
+            sm: 14
+        }
+    }
 
     function calculate(values) {
         calcVSAS.send(values)
@@ -41,10 +42,14 @@ export default function VSAS() {
         setResult({ visible: false, output: null, input: null, error: null });
     }
 
+    function handleReset() {
+        form.resetFields();
+    }
+
     return <React.Fragment>
-        <Tip method="VSAS" tips={["INSTRUCTIONS"]} />
+        <Tip method="vsas" />
         <div className="calculate-wrapper">
-            <Form {...formLayout} onFinish={calculate} className="calculate-form">
+            <Form form={form} {...formLayout} onFinish={calculate} className="calculate-form">
                 <Row gutter={24}>
                     <Col {...layout}>
                         <Form.Item label="Sph A" name="sph1" rules={[{ required: true }]}>
@@ -80,15 +85,14 @@ export default function VSAS() {
                 <Form.Item wrapperCol={{
                     sm: { span: 20, offset: 4 }
                 }}>
-                    <Button className="calculate-btn" type="primary" htmlType="submit">{intl.formatMessage({ id: "BTN_CALCULATE" })}</Button>
-                    <Button className="calculate-btn">{intl.formatMessage({ id: "BTN_CLEAR" })}</Button>
+                    <Button className="calculate-btn" type="primary" htmlType="submit">{intl.formatMessage({ id: "btn.calc" })}</Button>
+                    <Button className="calculate-btn" onClick={handleReset}>{intl.formatMessage({ id: "btn.clear" })}</Button>
                 </Form.Item>
             </Form>
-
         </div>
         <Result visible={result.visible} onClose={close}>
             {result.input &&
-                <Descriptions size="small" bordered colon={false} column={3} title={intl.formatMessage({ id: 'LABEL_INPUT' })} layout="vertical">
+                <Descriptions size="small" bordered colon={false} column={3} title={intl.formatMessage({ id: 'text.input' })} layout="vertical">
                     <Descriptions.Item label="Sph A">{result.input.sph1}</Descriptions.Item>
                     <Descriptions.Item label="Cyl A">{result.input.cyl1}</Descriptions.Item>
                     <Descriptions.Item label="Axis A">{result.input.axis1}</Descriptions.Item>
@@ -97,7 +101,7 @@ export default function VSAS() {
                     <Descriptions.Item label="Axis B">{result.input.axis2}</Descriptions.Item>
                 </Descriptions>}
             {result.output &&
-                <Descriptions size="small" bordered colon={false} column={3} title={intl.formatMessage({ id: 'LABEL_OUTPUT' })} layout="vertical">
+                <Descriptions size="small" bordered colon={false} column={3} title={intl.formatMessage({ id: 'text.output' })} layout="vertical">
                     <Descriptions.Item label="Sph A + B">{result.output.sph1add2}</Descriptions.Item>
                     <Descriptions.Item label="Cyl A + B">{result.output.cyl1add2}</Descriptions.Item>
                     <Descriptions.Item label="Axis A + B">{result.output.axis1add2}</Descriptions.Item>
@@ -107,7 +111,7 @@ export default function VSAS() {
                 </Descriptions>}
             <div>
                 <Radio.Group
-                    options={[{ label: intl.formatMessage({ id: 'BTN_SINGLE' }), value: 'single' }, { label: intl.formatMessage({ id: 'BTN_DOUBLE' }), value: 'double' }]}
+                    options={[{ label: intl.formatMessage({ id: 'btn.single' }), value: 'single' }, { label: intl.formatMessage({ id: 'btn.double' }), value: 'double' }]}
                     onChange={e => setChartType(e.target.value)}
                     value={chartType}
                     optionType="button"

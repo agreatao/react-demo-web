@@ -27,13 +27,13 @@ function SignInButton() {
     }
 
     const menu = <Menu>
-        <Menu.Item><a onClick={goList}>{intl.formatMessage({ id: user?.isAdmin ? 'BTN_INPUT_RESULT' : 'BTN_GET_RESULT' })}</a></Menu.Item>
-        <Menu.Item><a onClick={handleLogout}>{intl.formatMessage({ id: 'BTN_LOGOUT' })}</a></Menu.Item>
+        <Menu.Item><a onClick={goList}>{intl.formatMessage({ id: user?.isAdmin ? 'btn.inputResult' : 'btn.getResult' })}</a></Menu.Item>
+        <Menu.Item><a onClick={handleLogout}>{intl.formatMessage({ id: 'btn.logout' })}</a></Menu.Item>
     </Menu>
 
     return user ? <Dropdown overlay={menu} trigger={["click"]}>
         <Button type='link'>{user.nickname}<DownOutlined /></Button>
-    </Dropdown> : <Button type="link" onClick={() => go('login')}>{intl.formatMessage({ id: 'BTN_LOGIN' })}</Button>
+    </Dropdown> : <Button type="link" onClick={() => go('login')}>{intl.formatMessage({ id: 'btn.login' })}</Button>
 }
 
 export default function Master({ children, match }) {

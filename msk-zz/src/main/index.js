@@ -12,6 +12,7 @@ import "theme/index.less";
 import asyncComponent from 'utils/asyncComponent';
 import browserBind from "./browserBind";
 import "./index.less";
+import stripJsonComments from 'strip-json-comments';
 
 const history = createBrowserHistory();
 
@@ -23,7 +24,7 @@ Promise.all([
     axios.get('/i18n/en_US.json').then(({ data }) => data),
     axios.get('/i18n/zh_CN.json').then(({ data }) => data),
 ]).then(([en_US, zh_CN]) => {
-    window.LANGUAGES = { en_US, zh_CN };
+    window.LANGUAGES = { en_US: JSON.parse(stripJsonComments(en_US)), zh_CN: JSON.parse(stripJsonComments(zh_CN)) };
     const { pathname } = history.location;
     const defaultLang = pathname.split('/')[1] || 'en_US';
     dispatch({ type: '@Locale/CHANGE', lang: defaultLang });
