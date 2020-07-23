@@ -159,7 +159,7 @@ module.exports = {
         }),
         new CopyWebpackPlugin([
             { from: 'public/file', to: 'file' },
-            { from: 'src/assets/i18n', to: 'i18n' }
+            { from: 'public/i18n', to: 'i18n' }
         ]),
         new OptimizeCSSAssetsPlugin({
             // 默认是全部的CSS都压缩，该字段可以指定某些要处理的文件

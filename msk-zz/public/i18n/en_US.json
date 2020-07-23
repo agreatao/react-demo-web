@@ -1,16 +1,13 @@
 {
-    // 导航标题
     "nav.title.charge": "Charge",
     "nav.title.rs": "Refractive Surgery",
     "nav.title.icl": "ICL Refractive Surgery",
     "nav.title.tools": "Tools",
     "nav.title.ok": "Ortho-K glasses",
-    // Tip Component
     "tip.title.instructions": "Instructions",
     "tip.title.notes": "Notes",
     "tip.title.rawdata": "Raw Data",
     "tip.title.pay": "Pay",
-    // Button
     "btn.calc": "Calculate",
     "btn.clear": "Clear",
     "btn.login": "Sign in",
@@ -27,14 +24,12 @@
     "btn.applyRefund": "Apply Refund",
     "btn.addRow": "Add",
     "btn.clickHere": "Click Here",
-    // Table Column
     "col.filename": "File Name",
     "col.zzType": "ZZ Formula",
     "col.uploader": "Uploader",
     "col.createDate": "Create Date",
     "col.status": "Status",
     "col.operation": "Operation",
-    // Form Field
     "form.field.username": "Username",
     "form.field.password": "Password",
     "form.field.confirmPassword": "Confirm Password",
@@ -44,7 +39,6 @@
     "form.field.phone": "Phone",
     "form.field.filename": "Filename",
     "form.field.user": "User",
-    // Form rules
     "form.rules.required": "the field is required",
     "form.rules.required.username": "Please input your username!",
     "form.rules.required.password": "Please input your password",
@@ -56,79 +50,65 @@
     "form.rules.required.phone": "Please input the phone",
     "form.rules.required.upload": "Please upload the file",
     "form.rules.upload.zcsError": "the file suffix is .zcs",
-    // Text
     "text.input": "Input",
     "text.output": "Output",
     "text.noLogin": "No Sign in",
     "text.noData": "No Data",
-    // 算法
-    // iol
     "calc.iol.name": "",
     "calc.iol.instructions": "",
     "calc.iol.notes": "(Self filling is not available)\nUpload the value of A constant, Target D, AL, LT (Optional) and the raw data of corneal tomographic is needed;\nAL=Axial Length, LT=Lens Thickness",
     "calc.iol.rawdata": "Currently only CSO Sirius or Zeus .zcs documents are supported (include more than 3 repeatable results)\nAfter the payment is successful",
     "calc.iol.pay": "RMB 200 Each (After the payment is successful, the result will be given within 48 hours)",
-    // tiol
     "calc.tiol.name": "",
     "calc.tiol.instructions": "",
     "calc.tiol.notes": "(Self filling is not available)\nUpload the value of A constant, Target D, AL, LT (Optional), SIA D, SIA Axis and the raw data of corneal tomographic is needed;\nAL=Axial Length, LT=Lens Thickness, SIA=Surgically Induced Astigmatism",
     "calc.tiol.rawdata": "Currently only CSO Sirius or Zeus .zcs documents are supported (include more than 3 repeatable results)",
     "calc.tiol.pay": "RMB 200 Each (After the payment is successful, the result will be given within 48 hours)",
-    // ar
     "calc.ar.name": "ZZ AR (Auto-compensation Refraction) Calculator",
     "calc.ar.instructions": "Used to assist surgical strategy planning for Topo-Guide refractive surgery, By calculating the compensation diopter while correcting HOAs for virgin cornea",
     "calc.ar.notes": "Mani=Manifested; TMR=Topogray Modified Refraction; AR=After Auto-compensation (No Nomogramm)",
     "calc.ar.rawdata": "",
     "calc.ar.pay": "",
-    // vr
     "calc.vr.name": "ZZ VR (Vector-compensation Refraction) Calculator",
     "calc.vr.instructions": "Used to assist surgical strategy planning for Topo-Guide / Wavefront-Guide refractive surgery, By calculating the compensation diopter while correcting HOAs for virgin cornea",
     "calc.vr.notes": "C7~C13=Corresponded HOAs under selected Opic Zone in the excimer device, Optical Society of America(OSA) Standard (μm); Mani=Manifest refraction; VR=After vector-compensation (No Nomogramm)",
     "calc.vr.rawdata": "",
     "calc.vr.pay": "",
-    // vrpro
     "calc.vrpro.name": "ZZ VR (Vector-compensation Refraction) Pro Calculator",
     "calc.vrpro.instructions": "Used to assist surgical strategy planning for Topo-Guide / Wavefront-Guide refractive surgery, By calculating the compensation diopter while correcting HOAs for special treatment",
     "calc.vrpro.notes": "C7~C13=Corresponded HOAs under selected Opic Zone in the excimer device, Optical Society of America(OSA) Standard (μm); Mani=Manifest refraction; VR=After vector-compensation (No Nomogramm)",
     "calc.vrpro.rawdata": "",
     "calc.vrpro.pay": "",
-    // lsa
     "calc.lsa.name": "",
     "calc.lsa.instructions": "Design of surgical strategy for Q-value guide refractive surgery To calculate the ΔQ, for obtaining the expected ΔLSA (Longitudinal Spherical Aberration, Diopter)",
     "calc.lsa.notes": "Vertex K=Tangential Curvature; SE=Spherical Equivalent; e=ecc of cornea;",
     "calc.lsa.rawdata": "",
     "calc.lsa.pay": "",
-    // icl
     "calc.icl.name": "",
     "calc.icl.instructions": "Selection of ICL(Implantable Collamer Lens)\nTo calculate the ICL refraction and estimated vaulting hight",
     "calc.icl.notes": "Mani=Manifest refraction; SIA=Surgically Induced Astigmatism; CT=Corneal Thickness; AC=Anterior Chambler Depth (Internal); LT=Lens Thickness (Optional); H(0) to V(90)=Direction of ICL major axis; STS=Sulcus to Sulcus; H/V=Horizontal / Vertical",
     "calc.icl.rawdata": "",
     "calc.icl.pay": "",
-    // iclv
     "calc.iclv.name": "",
     "calc.iclv.instructions": "Selection of ICL (Implantable Collamer Lens) Diameter\nTo estimated vaulting hight after ICL implantation",
     "calc.iclv.notes": "LT=Lens Thickness; H(0) to V(90)=Direction of ICL major axis; STS=Sulcus to Sulcus; H/V=Horizontal / Vertical",
     "calc.iclv.rawdata": "",
     "calc.iclv.pay": "",
-    // ticl
     "calc.ticl.name": "",
     "calc.ticl.instructions": "Design of surgical strategy for adjustment of TICL(Toric Implantable Collamer Lens) axis error. To calculate the adjustment direction and angle of TICL in the current state, in order to reduce the residual astigmatism",
     "calc.ticl.notes": "No new main incision; no replacement of TICL; Mani=Manifest refraction before TICL implantation; Resi=Residual manifest refraction after TICL implantation; SIA=Surgically Induced Astigmatism; Esti=Estimated diopter",
     "calc.ticl.rawdata": "",
     "calc.ticl.pay": "",
-    // sia
     "calc.sia.name": "ZZ SIA (Surgically Induced Astigmatism) Calculator",
     "calc.sia.instructions": "Used to calculate the diopter after introducing SIA",
     "calc.sia.notes": "",
     "calc.sia.rawdata": "",
     "calc.sia.pay": "",
-    // vsas
     "calc.vsas.name": "ZZ Vector-Refraction Calculator",
     "calc.vsas.instructions": "Used to calculate the vector-sum or vector-substraction of two diopters",
     "calc.vsas.notes": "",
     "calc.vsas.rawdata": "",
     "calc.vsas.pay": "",
-    // mean
     "calc.mean.name": "ZZ Mean ± SD (Standard Deviation) of Vector-refraction Calculator",
     "calc.mean.instructions": "Used to calculate the Mean ± SD of multiple diopters",
     "calc.mean.notes": "Add rows by data amount",
@@ -136,13 +116,11 @@
     "calc.mean.pay": "",
     "calc.mean.tip1": "you can use a file",
     "calc.mean.tip2": "to import data, please ",
-    // exop
     "calc.exop.name": "ZZ EX500 Visual Axis Tracking Calculator",
     "calc.exop.instructions": "Adjust aiming beam according to ZZ EX500 method, to make ablation centered on the optic axis",
     "calc.exop.notes": "K=Tangential curvature of corneal vertical axis; G-R=Distance between Green dot and Red dot",
     "calc.exop.rawdata": "",
     "calc.exop.pay": "",
-    // ok
     "calc.ok.name": "ZZ OK (Orthokeratoloy) Lens Fitting Calculator for Central Area Abnormal Cornea (e.g. post refractive surgery, etc.)",
     "calc.ok.instructions": "",
     "calc.ok.notes": "K (9mm)=Mean tangential curvature of 9mm of corneal flat axis; AC=Simulated Sim-K of normal cornea",
