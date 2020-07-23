@@ -25,7 +25,7 @@ export default function SIA() {
     }
 
     return <React.Fragment>
-        <Tip method="SIA" tips={["INSTRUCTIONS"]} />
+        <Tip method="sia"  />
         <div className="calculate-wrapper">
             <Form onFinish={calculate}>
                 <Form.Item label="Mani Sph" name="maniSph" rules={[{ required: true }]}>

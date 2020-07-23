@@ -25,7 +25,7 @@ export default function TICL() {
     }
 
     return <React.Fragment>
-        <Tip method="TICL" />
+        <Tip method="ticl" />
         <div className="calculate-wrapper">
             <Form onFinish={calculate}>
                 <Form.Item label="Mani Sph" name="maniSph" rules={[{ required: true }]}>

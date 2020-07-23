@@ -2,7 +2,7 @@ import React from 'react';
 import './index.less';
 import { useIntl } from 'react-intl';
 
-export default function Tip({ method, tips = ['instructions', 'notes', 'steps', 'rawdata', 'pay'] }) {
+export default function Tip({ method, tips = ['instructions', 'notes', 'rawdata', 'pay'] }) {
     const intl = useIntl();
 
     function formatMessage(opts = {}) {

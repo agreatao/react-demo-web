@@ -69,7 +69,6 @@ const RegisterForm = ({ form }) => {
                         if (!value || getFieldValue('password') === value) {
                             return Promise.resolve();
                         }
-                        //'The two passwords that you entered do not match!'
                         return Promise.reject(intl.formatMessage({ id: "form.rules.confirmPassword.different" }));
                     },
                 }),
@@ -93,7 +92,7 @@ const RegisterForm = ({ form }) => {
             label={intl.formatMessage({ id: 'form.field.email' })}
             rules={[
                 { required: true, message: intl.formatMessage({ id: "form.rules.required.email" }) },
-                { type: 'email', message: intl.formatMessage({ id: "form.rules.email.valid" }) }, //'The input is not valid E-mail!'
+                { type: 'email', message: intl.formatMessage({ id: "form.rules.email.valid" }) },
             ]}
         >
             <Input autoComplete="off" />

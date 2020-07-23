@@ -25,7 +25,7 @@ export default function OK() {
     }
 
     return <React.Fragment>
-        <Tip method="OK" tips={['INSTRUCTIONS', 'NOTES', 'STEP']} />
+        <Tip method="ok" />
         <div className="calculate-wrapper">
             <Form onFinish={calculate}>
                 <Form.Item label="K" name="k" rules={[{ required: true }]}>
@@ -35,12 +35,12 @@ export default function OK() {
         </div>
         <Result visible={result.visible} onClose={close}>
             {result.input &&
-                <Descriptions column={2} title={intl.formatMessage({ id: 'LABEL_INPUT' })}>
+                <Descriptions column={2} title={intl.formatMessage({ id: 'text.input' })}>
                     <Descriptions.Item label="K">{result.input.k}</Descriptions.Item>
                 </Descriptions>}
             <div className="divider"></div>
             {result.output &&
-                <Descriptions column={1} title={intl.formatMessage({ id: 'LABEL_OUTPUT' })}>
+                <Descriptions column={1} title={intl.formatMessage({ id: 'text.output' })}>
                     <Descriptions.Item label="AC">{result.output.ac}</Descriptions.Item>
                 </Descriptions>}
         </Result>

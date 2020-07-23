@@ -25,7 +25,7 @@ export default function VRPRO() {
     }
 
     return <React.Fragment>
-        <Tip method="VRPRO" />
+        <Tip method="vrpro" />
         <div className="calculate-wrapper">
             <Form onFinish={calculate}>
                 <Form.Item label="Optic Zone" name="opicZone" rules={[{ required: true }]}>

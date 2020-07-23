@@ -25,7 +25,7 @@ export default function EXOP() {
     }
 
     return <React.Fragment>
-        <Tip method="EXOP" tips={['INSTRUCTIONS', 'NOTES', 'STEP']} />
+        <Tip method="exop" />
         <div className="calculate-wrapper">
             <Form onFinish={calculate}>
                 <Form.Item label="K" name="k" rules={[{ required: true }]}>

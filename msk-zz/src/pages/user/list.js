@@ -1,4 +1,4 @@
-import { HomeOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined } from '@ant-design/icons';
 import { Breadcrumb, Button, Empty, Form, Input, Select, Table } from 'antd';
 import { download, fetchIolList } from 'api/pay';
 import { userList } from 'api/user';
@@ -75,35 +75,35 @@ export default function IolList() {
 
     const columns = [
         {
-            title: intl.formatMessage({ id: 'ATTR_FILENAME' }),
+            title: intl.formatMessage({ id: 'col.filename' }),
             dataIndex: 'fileName',
             render: (fileName, row) => <a onClick={() => handleDownload(row)}>{fileName}</a>
         },
         {
-            title: intl.formatMessage({ id: 'ATTR_ZZTYPE' }),
+            title: intl.formatMessage({ id: 'col.zzType' }),
             dataIndex: 'zzType',
         },
         {
-            title: intl.formatMessage({ id: 'ATTR_UPLOADER' }),
+            title: intl.formatMessage({ id: 'col.uploader' }),
             dataIndex: 'user'
         },
         {
-            title: intl.formatMessage({ id: 'ATTR_CREATEDATE' }),
+            title: intl.formatMessage({ id: 'col.createDate' }),
             dataIndex: 'createDate',
             render: date => moment(date).format("YYYY-MM-DD HH:mm:ss")
         },
         {
-            title: intl.formatMessage({ id: 'ATTR_STATUS' }),
+            title: intl.formatMessage({ id: 'col.status' }),
             dataIndex: 'status'
         },
         {
             className: 'operation',
-            title: intl.formatMessage({ id: 'ATTR_OPERATION' }),
+            title: intl.formatMessage({ id: 'col.operation' }),
             key: 'operation',
             render: () => <React.Fragment>
-                <a>{intl.formatMessage({ id: 'BTN_GET_RESULT' })}</a>
-                {!!user?.isAdmin ? <a>{intl.formatMessage({ id: 'BTN_INPUT_RESULT' })}</a>
-                    : <a>{intl.formatMessage({ id: 'BTN_APPLYREFUND' })}</a>}
+                <a>{intl.formatMessage({ id: 'btn.getResult' })}</a>
+                {!!user?.isAdmin ? <a>{intl.formatMessage({ id: 'btn.inputResult' })}</a>
+                    : <a>{intl.formatMessage({ id: 'btn.applyRefund' })}</a>}
             </React.Fragment>
         }
     ]
@@ -125,20 +125,20 @@ export default function IolList() {
     return <React.Fragment>
         <Breadcrumb className="iol-list-breadcrumb">
             <Breadcrumb.Item onClick={goBack}>
-                <a title={intl.formatMessage({ id: 'BTN_BACK' })}><HomeOutlined /></a>
+                <a title={intl.formatMessage({ id: 'btn.back' })}><ArrowLeftOutlined /></a>
             </Breadcrumb.Item>
-            <Breadcrumb.Item>{intl.formatMessage({ id: 'LABEL_OUTPUT' })}</Breadcrumb.Item>
+            <Breadcrumb.Item>{intl.formatMessage({ id: 'text.output' })}</Breadcrumb.Item>
         </Breadcrumb>
         <Form form={form} colon={false} layout="inline" style={{ marginBottom: 10 }} onFinish={handleSearch}>
-            <Form.Item name='fileName' label={intl.formatMessage({ id: 'ATTR_FILENAME' })}>
+            <Form.Item name='fileName' label={intl.formatMessage({ id: 'form.field.filename' })}>
                 <Input autoComplete="off" />
             </Form.Item>
-            {!!user?.isAdmin && <Form.Item name='userId' label={intl.formatMessage({ id: 'ATTR_USER' })}>
+            {!!user?.isAdmin && <Form.Item name='userId' label={intl.formatMessage({ id: 'form.field.user' })}>
                 <Select style={{ width: 100 }}>
                     {userData.map(item => <Option key={item.id} value={item.id}>{item.nickname}</Option>)}
                 </Select>
             </Form.Item>}
-            <Form.Item><Button type='primary' htmlType='submit'>{intl.formatMessage({ id: 'BTN_SEARCH' })}</Button><Button onClick={handleReset}>{intl.formatMessage({ id: 'BTN_CLEAR' })}</Button></Form.Item>
+            <Form.Item><Button type='primary' htmlType='submit'>{intl.formatMessage({ id: 'btn.search' })}</Button><Button onClick={handleReset}>{intl.formatMessage({ id: 'btn.clear' })}</Button></Form.Item>
         </Form>
         <Table
             columns={columns}
@@ -152,8 +152,8 @@ export default function IolList() {
                 }
             }}
             locale={{
-                emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={intl.formatMessage({ id: user ? 'TEXT_DEFAULT_EMPTY' : 'TEXT_NOSIGNIN_EMPTY' })}>
-                    {!user && <Button type='primary' onClick={() => go('login')}>{intl.formatMessage({ id: 'BTN_LOGIN' })}</Button>}
+                emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={intl.formatMessage({ id: user ? 'text.noLogin' : 'text.noData' })}>
+                    {!user && <Button type='primary' onClick={() => go('login')}>{intl.formatMessage({ id: 'btn.login' })}</Button>}
                 </Empty>
             }}
         />

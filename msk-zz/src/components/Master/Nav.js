@@ -12,6 +12,7 @@ const nav = {
         //
         { label: 'ZZ IOL', path: 'calc/iol', title: 'charge' },
         { disable: true, label: 'ZZ Toric IOL', path: 'calc/tiol' },
+        { disable: true, label: 'ZZ AR', path: 'calc/ar' },
         //
         { label: 'ZZ VR', path: 'calc/vr', title: 'rs' },
         { disable: true, label: 'ZZ VR pro', path: 'calc/vrpro' },

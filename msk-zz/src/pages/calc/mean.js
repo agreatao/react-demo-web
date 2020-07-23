@@ -1,10 +1,9 @@
-import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Descriptions, Form, Input, Table, Upload } from 'antd';
+import { MinusCircleOutlined } from '@ant-design/icons';
+import { Button, Descriptions, Form, Input, Space, Table, Upload } from 'antd';
 import { calcMEAN, uploadMEAN } from 'api/calc';
 import Result from 'components/Result';
 import Tip from 'components/Tip';
-import { debounce } from 'lodash';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
 
 export default function MEAN() {
@@ -12,8 +11,7 @@ export default function MEAN() {
     const [result, setResult] = useState({ visible: false, output: null, input: null, error: null });
     const [form] = Form.useForm();
 
-    function calculate() {
-        const values = form.getFieldsValue();
+    function calculate(values) {
         calcMEAN.send(values)
             .then(data => {
                 console.log(data);
@@ -42,24 +40,52 @@ export default function MEAN() {
     }
 
     return <React.Fragment>
-        <Tip method="MEAN" tips={["INSTRUCTIONS", "NOTES"]} />
+        <Tip method="mean" />
         <div className="calculate-wrapper">
             <div className="calculate-mean-tip">
-                {intl.formatMessage({ id: "MEAN_TIP_1" })}（<a href="/file/zzmean.xlsx" target="_blank">zz_mean.xlsx</a>），{intl.formatMessage({ id: "MEAN_TIP_3" })}
+                {intl.formatMessage({ id: "calc.mean.tip1" })}（<a href="/file/zzmean.xlsx" target="_blank">{intl.formatMessage({ id: 'btn.clickHere' })}</a>）{intl.formatMessage({ id: "calc.mean.tip2" })}
                 <Upload customRequest={upload} showUploadList={false}>
-                    <a>{intl.formatMessage({ id: "MEAN_TIP_4" })}</a>
+                    <a>{intl.formatMessage({ id: "btn.upload" })}</a>
                 </Upload>
             </div>
-            <Form form={form} component={false} initialValues={{
-                zzMeanInfos: [{ sph: null, cyl: null, axis: null, key: 0 }]
-            }}>
-                <Form.Item name="zzMeanInfos" noStyle>
-                    <FormTable />
-                </Form.Item>
-                <div className="calculate-btn-group">
-                    <Button size="large" className="calculate-btn" type="primary" onClick={calculate}>{intl.formatMessage({ id: 'BTN_CALCULATE' })}</Button>
-                    <Button size="large" className="calculate-btn" onClick={reset}>{intl.formatMessage({ id: 'BTN_CLEAR' })}</Button>
-                </div>
+            <Form className="calculate-form" form={form} initialValues={{
+                zzMeanInfos: [{ sph: null, cyl: null, axis: null }]
+            }} onFinish={calculate}>
+                <Form.List name="zzMeanInfos">
+                    {(fields, { add, remove }) => {
+                        return <React.Fragment>
+                            {fields.map((field, index) =>
+                                <Space key={field.key} style={{ display: 'flex', marginBottom: 8 }} align="start">
+                                    <Form.Item
+                                        {...field}
+                                        name={[field.name, 'sph']}
+                                        fieldKey={[field.fieldKey, 'sph']}
+                                        rules={[{ required: true, message: intl.formatMessage({ id: 'form.rules.required' }) }]}>
+                                        <Input placeholder="Sph" />
+                                    </Form.Item>
+                                    <Form.Item
+                                        {...field}
+                                        name={[field.name, 'cyl']}
+                                        fieldKey={[field.fieldKey, 'cyl']}
+                                        rules={[{ required: true, message: intl.formatMessage({ id: 'form.rules.required' }) }]}>
+                                        <Input placeholder="Cyl" />
+                                    </Form.Item>
+                                    <Form.Item
+                                        {...field}
+                                        name={[field.name, 'axis']}
+                                        fieldKey={[field.fieldKey, 'axis']}
+                                        rules={[{ required: true, message: intl.formatMessage({ id: 'form.rules.required' }) }]}>
+                                        <Input placeholder="Axis" />
+                                    </Form.Item>
+                                    {fields.length > 1 && <MinusCircleOutlined style={{ marginLeft: 8 }} onClick={() => remove(field.name)} style={{ marginTop: 9 }} />}
+                                </Space>
+                            )}
+                            <Button className="calculate-btn" onClick={() => add()}>{intl.formatMessage({ id: 'btn.addRow' })}</Button>
+                        </React.Fragment>
+                    }}
+                </Form.List>
+                <Button className="calculate-btn" type="primary" htmlType="submit">{intl.formatMessage({ id: 'btn.calc' })}</Button>
+                <Button className="calculate-btn" onClick={reset}>{intl.formatMessage({ id: 'btn.clear' })}</Button>
             </Form>
         </div>
         <Result visible={result.visible} onClose={close}>
@@ -85,94 +111,4 @@ export default function MEAN() {
                 </Descriptions>}
         </Result>
     </React.Fragment>
-}
-
-
-/**
- * TODO 需要优化
- */
-function FormTable({ value = [], onChange }) {
-    const [dataSource, setDataSource] = useState(value.map((item, key) => ({ ...item, key })));
-
-    useEffect(() => {
-        setDataSource(value.map((item, key) => ({ ...item, key })));
-    }, [value]);
-
-    function handleChange(rowIndex, dataIndex, val) {
-        dataSource[rowIndex][dataIndex] = val;
-        onChange(dataSource.map(({ key, ...item }) => item));
-    }
-
-    const Cell = ({ record, rowIndex, dataIndex, value, children, ...props }) => {
-        const [_value, setValue] = useState(value);
-        const callChange = useCallback(debounce(handleChange, 500), []);
-
-        function handleInputChange(e) {
-            const _value = e.target.value;
-            setValue(_value);
-            callChange(rowIndex, dataIndex, _value);
-        }
-
-        if (dataIndex) {
-            return <td {...props} style={{ padding: '5px' }}>
-                <Input
-                    value={_value}
-                    onChange={handleInputChange}
-                />
-            </td>
-        }
-        return <td {...props} style={{ padding: '5px 0' }}>{children}</td>
-    }
-
-    function handleAdd(rowIndex) {
-        dataSource.splice(rowIndex + 1, 0, { sph: null, cyl: null, axis: null, key: dataSource.length });
-        setDataSource([...dataSource]);
-        onChange(dataSource.map(({ key, ...item }) => item));
-    }
-
-    function handleRemove(rowIndex) {
-        if (dataSource.length > 1) {
-            dataSource.splice(rowIndex, 1);
-            setDataSource([...dataSource]);
-            onChange(dataSource.map(({ key, ...item }) => item));
-        }
-    }
-
-    return <Table
-        style={{ maxWidth: 460, margin: '0 auto' }}
-        pagination={false}
-        dataSource={dataSource}
-        components={{
-            body: {
-                cell: Cell
-            }
-        }}
-        columns={[
-            { title: 'Sph', dataIndex: 'sph' },
-            { title: 'Cyl', dataIndex: 'cyl' },
-            { title: 'Axis', dataIndex: 'axis' },
-            {
-                key: 'operation',
-                width: '40px',
-                render(text, row, rowIndex) {
-                    return <React.Fragment>
-                        <PlusCircleOutlined onClick={() => handleAdd(rowIndex)} />
-                        <MinusCircleOutlined style={{ marginLeft: 8 }} onClick={() => handleRemove(rowIndex)} />
-                    </React.Fragment>
-                }
-            }
-        ].map(item => {
-            return {
-                ...item,
-                onCell(record, rowIndex) {
-                    return {
-                        rowIndex,
-                        record,
-                        value: record[item.dataIndex],
-                        dataIndex: item.dataIndex
-                    }
-                }
-            }
-        })}
-    />
 }

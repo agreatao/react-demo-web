@@ -25,7 +25,7 @@ export default function ICL() {
     }
 
     return <React.Fragment>
-        <Tip method="ICL" />
+        <Tip method="icl" />
         <div className="calculate-wrapper">
             <Form onFinish={calculate}>
                 <Form.Item label="Mani Sph" name="maniSph" rules={[{ required: true }]}>

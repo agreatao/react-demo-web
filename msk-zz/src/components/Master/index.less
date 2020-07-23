@@ -18,13 +18,16 @@
     display: flex;
 
     .content {
+        height: 100%;
         flex: 1;
-        padding: 20px 72px 0 64px;
+        padding: 20px 72px 20px 64px;
+        overflow: auto;
     }
 
     @media (max-width: 576px) {
         .content {
             padding: 0 20px;
+            overflow: initial;
         }
     }
 }

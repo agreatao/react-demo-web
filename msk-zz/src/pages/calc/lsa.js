@@ -25,7 +25,7 @@ export default function LSA() {
     }
 
     return <React.Fragment>
-        <Tip method="LSA" />
+        <Tip method="lsa" />
         <div className="calculate-wrapper">
             <Form onFinish={calculate} initialValues={{ s: 10000000 }}>
                 <Form.Item label="Optic Zone" name="opicZone" rules={[{ required: true }]}>

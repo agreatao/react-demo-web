@@ -81,7 +81,7 @@ export default function IOL() {
     }
 
     return <React.Fragment>
-        <Tip method="IOL" tips={['NOTES', 'RAWDATA', "PAY"]} />
+        <Tip method="iol" />
         <div className="calculate-wrapper">
             <Form onFinish={upload}>
                 <Button.Group>
@@ -89,15 +89,27 @@ export default function IOL() {
                         name="file"
                         valuePropName="fileList"
                         getValueFromEvent={e => e.file}
-                        rules={[{ required: true, message: '请上传文件' }]}
+                        rules={[
+                            { required: true, message: intl.formatMessage({ id: 'form.rules.required.upload' }) },
+                            () => ({
+                                validator(_, file) {
+                                    if (!file)
+                                        return Promise.resolve();
+                                    const suffix = file.name.slice(file.name.lastIndexOf('.'));
+                                    if (suffix != '.zcs')
+                                        return Promise.reject(intl.formatMessage({ id: "form.rules.upload.zcsError" }));
+                                    return Promise.resolve();
+                                },
+                            }),
+                        ]}
                     >
                         <Upload beforeUpload={beforeUpload} customRequest={() => { }} showUploadList={false}>
                             <Input readOnly value={file?.name} />
                         </Upload>
                     </Form.Item>
-                    <Button type="primary" htmlType='submit'>{intl.formatMessage({ id: 'BTN_UPLOAD' })}</Button>
+                    <Button type="primary" htmlType='submit'>{intl.formatMessage({ id: 'btn.upload' })}</Button>
                 </Button.Group>
-                <Button type="link" onClick={goPage}>{intl.formatMessage({ id: "BTN_SEARCH_RESULT" })}</Button>
+                <Button type="link" onClick={goPage}>{intl.formatMessage({ id: "btn.searchResult" })}</Button>
             </Form>
         </div>
     </React.Fragment>

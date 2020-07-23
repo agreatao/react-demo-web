@@ -25,7 +25,7 @@ export default function ICLV() {
     }
 
     return <React.Fragment>
-        <Tip method="ICLV" />
+        <Tip method="iclv" />
         <div className="calculate-wrapper">
             <Form onFinish={calculate}>
                 <Form.Item label="Icl Diameter" name="iclDiameter" rules={[{ required: true }]}>
