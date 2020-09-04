@@ -1,6 +1,6 @@
-import { isLogin } from '@/api/user';
 import { ConfigProvider } from 'antd';
 import zh_CN from 'antd/es/locale/zh_CN';
+import { isLogin } from 'api/user';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';

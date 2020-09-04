@@ -1,12 +1,12 @@
 import { LockOutlined, QuestionCircleOutlined, UserOutlined } from '@ant-design/icons';
 import { Form, Input, Modal, Tabs, Tooltip } from 'antd';
+import { isLogin, login, register } from 'api/user';
 import LocaleProvider from 'components/Locale/Provider';
 import React, { useState } from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
+import { useIntl } from 'react-intl';
 import { Provider, useDispatch } from 'react-redux';
 import store from 'store';
-import { useIntl } from 'react-intl';
-import { login, register, isLogin } from '@/api/user';
 
 const formItemLayout = {
     labelCol: {

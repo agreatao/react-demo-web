@@ -6,7 +6,7 @@ import { render, unmountComponentAtNode } from 'react-dom';
 import { Provider, useDispatch } from 'react-redux';
 import store from 'store';
 import { useIntl } from 'react-intl';
-import { login, register, isLogin } from '@/api/user';
+import { login, register, isLogin } from 'api/user';
 
 const formItemLayout = {
     labelCol: {

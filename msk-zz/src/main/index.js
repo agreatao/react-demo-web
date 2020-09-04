@@ -1,4 +1,4 @@
-import { isLogin } from '@/api/user';
+import { isLogin } from 'api/user';
 import axios from 'axios';
 import LocaleProvider from 'components/Locale/Provider';
 import Master from 'components/Master';
@@ -51,6 +51,8 @@ function initApp() {
                                 <Route exact path="/:locale/calc/iol" component={asyncComponent(() => import(/* webpackChunkName: 'iol' */'pages/calc/iol'))} />
                                 {/* ZZ TORIC IOL */}
                                 <Route exact path="/:locale/calc/tiol" component={asyncComponent(() => import(/* webpackChunkName: 'tiol' */'pages/calc/tiol'))} />
+                                {/* AR */}
+                                <Route exact path="/:locale/calc/ar" component={asyncComponent(() => import(/* webpackChunkName: 'vr' */'pages/calc/ar'))} />
 
                                 {/* VR */}
                                 <Route exact path="/:locale/calc/vr" component={asyncComponent(() => import(/* webpackChunkName: 'vr' */'pages/calc/vr'))} />
