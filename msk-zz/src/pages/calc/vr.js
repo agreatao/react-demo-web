@@ -1,4 +1,4 @@
-import { Button, Col, Descriptions, Form, Input, Radio, Row } from "antd";
+import { Button, Col, Descriptions, Form, Input, Radio, Row, Select } from "antd";
 import { calcVR } from "api/calc";
 import Polar from "components/Chart/Polar";
 import Result from "components/Result";
@@ -6,6 +6,8 @@ import Tip from "components/Tip";
 import React, { useState } from "react";
 import { useIntl } from "react-intl";
 import { useSelector } from "react-redux";
+
+const { Option } = Select;
 
 export default function VR() {
     const [form] = Form.useForm();
@@ -17,6 +19,7 @@ export default function VR() {
         input: null,
         error: null,
     });
+    const [version, setVersion] = useState("1.0");
     const [chartType, setChartType] = useState("single");
 
     const layout = {
@@ -35,7 +38,7 @@ export default function VR() {
 
     function calculate(values) {
         calcVR
-            .send(values)
+            .send({...values, version})
             .then((data) => {
                 setResult({ visible: true, output: data, input: values });
             })
@@ -54,7 +57,15 @@ export default function VR() {
 
     return (
         <React.Fragment>
-            <Tip method="vr" />
+            <Tip
+                method="vr"
+                version={
+                    <Select value={version} size="small" onChange={e => setVersion(e)} style={{ width: 60 }}>
+                        <Option value="1.0">v1.0</Option>
+                        <Option value="1.1">v1.1</Option>
+                    </Select>
+                }
+            />
             <div className="calculate-wrapper">
                 <Form form={form} {...formLayout} onFinish={calculate} className="calculate-form">
                     <Row gutter={24}>
@@ -168,14 +179,14 @@ export default function VR() {
                         title={intl.formatMessage({ id: "text.output" })}
                         layout="vertical"
                     >
-                        <Descriptions.Item label="Correct Sph">
-                            {result.output.correctSph}
+                        <Descriptions.Item label="VR Sph">
+                            {result.output.vrSph}
                         </Descriptions.Item>
-                        <Descriptions.Item label="Correct Cyl">
-                            {result.output.correctCyl}
+                        <Descriptions.Item label="VR Cyl">
+                            {result.output.vrCyl}
                         </Descriptions.Item>
-                        <Descriptions.Item label="Correct Axis">
-                            {result.output.correctCylAxis}
+                        <Descriptions.Item label="VR Axis">
+                            {result.output.vrAxis}
                         </Descriptions.Item>
                     </Descriptions>
                 )}
