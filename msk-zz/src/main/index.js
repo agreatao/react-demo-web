@@ -78,6 +78,9 @@ function initApp() {
                                 <Route exact path="/:locale/calc/ok" component={asyncComponent(() => import(/* webpackChunkName: 'ok' */'pages/calc/ok'))} />
                                 {/* ZZ EX500 OPMI */}
                                 <Route exact path="/:locale/calc/exop" component={asyncComponent(() => import(/* webpackChunkName: 'exop' */'pages/calc/exop'))} />
+                                
+                                {/* ZZ PC PRL */}
+                                <Route exact path="/:locale/calc/pcprl" component={asyncComponent(() => import(/* webpackChunkName: 'pcprl' */'pages/calc/pcprl'))} />
 
                                 {/* User List */}
                                 <Route exact path="/:locale/user/list" component={asyncComponent(() => import(/* webpackChunkName: 'userList' */'pages/user/list'))} />

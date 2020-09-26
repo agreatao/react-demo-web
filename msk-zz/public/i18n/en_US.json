@@ -133,5 +133,10 @@
     "calc.ok.instructions": "",
     "calc.ok.notes": "K (9mm)=Mean tangential curvature of 9mm of corneal flat axis; AC=Simulated Sim-K of normal cornea",
     "calc.ok.rawdata": "",
-    "calc.ok.pay": ""
+    "calc.ok.pay": "",
+    "calc.pcprl.name": "PC-PRL Refraction Calculator",
+    "calc.pcprl.instructions": "Selection of PC-PRL",
+    "calc.pcprl.notes": "Mani=Manifest refraction;  AC=Anterior Chambler Depth (Internal); CT=Corneal Thickness(Optional)",
+    "calc.pcprl.rawdata": "",
+    "calc.pcprl.pay": ""
 }

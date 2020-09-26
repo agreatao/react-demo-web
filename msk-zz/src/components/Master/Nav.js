@@ -12,7 +12,7 @@ const nav = {
         //
         { label: "ZZ IOL", path: "calc/iol", title: "charge" },
         { disable: true, label: "ZZ Toric IOL", path: "calc/tiol" },
-        { label: "ZZ AR", path: "calc/ar" },
+        { disable: true, label: "ZZ AR", path: "calc/ar" },
         //
         { label: "ZZ VR", path: "calc/vr", title: "rs" },
         { disable: true, label: "ZZ VR pro", path: "calc/vrpro" },
@@ -21,6 +21,7 @@ const nav = {
         { label: "ZZ ICL", path: "calc/icl", title: "icl" },
         { label: "ZZ ICL Vault", path: "calc/iclv" },
         { label: "ZZ TICL Rotation", path: "calc/ticl" },
+        { label: "ZZ PC-PRL", path: "calc/pcprl" },
         //
         { label: "ZZ SIA", path: "calc/sia", title: "tools" },
         { label: "ZZ Vector Sum & Sub", path: "calc/vsas" },

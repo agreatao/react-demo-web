@@ -148,5 +148,10 @@
     "calc.ok.notes": "K (9mm)=角膜平轴9mm区切向曲率均值；AC=模拟正常角膜Sim-K参数",
     "calc.ok.step": "",
     "calc.ok.rawdata": "",
-    "calc.ok.pay": ""
+    "calc.ok.pay": "",
+    "calc.pcprl.name": "PC-PRL屈光度",
+    "calc.pcprl.instructions": "辅助PC-PRL晶体屈光度的选择",
+    "calc.pcprl.notes": "Mani=主觉验光度; AC=前房深度（内皮）;  CT=角膜厚度（选填）",
+    "calc.pcprl.rawdata": "",
+    "calc.pcprl.pay": ""
 }

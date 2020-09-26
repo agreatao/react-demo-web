@@ -19,7 +19,7 @@ export default function VR() {
         input: null,
         error: null,
     });
-    const [version, setVersion] = useState("1.0");
+    const [version, setVersion] = useState("1.1");
     const [chartType, setChartType] = useState("single");
 
     const layout = {
@@ -60,9 +60,9 @@ export default function VR() {
             <Tip
                 method="vr"
                 version={
-                    <Select value={version} size="small" onChange={e => setVersion(e)} style={{ width: 60 }}>
-                        <Option value="1.0">v1.0</Option>
-                        <Option value="1.1">v1.1</Option>
+                    <Select value={version} onChange={e => setVersion(e)} style={{ width: 80 }}>
+                        <Option value="1.0">v 1. 0</Option>
+                        <Option value="1.1">v 1. 1</Option>
                     </Select>
                 }
             />

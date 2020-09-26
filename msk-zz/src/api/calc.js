@@ -27,3 +27,5 @@ export const calcMEAN = Http.post("/calculate/zzmeansdvector");
 export const uploadMEAN = Http.upload("/calculate/zzmeanexcel");
 
 export const calcAR = Http.post("/calculate/zzar");
+
+export const calcPcprl = Http.post("/calculate/zzpcprl");
