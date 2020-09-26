@@ -1,9 +1,20 @@
-import { Button, Col, Descriptions, Form, Input, Radio, Row, Select } from "antd";
+import {
+    Button,
+    Col,
+    Descriptions,
+    Form,
+    Input,
+    Radio,
+    Row,
+    Select,
+    notification,
+    Timeline,
+} from "antd";
 import { calcVR } from "api/calc";
 import Polar from "components/Chart/Polar";
 import Result from "components/Result";
 import Tip from "components/Tip";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import { useSelector } from "react-redux";
 
@@ -22,6 +33,31 @@ export default function VR() {
     const [version, setVersion] = useState("1.1");
     const [chartType, setChartType] = useState("single");
 
+    useEffect(() => {
+        notification.destroy();
+        notification.info({
+            duration: null,
+            message: `${intl.formatMessage({ id: "text.changeLog" })}:`,
+            top: 96,
+            description: (
+                <div className="change-log">
+                    <h4 className="change-log__title">
+                        {intl.formatMessage({ id: "calc.vr.changeLog.1_1.title" })}
+                    </h4>
+                    <p className="change-log__time">
+                        <span>2020-09-26</span>
+                    </p>
+                    <ul
+                        className="change-log__list"
+                        dangerouslySetInnerHTML={{
+                            __html: intl.formatMessage({ id: "calc.vr.changeLog.1_1" }),
+                        }}
+                    ></ul>
+                </div>
+            ),
+        });
+    }, []);
+
     const layout = {
         xs: 24,
         sm: 12,
@@ -38,7 +74,7 @@ export default function VR() {
 
     function calculate(values) {
         calcVR
-            .send({...values, version})
+            .send({ ...values, version })
             .then((data) => {
                 setResult({ visible: true, output: data, input: values });
             })
@@ -60,7 +96,7 @@ export default function VR() {
             <Tip
                 method="vr"
                 version={
-                    <Select value={version} onChange={e => setVersion(e)} style={{ width: 80 }}>
+                    <Select value={version} onChange={(e) => setVersion(e)} style={{ width: 80 }}>
                         <Option value="1.0">v 1. 0</Option>
                         <Option value="1.1">v 1. 1</Option>
                     </Select>
@@ -179,12 +215,8 @@ export default function VR() {
                         title={intl.formatMessage({ id: "text.output" })}
                         layout="vertical"
                     >
-                        <Descriptions.Item label="VR Sph">
-                            {result.output.vrSph}
-                        </Descriptions.Item>
-                        <Descriptions.Item label="VR Cyl">
-                            {result.output.vrCyl}
-                        </Descriptions.Item>
+                        <Descriptions.Item label="VR Sph">{result.output.vrSph}</Descriptions.Item>
+                        <Descriptions.Item label="VR Cyl">{result.output.vrCyl}</Descriptions.Item>
                         <Descriptions.Item label="VR Axis">
                             {result.output.vrAxis}
                         </Descriptions.Item>
