@@ -39,6 +39,9 @@ export default function VR() {
             duration: null,
             message: `${intl.formatMessage({ id: "text.changeLog" })}:`,
             top: 96,
+            style: {
+                width: 300,
+            },
             description: (
                 <div className="change-log">
                     <h4 className="change-log__title">

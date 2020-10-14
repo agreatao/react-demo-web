@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { useDebounce } from "utils/hooks";
 import "./list.less";
+import { sendMessage } from "api/user";
 
 const { Option } = Select;
 
@@ -74,6 +75,10 @@ const EditTable = ({ dataSource, currentPage, onPageChange, ...restProps }) => {
             await setResult.send({
                 id: row.id,
                 resultContent: values.resultContent,
+            });
+            await sendMessage.send({
+                id: row.id,
+                type: "1",
             });
             const newData = [...data];
             const index = newData.findIndex((item) => row.id === item.id);
