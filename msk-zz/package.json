@@ -4,8 +4,8 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "serve": "cross-env NODE_ENV=development webpack-dev-server --hot --open",
-        "build": "cross-env NODE_ENV=production webpack --progress --colors --display-depth"
+        "serve": "cross-env NODE_ENV=development webpack-dev-server --hot --open --config build/webpack.development.config.js",
+        "build": "cross-env NODE_ENV=production webpack --progress --colors --display-depth --config build/webpack.production.config.js"
     },
     "keywords": [],
     "author": "",
@@ -65,7 +65,8 @@
         "uglifyjs-webpack-plugin": "^2.2.0",
         "webpack": "^4.43.0",
         "webpack-cli": "^3.3.12",
-        "webpack-dev-server": "^3.11.0"
+        "webpack-dev-server": "^3.11.0",
+        "webpack-merge": "^5.4.0"
     },
     "dependencies": {
         "d3": "^5.16.0"
