@@ -20,13 +20,14 @@ const enUS = http("/i18n/en_US.json", {
     headers: {
         "Cache-Control": "max-age=3600",
     },
-});
+}).get;
+
 const zhCN = http("/i18n/zh_CN.json", {
     checkStatus: false,
     headers: {
         "Cache-Control": "max-age=3600",
     },
-});
+}).get;
 
 function loadLocale() {
     return new Promise((resolve) => {
@@ -37,19 +38,17 @@ function loadLocale() {
             resolve();
             return;
         }
-        return Promise.all([
-            enUS.get().then(({ data }) => data),
-            zhCN.get().then(({ data }) => data),
-        ]).then(([en_US, zh_CN]) => {
-            dispatch({ type: "@Locale/INIT", languages: { en_US, zh_CN }, lang: locale });
-            resolve();
-        });
+        return Promise.all([enUS().then(({ data }) => data), zhCN().then(({ data }) => data)]).then(
+            ([en_US, zh_CN]) => {
+                dispatch({ type: "@Locale/INIT", languages: { en_US, zh_CN }, lang: locale });
+                resolve();
+            }
+        );
     });
 }
 
 function loginUser() {
-    return isLogin
-        .post()
+    return isLogin()
         .then((user) => {})
         .catch((e) => {
             // console.log("登录未成功");

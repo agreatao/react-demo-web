@@ -1,4 +1,8 @@
 {
+    "info.login.success": "登录成功",
+    "info.login.fail": "登录失败",
+    "info.register.success": "注册成功",
+    "info.register.fail": "注册失败",
     "nav.title.charge": "收费",
     "nav.title.rs": "角膜屈光手术",
     "nav.title.icl": "ICL晶体屈光手术",

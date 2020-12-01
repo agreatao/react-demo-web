@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
+import loadable from "@loadable/component";
 
-export default function asyncComponent(loadComponent) {
+export function asyncLoadComponent(loadComponent) {
+    return loadable(loadComponent, {
+        fallback: <div className="loading"></div>,
+    });
+}
+
+export function asyncComponent(loadComponent) {
     return function AsyncComponent(props) {
         const [Component, setComponent] = useState(null);
 

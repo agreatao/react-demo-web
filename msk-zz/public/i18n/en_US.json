@@ -1,4 +1,6 @@
 {
+    "info.login.success": "Sign In Success!",
+    "info.login.fail": "Sign In Error!",
     "nav.title.charge": "Charge",
     "nav.title.rs": "Refractive Surgery",
     "nav.title.icl": "ICL Refractive Surgery",

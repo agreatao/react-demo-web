@@ -21,7 +21,7 @@ export default {
     locale(state = { lang: "en_US", languages: null }, { type, lang, languages }) {
         switch (type) {
             case "@Locale/CHANGE":
-                return { lang };
+                return { ...state, lang };
             case "@Locale/INIT":
                 return { languages, lang };
             default:

@@ -30,6 +30,7 @@
         "@babel/plugin-transform-runtime": "^7.10.5",
         "@babel/preset-env": "^7.10.4",
         "@babel/preset-react": "^7.10.4",
+        "@loadable/component": "^5.14.1",
         "add-dom-event-listener": "^1.1.0",
         "antd": "^4.4.2",
         "autoprefixer": "^9.8.5",
