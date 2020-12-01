@@ -11,10 +11,10 @@ const antd_lang = {
 };
 
 export default function LocaleProvider({ children }) {
-    const lang = useSelector((state) => state.locale.lang);
+    const { lang, languages } = useSelector((state) => state.locale);
     return (
         <ConfigProvider locale={antd_lang[lang]}>
-            <IntlProvider locale="en_US" messages={languages[lang]}>
+            <IntlProvider locale={lang.substr(0, 2)} messages={languages[lang]}>
                 {children}
             </IntlProvider>
         </ConfigProvider>

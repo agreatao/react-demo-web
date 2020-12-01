@@ -4,10 +4,23 @@ const path = require("path");
 
 const __wd = path.resolve(__dirname, "../");
 
+const entry = webpackConfig.entry;
+
+const historyApiRewrites = [];
+
+Object.keys(entry).forEach((chunkName) => {
+    historyApiRewrites.push({
+        from: new RegExp(`^\\/(en_US|zh_CN)\\/${chunkName}(\\/.*)*`),
+        to: `/${chunkName}.html`,
+    });
+});
+
 module.exports = merge(webpackConfig, {
     devServer: {
         contentBase: path.join(__dirname, "public"),
-        historyApiFallback: true,
+        historyApiFallback: {
+            rewrites: historyApiRewrites,
+        },
         proxy: {
             "/calculate": {
                 target: "http://localhost:80",
@@ -18,7 +31,7 @@ module.exports = merge(webpackConfig, {
             "/userInfo": {
                 target: "http://localhost:80",
             },
-        }
+        },
     },
     devtool: "cheap-module-source-map",
     output: {
@@ -30,7 +43,7 @@ module.exports = merge(webpackConfig, {
         rules: [
             {
                 test: /\.(png|jpe?g|svg|gif|ico)$/,
-                loader: "url-loader",
+                loader: "file-loader",
                 include: path.join(__wd, "src/assets"),
                 options: {
                     limit: 512,

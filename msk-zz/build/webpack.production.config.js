@@ -24,7 +24,7 @@ module.exports = smp.wrap(
             rules: [
                 {
                     test: /\.(png|jpe?g|svg|gif|ico)$/,
-                    loader: "url-loader",
+                    loader: "file-loader",
                     include: path.join(__wd, "src/assets"),
                     options: {
                         limit: 512,

@@ -9,28 +9,41 @@ import "utils";
 import http from "utils/http";
 import browserBind from "./browserBind";
 import "./index.less";
+import urlParse from "utils/urlParse";
 
 browserBind(store);
 
 const { dispatch, getState } = store;
 
-const enUS = http("/i18n/en_US.json", { checkStatus: false });
-const zhCN = http("/i18n/zh_CN.json", { checkStatus: false });
+const enUS = http("/i18n/en_US.json", {
+    checkStatus: false,
+    headers: {
+        "Cache-Control": "max-age=3600",
+    },
+});
+const zhCN = http("/i18n/zh_CN.json", {
+    checkStatus: false,
+    headers: {
+        "Cache-Control": "max-age=3600",
+    },
+});
 
-let locale;
 function loadLocale() {
     return new Promise((resolve) => {
-        if (locale) resolve(locale);
+        const languages = getState().locale.languages;
+        const { locale } = urlParse("/:locale/:page/:method?", location.pathname);
+        if (languages) {
+            dispatch({ type: "@Locale/CHANGE", lang: locale });
+            resolve();
+            return;
+        }
         return Promise.all([
             enUS.get().then(({ data }) => data),
             zhCN.get().then(({ data }) => data),
-        ])
-            .then(([enUS, zhCN]) => {
-                locale = { enUS, zhCN };
-                dispatch("@Locale/init", { locale, lang: "en_US" });
-                resolve(locale);
-            })
-            .catch((e) => {});
+        ]).then(([en_US, zh_CN]) => {
+            dispatch({ type: "@Locale/INIT", languages: { en_US, zh_CN }, lang: locale });
+            resolve();
+        });
     });
 }
 
@@ -38,7 +51,9 @@ function loginUser() {
     return isLogin
         .post()
         .then((user) => {})
-        .catch((e) => {});
+        .catch((e) => {
+            // console.log("登录未成功");
+        });
 }
 
 export function initApp(children, wrapper = document.getElementById("app")) {

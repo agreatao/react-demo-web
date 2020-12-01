@@ -18,12 +18,12 @@ const browser_width = window.innerWidth || documentElement.clientWidth || body.c
 const browser_height = window.innerHeight || documentElement.clientHeight || body.clientHeight;
 
 export default {
-    locale(state = { lang: "en_US" }, { type, lang, locale }) {
+    locale(state = { lang: "en_US", languages: null }, { type, lang, languages }) {
         switch (type) {
             case "@Locale/CHANGE":
                 return { lang };
             case "@Locale/INIT":
-                return { locale, lang };
+                return { languages, lang };
             default:
                 return state;
         }

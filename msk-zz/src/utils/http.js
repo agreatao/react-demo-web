@@ -23,6 +23,7 @@ function checkStatus({ status, data }) {
 
 function debugError(e) {
     if (isDev) console.error(e);
+    throw e;
 }
 
 function filterResponse(promise, optionCheckStatus) {

@@ -1,0 +1,56 @@
+.ant-layout {
+    background-color: #fff;
+}
+
+.nav__wrapper {
+    height: 100%;
+    overflow: auto;
+    background-color: #fff;
+    border-right: 1px solid #f0f0f0;
+
+    .ant-menu-inline,
+    .ant-menu-vertical,
+    .ant-menu-vertical-left {
+        border-right: none;
+    }
+}
+
+.page-header__wrapper {
+    background-color: #fff;
+    box-shadow: 0 2px 8px #f0f0f0;
+    display: flex;
+    margin-bottom: 24px;
+    justify-content: space-between;
+}
+
+.content__wrapper {
+    height: 100%;
+    overflow: auto;
+    background-color: #fff;
+}
+
+.copyright__wrapper {
+    text-align: center;
+    padding: 8px 24px;
+    position: relative;
+    background-color: #fff;
+
+    .copyright {
+        display: inline-block;
+        color: #bbb;
+        margin: 0 12px;
+        vertical-align: middle;
+
+        &:hover {
+            color: #333;
+        }
+
+        &.police {
+            background-image: url("~images/police.png");
+            background-repeat: no-repeat;
+            background-position: 0 center;
+            background-size: 18px 18px;
+            padding-left: 24px;
+        }
+    }
+}
