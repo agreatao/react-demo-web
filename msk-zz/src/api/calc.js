@@ -1,12 +1,6 @@
-// import Http from "utils/http";
-
-// export const calcVR = Http.post("/calculate/formulavr");
-
 // export const calcTICL = Http.post("/calculate/zzticl");
 
-// export const calcLSA = Http.post("/calculate/zzlsa");
 
-// export const calcTIOL = Http.post("/calculate/zztoriciol");
 
 // export const calcVSAS = Http.post("/calculate/zzastigmatism");
 
@@ -14,9 +8,6 @@
 
 // export const calcEXOP = Http.post("/calculate/zzexopmi");
 
-// export const calcVRPRO = Http.post("/calculate/formulavrpro");
-
-// export const calcICL = Http.post("/calculate/zzicl");
 
 // export const calcICLV = Http.post("/calculate/zziclvault");
 
@@ -26,6 +17,11 @@
 
 // export const uploadMEAN = Http.upload("/calculate/zzmeanexcel");
 
-// export const calcAR = Http.post("/calculate/zzar");
 
 // export const calcPcprl = Http.post("/calculate/zzpcprl");
+
+import http from "utils/http";
+
+export default function (method) {
+    return http(`/calculate/${method}`).post;
+}

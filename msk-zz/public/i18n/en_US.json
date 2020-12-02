@@ -61,7 +61,7 @@
     "form.rules.required.phone": "Please input the phone",
     "form.rules.required.upload": "Please upload the file",
     "form.rules.upload.zcsError": "the file suffix is .zcs",
-    "form.rules.required.field": "Please input the {field}!",
+    "form.rules.required.field": "‘${label}’ is required!",
     "text.input": "Input",
     "text.output": "Output",
     "text.noLogin": "No Sign in",

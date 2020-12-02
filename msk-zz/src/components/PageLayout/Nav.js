@@ -28,14 +28,14 @@ function renderNavlist(nav, { intl }) {
                             title={intl.formatMessage({ id: item.title })}
                         >
                             {item.groups.map((subItem) => (
-                                <Menu.Item key={subItem.path} title={`/${locale}${subItem.path}`}>
+                                <Menu.Item key={subItem.path} title={`/${locale}${subItem.path}`} disabled={subItem.disabled}>
                                     {subItem.title}
                                 </Menu.Item>
                             ))}
                         </Menu.ItemGroup>
                     );
                 return (
-                    <Menu.Item key={item.path} title={`/${locale}${subItem.path}`}>
+                    <Menu.Item key={item.path} title={`/${locale}${subItem.path}`} disabled={item.disabled}>
                         {item.title}
                     </Menu.Item>
                 );

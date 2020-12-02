@@ -62,7 +62,7 @@
     "form.rules.required.phone": "请输入电话号码",
     "form.rules.required.upload": "请上传文件",
     "form.rules.upload.zcsError": "文件格式为.zcs",
-    "form.rules.required.field": "请输入{field}!",
+    "form.rules.required.field": "'${label}' 是必填字段!",
     "text.input": "输入",
     "text.output": "计算结果",
     "text.noLogin": "暂未登录",

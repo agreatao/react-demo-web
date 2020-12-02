@@ -4,54 +4,31 @@
     flex-direction: column;
 }
 
-.calculate-mean-tip {
-    max-width: 460px;
-    margin: 0 auto 10px auto;
-}
+.calc-btn__wrapper {
+    text-align: center;
 
-.calculate-btn-group {
-    margin: 20px auto 0 auto;
-    max-width: 460px;
-}
+    .calc-btn {
+        width: 98px;
 
-.calculate-title {
-    margin-bottom: 20px;
-    color: rgba(0, 0, 0, .85);
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 1.5715;
-}
+        &+.calc-btn {
+            margin-left: 12px;
+        }
 
-.calculate-form {
-    width: 625px;
-    margin: 0 auto;
-}
+        @media (max-width: 576px) {
+            & {
+                display: block;
+                width: 100%;
 
-.calculate-btn {
-    width: 110px;
-
-    &+.calculate-btn {
-        margin-left: 20px;
-    }
-}
-
-@media (max-width: 1024px) {
-    .calculate-form {
-        width: auto;
-    }
-}
-
-@media (max-width: 576px) {
-    .calculate-btn {
-        display: block;
-        width: 100%;
-
-        &+.calculate-btn {
-            margin-top: 8px;
-            margin-left: 0;
+                &+.calc-btn {
+                    margin-top: 8px;
+                    margin-left: 0;
+                }
+            }
         }
     }
 }
+
+
 
 .change-log {
     .change-log__title {
