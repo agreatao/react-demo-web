@@ -1,6 +1,8 @@
 {
-    "info.login.success": "Sign In Success!",
-    "info.login.fail": "Sign In Error!",
+    "response.msg.signInSuccess": "Sign In Success",
+    "response.msg.signInError": "Sign In Error",
+    "response.msg.addSuccess": "Add Success",
+    "response.msg.addError": "Add Error",
     "nav.title.charge": "Charge",
     "nav.title.rs": "Refractive Surgery",
     "nav.title.icl": "ICL Refractive Surgery",

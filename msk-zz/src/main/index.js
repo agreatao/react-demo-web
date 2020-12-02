@@ -49,9 +49,13 @@ function loadLocale() {
 
 function loginUser() {
     return isLogin()
-        .then((user) => {})
+        .then(({ data }) => {
+            dispatch({ type: "@User/LOGIN", user: data });
+            return data;
+        })
         .catch((e) => {
             // console.log("登录未成功");
+            return;
         });
 }
 

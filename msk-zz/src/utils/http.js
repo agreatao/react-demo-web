@@ -15,10 +15,10 @@ function request({ baseURL, timeout, headers }) {
 
 function checkStatus({ status, data }) {
     if (status === 200) {
-        if (data.success) return data.result;
-        throw new Error(data.errorDesc);
+        if (data.type === 0) return { data: data.data, msg: data.msg };
+        throw new Error(data.msg);
     }
-    throw new Error("系统错误");
+    throw new Error("response.msg.systemError");
 }
 
 function debugError(e) {

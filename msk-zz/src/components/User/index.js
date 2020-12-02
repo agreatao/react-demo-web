@@ -198,18 +198,22 @@ export default function UserModal({ visible = true, defaultActiveTab = "login", 
         try {
             if (activeTab === "login") {
                 const { username, password } = await loginForm.validateFields();
-                user = await login({ username, password });
-                if (!user) throw new Error(intl.formatMessage({ id: "info.login.fail" }));
+                const { data, msg } = await login({ username, password });
+                user = data;
+                if (!user) throw new Error(intl.formatMessage({ id: msg }));
             } else if (activeTab === "register") {
                 const formData = await registerForm.validateFields();
-                user = await register(formData);
-                if (!user) throw new Error(intl.formatMessage({ id: "info.register.fail" }));
+                const { data, msg } = await register(formData);
+                user = data;
+                if (!user) throw new Error(intl.formatMessage({ id: msg }));
             }
             dispatch({ type: "@User/LOGIN", user });
             typeof onOK === "function" && onOK(user);
             setVisible(false);
             return user;
-        } catch (e) {}
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     return (
