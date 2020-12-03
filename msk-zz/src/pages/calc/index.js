@@ -53,7 +53,54 @@ initApp(
             <Route
                 exact
                 path="/:locale/calc/iclv"
-                component={asyncLoadComponent(() => import(/* webpackChunkName: 'iclv' */ "./iclv"))}
+                component={asyncLoadComponent(() =>
+                    import(/* webpackChunkName: 'iclv' */ "./iclv")
+                )}
+            />
+            <Route
+                exact
+                path="/:locale/calc/ticl"
+                component={asyncLoadComponent(() =>
+                    import(/* webpackChunkName: 'ticl' */ "./ticl")
+                )}
+            />
+            <Route
+                exact
+                path="/:locale/calc/pcprl"
+                component={asyncLoadComponent(() =>
+                    import(/* webpackChunkName: 'pcprl' */ "./pcprl")
+                )}
+            />
+            <Route
+                exact
+                path="/:locale/calc/sia"
+                component={asyncLoadComponent(() => import(/* webpackChunkName: 'sia' */ "./sia"))}
+            />
+            <Route
+                exact
+                path="/:locale/calc/vsas"
+                component={asyncLoadComponent(() =>
+                    import(/* webpackChunkName: 'vsas' */ "./vsas")
+                )}
+            />
+            <Route
+                exact
+                path="/:locale/calc/mean"
+                component={asyncLoadComponent(() =>
+                    import(/* webpackChunkName: 'mean' */ "./mean")
+                )}
+            />
+            <Route
+                exact
+                path="/:locale/calc/exop"
+                component={asyncLoadComponent(() =>
+                    import(/* webpackChunkName: 'exop' */ "./exop")
+                )}
+            />
+            <Route
+                exact
+                path="/:locale/calc/ok"
+                component={asyncLoadComponent(() => import(/* webpackChunkName: 'ok' */ "./ok"))}
             />
         </Router>
     </PageLayout>
