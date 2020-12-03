@@ -51,12 +51,6 @@ export default function ar() {
             <Panel key="notes" header={<FormattedMessage id="tip.title.notes" />}>
                 <FormattedMessage id="calc.ar.notes" />
             </Panel>
-            {/* <Panel key="rawdata" header={<FormattedMessage id="tip.title.rawdata" />}>
-                <FormattedMessage id="calc.ar.rawdata" />
-            </Panel>
-            <Panel key="pay" header={<FormattedMessage id="tip.title.pay" />}>
-                <FormattedMessage id="calc.ar.pay" />
-            </Panel> */}
             <Panel key="content" header={<FormattedMessage id="text.input" />}>
                 <Form
                     form={form}

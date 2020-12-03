@@ -52,12 +52,6 @@ export default function vrpro() {
             <Panel key="notes" header={<FormattedMessage id="tip.title.notes" />}>
                 <FormattedMessage id="calc.vrpro.notes" />
             </Panel>
-            {/* <Panel key="rawdata" header={<FormattedMessage id="tip.title.rawdata" />}>
-                <FormattedMessage id="calc.vrpro.rawdata" />
-            </Panel>
-            <Panel key="pay" header={<FormattedMessage id="tip.title.pay" />}>
-                <FormattedMessage id="calc.vrpro.pay" />
-            </Panel> */}
             <Panel key="content" header={<FormattedMessage id="text.input" />}>
                 <Form
                     form={form}

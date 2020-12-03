@@ -74,7 +74,7 @@ export default function iol() {
 
     return [
         <h1 key="title" className="title">
-            <FormattedMessage id="calc.lsa.name" />
+            <FormattedMessage id="calc.iol.name" />
         </h1>,
         <Collapse key="collapse" ghost defaultActiveKey={["notes", "rawdata", "pay", "content"]}>
             <Panel key="notes" header={<FormattedMessage id="tip.title.notes" />}>
