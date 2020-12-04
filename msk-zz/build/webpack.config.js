@@ -22,7 +22,7 @@ for (let chunkName in chunks) {
         template,
         filename: `${isDev ? "" : "../templates/"}${chunkName}.html`,
         inject: true,
-        chunks: ["vendors", "manifest", chunkName],
+        chunks: ["manifest", "vendors", "commons", chunkName],
         minify: !isDev && {
             removeRedundantAttributes: true, // 删除多余的属性
             collapseWhitespace: true, // 折叠空白区域
@@ -66,6 +66,11 @@ module.exports = {
                     test: /[\\/]node_modules[\\/]/,
                     name: "vendors",
                     priority: 10,
+                },
+                commons: {
+                    test: /[\\/]src[\\/](api|components|main|store|theme|utils)[\\/]/,
+                    name: "commons",
+                    priority: 9,
                 },
             },
         },

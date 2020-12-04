@@ -8,6 +8,4 @@ export const login = http("/userInfo/login").post;
 
 export const register = http("/userInfo/login").post;
 
-// export const userList = Http.post("/userInfo/list");
-
-// export const sendMessage = Http.post("/alibaba/sendMail");
+export const searchAllUser = http("/userInfo/list").post;

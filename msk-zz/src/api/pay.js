@@ -1,19 +1,3 @@
-// import Http from "utils/http";
-
-// // 调起支付
-// export const pay = Http.post("/alibaba/pay");
-
-// // 查询支付状态
-// export const payStatus = Http.post("/alibaba/query");
-
-// export const uploadIOL = Http.upload("/alibaba/fileUpload");
-
-// export const download = (id) => `/alibaba/fileDownload?id=${id}`;
-
-// export const fetchIolList = Http.post("/alibaba/fileList");
-
-// export const setResult = Http.post("/alibaba/updateResultContent");
-
 import http from "utils/http";
 
 export const pay = http("/pay/pay").post;
@@ -25,3 +9,9 @@ export const uploadZcsFile = http("/pay/fileUpload", {
         "Content-Type": "multipart/form-data",
     },
 }).post;
+
+export const searchFileList = http("/pay/fileList").post;
+
+export const requestSendMessage = http("/pay/sendMail").post;
+
+export const updateResult = http("/pay/updateResultContent").post;

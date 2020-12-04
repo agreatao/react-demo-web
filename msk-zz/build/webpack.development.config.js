@@ -25,7 +25,7 @@ module.exports = merge(webpackConfig, {
             "/calculate": {
                 target: "http://localhost:80",
             },
-            "/alibaba": {
+            "/pay": {
                 target: "http://localhost:80",
             },
             "/userInfo": {

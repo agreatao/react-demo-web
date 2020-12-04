@@ -71,7 +71,7 @@ const EditTable = ({ dataSource, currentPage, onPageChange, ...restProps }) => {
 
     const save = async (row) => {
         try {
-            const values = await form.validateFields().catch(e => {});
+            const values = await form.validateFields();
             await setResult.send({
                 id: row.id,
                 resultContent: values.resultContent,

@@ -26,6 +26,8 @@
     "btn.single": "Single",
     "btn.double": "Double",
     "btn.searchResult": "Search Result",
+    "btn.seeResult": "See Result",
+    "btn.sendMessage": "Send Message",
     "btn.getResult": "Get Result",
     "btn.inputResult": "Input Result",
     "btn.applyRefund": "Apply Refund",

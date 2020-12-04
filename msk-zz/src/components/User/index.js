@@ -240,35 +240,37 @@ export default function UserModal({ visible = true, defaultActiveTab = "login", 
 
 export function go(page) {
     return new Promise((resolve) => {
-        const wrapper = document.createElement("div");
-        document.body.appendChild(wrapper);
+        try {
+            const wrapper = document.createElement("div");
+            document.body.appendChild(wrapper);
 
-        function destroyed() {
-            let timer = setTimeout(() => {
-                clearTimeout(timer);
-                timer = null;
-                unmountComponentAtNode(wrapper);
-                wrapper.remove();
-            }, 300);
-        }
+            function destroyed() {
+                let timer = setTimeout(() => {
+                    clearTimeout(timer);
+                    timer = null;
+                    unmountComponentAtNode(wrapper);
+                    wrapper.remove();
+                }, 300);
+            }
 
-        function handleCancel() {
-            destroyed();
-        }
+            function handleCancel() {
+                destroyed();
+            }
 
-        function handleOk(user) {
-            destroyed();
-            resolve(user);
-        }
+            function handleOk(user) {
+                destroyed();
+                resolve(user);
+            }
 
-        initApp(
-            <UserModal
-                visible={true}
-                defaultActiveTab={page}
-                onCancel={handleCancel}
-                onOK={handleOk}
-            />,
-            wrapper
-        );
+            initApp(
+                <UserModal
+                    visible={true}
+                    defaultActiveTab={page}
+                    onCancel={handleCancel}
+                    onOK={handleOk}
+                />,
+                wrapper
+            );
+        } catch (e) {}
     });
 }

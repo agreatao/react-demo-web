@@ -37,7 +37,7 @@ export default function ar() {
 
     const onSubmit = useCallback(async () => {
         try {
-            const formData = await form.validateFields().catch((e) => {});
+            const formData = await form.validateFields();
             setLoading(true);
             const { data } = await calcApi("zzar")(formData);
             setLoading(false);

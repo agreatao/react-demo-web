@@ -39,7 +39,7 @@ export default function vsas() {
 
     const onSubmit = useCallback(async () => {
         try {
-            const formData = await form.validateFields().catch((e) => {});
+            const formData = await form.validateFields();
             setLoading(true);
             const { data } = await calcApi("zzastigmatism")(formData);
             setLoading(false);

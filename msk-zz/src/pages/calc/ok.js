@@ -37,7 +37,7 @@ export default function ok() {
 
     const onSubmit = useCallback(async () => {
         try {
-            const formData = await form.validateFields().catch((e) => {});
+            const formData = await form.validateFields();
             setLoading(true);
             const { data } = await calcApi("zzok")(formData);
             setLoading(false);
