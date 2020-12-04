@@ -1,10 +1,11 @@
-import { Button, Col, Collapse, Form, Input, notification, Row, Select } from "antd";
+import { CloseOutlined } from "@ant-design/icons";
+import { Button, Col, Collapse, Form, Input, message, Row, Spin } from "antd";
 import calcApi from "api/calc";
-import React, { useEffect, useState } from "react";
+import CalcResult from "CalcResult";
+import React, { useCallback, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 
 const { Panel } = Collapse;
-const { Option } = Select;
 
 const formLayout = {
     labelCol: {
@@ -24,59 +25,102 @@ const layout = {
 export default function ok() {
     const intl = useIntl();
     const [form] = Form.useForm();
+    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState(null);
+    const [activeKey, setActiveKey] = useState([
+        "instructions",
+        "notes",
+        "rawdata",
+        "pay",
+        "input",
+    ]);
 
-    async function onSubmit() {
+    const onSubmit = useCallback(async () => {
         try {
-            const formData = await form.validateFields();
+            const formData = await form.validateFields().catch((e) => {});
+            setLoading(true);
             const { data } = await calcApi("zzok")(formData);
-            console.log(data);
-        } catch (e) {}
-    }
+            setLoading(false);
+            setData(data);
+            activeKey.remove("input");
+            activeKey.push("output");
+            setActiveKey([...activeKey]);
+        } catch (e) {
+            setLoading(false);
+            message.error(intl.formatMessage({ id: "text.systemError" }));
+        }
+    }, []);
 
-    function onReset() {
+    const onReset = useCallback(() => {
         form.resetFields();
-    }
+        onClose();
+    }, []);
+
+    const onClose = useCallback((e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        activeKey.remove("output");
+        activeKey.push("input");
+        setActiveKey([...activeKey]);
+        setData(null);
+    }, []);
+
+    const onActiveChange = useCallback((activeKey) => {
+        setActiveKey(activeKey);
+    }, []);
 
     return [
         <h1 key="title" className="title">
             <FormattedMessage id="calc.ok.name" />
         </h1>,
-        <Collapse
-            key="collapse"
-            ghost
-            defaultActiveKey={["instructions", "notes", "rawdata", "pay", "content"]}
-        >
-            <Panel key="instructions" header={<FormattedMessage id="tip.title.instructions" />}>
-                <FormattedMessage id="calc.ok.instructions" />
-            </Panel>
-            <Panel key="notes" header={<FormattedMessage id="tip.title.notes" />}>
-                <FormattedMessage id="calc.ok.notes" />
-            </Panel>
-            <Panel key="content" header={<FormattedMessage id="text.input" />}>
-                <Form
-                    form={form}
-                    {...formLayout}
-                    validateMessages={{
-                        required: intl.formatMessage({ id: "form.rules.required.field" }),
-                    }}
-                >
-                    <Row gutter={24}>
-                        <Col {...layout}>
-                            <Form.Item label="K" name="k" rules={[{ required: true }]}>
-                                <Input autoComplete="off" />
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                </Form>
-                <div className="calc-btn__wrapper">
-                    <Button className="calc-btn" type="primary" onClick={onSubmit}>
-                        <FormattedMessage id="btn.calc" />
-                    </Button>
-                    <Button className="calc-btn" onClick={onReset}>
-                        <FormattedMessage id="btn.clear" />
-                    </Button>
-                </div>
-            </Panel>
-        </Collapse>,
+        <Spin key="collapse" spinning={loading}>
+            <Collapse ghost activeKey={activeKey} onChange={onActiveChange}>
+                <Panel key="instructions" header={<FormattedMessage id="tip.title.instructions" />}>
+                    <FormattedMessage id="calc.ok.instructions" />
+                </Panel>
+                <Panel key="notes" header={<FormattedMessage id="tip.title.notes" />}>
+                    <FormattedMessage id="calc.ok.notes" />
+                </Panel>
+                <Panel key="input" header={<FormattedMessage id="text.input" />}>
+                    <Form
+                        form={form}
+                        {...formLayout}
+                        validateMessages={{
+                            required: intl.formatMessage({ id: "form.rules.required.field" }),
+                        }}
+                    >
+                        <Row gutter={24}>
+                            <Col {...layout}>
+                                <Form.Item label="K" name="k" rules={[{ required: true }]}>
+                                    <Input autoComplete="off" />
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                    </Form>
+                    <div className="calc-btn__wrapper">
+                        <Button className="calc-btn" type="primary" onClick={onSubmit}>
+                            <FormattedMessage id="btn.calc" />
+                        </Button>
+                        <Button className="calc-btn" onClick={onReset}>
+                            <FormattedMessage id="btn.clear" />
+                        </Button>
+                    </div>
+                </Panel>
+                {data && (
+                    <Panel
+                        key="output"
+                        header={<FormattedMessage id="text.output" />}
+                        extra={<CloseOutlined onClick={onClose} />}
+                    >
+                        <CalcResult
+                            data={data}
+                            dataKeys={{
+                                ac: "Ac",
+                            }}
+                        />
+                    </Panel>
+                )}
+            </Collapse>
+        </Spin>,
     ];
 }

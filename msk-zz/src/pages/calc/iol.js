@@ -1,5 +1,5 @@
 import { Collapse, Form, Input, Upload, Button, Col, Row } from "antd";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useSelector } from "react-redux";
 import moment from "moment";
@@ -16,7 +16,7 @@ export default function iol() {
     /**
      * 获取订单支付状态的轮询
      */
-    function getPayStatus(outTradeNo) {
+    const getPayStatus = useCallback(() => {
         return new Promise((resolve, reject) => {
             let timer;
             function loop() {
@@ -37,9 +37,9 @@ export default function iol() {
             }
             loop();
         });
-    }
+    }, []);
 
-    async function upload() {
+    const upload = useCallback(async () => {
         try {
             // 判断是否登录
             const user = await go("login");
@@ -65,12 +65,12 @@ export default function iol() {
         } catch (e) {
             console.error(e);
         }
-    }
+    }, []);
 
-    function beforeUpload(file) {
+    const beforeUpload = useCallback((file) => {
         setFile(file);
         return true;
-    }
+    }, []);
 
     return [
         <h1 key="title" className="title">

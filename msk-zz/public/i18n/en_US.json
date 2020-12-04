@@ -67,6 +67,7 @@
     "text.noLogin": "No Sign in",
     "text.noData": "No Data",
     "text.changeLog": "Change Log",
+    "text.systemError": "System Error",
     "calc.iol.name": "ZZ IOL",
     "calc.iol.instructions": "",
     "calc.iol.notes": "(Self filling is not available)\nUpload the value of A constant, Target D, AL, LT (Optional) and the raw data of corneal tomographic is needed;\nAL=Axial Length, LT=Lens Thickness",

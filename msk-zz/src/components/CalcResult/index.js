@@ -6,15 +6,17 @@ import { useSelector } from "react-redux";
 
 const { Item } = Descriptions;
 
-export default function CalcResult({ data, dataKeys, onClose }) {
+export default function CalcResult({ data, dataKeys, title }) {
     const width = useSelector((state) => state.browser.width);
 
-    function handleClose() {
-        typeof onClose === "function" && onClose();
-    }
-
     return (
-        <Descriptions bordered colon={false} layout={width > 1024 ? "vertical" : "horizontal"}>
+        <Descriptions
+            style={{ marginBottom: 12 }}
+            title={title}
+            bordered
+            colon={false}
+            layout={width > 1024 ? "vertical" : "horizontal"}
+        >
             {Object.keys(dataKeys).map((key) => (
                 <Item key={key} label={dataKeys[key]}>
                     {data[key]}

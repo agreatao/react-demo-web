@@ -62,11 +62,13 @@
     "form.rules.required.upload": "请上传文件",
     "form.rules.upload.zcsError": "文件格式为.zcs",
     "form.rules.required.field": "'${label}' 是必填字段!",
+
     "text.input": "输入",
     "text.output": "计算结果",
     "text.noLogin": "暂未登录",
     "text.noData": "暂无数据",
     "text.changeLog": "更新日志",
+    "text.systemError": "系统错误",
 
     "calc.iol.name": "ZZ IOL 计算器",
     "calc.iol.instructions": "",

@@ -2,7 +2,7 @@ import { LockOutlined, QuestionCircleOutlined, UserOutlined } from "@ant-design/
 import { Form, Input, Modal, Tabs, Tooltip } from "antd";
 import { login, register } from "api/user";
 import { initApp } from "main";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { unmountComponentAtNode } from "react-dom";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useDispatch } from "react-redux";
@@ -182,27 +182,27 @@ export default function UserModal({ visible = true, defaultActiveTab = "login", 
     const [loginForm] = Form.useForm();
     const [registerForm] = Form.useForm();
 
-    function handleTabChange(tab) {
+    const handleTabChange = useCallback((tab) => {
         setActiveTab(tab);
         if (tab === "login") loginForm.resetFields();
         else if (tab === "register") registerForm.resetFields();
-    }
+    }, []);
 
-    function handleCancel() {
+    const handleCancel = useCallback(() => {
         setVisible(false);
         onCancel && onCancel();
-    }
+    }, []);
 
-    async function handleSubmit() {
+    const handleSubmit = useCallback(async () => {
         let user;
         try {
             if (activeTab === "login") {
-                const { username, password } = await loginForm.validateFields();
+                const { username, password } = await loginForm.validateFields().catch((e) => {});
                 const { data, msg } = await login({ username, password });
                 user = data;
                 if (!user) throw new Error(intl.formatMessage({ id: msg }));
             } else if (activeTab === "register") {
-                const formData = await registerForm.validateFields();
+                const formData = await registerForm.validateFields().catch((e) => {});
                 const { data, msg } = await register(formData);
                 user = data;
                 if (!user) throw new Error(intl.formatMessage({ id: msg }));
@@ -212,9 +212,9 @@ export default function UserModal({ visible = true, defaultActiveTab = "login", 
             setVisible(false);
             return user;
         } catch (e) {
-            console.log(e);
+            message.error(e.msg);
         }
-    }
+    }, []);
 
     return (
         <Modal

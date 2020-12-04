@@ -1,10 +1,11 @@
-import { Button, Col, Collapse, Form, Input, Row, Select, Spin } from "antd";
+import { CloseOutlined } from "@ant-design/icons";
+import { Button, Col, Collapse, Form, Input, message, Radio, Row, Select, Spin } from "antd";
 import calcApi from "api/calc";
 import CalcResult from "CalcResult";
-import React, { useState } from "react";
+import Polar from "Chart/Polar";
+import React, { useCallback, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { VersionLogButton } from "VersionLog";
-import { CloseOutlined } from "@ant-design/icons";
 
 const { Panel } = Collapse;
 const { Option } = Select;
@@ -37,10 +38,11 @@ export default function vr() {
         "pay",
         "input",
     ]);
+    const [chartType, setChartType] = useState("single");
 
-    async function onSubmit() {
+    const onSubmit = useCallback(async () => {
         try {
-            const formData = await form.validateFields();
+            const formData = await form.validateFields().catch((e) => {});
             setLoading(true);
             const { data } = await calcApi("formulavr")({ ...formData, version });
             setLoading(false);
@@ -48,19 +50,33 @@ export default function vr() {
             activeKey.remove("input");
             activeKey.push("output");
             setActiveKey([...activeKey]);
-        } catch (e) {}
-    }
+        } catch (e) {
+            setLoading(false);
+            message.error(intl.formatMessage({ id: "text.systemError" }));
+        }
+    }, []);
 
-    function onReset() {
+    const onReset = useCallback(() => {
         form.resetFields();
         onClose();
-    }
+    }, []);
 
-    function onClose() {
-        setData(null);
+    const onClose = useCallback((e) => {
+        e.stopPropagation();
+        e.preventDefault();
         activeKey.remove("output");
         activeKey.push("input");
-    }
+        setActiveKey([...activeKey]);
+        setData(null);
+    }, []);
+
+    const onActiveChange = useCallback((activeKey) => {
+        setActiveKey(activeKey);
+    }, []);
+
+    const onChartTypeChange = useCallback((e) => {
+        setChartType(e.target.value);
+    }, []);
 
     return [
         <h1 key="title" className="title">
@@ -91,7 +107,7 @@ export default function vr() {
             </VersionLogButton>
         </h1>,
         <Spin key="collapse" spinning={loading}>
-            <Collapse ghost activeKey={activeKey} onChange={(activeKey) => setActiveKey(activeKey)}>
+            <Collapse ghost activeKey={activeKey} onChange={onActiveChange}>
                 <Panel key="instructions" header={<FormattedMessage id="tip.title.instructions" />}>
                     <FormattedMessage id="calc.vr.instructions" />
                 </Panel>
@@ -196,6 +212,34 @@ export default function vr() {
                                 vrCyl: "VR Cyl",
                                 vrAxis: "VR Axis",
                             }}
+                        />
+                        <Radio.Group
+                            options={[
+                                {
+                                    label: intl.formatMessage({ id: "btn.single" }),
+                                    value: "single",
+                                },
+                                {
+                                    label: intl.formatMessage({ id: "btn.double" }),
+                                    value: "double",
+                                },
+                            ]}
+                            optionType="button"
+                            value={chartType}
+                            onChange={onChartTypeChange}
+                        />
+                        <Polar
+                            type={chartType}
+                            data={
+                                data && [
+                                    [+data.maniCyl, +data.maniAxis, "Mani"],
+                                    [+data.comaCyl, +data.comaAxis, "COMA"],
+                                    [+data.c11Cyl, 135, "C11"],
+                                    [+data.c13Cyl, 90, "C13"],
+                                    [+data.vrCyl, +data.vrAxis, "VR"],
+                                ]
+                            }
+                            height={400}
                         />
                     </Panel>
                 )}
