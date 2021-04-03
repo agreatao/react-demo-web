@@ -1,9 +1,18 @@
 export const calc = [
     {
-        title: "nav.title.charge",
+        title: "nav.title.iol",
         groups: [
             { title: "ZZ IOL", path: "/calc/iol" },
-            { disabled: true, title: "ZZ Toric IOL", path: "/calc/tiol" },
+            { title: "ZZ Toric IOL", path: "/calc/tiol" },
+            { disabled: true, title: "ZZ IOL PRO", path: "/calc/iolpro" },
+            { disabled: true, title: "ZZ IOL Plus", path: "/calc/iolplus" },
+        ],
+    },
+    {
+        title: "nav.title.charge",
+        groups: [
+            // { title: "ZZ IOL (Old Ver.)", path: "/calc/iolold" },
+            // { disabled: true, title: "ZZ Toric IOL", path: "/calc/tiol" },
             { disabled: true, title: "ZZ AR", path: "/calc/ar" },
         ],
     },

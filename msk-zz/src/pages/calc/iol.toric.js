@@ -22,7 +22,7 @@ const layout = {
     sm: 12,
 };
 
-export default function iol() {
+export default function tiol() {
     const intl = useIntl();
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
@@ -39,7 +39,7 @@ export default function iol() {
         try {
             const formData = await form.validateFields();
             setLoading(true);
-            const { data } = await calcApi("zzcaliol")(formData);
+            const { data } = await calcApi("zzcaltoriciol")(formData);
             setLoading(false);
             setData(data);
             activeKey.remove("input");
@@ -71,15 +71,15 @@ export default function iol() {
 
     return [
         <h1 key="title" className="title">
-            <FormattedMessage id="calc.iol.name" />
+            <FormattedMessage id="calc.tiol.name" />
         </h1>,
         <Spin key="collapse" spinning={loading}>
             <Collapse ghost activeKey={activeKey} onChange={onActiveChange}>
                 <Panel key="instructions" header={<FormattedMessage id="tip.title.instructions" />}>
-                    <FormattedMessage id="calc.iol.instructions" />
+                    <FormattedMessage id="calc.tiol.instructions" />
                 </Panel>
                 <Panel key="notes" header={<FormattedMessage id="tip.title.notes" />}>
-                    <FormattedMessage id="calc.iol.notes" />
+                    <FormattedMessage id="calc.tiol.notes" />
                 </Panel>
                 <Panel key="input" header={<FormattedMessage id="text.input" />}>
                     <Form
@@ -128,12 +128,40 @@ export default function iol() {
                                 </Form.Item>
                             </Col>
                             <Col {...layout}>
-                                <Form.Item label="AL(mm)" name="al" rules={[{ required: true }]}>
+                                <Form.Item
+                                    label="Corn Asti (D)"
+                                    name="cornAsti"
+                                    rules={[{ required: true }]}
+                                >
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
                             <Col {...layout}>
-                                <Form.Item label="LT(mm)" name="lt" rules={[{ required: true }]}>
+                                <Form.Item
+                                    label="Corn Asti Ax"
+                                    name="cornAstiAx"
+                                    rules={[{ required: true }]}
+                                >
+                                    <Input autoComplete="off" />
+                                </Form.Item>
+                            </Col>
+                            <Col {...layout}>
+                                <Form.Item label="AL (mm)" name="al" rules={[{ required: true }]}>
+                                    <Input autoComplete="off" />
+                                </Form.Item>
+                            </Col>
+                            <Col {...layout}>
+                                <Form.Item label="LT (mm)" name="lt" rules={[{ required: true }]}>
+                                    <Input autoComplete="off" />
+                                </Form.Item>
+                            </Col>
+                            <Col {...layout}>
+                                <Form.Item label="SIA (D)" name="sia">
+                                    <Input autoComplete="off" />
+                                </Form.Item>
+                            </Col>
+                            <Col {...layout}>
+                                <Form.Item label="SIA Ax" name="siaAx" rules={[{ required: true }]}>
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
@@ -157,7 +185,10 @@ export default function iol() {
                         <CalcResult
                             data={data}
                             dataKeys={{
-                                iol: "IOL(D)",
+                                iolSe: "IOL SE(D)",
+                                iolS: "IOL S(D)",
+                                iolC: "IOL C(D)",
+                                iolAx: "IOL Ax",
                             }}
                         />
                     </Panel>

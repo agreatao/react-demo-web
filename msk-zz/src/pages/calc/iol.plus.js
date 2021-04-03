@@ -22,7 +22,7 @@ const layout = {
     sm: 12,
 };
 
-export default function iol() {
+export default function iolplus() {
     const intl = useIntl();
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
@@ -39,7 +39,7 @@ export default function iol() {
         try {
             const formData = await form.validateFields();
             setLoading(true);
-            const { data } = await calcApi("zzcaliol")(formData);
+            const { data } = await calcApi("zziolplus")(formData);
             setLoading(false);
             setData(data);
             activeKey.remove("input");
@@ -71,15 +71,18 @@ export default function iol() {
 
     return [
         <h1 key="title" className="title">
-            <FormattedMessage id="calc.iol.name" />
+            <FormattedMessage id="calc.iolplus.name" />
         </h1>,
         <Spin key="collapse" spinning={loading}>
             <Collapse ghost activeKey={activeKey} onChange={onActiveChange}>
-                <Panel key="instructions" header={<FormattedMessage id="tip.title.instructions" />}>
-                    <FormattedMessage id="calc.iol.instructions" />
-                </Panel>
                 <Panel key="notes" header={<FormattedMessage id="tip.title.notes" />}>
-                    <FormattedMessage id="calc.iol.notes" />
+                    <FormattedMessage id="calc.iolplus.notes" />
+                </Panel>
+                <Panel key="rawdata" header={<FormattedMessage id="tip.title.rawdata" />}>
+                    <FormattedMessage id="calc.iolplus.rawdata" />
+                </Panel>
+                <Panel key="pay" header={<FormattedMessage id="tip.title.pay" />}>
+                    <FormattedMessage id="calc.iolplus.pay" />
                 </Panel>
                 <Panel key="input" header={<FormattedMessage id="text.input" />}>
                     <Form
@@ -101,7 +104,7 @@ export default function iol() {
                             </Col>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="Target Se"
+                                    label="Target SE"
                                     name="targetSe"
                                     rules={[{ required: true }]}
                                 >
@@ -119,21 +122,31 @@ export default function iol() {
                                 </Form.Item>
                             </Col>
                             <Col {...layout}>
+                                <Form.Item label="Kf(D)" name="kf" rules={[{ required: true }]}>
+                                    <Input autoComplete="off" />
+                                </Form.Item>
+                            </Col>
+                            <Col {...layout}>
+                                <Form.Item label="Kb(D)" name="kb" rules={[{ required: true }]}>
+                                    <Input autoComplete="off" />
+                                </Form.Item>
+                            </Col>
+                            <Col {...layout}>
                                 <Form.Item
-                                    label="Mean PP(D)"
-                                    name="meanpp"
+                                    label="Corn Asti (D)"
+                                    name="cornAsti"
                                     rules={[{ required: true }]}
                                 >
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
                             <Col {...layout}>
-                                <Form.Item label="AL(mm)" name="al" rules={[{ required: true }]}>
+                                <Form.Item label="AL (mm)" name="al" rules={[{ required: true }]}>
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
                             <Col {...layout}>
-                                <Form.Item label="LT(mm)" name="lt" rules={[{ required: true }]}>
+                                <Form.Item label="LT (mm)" name="lt">
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>

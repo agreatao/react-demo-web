@@ -22,7 +22,7 @@ const layout = {
     sm: 12,
 };
 
-export default function tiol() {
+export default function iolpro() {
     const intl = useIntl();
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
@@ -39,7 +39,7 @@ export default function tiol() {
         try {
             const formData = await form.validateFields();
             setLoading(true);
-            const { data } = await calcApi("zztoriciol")(formData);
+            const { data } = await calcApi("zziol")(formData);
             setLoading(false);
             setData(data);
             activeKey.remove("input");
@@ -71,18 +71,18 @@ export default function tiol() {
 
     return [
         <h1 key="title" className="title">
-            <FormattedMessage id="calc.lsa.name" />
+            <FormattedMessage id="calc.iolpro.name" />
         </h1>,
         <Spin key="collapse" spinning={loading}>
             <Collapse ghost activeKey={activeKey} onChange={onActiveChange}>
                 <Panel key="notes" header={<FormattedMessage id="tip.title.notes" />}>
-                    <FormattedMessage id="calc.tiol.notes" />
+                    <FormattedMessage id="calc.iolpro.notes" />
                 </Panel>
                 <Panel key="rawdata" header={<FormattedMessage id="tip.title.rawdata" />}>
-                    <FormattedMessage id="calc.tiol.rawdata" />
+                    <FormattedMessage id="calc.iolpro.rawdata" />
                 </Panel>
                 <Panel key="pay" header={<FormattedMessage id="tip.title.pay" />}>
-                    <FormattedMessage id="calc.tiol.pay" />
+                    <FormattedMessage id="calc.iolpro.pay" />
                 </Panel>
                 <Panel key="input" header={<FormattedMessage id="text.input" />}>
                     <Form
@@ -96,7 +96,7 @@ export default function tiol() {
                             <Col {...layout}>
                                 <Form.Item
                                     label="A Constant"
-                                    name="aCons"
+                                    name="aConstant"
                                     rules={[{ required: true }]}
                                 >
                                     <Input autoComplete="off" />
@@ -104,8 +104,8 @@ export default function tiol() {
                             </Col>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="Target D"
-                                    name="targetD"
+                                    label="Target SE"
+                                    name="targetSe"
                                     rules={[{ required: true }]}
                                 >
                                     <Input autoComplete="off" />
@@ -122,31 +122,12 @@ export default function tiol() {
                                 </Form.Item>
                             </Col>
                             <Col {...layout}>
-                                <Form.Item label="Kf1" name="kf1" rules={[{ required: true }]}>
+                                <Form.Item label="Kf(D)" name="kf" rules={[{ required: true }]}>
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
                             <Col {...layout}>
-                                <Form.Item label="Kb1" name="kb1" rules={[{ required: true }]}>
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                            <Col {...layout}>
-                                <Form.Item
-                                    label="Kf1 Axis"
-                                    name="axis"
-                                    rules={[{ required: true }]}
-                                >
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                            <Col {...layout}>
-                                <Form.Item label="Kf2" name="kf2" rules={[{ required: true }]}>
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                            <Col {...layout}>
-                                <Form.Item label="Kb2" name="kb2" rules={[{ required: true }]}>
+                                <Form.Item label="Kb(D)" name="kb" rules={[{ required: true }]}>
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
@@ -157,20 +138,6 @@ export default function tiol() {
                             </Col>
                             <Col {...layout}>
                                 <Form.Item label="LT (mm)" name="lt">
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                            <Col {...layout}>
-                                <Form.Item label="SIA" name="sia" rules={[{ required: true }]}>
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                            <Col {...layout}>
-                                <Form.Item
-                                    label="SIA Axis"
-                                    name="siaAxis"
-                                    rules={[{ required: true }]}
-                                >
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
@@ -194,10 +161,7 @@ export default function tiol() {
                         <CalcResult
                             data={data}
                             dataKeys={{
-                                se: "SE",
-                                sperical: "Sperical",
-                                cylinder: "Cylinder",
-                                cylinderAxis: "Axis",
+                                iol: "IOL(D)",
                             }}
                         />
                     </Panel>

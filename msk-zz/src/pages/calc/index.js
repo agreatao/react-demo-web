@@ -20,7 +20,28 @@ initApp(
                 exact
                 path="/:locale/calc/tiol"
                 component={asyncLoadComponent(() =>
-                    import(/* webpackChunkName: 'tiol' */ "./tiol")
+                    import(/* webpackChunkName: 'iol.toric' */ "./iol.toric")
+                )}
+            />
+            <Route
+                exact
+                path="/:locale/calc/iolpro"
+                component={asyncLoadComponent(() =>
+                    import(/* webpackChunkName: 'iol.pro' */ "./iol.pro")
+                )}
+            />
+            <Route
+                exact
+                path="/:locale/calc/iolplus"
+                component={asyncLoadComponent(() =>
+                    import(/* webpackChunkName: 'iol.plus' */ "./iol.plus")
+                )}
+            />
+            <Route
+                exact
+                path="/:locale/calc/iolold"
+                component={asyncLoadComponent(() =>
+                    import(/* webpackChunkName: 'iol.old' */ "./iol.old")
                 )}
             />
             <Route
