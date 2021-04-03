@@ -29,7 +29,7 @@ export default function PageLayout({ nav, children }) {
                     target="_blank"
                     href="https://beian.miit.gov.cn/?spm=a21bo.2017.1997523009.42.5af911d9dARMWo#/Integrated/recordQuery"
                 >
-                    浙ICP备 18028241号
+                    浙ICP备 18028241号-3
                 </a>
                 <a
                     className="copyright police"
