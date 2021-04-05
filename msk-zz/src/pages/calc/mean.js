@@ -131,7 +131,7 @@ export default function ok() {
                                                         name={[field.name, "sph"]}
                                                         fieldKey={[field.fieldKey, "sph"]}
                                                         rules={[{ required: true }]}
-                                                        label="Sph"
+                                                        label="S (D)"
                                                     >
                                                         <Input
                                                             placeholder="Sph"
@@ -145,7 +145,7 @@ export default function ok() {
                                                         name={[field.name, "cyl"]}
                                                         fieldKey={[field.fieldKey, "cyl"]}
                                                         rules={[{ required: true }]}
-                                                        label="Cyl"
+                                                        label="C (D)"
                                                     >
                                                         <Input
                                                             placeholder="Cyl"
@@ -159,7 +159,7 @@ export default function ok() {
                                                         name={[field.name, "axis"]}
                                                         fieldKey={[field.fieldKey, "axis"]}
                                                         rules={[{ required: true }]}
-                                                        label="Axis"
+                                                        label="Ax"
                                                     >
                                                         <Input
                                                             placeholder="Axis"
@@ -206,11 +206,11 @@ export default function ok() {
                         <CalcResult
                             data={data}
                             dataKeys={{
-                                meanSph: "Mean Sph",
-                                meanCyl: "Mean Cyl",
-                                meanAxis: "Mean Axis",
-                                sdSph: "Sd Sph",
-                                sdCyl: "Sd Cyl",
+                                meanSph: "Mean S (D)",
+                                meanCyl: "Mean C (D)",
+                                meanAxis: "Mean Ax",
+                                sdSph: "SD S (D)",
+                                sdCyl: "SD C (D)",
                             }}
                         />
                     </Panel>

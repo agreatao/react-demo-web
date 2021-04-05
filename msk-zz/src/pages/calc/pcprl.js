@@ -88,11 +88,12 @@ export default function pcprl() {
                         validateMessages={{
                             required: intl.formatMessage({ id: "form.rules.required.field" }),
                         }}
+                        initialValues={{ ct: 500 }}
                     >
                         <Row gutter={24}>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="Mani Sph"
+                                    label="Mani S (D)"
                                     name="maniSph"
                                     rules={[{ required: true }]}
                                 >
@@ -101,7 +102,7 @@ export default function pcprl() {
                             </Col>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="Mani Cyl"
+                                    label="Mani C (D)"
                                     name="maniCyl"
                                     rules={[{ required: true }]}
                                 >
@@ -109,17 +110,17 @@ export default function pcprl() {
                                 </Form.Item>
                             </Col>
                             <Col {...layout}>
-                                <Form.Item label="AC (mm)" name="ac" rules={[{ required: true }]}>
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                            <Col {...layout}>
-                                <Form.Item label="Kf" name="kf" rules={[{ required: true }]}>
+                                <Form.Item label="K (D)" name="kf" rules={[{ required: true }]}>
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
                             <Col {...layout}>
                                 <Form.Item label="CT (μm)" name="ct" rules={[{ required: true }]}>
+                                    <Input autoComplete="off" />
+                                </Form.Item>
+                            </Col>
+                            <Col {...layout}>
+                                <Form.Item label="AC (mm)" name="ac" rules={[{ required: true }]}>
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
@@ -143,7 +144,7 @@ export default function pcprl() {
                         <CalcResult
                             data={data}
                             dataKeys={{
-                                pcPrl: "Pc Prl",
+                                pcPrl: "PC-PRL (D)",
                             }}
                         />
                     </Panel>

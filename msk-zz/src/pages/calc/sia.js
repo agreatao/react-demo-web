@@ -92,7 +92,7 @@ export default function sia() {
                         <Row gutter={24}>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="Mani Sph"
+                                    label="Mani S (D)"
                                     name="maniSph"
                                     rules={[{ required: true }]}
                                 >
@@ -101,7 +101,7 @@ export default function sia() {
                             </Col>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="Mani Cyl"
+                                    label="Mani C (D)"
                                     name="maniCyl"
                                     rules={[{ required: true }]}
                                 >
@@ -110,7 +110,7 @@ export default function sia() {
                             </Col>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="Mani Cyl Axis"
+                                    label="Mani Ax"
                                     name="maniCylAxis"
                                     rules={[{ required: true }]}
                                 >
@@ -120,13 +120,13 @@ export default function sia() {
                         </Row>
                         <Row gutter={24}>
                             <Col {...layout}>
-                                <Form.Item label="SIA D" name="siaD" rules={[{ required: true }]}>
+                                <Form.Item label="SIA (D)" name="siaD" rules={[{ required: true }]}>
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="SIA Axis"
+                                    label="SIA Ax"
                                     name="siaAxis"
                                     rules={[{ required: true }]}
                                 >
@@ -153,9 +153,9 @@ export default function sia() {
                         <CalcResult
                             data={data}
                             dataKeys={{
-                                sph: "Sph",
-                                cyl: "Cyl",
-                                axis: "Axis",
+                                sph: "SIA S (D)",
+                                cyl: "SIA C (D)",
+                                axis: "SIA Ax",
                             }}
                         />
                     </Panel>

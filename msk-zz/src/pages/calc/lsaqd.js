@@ -22,7 +22,7 @@ const layout = {
     sm: 12,
 };
 
-export default function ticl() {
+export default function lsaqd() {
     const intl = useIntl();
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
@@ -39,7 +39,7 @@ export default function ticl() {
         try {
             const formData = await form.validateFields();
             setLoading(true);
-            const { data } = await calcApi("zzticl")(formData);
+            const { data } = await calcApi("zzlsa")(formData);
             setLoading(false);
             setData(data);
             activeKey.remove("input");
@@ -71,15 +71,15 @@ export default function ticl() {
 
     return [
         <h1 key="title" className="title">
-            <FormattedMessage id="calc.ticl.name" />
+            <FormattedMessage id="calc.lsaqd.name" />
         </h1>,
         <Spin key="collapse" spinning={loading}>
             <Collapse ghost activeKey={activeKey} onChange={onActiveChange}>
                 <Panel key="instructions" header={<FormattedMessage id="tip.title.instructions" />}>
-                    <FormattedMessage id="calc.ticl.instructions" />
+                    <FormattedMessage id="calc.lsaqd.instructions" />
                 </Panel>
                 <Panel key="notes" header={<FormattedMessage id="tip.title.notes" />}>
-                    <FormattedMessage id="calc.ticl.notes" />
+                    <FormattedMessage id="calc.lsaqd.notes" />
                 </Panel>
                 <Panel key="input" header={<FormattedMessage id="text.input" />}>
                     <Form
@@ -88,12 +88,34 @@ export default function ticl() {
                         validateMessages={{
                             required: intl.formatMessage({ id: "form.rules.required.field" }),
                         }}
+                        initialValues={{
+                            lsaqd: -1,
+                        }}
                     >
                         <Row gutter={24}>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="Mani Sph"
-                                    name="maniSph"
+                                    label="Opic Zone(mm)"
+                                    name="opicZone"
+                                    rules={[{ required: true }]}
+                                >
+                                    <Input autoComplete="off" />
+                                </Form.Item>
+                            </Col>
+                            <Col {...layout}>
+                                <Form.Item label="K(D)" name="vertexK" rules={[{ required: true }]}>
+                                    <Input autoComplete="off" />
+                                </Form.Item>
+                            </Col>
+                            <Col {...layout}>
+                                <Form.Item label="e" name="e" rules={[{ required: true }]}>
+                                    <Input autoComplete="off" />
+                                </Form.Item>
+                            </Col>
+                            <Col {...layout}>
+                                <Form.Item
+                                    label="Correct SE(D)"
+                                    name="correctSe"
                                     rules={[{ required: true }]}
                                 >
                                     <Input autoComplete="off" />
@@ -101,62 +123,8 @@ export default function ticl() {
                             </Col>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="Mani Cyl"
-                                    name="maniCyl"
-                                    rules={[{ required: true }]}
-                                >
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                            <Col {...layout}>
-                                <Form.Item
-                                    label="Mani Cyl Axis"
-                                    name="maniCylAxis"
-                                    rules={[{ required: true }]}
-                                >
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                        </Row>
-                        <Row gutter={24}>
-                            <Col {...layout}>
-                                <Form.Item
-                                    label="Resi Sph"
-                                    name="resiSph"
-                                    rules={[{ required: true }]}
-                                >
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                            <Col {...layout}>
-                                <Form.Item
-                                    label="Resi Cyl"
-                                    name="resiCyl"
-                                    rules={[{ required: true }]}
-                                >
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                            <Col {...layout}>
-                                <Form.Item
-                                    label="Resi Cyl Axis"
-                                    name="resiCylAxis"
-                                    rules={[{ required: true }]}
-                                >
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                        </Row>
-                        <Row gutter={24}>
-                            <Col {...layout}>
-                                <Form.Item label="SIA D" name="siaD" rules={[{ required: true }]}>
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                            <Col {...layout}>
-                                <Form.Item
-                                    label="SIA Axis"
-                                    name="siaAxis"
+                                    label="Target Q"
+                                    name="targetQ"
                                     rules={[{ required: true }]}
                                 >
                                     <Input autoComplete="off" />
@@ -182,10 +150,10 @@ export default function ticl() {
                         <CalcResult
                             data={data}
                             dataKeys={{
-                                antiClockwise: data.type,
-                                estiSph: "Esti Sph",
-                                estiCyl: "Esti Cyl",
-                                estiCylAxis: "Esti Cyl Axis",
+                                lsa: "Δ LSA(D)",
+                                qd: "Q.D.(D)",
+                                targetD: "Target D",
+                                momo: "Sug. Nomo & D",
                             }}
                         />
                     </Panel>

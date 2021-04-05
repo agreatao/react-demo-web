@@ -63,8 +63,18 @@ initApp(
             />
             <Route
                 exact
+                path="/:locale/calc/lsaqd"
+                component={asyncLoadComponent(() => import(/* webpackChunkName: 'lsa' */ "./lsaqd"))}
+            />
+            <Route
+                exact
                 path="/:locale/calc/lsa"
                 component={asyncLoadComponent(() => import(/* webpackChunkName: 'lsa' */ "./lsa"))}
+            />
+            <Route
+                exact
+                path="/:locale/calc/qd"
+                component={asyncLoadComponent(() => import(/* webpackChunkName: 'lsa' */ "./qd"))}
             />
             <Route
                 exact
@@ -75,14 +85,14 @@ initApp(
                 exact
                 path="/:locale/calc/iclv"
                 component={asyncLoadComponent(() =>
-                    import(/* webpackChunkName: 'iclv' */ "./iclv")
+                    import(/* webpackChunkName: 'iclv' */ "./icl.vault")
                 )}
             />
             <Route
                 exact
                 path="/:locale/calc/ticl"
                 component={asyncLoadComponent(() =>
-                    import(/* webpackChunkName: 'ticl' */ "./ticl")
+                    import(/* webpackChunkName: 'ticl' */ "./icl.rotation")
                 )}
             />
             <Route

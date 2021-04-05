@@ -22,6 +22,8 @@ export const calc = [
             { title: "ZZ VR", path: "/calc/vr" },
             { disabled: true, title: "ZZ VR pro", path: "/calc/vrpro" },
             { title: "ZZ LSA", path: "/calc/lsa" },
+            { title: "ZZ LSA + QD", path: "/calc/lsaqd" },
+            { title: "ZZ Q.D.", path: "/calc/qd" },
         ],
     },
     {

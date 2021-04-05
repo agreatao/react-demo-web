@@ -89,11 +89,15 @@ export default function icl() {
                         validateMessages={{
                             required: intl.formatMessage({ id: "form.rules.required.field" }),
                         }}
+                        initialValues={{
+                            ct: 500,
+                            lt: 4,
+                        }}
                     >
                         <Row gutter={24}>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="Mani Sph"
+                                    label="Mani S(D)"
                                     name="maniSph"
                                     rules={[{ required: true }]}
                                 >
@@ -102,7 +106,7 @@ export default function icl() {
                             </Col>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="Mani Cyl"
+                                    label="Mani C(D)"
                                     name="maniCyl"
                                     rules={[{ required: true }]}
                                 >
@@ -111,7 +115,7 @@ export default function icl() {
                             </Col>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="Mani Cyl Axis"
+                                    label="Mani Ax"
                                     name="maniCylAxis"
                                     rules={[{ required: true }]}
                                 >
@@ -119,12 +123,7 @@ export default function icl() {
                                 </Form.Item>
                             </Col>
                             <Col {...layout}>
-                                <Form.Item label="SIA D" name="siaD" rules={[{ required: true }]}>
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                            <Col {...layout}>
-                                <Form.Item label="SIA A" name="siaA" rules={[{ required: true }]}>
+                                <Form.Item label="K(D)" name="k" rules={[{ required: true }]}>
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
@@ -139,30 +138,7 @@ export default function icl() {
                                 </Form.Item>
                             </Col>
                             <Col {...layout}>
-                                <Form.Item label="Kf" name="kf" rules={[{ required: true }]}>
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                            <Col {...layout}>
                                 <Form.Item label="LT (mm)" name="lt" rules={[{ required: true }]}>
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                            <Col {...layout}>
-                                <Form.Item
-                                    label="Icl Diameter"
-                                    name="iclDiameter"
-                                    rules={[{ required: true }]}
-                                >
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                            <Col {...layout}>
-                                <Form.Item
-                                    label="H(0) to V(90)"
-                                    name="htov"
-                                    rules={[{ required: true }]}
-                                >
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
@@ -185,17 +161,60 @@ export default function icl() {
                                 </Form.Item>
                             </Col>
                             <Col {...layout}>
-                                <Form.Item group="extra" label="ICL S" name="iclS">
+                                <Form.Item label="ICL Size(mm)" name="iclS">
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
                             <Col {...layout}>
-                                <Form.Item group="extra" label="ICL C" name="iclC">
+                                <Form.Item
+                                    label="ICL Ax"
+                                    name="iclAx"
+                                    rules={[
+                                        { required: true },
+                                        {
+                                            validator: (_, value) => {
+                                                if (+value > 0 && +value < 180)
+                                                    return Promise.resolve();
+                                                return Promise.reject(
+                                                    intl.formatMessage(
+                                                        { id: "form.rules.range" },
+                                                        { min: 0, max: 180 }
+                                                    )
+                                                );
+                                            },
+                                        },
+                                    ]}
+                                >
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
                             <Col {...layout}>
-                                <Form.Item group="extra" label="ICL A" name="iclA">
+                                <Form.Item label="SIA(D)" name="siaD" rules={[{ required: true }]}>
+                                    <Input autoComplete="off" />
+                                </Form.Item>
+                            </Col>
+                            <Col {...layout}>
+                                <Form.Item label="SIA Ax" name="siaA" rules={[{ required: true }]}>
+                                    <Input autoComplete="off" />
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                        <Row gutter={24}>
+                            <Col {...layout}>
+                                <Form.Item
+                                    label="Plan ICL S (D)"
+                                    name="siaD"
+                                    rules={[{ required: true }]}
+                                >
+                                    <Input autoComplete="off" />
+                                </Form.Item>
+                            </Col>
+                            <Col {...layout}>
+                                <Form.Item
+                                    label="Plan ICL C (D)"
+                                    name="siaA"
+                                    rules={[{ required: true }]}
+                                >
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
@@ -219,13 +238,13 @@ export default function icl() {
                         <CalcResult
                             data={data}
                             dataKeys={{
-                                estiVault: "Esti Vault",
-                                iclS: "ICL S",
-                                iclC: "ICL C",
-                                iclA: "ICL A",
-                                resiDualS: "Residual S",
-                                resiDualC: "Residual C",
-                                resiDualA: "Residual A",
+                                iclS: "ICL S (D)",
+                                iclC: "ICL C (D)",
+                                iclA: "ICL Ax",
+                                esti: "Esti Vault (mm)",
+                                planIclAx: "Plan ICL Ax",
+                                resiS: "Residual S (D)",
+                                resiC: "Residual C (D)",
                             }}
                         />
                     </Panel>

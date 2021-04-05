@@ -92,7 +92,7 @@ export default function ar() {
                         <Row gutter={24}>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="Mani Sph"
+                                    label="Mani S(D)"
                                     name="maniSph"
                                     rules={[{ required: true }]}
                                 >
@@ -101,7 +101,7 @@ export default function ar() {
                             </Col>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="Mani Cyl"
+                                    label="Mani C(D)"
                                     name="maniCyl"
                                     rules={[{ required: true }]}
                                 >
@@ -110,7 +110,7 @@ export default function ar() {
                             </Col>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="Mani Cyl Axis"
+                                    label="Mani Ax"
                                     name="maniCylAxis"
                                     rules={[{ required: true }]}
                                 >
@@ -120,18 +120,18 @@ export default function ar() {
                         </Row>
                         <Row gutter={24}>
                             <Col {...layout}>
-                                <Form.Item label="Kf" name="kf" rules={[{ required: true }]}>
+                                <Form.Item label="Kf(D)" name="kf" rules={[{ required: true }]}>
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
                             <Col {...layout}>
-                                <Form.Item label="Ks" name="ks" rules={[{ required: true }]}>
+                                <Form.Item label="Ks(D)" name="ks" rules={[{ required: true }]}>
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="Kf Axis"
+                                    label="Kf Ax"
                                     name="kfAxis"
                                     rules={[{ required: true }]}
                                 >
@@ -141,17 +141,30 @@ export default function ar() {
                         </Row>
                         <Row gutter={24}>
                             <Col {...layout}>
-                                <Form.Item label="TMR C" name="tmrc" rules={[{ required: true }]}>
+                                <Form.Item
+                                    label="TMR C(D)"
+                                    name="tmrc"
+                                    rules={[
+                                        { required: true },
+                                        {
+                                            validator: (_, value) => {
+                                                if (+value > 0)
+                                                    return Promise.reject(
+                                                        intl.formatMessage(
+                                                            { id: "form.rules.max" },
+                                                            { max: 0 }
+                                                        )
+                                                    );
+                                                return Promise.resolve();
+                                            },
+                                        },
+                                    ]}
+                                >
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
                             <Col {...layout}>
-                                <Form.Item label="Kf2" name="kf2" rules={[{ required: true }]}>
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                            <Col {...layout}>
-                                <Form.Item label="TMR A" name="tmra" rules={[{ required: true }]}>
+                                <Form.Item label="TMR Ax" name="tmra" rules={[{ required: true }]}>
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>

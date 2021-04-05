@@ -1,14 +1,11 @@
 import { CloseOutlined } from "@ant-design/icons";
-import { Button, Col, Collapse, Form, Input, message, Radio, Row, Select, Spin } from "antd";
+import { Button, Col, Collapse, Form, Input, message, Row, Spin } from "antd";
 import calcApi from "api/calc";
 import CalcResult from "CalcResult";
-import Polar from "Chart/Polar";
 import React, { useCallback, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
-import { VersionLogButton } from "VersionLog";
 
 const { Panel } = Collapse;
-const { Option } = Select;
 
 const formLayout = {
     labelCol: {
@@ -25,10 +22,9 @@ const layout = {
     sm: 12,
 };
 
-export default function vr() {
+export default function ticl() {
     const intl = useIntl();
     const [form] = Form.useForm();
-    const [version, setVersion] = useState("1.1");
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState(null);
     const [activeKey, setActiveKey] = useState([
@@ -38,13 +34,12 @@ export default function vr() {
         "pay",
         "input",
     ]);
-    const [chartType, setChartType] = useState("single");
 
     const onSubmit = useCallback(async () => {
         try {
             const formData = await form.validateFields();
             setLoading(true);
-            const { data } = await calcApi("formulavr")({ ...formData, version });
+            const { data } = await calcApi("zzticl")(formData);
             setLoading(false);
             setData(data);
             activeKey.remove("input");
@@ -56,9 +51,9 @@ export default function vr() {
         }
     }, []);
 
-    const onReset = useCallback((e) => {
+    const onReset = useCallback(() => {
         form.resetFields();
-        onClose(e);
+        onClose();
     }, []);
 
     const onClose = useCallback((e) => {
@@ -74,45 +69,17 @@ export default function vr() {
         setActiveKey(activeKey);
     }, []);
 
-    const onChartTypeChange = useCallback((e) => {
-        setChartType(e.target.value);
-    }, []);
-
     return [
         <h1 key="title" className="title">
-            <FormattedMessage id="calc.vr.name" />
-            <Select
-                value={version}
-                onChange={(version) => setVersion(version)}
-                style={{ width: 76, marginLeft: 12 }}
-            >
-                <Option value="1.0">v 1.0</Option>
-                <Option value="1.1">v 1.1</Option>
-            </Select>
-            <VersionLogButton>
-                <div className="change-log">
-                    <h4 className="change-log__title">
-                        {intl.formatMessage({ id: "calc.vr.changeLog.1_1.title" })}
-                    </h4>
-                    <p className="change-log__time">
-                        <span>2020-09-26</span>
-                    </p>
-                    <ul
-                        className="change-log__list"
-                        dangerouslySetInnerHTML={{
-                            __html: intl.formatMessage({ id: "calc.vr.changeLog.1_1" }),
-                        }}
-                    ></ul>
-                </div>
-            </VersionLogButton>
+            <FormattedMessage id="calc.ticl.name" />
         </h1>,
         <Spin key="collapse" spinning={loading}>
             <Collapse ghost activeKey={activeKey} onChange={onActiveChange}>
                 <Panel key="instructions" header={<FormattedMessage id="tip.title.instructions" />}>
-                    <FormattedMessage id="calc.vr.instructions" />
+                    <FormattedMessage id="calc.ticl.instructions" />
                 </Panel>
                 <Panel key="notes" header={<FormattedMessage id="tip.title.notes" />}>
-                    <FormattedMessage id="calc.vr.notes" />
+                    <FormattedMessage id="calc.ticl.notes" />
                 </Panel>
                 <Panel key="input" header={<FormattedMessage id="text.input" />}>
                     <Form
@@ -121,52 +88,11 @@ export default function vr() {
                         validateMessages={{
                             required: intl.formatMessage({ id: "form.rules.required.field" }),
                         }}
-                        initialValues={{
-                            opicZone: 6.5,
-                        }}
                     >
                         <Row gutter={24}>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="Opic Zone(mm)"
-                                    name="opicZone"
-                                    rules={[{ required: true }]}
-                                >
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                        </Row>
-                        <Row gutter={24}>
-                            <Col {...layout}>
-                                <Form.Item label="C7(μm)" name="c7" rules={[{ required: true }]}>
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                            <Col {...layout}>
-                                <Form.Item label="C8(μm)" name="c8" rules={[{ required: true }]}>
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                            <Col {...layout}>
-                                <Form.Item label="C11(μm)" name="c11" rules={[{ required: true }]}>
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                            <Col {...layout}>
-                                <Form.Item label="C12(μm)" name="c12" rules={[{ required: true }]}>
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                            <Col {...layout}>
-                                <Form.Item label="C13(μm)" name="c13" rules={[{ required: true }]}>
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                        </Row>
-                        <Row gutter={24}>
-                            <Col {...layout}>
-                                <Form.Item
-                                    label="Mani S(D)"
+                                    label="Mani S (D)"
                                     name="maniSph"
                                     rules={[{ required: true }]}
                                 >
@@ -175,7 +101,7 @@ export default function vr() {
                             </Col>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="Mani C(D)"
+                                    label="Mani C (D)"
                                     name="maniCyl"
                                     rules={[{ required: true }]}
                                 >
@@ -186,6 +112,51 @@ export default function vr() {
                                 <Form.Item
                                     label="Mani Ax"
                                     name="maniCylAxis"
+                                    rules={[{ required: true }]}
+                                >
+                                    <Input autoComplete="off" />
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                        <Row gutter={24}>
+                            <Col {...layout}>
+                                <Form.Item
+                                    label="Residual S (D)"
+                                    name="resiSph"
+                                    rules={[{ required: true }]}
+                                >
+                                    <Input autoComplete="off" />
+                                </Form.Item>
+                            </Col>
+                            <Col {...layout}>
+                                <Form.Item
+                                    label="Residual C (D)"
+                                    name="resiCyl"
+                                    rules={[{ required: true }]}
+                                >
+                                    <Input autoComplete="off" />
+                                </Form.Item>
+                            </Col>
+                            <Col {...layout}>
+                                <Form.Item
+                                    label="Residual Ax"
+                                    name="resiCylAxis"
+                                    rules={[{ required: true }]}
+                                >
+                                    <Input autoComplete="off" />
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                        <Row gutter={24}>
+                            <Col {...layout}>
+                                <Form.Item label="SIA (D)" name="siaD" rules={[{ required: true }]}>
+                                    <Input autoComplete="off" />
+                                </Form.Item>
+                            </Col>
+                            <Col {...layout}>
+                                <Form.Item
+                                    label="SIA Ax"
+                                    name="siaAxis"
                                     rules={[{ required: true }]}
                                 >
                                     <Input autoComplete="off" />
@@ -211,38 +182,12 @@ export default function vr() {
                         <CalcResult
                             data={data}
                             dataKeys={{
-                                vrSph: "VR S(D)",
-                                vrCyl: "VR C(D)",
-                                vrAxis: "VR Axis",
+                                // antiClockwise: data.type,
+                                cc: "Counter-clockwise",
+                                estiSph: "Estimated S (D)",
+                                estiCyl: "Estimated C (D)",
+                                estiCylAxis: "Estimated Ax",
                             }}
-                        />
-                        <Radio.Group
-                            options={[
-                                {
-                                    label: intl.formatMessage({ id: "btn.single" }),
-                                    value: "single",
-                                },
-                                {
-                                    label: intl.formatMessage({ id: "btn.double" }),
-                                    value: "double",
-                                },
-                            ]}
-                            optionType="button"
-                            value={chartType}
-                            onChange={onChartTypeChange}
-                        />
-                        <Polar
-                            type={chartType}
-                            data={
-                                data && [
-                                    [+data.maniCyl, +data.maniAxis, "Mani"],
-                                    [+data.comaCyl, +data.comaAxis, "COMA"],
-                                    [+data.c11Cyl, 135, "C11"],
-                                    [+data.c13Cyl, 90, "C13"],
-                                    [+data.vrCyl, +data.vrAxis, "VR"],
-                                ]
-                            }
-                            height={400}
                         />
                     </Panel>
                 )}

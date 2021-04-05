@@ -22,7 +22,7 @@ const layout = {
     sm: 12,
 };
 
-export default function iclv() {
+export default function qd() {
     const intl = useIntl();
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
@@ -39,7 +39,7 @@ export default function iclv() {
         try {
             const formData = await form.validateFields();
             setLoading(true);
-            const { data } = await calcApi("zziclvault")(formData);
+            const { data } = await calcApi("zzlsa")(formData);
             setLoading(false);
             setData(data);
             activeKey.remove("input");
@@ -71,15 +71,15 @@ export default function iclv() {
 
     return [
         <h1 key="title" className="title">
-            <FormattedMessage id="calc.iclv.name" />
+            <FormattedMessage id="calc.qd.name" />
         </h1>,
         <Spin key="collapse" spinning={loading}>
             <Collapse ghost activeKey={activeKey} onChange={onActiveChange}>
                 <Panel key="instructions" header={<FormattedMessage id="tip.title.instructions" />}>
-                    <FormattedMessage id="calc.iclv.instructions" />
+                    <FormattedMessage id="calc.qd.instructions" />
                 </Panel>
                 <Panel key="notes" header={<FormattedMessage id="tip.title.notes" />}>
-                    <FormattedMessage id="calc.iclv.notes" />
+                    <FormattedMessage id="calc.qd.notes" />
                 </Panel>
                 <Panel key="input" header={<FormattedMessage id="text.input" />}>
                     <Form
@@ -88,12 +88,15 @@ export default function iclv() {
                         validateMessages={{
                             required: intl.formatMessage({ id: "form.rules.required.field" }),
                         }}
+                        initialValues={{
+                            qd: -1,
+                        }}
                     >
                         <Row gutter={24}>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="Icl Diameter"
-                                    name="iclDiameter"
+                                    label="K(D)"
+                                    name="opicZone"
                                     rules={[{ required: true }]}
                                 >
                                     <Input autoComplete="off" />
@@ -101,25 +104,24 @@ export default function iclv() {
                             </Col>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="H(0) to V(90)"
-                                    name="htov"
+                                    label="Correct SD(D)"
+                                    name="vertexK"
                                     rules={[{ required: true }]}
                                 >
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
                             <Col {...layout}>
-                                <Form.Item label="LT" name="lt" rules={[{ required: true }]}>
+                                <Form.Item label="e" name="e" rules={[{ required: true }]}>
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
                             <Col {...layout}>
-                                <Form.Item label="STS-H" name="stsh" rules={[{ required: true }]}>
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                            <Col {...layout}>
-                                <Form.Item label="STS-V" name="stsv" rules={[{ required: true }]}>
+                                <Form.Item
+                                    label="Target Q"
+                                    name="targetQ"
+                                    rules={[{ required: true }]}
+                                >
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
@@ -143,7 +145,9 @@ export default function iclv() {
                         <CalcResult
                             data={data}
                             dataKeys={{
-                                estiVault: "Esti Vault",
+                                qd: "Q.D.(D)",
+                                targetD: "Target D",
+                                sug: "Sug.Nomo & D",
                             }}
                         />
                     </Panel>

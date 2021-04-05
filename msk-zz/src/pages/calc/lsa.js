@@ -88,11 +88,14 @@ export default function lsa() {
                         validateMessages={{
                             required: intl.formatMessage({ id: "form.rules.required.field" }),
                         }}
+                        initialValues={{
+                            lsa: -1,
+                        }}
                     >
                         <Row gutter={24}>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="Optic Zone"
+                                    label="Opic Zone(mm)"
                                     name="opicZone"
                                     rules={[{ required: true }]}
                                 >
@@ -100,11 +103,7 @@ export default function lsa() {
                                 </Form.Item>
                             </Col>
                             <Col {...layout}>
-                                <Form.Item
-                                    label="Vertex K"
-                                    name="vertexK"
-                                    rules={[{ required: true }]}
-                                >
+                                <Form.Item label="K(D)" name="vertexK" rules={[{ required: true }]}>
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
@@ -115,7 +114,7 @@ export default function lsa() {
                             </Col>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="Correct SE"
+                                    label="Correct SE(D)"
                                     name="correctSe"
                                     rules={[{ required: true }]}
                                 >
@@ -123,7 +122,11 @@ export default function lsa() {
                                 </Form.Item>
                             </Col>
                             <Col {...layout}>
-                                <Form.Item label="Δ LSA" name="lsa" rules={[{ required: true }]}>
+                                <Form.Item
+                                    label="Target Q"
+                                    name="targetQ"
+                                    rules={[{ required: true }]}
+                                >
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
@@ -145,19 +148,9 @@ export default function lsa() {
                         extra={<CloseOutlined onClick={onClose} />}
                     >
                         <CalcResult
-                            title="> 5m"
                             data={data}
                             dataKeys={{
-                                farQ: "Δ Q",
-                                farExpectQ: "Expect Q",
-                            }}
-                        />
-                        <CalcResult
-                            title="33cm"
-                            data={data}
-                            dataKeys={{
-                                nearQ: "Δ Q",
-                                nearExpectQ: "Expect Q",
+                                lsa: "Δ LSA(D)",
                             }}
                         />
                     </Panel>
