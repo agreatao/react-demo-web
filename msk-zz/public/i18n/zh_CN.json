@@ -64,7 +64,9 @@
     "form.rules.required.phone": "请输入电话号码",
     "form.rules.required.upload": "请上传文件",
     "form.rules.upload.zcsError": "文件格式为.zcs",
-    "form.rules.required.field": "'${label}' 是必填字段!",
+    "form.rules.required.field": "${label} 是必填字段!",
+    "form.rules.max": "这个值不大于{max}",
+    "form.rules.range": "取值范围在{min}和{max}之间",
 
     "text.input": "输入",
     "text.output": "计算结果",

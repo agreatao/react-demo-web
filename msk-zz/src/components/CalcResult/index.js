@@ -16,6 +16,7 @@ export default function CalcResult({ data, dataKeys, title }) {
             bordered
             colon={false}
             layout={width > 1024 ? "vertical" : "horizontal"}
+            column={Object.keys(dataKeys).length % 3 === 0 ? 3 : 2}
         >
             {Object.keys(dataKeys).map((key) => (
                 <Item key={key} label={dataKeys[key]}>

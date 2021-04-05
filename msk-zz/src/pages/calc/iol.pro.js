@@ -1,7 +1,10 @@
 import { CloseOutlined } from "@ant-design/icons";
 import { Button, Col, Collapse, Form, Input, message, Row, Spin } from "antd";
 import calcApi from "api/calc";
+import { pay } from "api/pay";
 import CalcResult from "CalcResult";
+import { go } from "components/User";
+import moment from "moment";
 import React, { useCallback, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 
@@ -35,9 +38,47 @@ export default function iolpro() {
         "input",
     ]);
 
+    const getPayStatus = useCallback(() => {
+        return new Promise((resolve, reject) => {
+            let timer;
+            function loop() {
+                timer = setTimeout(() => {
+                    clearTimeout(timer);
+                    payStatus({ outTradeNo })
+                        .then(({ status }) => {
+                            if (status === "WAIT_BUYER_PAY")
+                                // 等待付款
+                                loop();
+                            else if (status === "TRADE_SUCCESS")
+                                // 完成付款
+                                resolve(status);
+                            else reject(status);
+                        })
+                        .catch((e) => reject(e));
+                }, 3000);
+            }
+            loop();
+        });
+    }, []);
+
     const onSubmit = useCallback(async () => {
         try {
+            // 判断是否登录
+            const user = await go("login");
+            // 付费
+            const outTradeNo = moment().format("YYYYMMDDHHmmssSSS");
+            let form = await pay({ outTradeNo, type });
+            const formWrapper = document.createElement("div");
+            document.body.append(formWrapper);
+            formWrapper.innerHTML = form;
+            form = document.getElementsByName("punchout_form");
+            form[0].setAttribute("target", "_blank");
+            form[0].submit();
+            // 调起支付后，每3s获取一次订单状态，直到支付完成结束轮询
+            await getPayStatus(outTradeNo);
+
             const formData = await form.validateFields();
+            formData.outTradeNo = outTradeNo;
             setLoading(true);
             const { data } = await calcApi("zziol")(formData);
             setLoading(false);
@@ -51,9 +92,9 @@ export default function iolpro() {
         }
     }, []);
 
-    const onReset = useCallback(() => {
+    const onReset = useCallback((e) => {
         form.resetFields();
-        onClose();
+        onClose(e);
     }, []);
 
     const onClose = useCallback((e) => {
@@ -90,6 +131,10 @@ export default function iolpro() {
                         {...formLayout}
                         validateMessages={{
                             required: intl.formatMessage({ id: "form.rules.required.field" }),
+                        }}
+                        initialValues={{
+                            ct: 500,
+                            lt: 5,
                         }}
                     >
                         <Row gutter={24}>

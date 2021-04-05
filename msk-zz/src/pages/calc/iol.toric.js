@@ -51,9 +51,9 @@ export default function tiol() {
         }
     }, []);
 
-    const onReset = useCallback(() => {
+    const onReset = useCallback((e) => {
         form.resetFields();
-        onClose();
+        onClose(e);
     }, []);
 
     const onClose = useCallback((e) => {
@@ -87,6 +87,10 @@ export default function tiol() {
                         {...formLayout}
                         validateMessages={{
                             required: intl.formatMessage({ id: "form.rules.required.field" }),
+                        }}
+                        initialValues={{
+                            ct: 500,
+                            lt: 5,
                         }}
                     >
                         <Row gutter={24}>
@@ -131,7 +135,21 @@ export default function tiol() {
                                 <Form.Item
                                     label="Corn Asti (D)"
                                     name="cornAsti"
-                                    rules={[{ required: true }]}
+                                    rules={[
+                                        { required: true },
+                                        {
+                                            validator: (_, value) => {
+                                                if (+value > 0)
+                                                    return Promise.reject(
+                                                        intl.formatMessage(
+                                                            { id: "form.rules.max" },
+                                                            { max: 0 }
+                                                        )
+                                                    );
+                                                return Promise.resolve();
+                                            },
+                                        },
+                                    ]}
                                 >
                                     <Input autoComplete="off" />
                                 </Form.Item>

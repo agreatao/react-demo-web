@@ -1,10 +1,10 @@
-import { Collapse, Form, Input, Upload, Button, Col, Row } from "antd";
+import { Button, Col, Collapse, Form, Input, Row, Upload } from "antd";
+import { pay, payStatus, uploadZcsFile } from "api/pay";
+import { go } from "components/User";
+import moment from "moment";
 import React, { useCallback, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useSelector } from "react-redux";
-import moment from "moment";
-import { go } from "components/User";
-import { uploadZcsFile, pay, payStatus } from "api/pay";
 
 const { Panel } = Collapse;
 

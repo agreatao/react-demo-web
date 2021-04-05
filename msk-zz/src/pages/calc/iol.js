@@ -51,9 +51,9 @@ export default function iol() {
         }
     }, []);
 
-    const onReset = useCallback(() => {
+    const onReset = useCallback((e) => {
         form.resetFields();
-        onClose();
+        onClose(e);
     }, []);
 
     const onClose = useCallback((e) => {
@@ -87,6 +87,10 @@ export default function iol() {
                         {...formLayout}
                         validateMessages={{
                             required: intl.formatMessage({ id: "form.rules.required.field" }),
+                        }}
+                        initialValues={{
+                            ct: 500,
+                            lt: 5
                         }}
                     >
                         <Row gutter={24}>
