@@ -120,5 +120,6 @@ module.exports = {
             { from: "public/file", to: "file" },
             { from: "public/i18n", to: "i18n" },
         ]),
+        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     ],
 };

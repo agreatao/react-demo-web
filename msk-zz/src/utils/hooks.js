@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback } from "react";
+import { useRef, useEffect, useCallback, useState } from "react";
 
 export const useDebounce = (fn, delay, dep = []) => {
     const { current } = useRef({ fn, timer: null });
@@ -36,4 +36,32 @@ export const useThrottle = (fn, delay, dep = []) => {
             current.fn.call(this, ...args);
         }
     }, dep);
+};
+
+import addEventListener from "add-dom-event-listener";
+import { debounce } from "lodash";
+
+export const useWindowResize = () => {
+    const [width, setWidth] = useState(window.innerWidth);
+    const [height, setHeight] = useState(window.innerHeight);
+
+    const ref = useRef(null);
+
+    useEffect(() => {
+        ref.current = addEventListener(
+            window,
+            "resize",
+            debounce((e) => {
+                setWidth(window.innerWidth);
+                setHeight(window.innerHeight);
+            }),
+            500
+        );
+
+        return () => {
+            ref.current && ref.current.remove();
+        };
+    }, []);
+
+    return [width, height];
 };

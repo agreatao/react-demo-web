@@ -1,29 +1,27 @@
 import { Layout } from "antd";
 import React from "react";
 import Nav from "./Nav";
-import "./index.less";
-import LocaleButton from "Locale/LocaleButton";
-import UserButton from "User/UserButton";
+import "./Page.less";
 
-const { Header, Content, Footer } = Layout;
+const { Header, Content, Footer, Sider } = Layout;
 
-export default function PageLayout({ nav, children }) {
+export default function Page({ active, nav, component: Component }) {
     return (
-        <Layout>
-            <Header className="page-header__wrapper">
-                <div className="logo">ZZ Formula</div>
-                <div className="actions">
-                    <UserButton />
-                    <LocaleButton />
-                </div>
+        <Layout className="page">
+            <Header className="page-header">
+                <div>ZZ Formula</div>
             </Header>
-            <Layout>
-                <Nav nav={nav} />
-                <Layout>
-                    <Content className="content__wrapper">{children}</Content>
+            <Content className="page-content">
+                <Layout className="page-content-layout">
+                    <Nav nav={nav} active={active} />
+                    <Layout>
+                        <Content className="page-content-main">
+                            <Component />
+                        </Content>
+                    </Layout>
                 </Layout>
-            </Layout>
-            <Footer className="copyright__wrapper">
+            </Content>
+            <Footer className="page-footer">
                 <a
                     className="copyright"
                     target="_blank"

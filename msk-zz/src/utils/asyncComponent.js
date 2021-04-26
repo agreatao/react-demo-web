@@ -6,22 +6,3 @@ export function asyncLoadComponent(loadComponent) {
         fallback: <div className="loading"></div>,
     });
 }
-
-export function asyncComponent(loadComponent) {
-    return function AsyncComponent(props) {
-        const [Component, setComponent] = useState(null);
-
-        useEffect(() => {
-            typeof loadComponent === "function" &&
-                loadComponent()
-                    .then((module) => setComponent(module.default))
-                    .catch((e) => {});
-
-            return () => {
-                setComponent(null);
-            };
-        }, []);
-
-        return Component && <Component {...props} />;
-    };
-}

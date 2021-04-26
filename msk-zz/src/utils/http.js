@@ -43,7 +43,7 @@ export default function http(url, options = {}) {
     const { headers, params, ...restOptions } = options;
     const instance = request({
         baseURL: "/",
-        timeout: 2000,
+        timeout: 30000,
         headers: { ...headers, "Content-Type": "application/json" },
     });
     return {

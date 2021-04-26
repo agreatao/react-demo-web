@@ -3,16 +3,19 @@
     "response.msg.signInError": "Sign In Error",
     "response.msg.addSuccess": "Add Success",
     "response.msg.addError": "Add Error",
+    
     "nav.title.iol": "IOL Refractive Surgery",
     "nav.title.charge": "Charge",
     "nav.title.rs": "Refractive Surgery",
     "nav.title.icl": "ICL Refractive Surgery",
     "nav.title.tools": "Tools",
     "nav.title.ok": "Ortho-K glasses",
+    
     "tip.title.instructions": "Instructions",
     "tip.title.notes": "Notes",
     "tip.title.rawdata": "Raw Data",
     "tip.title.pay": "Pay",
+    
     "btn.versionLog": "Update Log",
     "btn.save": "Save",
     "btn.cancel": "Cancel",
@@ -33,6 +36,7 @@
     "btn.inputResult": "Input Result",
     "btn.applyRefund": "Apply Refund",
     "btn.clickHere": "Click Here",
+    
     "col.filename": "File Name",
     "col.zzType": "ZZ Formula",
     "col.uploader": "Uploader",
@@ -44,6 +48,7 @@
     "col.status.TRADE_FINISHED": "trade finished",
     "col.result": "Result",
     "col.operation": "Operation",
+    
     "form.field.username": "Username",
     "form.field.password": "Password",
     "form.field.confirmPassword": "Confirm Password",
@@ -53,6 +58,7 @@
     "form.field.phone": "Phone",
     "form.field.filename": "Filename",
     "form.field.user": "User",
+    
     "form.rules.required": "the field is required",
     "form.rules.required.username": "Please input your username!",
     "form.rules.required.password": "Please input your password",
@@ -64,47 +70,41 @@
     "form.rules.required.phone": "Please input the phone",
     "form.rules.required.upload": "Please upload the file",
     "form.rules.upload.zcsError": "the file suffix is .zcs",
-    "form.rules.required.field": "${label} is required!",
-    "form.rules.max": "it should be smaller than {max}",
+    "form.rules.required.field": "{label} is required!",
+    "form.rules.max": "{label}≤{max}",
     "form.rules.range": "it should be between {min} and {max}",
-
+    
     "text.input": "Input",
     "text.output": "Output",
     "text.noLogin": "No Sign in",
     "text.noData": "No Data",
     "text.changeLog": "Change Log",
     "text.systemError": "System Error",
-
+    
     "calc.iol.name": "ZZ IOL",
     "calc.iol.instructions": "Selection of IOL (Intra-ocula Lens) for normal cornea to calculate the IOL refraction",
     "calc.iol.notes": "SE=Spherical Equivalent; CT=Corneal Thickness; AC=Anterior Chambler Depth (Internal); AL=Axial Length; LT=Lens Thickness; PP=Puple Power (4mm) (Available from CSO Sirius or Zeus)",
     "calc.iol.rawdata": "",
     "calc.iol.pay": "",
-
-    "calc.tiol.name": "ZZ TIOL",
-    "calc.tiol.instructions": "Selection of Toric IOL (Intra-ocula Lens) for normal cornea to calculate the Toric IOL refraction and axis",
-    "calc.tiol.notes": "SE=Spherical Equivalent; CT=Corneal Thickness; AC=Anterior Chambler Depth (Internal); AL=Axial Length; LT=Lens Thickness; PP=Puple Power (4mm) (Available from CSO Sirius or Zeus); Corn Asti=Corneal Astigmatism (4mm); SIA=Surgically Induced Astigmatism",
-    "calc.tiol.rawdata": "",
-    "calc.tiol.pay": "",
-
-    "calc.iolpro.name": "ZZ IOL Pro",
-    "calc.iolpro.instructions": "",
-    "calc.iolpro.notes": "Selection of various corneal IOL (Self filling is not available)\nUpload the value of A constant, Target D, AL, LT  and the raw data of corneal tomographic is needed;\nAL=Axial Length, LT=Lens Thickness, SE=Sperical Equivalant, AC=Anterior Chambler Depth (Internal)",
-    "calc.iolpro.rawdata": "Currently only CSO Sirius or Zeus .zcs documents are supported (include more than 3 repeatable results)\nAfter the payment is successful",
-    "calc.iolpro.pay": "RMB 200 Each (After the payment is successful, the result will be given within 48 hours)",
-
-    "calc.iolplus.name": "ZZ IOL Plus",
-    "calc.iolplus.instructions": "",
-    "calc.iolplus.notes": "Selection of various corneal IOL (Self filling is not available)\nUpload the value of A constant, Target D, AL, LT  and the raw data of corneal tomographic is needed;\nAL=Axial Length, LT=Lens Thickness, SE=Sperical Equivalant, AC=Anterior Chambler Depth (Internal)",
-    "calc.iolplus.rawdata": "Currently only CSO Sirius or Zeus .zcs documents are supported (include more than 3 repeatable results)\nAfter the payment is successful",
-    "calc.iolplus.pay": "RMB 200 Each (After the payment is successful, the result will be given within 48 hours)",
     
-    "calc.iolold.name": "ZZ IOL",
-    "calc.iolold.instructions": "",
-    "calc.iolold.notes": "(Self filling is not available)\nUpload the value of A constant, Target D, AL, LT (Optional) and the raw data of corneal tomographic is needed;\nAL=Axial Length, LT=Lens Thickness",
-    "calc.iolold.rawdata": "Currently only CSO Sirius or Zeus .zcs documents are supported (include more than 3 repeatable results)\nAfter the payment is successful",
-    "calc.iolold.pay": "RMB 200 Each (After the payment is successful, the result will be given within 48 hours)",
+    "calc.iol_toric.name": "ZZ TIOL",
+    "calc.iol_toric.instructions": "Selection of Toric IOL (Intra-ocula Lens) for normal cornea to calculate the Toric IOL refraction and axis",
+    "calc.iol_toric.notes": "SE=Spherical Equivalent; CT=Corneal Thickness; AC=Anterior Chambler Depth (Internal); AL=Axial Length; LT=Lens Thickness; PP=Puple Power (4mm) (Available from CSO Sirius or Zeus); Corn Asti=Corneal Astigmatism (4mm); SIA=Surgically Induced Astigmatism",
+    "calc.iol_toric.rawdata": "",
+    "calc.iol_toric.pay": "",
+
+    "calc.iol_pro.name": "ZZ IOL Pro (Self filling is not available)",
+    "calc.iol_pro.instructions": "Selection of various corneal IOL, upload the value of A constant, Target D, AL, LT and the raw data of corneal tomographic is needed",
+    "calc.iol_pro.notes": "AL=Axial Length, LT=Lens Thickness, SE=Sperical Equivalant, AC=Anterior Chambler Depth (Internal)",
+    "calc.iol_pro.rawdata": "Currently only CSO Sirius or Zeus .zcs documents are supported (include more than 5 repeatable results)",
+    "calc.iol_pro.pay": "RMB 200 Each (After the payment is successful, the result will be given within 48 hours)",
     
+    "calc.iol_plus.name": "ZZ IOL Pro (Self filling is not available)",
+    "calc.iol_plus.instructions": "Selection of various corneal IOL, upload the value of A constant, Target D, AL, LT and the raw data of corneal tomographic is needed",
+    "calc.iol_plus.notes": "AL=Axial Length, LT=Lens Thickness, SE=Sperical Equivalant, AC=Anterior Chambler Depth (Internal)",
+    "calc.iol_plus.rawdata": "Currently only CSO Sirius or Zeus .zcs documents are supported (include more than 5 repeatable results)",
+    "calc.iol_plus.pay": "RMB 200 Each (After the payment is successful, the result will be given within 48 hours)",
+
     "calc.ar.name": "ZZ AR (Auto-compensation Refraction) Calculator",
     "calc.ar.instructions": "Used to assist surgical strategy planning for Topo-Guide refractive surgery, By calculating the compensation diopter while correcting HOAs for virgin cornea",
     "calc.ar.notes": "Mani=Manifested; TMR=Topogray Modified Refraction; AR=After Auto-compensation (No Nomogramm)",
@@ -119,11 +119,11 @@
     "calc.vr.changeLog.1_1.title": "ZZ VR公式更新 V1.1版",
     "calc.vr.changeLog.1_1": "<li>修改了已知特殊情况下引起计算结果偏差较大的BUG</li><li>优化了球镜计算结果</li><li>目标散光结果，从0.00DC更改到-0.25DC Ax180，降低术后逆规散光的比例</li>",
     
-    "calc.vrpro.name": "ZZ VR (Vector-compensation Refraction) Pro Calculator",
-    "calc.vrpro.instructions": "Used to assist surgical strategy planning for Topo-Guide / Wavefront-Guide refractive surgery, By calculating the compensation diopter while correcting HOAs for special treatment",
-    "calc.vrpro.notes": "C7~C13=Corresponded HOAs under selected Opic Zone in the excimer device, Optical Society of America(OSA) Standard (μm); Mani=Manifest refraction; VR=After vector-compensation (No Nomogramm)",
-    "calc.vrpro.rawdata": "",
-    "calc.vrpro.pay": "",
+    "calc.vr_pro.name": "ZZ VR (Vector-compensation Refraction) Pro Calculator",
+    "calc.vr_pro.instructions": "Used to assist surgical strategy planning for Topo-Guide / Wavefront-Guide refractive surgery, By calculating the compensation diopter while correcting HOAs for special treatment",
+    "calc.vr_pro.notes": "C7~C13=Corresponded HOAs under selected Opic Zone in the excimer device, Optical Society of America(OSA) Standard (μm); Mani=Manifest refraction; VR=After vector-compensation (No Nomogramm)",
+    "calc.vr_pro.rawdata": "",
+    "calc.vr_pro.pay": "",
     
     "calc.lsa.name": "ZZ LSA",
     "calc.lsa.instructions": "Design of surgical strategy for Q-value guide refractive surgery To calculate the ΔQ, for obtaining the expected ΔLSA (Longitudinal Spherical Aberration, Diopter)",
@@ -137,18 +137,24 @@
     "calc.icl.rawdata": "",
     "calc.icl.pay": "",
     
-    "calc.iclv.name": "ZZ ICLV",
-    "calc.iclv.instructions": "Selection of ICL (Implantable Collamer Lens) Diameter\nTo estimated vaulting hight after ICL implantation",
-    "calc.iclv.notes": "LT=Lens Thickness; H(0) to V(90)=Direction of ICL major axis; STS=Sulcus to Sulcus; H/V=Horizontal / Vertical",
-    "calc.iclv.rawdata": "",
-    "calc.iclv.pay": "",
+    "calc.icl_vault.name": "ZZ ICL Vault",
+    "calc.icl_vault.instructions": "Selection of ICL (Implantable Collamer Lens) Diameter\nTo estimated vaulting hight after ICL implantation",
+    "calc.icl_vault.notes": "LT=Lens Thickness; H(0) to V(90)=Direction of ICL major axis; STS=Sulcus to Sulcus; H/V=Horizontal / Vertical",
+    "calc.icl_vault.rawdata": "",
+    "calc.icl_vault.pay": "",
     
-    "calc.ticl.name": "ZZ TICL",
-    "calc.ticl.instructions": "Design of surgical strategy for adjustment of TICL(Toric Implantable Collamer Lens) axis error. To calculate the adjustment direction and angle of TICL in the current state, in order to reduce the residual astigmatism",
-    "calc.ticl.notes": "No new main incision; no replacement of TICL; Mani=Manifest refraction before TICL implantation; Resi=Residual manifest refraction after TICL implantation; SIA=Surgically Induced Astigmatism; Esti=Estimated diopter",
-    "calc.ticl.rawdata": "",
-    "calc.ticl.pay": "",
+    "calc.ticl_rotation.name": "ZZ TICL Rotation",
+    "calc.ticl_rotation.instructions": "Design of surgical strategy for adjustment of TICL(Toric Implantable Collamer Lens) axis error. To calculate the adjustment direction and angle of TICL in the current state, in order to reduce the residual astigmatism",
+    "calc.ticl_rotation.notes": "No new main incision; no replacement of TICL; Mani=Manifest refraction before TICL implantation; Resi=Residual manifest refraction after TICL implantation; SIA=Surgically Induced Astigmatism; Esti=Estimated diopter",
+    "calc.ticl_rotation.rawdata": "",
+    "calc.ticl_rotation.pay": "",
     
+    "calc.pc_prl.name": "PC-PRL Refraction Calculator",
+    "calc.pc_prl.instructions": "Selection of PC-PRL",
+    "calc.pc_prl.notes": "Mani=Manifest refraction;  AC=Anterior Chambler Depth (Internal); CT=Corneal Thickness(Optional)",
+    "calc.pc_prl.rawdata": "",
+    "calc.pc_prl.pay": "",
+
     "calc.sia.name": "ZZ SIA (Surgically Induced Astigmatism) Calculator",
     "calc.sia.instructions": "Used to calculate the diopter after introducing SIA",
     "calc.sia.notes": "",
@@ -179,11 +185,7 @@
     "calc.ok.instructions": "",
     "calc.ok.notes": "K (9mm)=Mean tangential curvature of 9mm of corneal flat axis; AC=Simulated Sim-K of normal cornea",
     "calc.ok.rawdata": "",
-    "calc.ok.pay": "",
+    "calc.ok.pay": ""
     
-    "calc.pcprl.name": "PC-PRL Refraction Calculator",
-    "calc.pcprl.instructions": "Selection of PC-PRL",
-    "calc.pcprl.notes": "Mani=Manifest refraction;  AC=Anterior Chambler Depth (Internal); CT=Corneal Thickness(Optional)",
-    "calc.pcprl.rawdata": "",
-    "calc.pcprl.pay": ""
+    
 }

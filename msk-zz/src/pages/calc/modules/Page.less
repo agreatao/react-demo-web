@@ -1,0 +1,67 @@
+.page {
+    height: 100%;
+}
+
+.page-header {
+    color: #fff;
+    font-size: 16px;
+}
+
+.page-content {
+    padding: 50px 50px 0 50px;
+}
+
+.page-content-layout {
+    height: calc(100vh - 184px);
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.page-content-main {
+    height: calc(100vh - 184px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #fff;
+    padding: 16px;
+
+    h2 {
+        border-bottom: 1px solid #e6e6e6;
+        margin-bottom: 8px;
+        padding: 0 8px;
+        display: flex;
+        align-items: center;
+    }
+
+    p {
+        color: #aaa;
+        margin-bottom: 8px;
+        padding: 0 8px;
+    }
+}
+
+.page-menu {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.page-footer {
+    text-align: center;
+
+    a {
+        color: #7b7b7b;
+
+        &:hover {
+            color: #333;
+        }
+
+        &.police {
+            background-image: url("~images/police.png");
+            background-repeat: no-repeat;
+            background-position: 0 center;
+            background-size: 18px 18px;
+            padding-left: 24px;
+            margin-left: 32px;
+        }
+    }
+}

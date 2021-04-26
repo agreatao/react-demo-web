@@ -3,16 +3,19 @@
     "response.msg.signInError": "登录失败，用户名或密码错误",
     "response.msg.addSuccess": "新增成功",
     "response.msg.addError": "新增失败",
+    
     "nav.title.iol": "IOL Refractive Surgery",
     "nav.title.charge": "收费",
     "nav.title.rs": "角膜屈光手术",
     "nav.title.icl": "ICL晶体屈光手术",
     "nav.title.tools": "小工具",
     "nav.title.ok": "角膜塑形镜验配",
+    
     "tip.title.instructions": "说明",
     "tip.title.notes": "注意事项",
     "tip.title.rawdata": "原始文档",
     "tip.title.pay": "收费标准",
+
     "btn.versionLog": "更新日志",
     "btn.save": "保存",
     "btn.cancel": "取消",
@@ -33,6 +36,7 @@
     "btn.inputResult": "录入结果",
     "btn.applyRefund": "申请退款",
     "btn.clickHere": "点击这里",
+    
     "col.filename": "文件名",
     "col.zzType": "ZZ公式",
     "col.uploader": "上传者",
@@ -44,6 +48,7 @@
     "col.status.TRADE_FINISHED": "交易完成",
     "col.result": "结果",
     "col.operation": "操作",
+    
     "form.field.username": "用户名",
     "form.field.password": "密码",
     "form.field.confirmPassword": "确认密码",
@@ -53,6 +58,7 @@
     "form.field.phone": "电话号码",
     "form.field.filename": "文件名",
     "form.field.user": "用户",
+    
     "form.rules.required": "这里是必填项",
     "form.rules.required.username": "请输入你的用户名",
     "form.rules.required.password": "请输入你的密码",
@@ -64,8 +70,8 @@
     "form.rules.required.phone": "请输入电话号码",
     "form.rules.required.upload": "请上传文件",
     "form.rules.upload.zcsError": "文件格式为.zcs",
-    "form.rules.required.field": "${label} 是必填字段!",
-    "form.rules.max": "这个值不大于{max}",
+    "form.rules.required.field": "{label} 是必填字段!",
+    "form.rules.max": "{label}≤{max}",
     "form.rules.range": "取值范围在{min}和{max}之间",
 
     "text.input": "输入",
@@ -77,33 +83,18 @@
 
     "calc.iol.name": "ZZ IOL 计算器",
     "calc.iol.instructions": "辅助常规患者IOL屈光度选择计算IOL屈光度",
-    "calc.iol.notes": "SE=等效球镜；CT=角膜厚度；AC=前房深度（内）；AL=眼轴长度；LT=晶体厚度；PP=瞳孔屈光力（4mm）（可获取设备如CSO公司Sirius或Zeus）",
     "calc.iol.rawdata": "",
     "calc.iol.pay": "",
 
-    "calc.tiol.name": "ZZ TIOL 计算器",
-    "calc.tiol.instructions": "辅助常规患者Toric IOL屈光度选择计算Toric IOL屈光度和轴位",
-    "calc.tiol.notes": "SE=等效球镜；CT=角膜厚度；AC=前房深度（内）；AL=眼轴长度；LT=晶体厚度；PP=瞳孔屈光力（4mm）（可获取设备如CSO公司Sirius或Zeus）；Corn Asti=全角膜散光（4mm）；SIA=术源性散光",
-    "calc.tiol.rawdata": "",
-    "calc.tiol.pay": "",
+    "calc.iol_toric.name": "ZZ TIOL 计算器",
+    "calc.iol_toric.instructions": "辅助常规患者Toric IOL屈光度选择计算Toric IOL屈光度和轴位",
+    "calc.iol_toric.rawdata": "",
+    "calc.iol_toric.pay": "",
 
-    "calc.iolpro.name": "ZZ IOL Pro",
-    "calc.iolpro.instructions": "",
-    "calc.iolpro.notes": "辅助任何角膜形态IOL屈光度的选择（目前尚不支持自主填写）\n需要上传A常数、目标屈光度、眼轴长度、晶体厚度和角膜断层扫描图的原始文档",
-    "calc.iolpro.rawdata": "目前仅支持CSO公司Sirius或Zeus设备下的.zcs文档（包含至少3次重复性好的检查结果）",
-    "calc.iolpro.pay": "200 元 / 次（付费成功后，结果会在48小时内给出）",
-
-    "calc.iolplus.name": "ZZ IOL Plus",
-    "calc.iolplus.instructions": "",
-    "calc.iolplus.notes": "辅助任何角膜形态IOL屈光度的选择（目前尚不支持自主填写）\n需要上传A常数、目标屈光度、眼轴长度、晶体厚度和角膜断层扫描图的原始文档",
-    "calc.iolplus.rawdata": "目前仅支持CSO公司Sirius或Zeus设备下的.zcs文档（包含至少3次重复性好的检查结果）",
-    "calc.iolplus.pay": "200 元 / 次（付费成功后，结果会在48小时内给出）",
-
-    "calc.iolold.name": "ZZ IOL 计算器",
-    "calc.iolold.instructions": "",
-    "calc.iolold.notes": "（目前尚不支持自主填写）\n需要上传A常数、目标屈光度、眼轴长度、晶体厚度（非必须）和角膜断层扫描图的原始文档",
-    "calc.iolold.rawdata": "目前仅支持CSO公司Sirius或Zeus设备下的.zcs文档（包含至少3次重复性好的检查结果）",
-    "calc.iolold.pay": "200 元 / 次（付费成功后，结果会在48小时内给出）",
+    "calc.iol_pro.name": "ZZ IOL Pro 计算器（目前尚不支持自主填写）",
+    "calc.iol_pro.instructions": "辅助任何角膜形态IOL屈光度的选择，需要上传A常数、目标屈光度、眼轴长度、晶体厚度和角膜断层扫描图的原始文档",
+    "calc.iol_pro.rawdata": "目前仅支持CSO公司Sirius或Zeus设备下的.zcs文档（包含至少5次重复性好的检查结果）",
+    "calc.iol_pro.pay": "200块 / 次 （付费成功后，结果会在48小时内给出）",
 
     "calc.ar.name": "ZZ AR 计算器",
     "calc.ar.instructions": "用于辅助角膜地形图引导角膜屈光手术方案规划，计算矫正高阶像差时的屈光补偿量（用于初始角膜）",

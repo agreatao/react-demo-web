@@ -22,7 +22,7 @@ const layout = {
     sm: 12,
 };
 
-export default function tiol() {
+export default function iol() {
     const intl = useIntl();
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
@@ -39,7 +39,7 @@ export default function tiol() {
         try {
             const formData = await form.validateFields();
             setLoading(true);
-            const { data } = await calcApi("zzcaltoriciol")(formData);
+            const { data } = await calcApi("zzcaliol")(formData);
             setLoading(false);
             setData(data);
             activeKey.remove("input");
@@ -71,18 +71,19 @@ export default function tiol() {
 
     return [
         <h1 key="title" className="title">
-            <FormattedMessage id="calc.tiol.name" />
+            <FormattedMessage id="calc.iol.name" />
         </h1>,
         <Spin key="collapse" spinning={loading}>
             <Collapse ghost activeKey={activeKey} onChange={onActiveChange}>
                 <Panel key="instructions" header={<FormattedMessage id="tip.title.instructions" />}>
-                    <FormattedMessage id="calc.tiol.instructions" />
+                    <FormattedMessage id="calc.iol.instructions" />
                 </Panel>
                 <Panel key="notes" header={<FormattedMessage id="tip.title.notes" />}>
-                    <FormattedMessage id="calc.tiol.notes" />
+                    <FormattedMessage id="calc.iol.notes" />
                 </Panel>
                 <Panel key="input" header={<FormattedMessage id="text.input" />}>
                     <Form
+                        className="calc-form"
                         form={form}
                         {...formLayout}
                         validateMessages={{
@@ -105,7 +106,7 @@ export default function tiol() {
                             </Col>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="Target Se"
+                                    label="Target SE"
                                     name="targetSe"
                                     rules={[{ required: true }]}
                                 >
@@ -124,40 +125,8 @@ export default function tiol() {
                             </Col>
                             <Col {...layout}>
                                 <Form.Item
-                                    label="Mean PP(D)"
+                                    label="Mean PP (D)"
                                     name="meanpp"
-                                    rules={[{ required: true }]}
-                                >
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                            <Col {...layout}>
-                                <Form.Item
-                                    label="Corn Asti (D)"
-                                    name="cornAsti"
-                                    rules={[
-                                        { required: true },
-                                        {
-                                            validator: (_, value) => {
-                                                if (+value > 0)
-                                                    return Promise.reject(
-                                                        intl.formatMessage(
-                                                            { id: "form.rules.max" },
-                                                            { max: 0 }
-                                                        )
-                                                    );
-                                                return Promise.resolve();
-                                            },
-                                        },
-                                    ]}
-                                >
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                            <Col {...layout}>
-                                <Form.Item
-                                    label="Corn Asti Ax"
-                                    name="cornAstiAx"
                                     rules={[{ required: true }]}
                                 >
                                     <Input autoComplete="off" />
@@ -173,26 +142,16 @@ export default function tiol() {
                                     <Input autoComplete="off" />
                                 </Form.Item>
                             </Col>
-                            <Col {...layout}>
-                                <Form.Item label="SIA (D)" name="sia">
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
-                            <Col {...layout}>
-                                <Form.Item label="SIA Ax" name="siaAx" rules={[{ required: true }]}>
-                                    <Input autoComplete="off" />
-                                </Form.Item>
-                            </Col>
                         </Row>
+                        <div className="calc-btn__wrapper">
+                            <Button className="calc-btn" type="primary" onClick={onSubmit}>
+                                <FormattedMessage id="btn.calc" />
+                            </Button>
+                            <Button className="calc-btn" onClick={onReset}>
+                                <FormattedMessage id="btn.clear" />
+                            </Button>
+                        </div>
                     </Form>
-                    <div className="calc-btn__wrapper">
-                        <Button className="calc-btn" type="primary" onClick={onSubmit}>
-                            <FormattedMessage id="btn.calc" />
-                        </Button>
-                        <Button className="calc-btn" onClick={onReset}>
-                            <FormattedMessage id="btn.clear" />
-                        </Button>
-                    </div>
                 </Panel>
                 {data && (
                     <Panel
@@ -203,10 +162,7 @@ export default function tiol() {
                         <CalcResult
                             data={data}
                             dataKeys={{
-                                iolSe: "IOL SE(D)",
-                                iolS: "IOL S(D)",
-                                iolC: "IOL C(D)",
-                                iolAx: "IOL Ax",
+                                iol: "IOL (D)",
                             }}
                         />
                     </Panel>

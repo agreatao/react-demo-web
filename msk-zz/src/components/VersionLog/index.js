@@ -2,7 +2,7 @@ import { Button, notification } from "antd";
 import React, { useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 
-export function VersionLogButton({ children, defaultShow = true }) {
+export function VersionLogButton({ children, defaultShow = false }) {
     const [show, setShow] = useState(defaultShow);
     const intl = useIntl();
 

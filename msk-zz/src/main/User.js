@@ -2,7 +2,7 @@ import { LockOutlined, QuestionCircleOutlined, UserOutlined } from "@ant-design/
 import { Form, Input, message, Modal, Tabs, Tooltip } from "antd";
 import { login, register } from "api/user";
 import { initApp } from "main";
-import { default as React, Fragment, useCallback, useMemo, useState } from "react";
+import React, { Fragment, useCallback, useMemo, useState } from "react";
 import { unmountComponentAtNode } from "react-dom";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useDispatch } from "react-redux";
@@ -247,9 +247,14 @@ export default function UserModal({ visible = true, defaultActiveTab = "login", 
     );
 }
 
-export function go(activeTab) {
+export function go(activeTab, user) {
     return new Promise((resolve) => {
         try {
+            if (user) {
+                resolve(user);
+                return;
+            }
+
             const wrapper = document.createElement("div");
             document.body.appendChild(wrapper);
 
@@ -284,4 +289,49 @@ export function go(activeTab) {
             console.log(e);
         }
     });
+}
+
+export default function UserButton() {
+    const user = useSelector((state) => state.user);
+    const lang = useSelector((state) => state.locale.lang);
+    const dispatch = useDispatch();
+
+    function handleLogout() {
+        logout().then(() => {
+            dispatch({ type: "@User/LOGOUT" });
+        });
+    }
+
+    if (user)
+        return (
+            <Dropdown
+                trigger={["click"]}
+                overlay={
+                    <Menu>
+                        <Menu.Item>
+                            <a href={`/${lang}/user/list`}>
+                                <FormattedMessage
+                                    id={user?.isAdmin ? "btn.inputResult" : "btn.getResult"}
+                                />
+                            </a>
+                        </Menu.Item>
+                        <Menu.Item>
+                            <a onClick={handleLogout}>
+                                <FormattedMessage id="btn.logout" />
+                            </a>
+                        </Menu.Item>
+                    </Menu>
+                }
+            >
+                <Button type="link">
+                    {user.nickname}
+                    <DownOutlined />
+                </Button>
+            </Dropdown>
+        );
+    return (
+        <Button size="small" type="link" onClick={() => go("login")}>
+            <FormattedMessage id="btn.login" />
+        </Button>
+    );
 }

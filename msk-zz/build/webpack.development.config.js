@@ -10,7 +10,7 @@ const historyApiRewrites = [];
 
 Object.keys(entry).forEach((chunkName) => {
     historyApiRewrites.push({
-        from: new RegExp(`^\\/(en_US|zh_CN)\\/${chunkName}(\\/.*)*`),
+        from: new RegExp(`^\\/${chunkName}(\\/.*)*`),
         to: `/${chunkName}.html`,
     });
 });
@@ -23,13 +23,13 @@ module.exports = merge(webpackConfig, {
         },
         proxy: {
             "/calculate": {
-                target: "http://localhost:80",
+                target: "http://localhost",
             },
             "/pay": {
-                target: "http://localhost:80",
+                target: "http://localhost",
             },
             "/userInfo": {
-                target: "http://localhost:80",
+                target: "http://localhost",
             },
         },
     },

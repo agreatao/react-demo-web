@@ -67,7 +67,7 @@ export default function iolpro() {
             const user = await go("login");
             // 付费
             const outTradeNo = moment().format("YYYYMMDDHHmmssSSS");
-            let form = await pay({ outTradeNo, type });
+            let form = await pay({ outTradeNo, type: "iol.pro" });
             const formWrapper = document.createElement("div");
             document.body.append(formWrapper);
             formWrapper.innerHTML = form;
@@ -87,6 +87,7 @@ export default function iolpro() {
             activeKey.push("output");
             setActiveKey([...activeKey]);
         } catch (e) {
+            console.log(e);
             setLoading(false);
             message.error(intl.formatMessage({ id: "text.systemError" }));
         }
@@ -112,18 +113,29 @@ export default function iolpro() {
 
     return [
         <h1 key="title" className="title">
-            <FormattedMessage id="calc.iolpro.name" />
+            <FormattedMessage id="calc.iol.pro.name" />
         </h1>,
         <Spin key="collapse" spinning={loading}>
             <Collapse ghost activeKey={activeKey} onChange={onActiveChange}>
+                <Panel key="instructions" header={<FormattedMessage id="tip.title.instructions" />}>
+                    <p
+                        dangerouslySetInnerHTML={{
+                            __html: intl.formatMessage({ id: "calc.iol.pro.instructions" }),
+                        }}
+                    />
+                </Panel>
                 <Panel key="notes" header={<FormattedMessage id="tip.title.notes" />}>
-                    <FormattedMessage id="calc.iolpro.notes" />
+                    <FormattedMessage id="calc.iol.pro.notes" />
                 </Panel>
                 <Panel key="rawdata" header={<FormattedMessage id="tip.title.rawdata" />}>
-                    <FormattedMessage id="calc.iolpro.rawdata" />
+                    <p
+                        dangerouslySetInnerHTML={{
+                            __html: intl.formatMessage({ id: "calc.iol.pro.rawdata" }),
+                        }}
+                    />
                 </Panel>
                 <Panel key="pay" header={<FormattedMessage id="tip.title.pay" />}>
-                    <FormattedMessage id="calc.iolpro.pay" />
+                    <FormattedMessage id="calc.iol.pro.pay" />
                 </Panel>
                 <Panel key="input" header={<FormattedMessage id="text.input" />}>
                     <Form

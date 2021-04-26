@@ -97,3 +97,5 @@ module.exports = smp.wrap(
         ],
     })
 );
+
+// const WebpackBar =  require('webpackbar');
