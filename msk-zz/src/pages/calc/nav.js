@@ -37,8 +37,8 @@ export default [
         title: "nav.title.tools",
         groups: [
             { title: "ZZ SIA", key: "sia" },
-            { title: "ZZ Vector Sum & Sub", key: "vsas" },
-            { title: "ZZ Mean ± SD Vector", key: "mean" },
+            { title: "ZZ Vector Sum & Sub", key: "vector_sum_sub" },
+            { title: "ZZ Mean ± SD Vector", key: "mean_sd_vector" },
             { title: "ZZ EX500 OPMI", key: "exop" },
         ],
     },
