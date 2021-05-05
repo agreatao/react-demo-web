@@ -175,17 +175,15 @@
     "calc.mean.tip1": "you can use a file",
     "calc.mean.tip2": "to import data, please ",
     
-    "calc.exop.name": "ZZ EX500 Visual Axis Tracking Calculator",
-    "calc.exop.instructions": "Adjust aiming beam according to ZZ EX500 method, to make ablation centered on the optic axis",
-    "calc.exop.notes": "K=Tangential curvature of corneal vertical axis; G-R=Distance between Green dot and Red dot",
-    "calc.exop.rawdata": "",
-    "calc.exop.pay": "",
+    "calc.ex_500_opmi.name": "ZZ EX500 Visual Axis Tracking Calculator",
+    "calc.ex_500_opmi.instructions": "Adjust aiming beam according to ZZ EX500 method, to make ablation centered on the optic axis",
+    "calc.ex_500_opmi.notes": "K=Tangential curvature of corneal vertical axis; G-R=Distance between Green dot and Red dot",
+    "calc.ex_500_opmi.rawdata": "",
+    "calc.ex_500_opmi.pay": "",
     
-    "calc.ok.name": "ZZ OK (Orthokeratoloy) Lens Fitting Calculator for Central Area Abnormal Cornea (e.g. post refractive surgery, etc.)",
-    "calc.ok.instructions": "",
-    "calc.ok.notes": "K (9mm)=Mean tangential curvature of 9mm of corneal flat axis; AC=Simulated Sim-K of normal cornea",
-    "calc.ok.rawdata": "",
-    "calc.ok.pay": ""
-    
-    
+    "calc.ok_glasses.name": "ZZ OK (Orthokeratoloy) Lens Fitting Calculator for Central Area Abnormal Cornea ",
+    "calc.ok_glasses.instructions": "(e.g. post refractive surgery, etc.)",
+    "calc.ok_glasses.notes": "K (9mm)=Mean tangential curvature of 9mm of corneal flat axis; AC=Simulated Sim-K of normal cornea",
+    "calc.ok_glasses.rawdata": "",
+    "calc.ok_glasses.pay": ""
 }

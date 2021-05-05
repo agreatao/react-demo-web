@@ -1,9 +1,11 @@
-import { DownOutlined, LockOutlined, QuestionCircleOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Dropdown, Form, Input, Menu, message, Modal, Tabs, Tooltip } from 'antd';
-import { login, register, logout } from "api/user";
-import React, { Fragment, useCallback, useMemo, useState } from 'react';
-import { useIntl } from 'react-intl';
-import { useDispatch, useSelector } from "react-redux";
+import { LockOutlined, QuestionCircleOutlined, UserOutlined } from "@ant-design/icons";
+import { Form, Input, message, Modal, Tabs, Tooltip } from "antd";
+import { login, register } from "api/user";
+import { initApp } from "main";
+import React, { Fragment, useCallback, useMemo, useState } from "react";
+import { unmountComponentAtNode } from "react-dom";
+import { FormattedMessage, useIntl } from "react-intl";
+import { useDispatch } from "react-redux";
 
 const formItemLayout = {
     labelCol: {
@@ -24,49 +26,37 @@ const formItemLayout = {
     },
 };
 
-export default function User() {
-    const intl = useIntl();
-    const [visible, setVisible] = useState(false);
-    const [activeTab, setActiveTab] = useState('login');
+export default function UserModal({ visible = true, defaultActiveTab = "login", onCancel, onOK }) {
+    const [activeTab, setActiveTab] = useState(defaultActiveTab);
+    const [vis, setVisible] = useState(visible);
     const [form] = Form.useForm();
-    const user = useSelector(state => state.user);
     const dispatch = useDispatch();
+    const intl = useIntl();
 
-    const onOpen = useCallback(() => {
-        setVisible(true);
+    const handleTabChange = useCallback((tab) => {
+        setActiveTab(tab);
+        form.resetFields();
     }, []);
 
-    const onSubmit = useCallback(() => {
+    const handleCancel = useCallback(() => {
+        setVisible(false);
+        onCancel && onCancel();
+    }, []);
+
+    const handleSubmit = useCallback(() => {
         form.validateFields()
             .then(async (formData) => {
                 try {
                     const method = activeTab === "login" ? login : register;
-                    const { data } = await method(formData);
-                    if (data) {
-                        dispatch({ type: "@User/LOGIN", user: data });
-                        setVisible(false);
-                        return;
-                    }
+                    const { data: user } = await method(formData);
+                    dispatch({ type: "@User/LOGIN", user });
+                    typeof onOK === "function" && onOK(user);
+                    // setVisible(false);
                 } catch (e) {
                     message.error(intl.formatMessage({ id: e.message }));
                 }
             })
-            .catch(() => { });
-    }, []);
-
-    const onCancel = useCallback(() => {
-        setVisible(false);
-    }, []);
-
-    const onLogout = useCallback(() => {
-        logout().then(() => {
-            dispatch({ type: "@User/LOGOUT" });
-            window.location.reload();
-        });
-    })
-
-    const onTabChange = useCallback((activeTab) => {
-        setActiveTab(activeTab);
+            .catch((e) => { });
     }, []);
 
     const FormItems = useMemo(() => {
@@ -238,17 +228,96 @@ export default function User() {
         );
     }, [activeTab]);
 
-    const Component = useMemo(() => {
-        return !user ?
-            <Button type="link" onClick={onOpen}>{intl.formatMessage({ id: 'btn.login' })}</Button>
-            :
+    return (
+        <Modal
+            width={480}
+            centered
+            destroyOnClose
+            visible={vis}
+            onCancel={handleCancel}
+            onOk={handleSubmit}
+            maskClosable={false}
+        >
+            <Tabs activeKey={activeTab} onChange={handleTabChange}>
+                <Tabs.TabPane tab={<FormattedMessage id="btn.login" />} key="login" />
+                <Tabs.TabPane tab={<FormattedMessage id="btn.register" />} key="register" />
+            </Tabs>
+            <Form form={form}>{FormItems}</Form>
+        </Modal>
+    );
+}
+
+export function go(activeTab, user) {
+    return new Promise((resolve) => {
+        try {
+            if (user) {
+                resolve(user);
+                return;
+            }
+
+            const wrapper = document.createElement("div");
+            document.body.appendChild(wrapper);
+
+            function destroyed() {
+                let timer = setTimeout(() => {
+                    clearTimeout(timer);
+                    timer = null;
+                    unmountComponentAtNode(wrapper);
+                    wrapper.remove();
+                }, 300);
+            }
+
+            function handleCancel() {
+                destroyed();
+            }
+
+            function handleOk(user) {
+                destroyed();
+                resolve(user);
+            }
+
+            initApp(
+                <UserModal
+                    visible={true}
+                    defaultActiveTab={activeTab}
+                    onCancel={handleCancel}
+                    onOK={handleOk}
+                />,
+                wrapper
+            );
+        } catch (e) {
+            console.log(e);
+        }
+    });
+}
+
+export default function UserButton() {
+    const user = useSelector((state) => state.user);
+    const lang = useSelector((state) => state.locale.lang);
+    const dispatch = useDispatch();
+
+    function handleLogout() {
+        logout().then(() => {
+            dispatch({ type: "@User/LOGOUT" });
+        });
+    }
+
+    if (user)
+        return (
             <Dropdown
                 trigger={["click"]}
                 overlay={
                     <Menu>
                         <Menu.Item>
-                            <a onClick={onLogout}>
-                                {intl.formatMessage({id:'btn.logout'})}
+                            <a href={`/${lang}/user/list`}>
+                                <FormattedMessage
+                                    id={user?.isAdmin ? "btn.inputResult" : "btn.getResult"}
+                                />
+                            </a>
+                        </Menu.Item>
+                        <Menu.Item>
+                            <a onClick={handleLogout}>
+                                <FormattedMessage id="btn.logout" />
                             </a>
                         </Menu.Item>
                     </Menu>
@@ -259,23 +328,10 @@ export default function User() {
                     <DownOutlined />
                 </Button>
             </Dropdown>
-    }, [user]);
-
-
-    return <Fragment>
-        {Component}
-        <Modal width={480}
-            centered
-            destroyOnClose
-            visible={visible}
-            onCancel={onCancel}
-            onOk={onSubmit}
-            maskClosable={false}>
-            <Tabs activeKey={activeTab} onChange={onTabChange}>
-                <Tabs.TabPane tab={intl.formatMessage({ id: 'btn.login' })} key="login" />
-                <Tabs.TabPane tab={intl.formatMessage({ id: 'btn.register' })} key="register" />
-            </Tabs>
-            <Form form={form}>{FormItems}</Form>
-        </Modal>
-    </Fragment>
+        );
+    return (
+        <Button size="small" type="link" onClick={() => go("login")}>
+            <FormattedMessage id="btn.login" />
+        </Button>
+    );
 }

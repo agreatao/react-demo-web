@@ -12,7 +12,7 @@ const formLayout = {
     },
 };
 
-const layout = {
+const LAYOUT = {
     span: 12,
     xs: 24,
     sm: 12,
@@ -31,7 +31,7 @@ export const Form = forwardRef(function Form({ children, initialValues, onCalc, 
                         .then((formData) => {
                             typeof callback === "function" && callback(formData);
                         })
-                        .catch((e) => {});
+                        .catch((e) => { });
                 },
                 resetFields() {
                     form.resetFields();
@@ -46,7 +46,7 @@ export const Form = forwardRef(function Form({ children, initialValues, onCalc, 
             .then((formData) => {
                 typeof onCalc === "function" && onCalc(formData);
             })
-            .catch((e) => {});
+            .catch((e) => { });
     }, []);
 
     const handleReset = useCallback(() => {
@@ -73,7 +73,9 @@ export const Form = forwardRef(function Form({ children, initialValues, onCalc, 
     );
 });
 
-export function FormItem({ label, tip, name, required, max, min, rules }) {
+export const FormList = AForm.List;
+
+export function FormItem({ layout, label, tip, name, required, max, min, rules, ...restProps }) {
     const intl = useIntl();
     const _label = useMemo(() => {
         if (tip) return <Tooltip title={intl.formatMessage({ id: tip })}>{label}</Tooltip>;
@@ -106,8 +108,8 @@ export function FormItem({ label, tip, name, required, max, min, rules }) {
                             hasMax && hasMin
                                 ? "form.rules.range"
                                 : hasMax
-                                ? "form.rules.max"
-                                : "form.rules.min",
+                                    ? "form.rules.max"
+                                    : "form.rules.min",
                     },
                     {
                         label: _label,
@@ -123,9 +125,11 @@ export function FormItem({ label, tip, name, required, max, min, rules }) {
         return _rules_;
     }, [label, required, max, min, rules]);
 
+    const stateLayout = useMemo(() => ({ ...LAYOUT, ...layout }), [layout]);
+
     return (
-        <Col {...layout}>
-            <AForm.Item title={label} label={_label} {...{ name, rules: _rules }}>
+        <Col {...stateLayout}>
+            <AForm.Item {...{ ...restProps, name, rules: _rules }} title={label} label={_label}>
                 <InputNumber autoComplete="off" />
             </AForm.Item>
         </Col>

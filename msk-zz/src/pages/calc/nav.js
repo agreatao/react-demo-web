@@ -39,11 +39,11 @@ export default [
             { title: "ZZ SIA", key: "sia" },
             { title: "ZZ Vector Sum & Sub", key: "vector_sum_sub" },
             { title: "ZZ Mean ± SD Vector", key: "mean_sd_vector" },
-            { title: "ZZ EX500 OPMI", key: "exop" },
+            { title: "ZZ EX500 OPMI", key: "ex_500_opmi" },
         ],
     },
     {
         title: "nav.title.ok",
-        groups: [{ title: "ZZ Ortho-K Glasses", key: "ok" }],
+        groups: [{ title: "ZZ Ortho-K Glasses", key: "ok_glasses" }],
     },
 ];

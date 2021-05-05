@@ -1,15 +1,21 @@
 import { Layout } from "antd";
+import User from 'main/user';
 import React from "react";
+import { LocaleSwitch } from './Locale';
 import Nav from "./Nav";
 import "./Page.less";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Footer } = Layout;
 
 export default function Page({ active, nav, component: Component }) {
     return (
         <Layout className="page">
             <Header className="page-header">
                 <div>ZZ Formula</div>
+                <div>
+                    <User />
+                    <LocaleSwitch />
+                </div>
             </Header>
             <Content className="page-content">
                 <Layout className="page-content-layout">

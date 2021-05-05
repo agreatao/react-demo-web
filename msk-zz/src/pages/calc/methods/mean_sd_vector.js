@@ -1,11 +1,17 @@
 import { message, Row } from "antd";
 import calcApi from "api/calc";
-import DataChart from "components/Chart/DataChart";
 import React, { Fragment, useCallback, useState } from "react";
 import { useIntl } from "react-intl";
 import P from "../modules/CalcP";
-import { Form, FormItem } from "../modules/Form";
+import { Form, FormList, FormItem } from "../modules/Form";
 import Result from "../modules/Result";
+import { CloseOutlined, MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
+
+const layout = {
+    span: 12,
+    xs: 12,
+    sm: 7,
+};
 
 export default function MEAN_SD_VECTOR() {
     const intl = useIntl();
@@ -37,7 +43,47 @@ export default function MEAN_SD_VECTOR() {
                         zzMeanInfos: [{ sph: null, cyl: null, axis: null }],
                     }}
                 >
-                    
+                    <FormList name="zzMeanInfos">
+                        {(fields, { add, remove }) => {
+                            return <Fragment>
+                                {fields.map((field, index) => <Row key={field.key} gutter={24}>
+                                    <FormItem
+                                        name={[field.name, "sph"]}
+                                        fieldKey={[field.fieldKey, "sph"]}
+                                        required
+                                        label="Sph"
+                                        layout={layout}
+                                    />
+                                    <FormItem
+                                        name={[field.name, "cyl"]}
+                                        fieldKey={[field.fieldKey, "cyl"]}
+                                        required
+                                        label="Cyl"
+                                        layout={layout}
+                                    />
+                                    <FormItem
+                                        name={[field.name, "axis"]}
+                                        fieldKey={[field.fieldKey, "axis"]}
+                                        required
+                                        label="Axis"
+                                        layout={layout}
+                                    />
+                                    {fields.length > 1 && (
+                                        <MinusCircleOutlined
+                                            className="calc-form-icon"
+                                            onClick={() => remove(field.name)}
+                                        />
+                                    )}
+                                    {index === fields.length - 1 && (
+                                        <PlusCircleOutlined
+                                            className="calc-form-icon"
+                                            onClick={() => add()}
+                                        />
+                                    )}
+                                </Row>)}
+                            </Fragment>
+                        }}
+                    </FormList>
                 </Form>
                 {data && (
                     <div className="calc-result">
