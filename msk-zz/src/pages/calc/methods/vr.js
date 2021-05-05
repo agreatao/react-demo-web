@@ -44,9 +44,9 @@ export default function VR() {
             </h2>
             <P id="calc.vr.instructions" />
             <div className="calc-form-wrapper">
-                <Form onCalc={onCalc} onReset={onReset}>
+                <Form onCalc={onCalc} onReset={onReset} initialValues={{ opicZone: 6.5 }}>
                     <Row gutter={24}>
-                        <FormItem name="opicZone" label="Opic Zone" required />
+                        <FormItem name="opicZone" label="Opic Zone (mm)" required />
                         <FormItem name="c7" label="C7" required />
                         <FormItem name="c8" label="C8" required />
                         <FormItem name="c11" label="C11" required />
@@ -72,10 +72,10 @@ export default function VR() {
                         <DataChart
                             data={
                                 data && [
-                                    [+data.maniCyl, +data.maniAxis, "Mani"],
-                                    [+data.comaCyl, +data.comaAxis, "COMA"],
-                                    [+data.c11Cyl, 135, "C11"],
-                                    [+data.c13Cyl, 90, "C13"],
+                                    [+data.maniCyl, +data.maniAxis, "Manifest Astigmatism"],
+                                    [+data.comaCyl, +data.comaAxis, "COMA Astigmatism"],
+                                    [+data.secAstiD1, 135, "Secondary Astigmatism D1"],
+                                    [+data.secAstiD2, 90, "Secondary Astigmatism D2"],
                                     [+data.vrCyl, +data.vrAxis, "VR"],
                                 ]
                             }

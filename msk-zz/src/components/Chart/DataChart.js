@@ -30,7 +30,7 @@ export default function DataChart({ data }) {
                     value={chartType}
                     onChange={onChartTypeChange}
                 />
-                <Polar type={chartType} data={data} height={300} />
+                <Polar type={chartType} data={data} height={440} radius={120} />
             </Fragment>
         )
     );

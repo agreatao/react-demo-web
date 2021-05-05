@@ -6,6 +6,7 @@ export default function Polar({
     height = "100%",
     data: propsData = [],
     type = "single", // 'double'
+    radius = 300
 }) {
     const wrapper = useRef();
     const { current } = useRef({
@@ -13,7 +14,7 @@ export default function Polar({
         maxAngle: 180,
         width: null,
         height: null,
-        radius: null,
+        radius: radius,
     });
 
     const data = useMemo(() => {
@@ -42,7 +43,8 @@ export default function Polar({
         current.width = clientWidth;
         current.height = clientHeight;
         current.graph.attr("transform", `translate(${clientWidth / 2}, ${clientHeight / 2})`);
-        current.radius = Math.min(clientWidth, clientHeight) / 2 - 30;
+        if (!current.radius)
+            current.radius = Math.min(clientWidth, clientHeight) / 2 - 30;
         current.color = d3.scaleOrdinal(d3.schemeCategory10);
     }, [width, height]);
 
@@ -110,10 +112,10 @@ export default function Polar({
                 Math.abs(d) === 90
                     ? `rotate(90 ${current.radius + 12}, -3)`
                     : Math.abs(d) === 270
-                    ? `rotate(-90 ${current.radius + 12}, 4)`
-                    : Math.abs(d) > 90 && Math.abs(d) < 270
-                    ? `rotate(180 ${current.radius + 6}, 0)`
-                    : null
+                        ? `rotate(-90 ${current.radius + 12}, 4)`
+                        : Math.abs(d) > 90 && Math.abs(d) < 270
+                            ? `rotate(180 ${current.radius + 6}, 0)`
+                            : null
             )
             .text((d) => Math.abs(d));
 
@@ -145,7 +147,7 @@ export default function Polar({
             .attr("title", (d) => `[${d.join(",")}]`)
             .attr("stroke", (d) => current.color(d))
             .attr("stroke-width", 2)
-            .attr("marker-end", (d,index) => {
+            .attr("marker-end", (d, index) => {
                 const arrowMarker = current.defs
                     .append("marker")
                     .attr("id", `arrow_${index}`)
@@ -165,7 +167,7 @@ export default function Polar({
 
         const legend = current.graph
             .append("g")
-            .attr("transform", `translate(${current.radius - 10}, -${current.radius + 20})`);
+            .attr("transform", `translate(${current.radius - 80}, -${current.radius + 90})`);
 
         legend
             .selectAll(null)

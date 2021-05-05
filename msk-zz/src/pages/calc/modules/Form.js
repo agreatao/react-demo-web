@@ -5,10 +5,10 @@ import "./Form.less";
 
 const formLayout = {
     labelCol: {
-        sm: { span: 10 },
+        sm: { span: 11 },
     },
     wrapperCol: {
-        sm: { span: 14 },
+        sm: { span: 13 },
     },
 };
 
