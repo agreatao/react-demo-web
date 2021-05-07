@@ -1,5 +1,6 @@
 import { message, Row } from "antd";
 import calcApi from "api/calc";
+import DataChart from "components/Chart/DataChart";
 import React, { Fragment, useCallback, useState } from "react";
 import { useIntl } from "react-intl";
 import P from "../modules/CalcP";
@@ -50,6 +51,16 @@ export default function AR() {
                                 arCyl: "AR Cyl",
                                 arSph: "AR Sph",
                             }}
+                        />
+                        <DataChart
+                            data={
+                                data && [
+                                    [+data.maniCyl, +data.maniAxis, "Manifest Astigmatism"],
+                                    [+data.comaCyl, +data.comaAxis, "Intraocular Astigmatism"],
+                                    [+data.tmrCyl, +data.tmrAxis, "TMR Astigmatism"],
+                                    [+data.arCyl, +data.arAxis, "AR"],
+                                ]
+                            }
                         />
                     </div>
                 )}

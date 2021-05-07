@@ -25,6 +25,11 @@ Promise.all([getEN(), getCN()]).then(([en, cn]) => {
         const user = response.data;
         store.dispatch({ type: '@User/LOGIN', user });
 
+
+
+    }).catch(e => {
+
+    }).finally(() => {
         render(
             <Provider store={store}>
                 <LocaleProvider messages={{ en, cn }}>
@@ -53,9 +58,6 @@ Promise.all([getEN(), getCN()]).then(([en, cn]) => {
             </Provider>,
             document.getElementById("app")
         );
-
-    }).catch(e => {
-
     })
 
 });

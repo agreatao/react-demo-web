@@ -30,6 +30,7 @@ export default function Polar({
         current.chart.attr("width", width).attr("height", height);
         current.graph = current.chart.append("g");
         current.defs = current.chart.append("defs");
+        current.color = d3.scaleOrdinal(d3.schemeCategory10);
 
         current.angle = d3
             .scaleLinear()
@@ -45,7 +46,7 @@ export default function Polar({
         current.graph.attr("transform", `translate(${clientWidth / 2}, ${clientHeight / 2})`);
         if (!current.radius)
             current.radius = Math.min(clientWidth, clientHeight) / 2 - 30;
-        current.color = d3.scaleOrdinal(d3.schemeCategory10);
+
     }, [width, height]);
 
     useEffect(() => {
@@ -145,7 +146,7 @@ export default function Polar({
                 return coors.split(",")[1];
             })
             .attr("title", (d) => `[${d.join(",")}]`)
-            .attr("stroke", (d) => current.color(d))
+            .attr("stroke", (d) => current.color(d[2]))
             .attr("stroke-width", 2)
             .attr("marker-end", (d, index) => {
                 const arrowMarker = current.defs
@@ -159,7 +160,7 @@ export default function Polar({
                 arrowMarker
                     .append("path")
                     .attr("d", "M0,-5 L10,0 L0,5")
-                    .attr("fill", current.color(d));
+                    .attr("fill", current.color(d[2]));
                 return `url(#arrow_${index})`;
             });
 
@@ -175,7 +176,7 @@ export default function Polar({
             .enter()
             .append("circle")
             .attr("cy", (d, index) => labelHeight * index * 1.8 + labelHeight)
-            .attr("fill", (d) => current.color(d))
+            .attr("fill", (d) => current.color(d[2]))
             .attr("r", 4);
 
         legend

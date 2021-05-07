@@ -130,7 +130,7 @@ export function FormItem({ layout, label, tip, name, required, max, min, rules, 
     return (
         <Col {...stateLayout}>
             <AForm.Item {...{ ...restProps, name, rules: _rules }} title={label} label={_label}>
-                <InputNumber autoComplete="off" />
+                <InputNumber autoComplete="off" className="calc-form-input" />
             </AForm.Item>
         </Col>
     );
