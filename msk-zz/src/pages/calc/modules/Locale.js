@@ -12,6 +12,7 @@ const ANTD = {
 export default function LocaleProvider({ children, messages }) {
     if (!messages) throw new Error("locale messages is not defined");
     const lang = useSelector((state) => state.locale);
+
     return (
         <ConfigProvider lang={ANTD[lang]}>
             <IntlProvider locale={lang} messages={messages[lang]}>

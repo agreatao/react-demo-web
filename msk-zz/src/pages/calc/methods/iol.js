@@ -28,6 +28,7 @@ export default function IOL() {
         <Fragment>
             <h2>{intl.formatMessage({ id: "calc.iol.name" })}</h2>
             <P id="calc.iol.instructions" />
+            <P id="calc.iol.notes" />
             <div className="calc-form-wrapper">
                 <Form
                     initialValues={{

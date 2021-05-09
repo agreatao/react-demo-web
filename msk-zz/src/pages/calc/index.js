@@ -21,6 +21,7 @@ Promise.all([getEN(), getCN()]).then(([en, cn]) => {
     const { locale } = urlParse('/calc/:locale/:method', window.location.pathname);
     store.dispatch({ type: '@Locale/CHANGE', locale });
 
+
     isLogin().then(response => {
         const user = response.data;
         store.dispatch({ type: '@User/LOGIN', user });

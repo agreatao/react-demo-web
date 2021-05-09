@@ -29,17 +29,18 @@ export default function AR() {
         <Fragment>
             <h2>{intl.formatMessage({ id: "calc.ar.name" })}</h2>
             <P id="calc.ar.instructions" />
+            <P id="calc.ar.notes" />
             <div className="calc-form-wrapper">
                 <Form onCalc={onCalc} onReset={onReset}>
                     <Row gutter={24}>
-                        <FormItem name="maniSph" label="Mani Sph" required />
-                        <FormItem name="maniCyl" label="Mani Cyl" required />
-                        <FormItem name="maniCylAxis" label="Mani Cyl Axis" required />
-                        <FormItem name="kf" label="Kf" required />
-                        <FormItem name="ks" label="Ks" required />
-                        <FormItem name="kf2" label="Kf2" required />
-                        <FormItem name="tmrc" label="TMR C" required />
-                        <FormItem name="tmra" label="TMR A" required />
+                        <FormItem name="maniSph" label="Mani S (D)" required />
+                        <FormItem name="maniCyl" label="Mani C (D)" required />
+                        <FormItem name="maniCylAxis" label="Mani Cyl Ax" required />
+                        <FormItem name="kf" label="Kf (D)" required />
+                        <FormItem name="ks" label="Ks (D)" required />
+                        <FormItem name="kf2" label="Kf Ax" required />
+                        <FormItem name="tmrc" label="TMR C (D)" required max={0} />
+                        <FormItem name="tmra" label="TMR Ax" required />
                     </Row>
                 </Form>
                 {data && (
@@ -47,16 +48,16 @@ export default function AR() {
                         <Result
                             data={data}
                             dataKeys={{
-                                arAxis: "AR Axis",
-                                arCyl: "AR Cyl",
-                                arSph: "AR Sph",
+                                arSph: "AR S (D)",
+                                arCyl: "AR C (D)",
+                                arAxis: "AR Ax",
                             }}
                         />
                         <DataChart
                             data={
                                 data && [
                                     [+data.maniCyl, +data.maniAxis, "Manifest Astigmatism"],
-                                    [+data.comaCyl, +data.comaAxis, "Intraocular Astigmatism"],
+                                    [+data.postLensCyl, +data.postLensAxis, "Intraocular Astigmatism"],
                                     [+data.tmrCyl, +data.tmrAxis, "TMR Astigmatism"],
                                     [+data.arCyl, +data.arAxis, "AR"],
                                 ]

@@ -28,6 +28,7 @@ export default function IOL_TORIC() {
         <Fragment>
             <h2>{intl.formatMessage({ id: "calc.iol_toric.name" })}</h2>
             <P id="calc.iol_toric.instructions" />
+            <P id="calc.iol_toric.notes" />
             <div className="calc-form-wrapper">
                 <Form
                     initialValues={{

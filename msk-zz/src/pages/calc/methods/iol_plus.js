@@ -32,6 +32,7 @@ export default function IOL_PLUS() {
         <Fragment>
             <h2>{intl.formatMessage({ id: "calc.iol_plus.name" })}</h2>
             <P id="calc.iol_plus.instructions" />
+            <P id="calc.iol_plus.notes" />
             <P id="calc.iol_plus.rawdata" />
             <P id="calc.iol_plus.pay" />
             <div className="calc-form-wrapper">

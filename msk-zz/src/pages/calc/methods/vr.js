@@ -43,20 +43,21 @@ export default function VR() {
                 </Select>
             </h2>
             <P id="calc.vr.instructions" />
+            <P id="calc.vr.notes" />
             <div className="calc-form-wrapper">
                 <Form onCalc={onCalc} onReset={onReset} initialValues={{ opicZone: 6.5 }}>
                     <Row gutter={24}>
                         <FormItem name="opicZone" label="Opic Zone (mm)" required />
-                        <FormItem name="c7" label="C7" required />
-                        <FormItem name="c8" label="C8" required />
-                        <FormItem name="c11" label="C11" required />
-                        <FormItem name="c12" label="C12" required />
-                        <FormItem name="c13" label="C13" required />
+                        <FormItem name="c7" label="C7 (μm)" required />
+                        <FormItem name="c8" label="C8 (μm)" required />
+                        <FormItem name="c11" label="C11 (μm)" required />
+                        <FormItem name="c12" label="C12 (μm)" required />
+                        <FormItem name="c13" label="C13 (μm)" required />
                     </Row>
                     <Row gutter={24}>
-                        <FormItem name="maniSph" label="Mani Sph" required />
-                        <FormItem name="maniCyl" label="Mani Cyl" required />
-                        <FormItem name="maniCylAxis" label="Mani Cyl Axis" required />
+                        <FormItem name="maniSph" label="Mani Sph (D)" required />
+                        <FormItem name="maniCyl" label="Mani Cyl (D)" required />
+                        <FormItem name="maniCylAxis" label="Mani Cyl Ax" required />
                     </Row>
                 </Form>
                 {data && (
@@ -64,9 +65,9 @@ export default function VR() {
                         <Result
                             data={data}
                             dataKeys={{
-                                vrSph: "VR Sph",
-                                vrCyl: "VR Cyl",
-                                vrAxis: "VR Axis",
+                                vrSph: "VR S (D)",
+                                vrCyl: "VR C (D)",
+                                vrAxis: "VR Ax",
                             }}
                         />
                         <DataChart
