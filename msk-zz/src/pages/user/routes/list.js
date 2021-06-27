@@ -13,18 +13,15 @@ import {
     Row,
     Select,
     Spin,
-    Tag,
+    Tag
 } from "antd";
 import { requestSendMessage, searchFileList, updateResult } from "api/pay";
 import { searchAllUser } from "api/user";
-import { initApp } from "main";
 import moment from "moment";
 import React, { useCallback, useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useSelector } from "react-redux";
-import { go } from "User";
 import { useDebounce } from "utils/hooks";
-import { unmountComponentAtNode } from "react-dom";
 import "./list.less";
 
 const formLayout = {
@@ -85,34 +82,34 @@ function InputModal({ visible = true, onCancel, onOK }) {
 }
 
 function inputModal() {
-    return new Promise((resolve) => {
-        try {
-            const wrapper = document.createElement("div");
-            document.body.appendChild(wrapper);
+    // return new Promise((resolve) => {
+    //     try {
+    //         const wrapper = document.createElement("div");
+    //         document.body.appendChild(wrapper);
 
-            function destroyed() {
-                let timer = setTimeout(() => {
-                    clearTimeout(timer);
-                    timer = null;
-                    unmountComponentAtNode(wrapper);
-                    wrapper.remove();
-                }, 300);
-            }
+    //         function destroyed() {
+    //             let timer = setTimeout(() => {
+    //                 clearTimeout(timer);
+    //                 timer = null;
+    //                 unmountComponentAtNode(wrapper);
+    //                 wrapper.remove();
+    //             }, 300);
+    //         }
 
-            function handleCancel() {
-                destroyed();
-            }
+    //         function handleCancel() {
+    //             destroyed();
+    //         }
 
-            function handleOk(resultContent) {
-                destroyed();
-                resolve(resultContent);
-            }
+    //         function handleOk(resultContent) {
+    //             destroyed();
+    //             resolve(resultContent);
+    //         }
 
-            initApp(<InputModal visible={true} onCancel={handleCancel} onOK={handleOk} />, wrapper);
-        } catch (e) {
-            console.log(e);
-        }
-    });
+    //         initApp(<InputModal visible={true} onCancel={handleCancel} onOK={handleOk} />, wrapper);
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // });
 }
 
 function FileItem({ data: propData }) {
@@ -223,7 +220,7 @@ function renderContent(user, data, loading) {
                 image={Empty.PRESENTED_IMAGE_SIMPLE}
                 description={<FormattedMessage id="text.noLogin" />}
             >
-                <Button type="primary" onClick={() => go("login")}>
+                <Button type="primary">
                     <FormattedMessage id="btn.login" />
                 </Button>
             </Empty>
@@ -323,11 +320,6 @@ export default function List() {
 
     return (
         <div className="user-list__wrapper">
-            <PageHeader
-                className="user-list__header"
-                onBack={() => history.back()}
-                title={<FormattedMessage id="text.output" />}
-            />
             <Form form={form} {...formLayout} colon={false} className="user-list__form">
                 <Row gutter={24}>
                     <Col {...layout}>
@@ -364,7 +356,7 @@ export default function List() {
                 pageSize={pageSize}
                 total={total}
                 showSizeChanger={true}
-                showTotal={(total) => `${total}`}
+                showTotal={(total) => `总共${total}条`}
                 style={{ textAlign: "right" }}
                 onChange={onCurrentPageChange}
                 onShowSizeChange={onPageSizeChange}

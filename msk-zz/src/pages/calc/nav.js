@@ -4,8 +4,9 @@ export default [
         groups: [
             { title: "ZZ IOL", key: "iol" },
             { title: "ZZ Toric IOL", key: "iol_toric" },
-            { title: "ZZ IOL Pro", key: "iol_pro" },
-            { title: "ZZ IOL Plus", key: "iol_plus" },
+            { title: "ZZ IOL Pro", key: "iol_old" },
+            // { title: "ZZ IOL Pro", key: "iol_pro" },
+            // { title: "ZZ IOL Plus", key: "iol_plus" },
         ],
     },
     {

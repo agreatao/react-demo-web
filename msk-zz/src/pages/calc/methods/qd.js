@@ -35,7 +35,7 @@ export default function LSA() {
                     lsa: -1
                 }}>
                     <Row gutter={24}>
-                        <FormItem name="k" label="K (D)" required disabled />
+                        <FormItem name="k" label="K (D)" required />
                         <FormItem name="correctSd" label="Correct SD (D)" required />
                         <FormItem name="e" label="e" required />
                         <FormItem name="targetQ" label="Target Q" required />
