@@ -4,8 +4,8 @@ export default [
         groups: [
             { title: "ZZ IOL", key: "iol" },
             { title: "ZZ Toric IOL", key: "iol_toric" },
-            { disabled: true, title: "ZZ IOL Pro", key: "iol_pro" },
-            { disabled: true, title: "ZZ IOL Plus", key: "iol_plus" },
+            { title: "ZZ IOL Pro", key: "iol_pro" },
+            { title: "ZZ IOL Plus", key: "iol_plus" },
         ],
     },
     {
@@ -21,7 +21,7 @@ export default [
         groups: [
             { title: "ZZ VR", key: "vr" },
             { disabled: true, title: "ZZ VR pro", key: "vr_pro" },
-            { title: "ZZ LSA", key: "lsa" },
+            { title: "ZZ LSA Q.D.", key: "lsa_qd" },
         ],
     },
     {

@@ -1,6 +1,6 @@
 import { Layout, Menu } from "antd";
 import classnames from "classnames";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { useIntl } from "react-intl";
 import { useSelector } from "react-redux";
@@ -62,12 +62,9 @@ export default function Nav({ nav = [], active }) {
     const history = useHistory();
     const locale = useSelector((state) => state.locale);
 
-    const onPageChange = useCallback(
-        (e) => {
-            history.push(`/calc/${locale}/${e.key}`);
-        },
-        [locale]
-    );
+    const onPageChange = (e) => {
+        history.push(`/calc/${locale}/${e.key}`);
+    }
 
     const Wrapper = useMemo(() => {
         return width <= 1024 ? InnerNav : OuterNav;

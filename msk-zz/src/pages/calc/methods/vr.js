@@ -1,7 +1,7 @@
 import { message, Row, Select } from "antd";
 import calcApi from "api/calc";
 import DataChart from "components/Chart/DataChart";
-import React, { Fragment, useCallback, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { useIntl } from "react-intl";
 import P from "../modules/CalcP";
 import { Form, FormItem } from "../modules/Form";
@@ -14,7 +14,7 @@ export default function VR() {
     const [data, setData] = useState(null);
     const [version, setVersion] = useState("1.1");
 
-    const onCalc = useCallback(async (formData) => {
+    const onCalc = async (formData) => {
         try {
             const { data } = await calcApi("formulavr")({ ...formData, version });
             setData(data);
@@ -22,11 +22,11 @@ export default function VR() {
             setData(null);
             message.error(intl.formatMessage({ id: "text.systemError" }));
         }
-    }, []);
+    }
 
-    const onReset = useCallback(() => {
+    const onReset = () => {
         setData(null);
-    }, []);
+    }
 
     return (
         <Fragment>

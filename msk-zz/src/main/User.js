@@ -1,7 +1,7 @@
 import { DownOutlined, LockOutlined, QuestionCircleOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Form, Input, Menu, message, Modal, Tabs, Tooltip } from 'antd';
-import { login, register, logout } from "api/user";
-import React, { Fragment, useCallback, useMemo, useState } from 'react';
+import { login, logout, register } from "api/user";
+import React, { Fragment, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from "react-redux";
 
@@ -26,17 +26,20 @@ const formItemLayout = {
 
 export default function User() {
     const intl = useIntl();
-    const [visible, setVisible] = useState(false);
     const [activeTab, setActiveTab] = useState('login');
     const [form] = Form.useForm();
-    const user = useSelector(state => state.user);
+    const { visible, data: user } = useSelector(state => state.user);
     const dispatch = useDispatch();
 
-    const onOpen = useCallback(() => {
-        setVisible(true);
-    }, []);
+    const onOpen = () => {
+        dispatch({ type: '@User/OPEN_DIALOG' });
+    }
 
-    const onSubmit = useCallback(() => {
+    const onCancel = () => {
+        dispatch({ type: '@User/CLOSE_DIALOG' });
+    }
+
+    const onSubmit = () => {
         form.validateFields()
             .then(async (formData) => {
                 try {
@@ -44,7 +47,7 @@ export default function User() {
                     const { data } = await method(formData);
                     if (data) {
                         dispatch({ type: "@User/LOGIN", user: data });
-                        setVisible(false);
+                        dispatch({ type: '@User/CLOSE_DIALOG' });
                         return;
                     }
                 } catch (e) {
@@ -52,22 +55,18 @@ export default function User() {
                 }
             })
             .catch(() => { });
-    }, []);
+    }
 
-    const onCancel = useCallback(() => {
-        setVisible(false);
-    }, []);
-
-    const onLogout = useCallback(() => {
+    const onLogout = () => {
         logout().then(() => {
             dispatch({ type: "@User/LOGOUT" });
             window.location.reload();
         });
-    })
+    }
 
-    const onTabChange = useCallback((activeTab) => {
+    const onTabChange = (activeTab) => {
         setActiveTab(activeTab);
-    }, []);
+    };
 
     const FormItems = useMemo(() => {
         if (activeTab === "login") {
@@ -248,7 +247,7 @@ export default function User() {
                     <Menu>
                         <Menu.Item>
                             <a onClick={onLogout}>
-                                {intl.formatMessage({id:'btn.logout'})}
+                                {intl.formatMessage({ id: 'btn.logout' })}
                             </a>
                         </Menu.Item>
                     </Menu>
@@ -260,7 +259,6 @@ export default function User() {
                 </Button>
             </Dropdown>
     }, [user]);
-
 
     return <Fragment>
         {Component}

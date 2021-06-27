@@ -26,8 +26,6 @@ Promise.all([getEN(), getCN()]).then(([en, cn]) => {
         const user = response.data;
         store.dispatch({ type: '@User/LOGIN', user });
 
-
-
     }).catch(e => {
 
     }).finally(() => {

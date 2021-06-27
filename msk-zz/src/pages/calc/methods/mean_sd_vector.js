@@ -1,11 +1,11 @@
+import { MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { message, Row } from "antd";
 import calcApi from "api/calc";
-import React, { Fragment, useCallback, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { useIntl } from "react-intl";
 import P from "../modules/CalcP";
-import { Form, FormList, FormItem } from "../modules/Form";
+import { Form, FormItem, FormList } from "../modules/Form";
 import Result from "../modules/Result";
-import { CloseOutlined, MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
 
 const layout = {
     span: 12,
@@ -17,7 +17,7 @@ export default function MEAN_SD_VECTOR() {
     const intl = useIntl();
     const [data, setData] = useState(null);
 
-    const onCalc = useCallback(async (formData) => {
+    const onCalc = async (formData) => {
         try {
             const { data } = await calcApi("zzmeansdvector")(formData);
             setData({ ...data, ...formData });
@@ -25,11 +25,11 @@ export default function MEAN_SD_VECTOR() {
             setData(null);
             message.error(intl.formatMessage({ id: "text.systemError" }));
         }
-    }, []);
+    }
 
-    const onReset = useCallback(() => {
+    const onReset = () => {
         setData(null);
-    }, []);
+    }
 
     return (
         <Fragment>

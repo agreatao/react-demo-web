@@ -23,7 +23,8 @@ export const getPayStatus = (outTradeNo, delay = 3000) => {
         function loop() {
             if (timer) clearTimeout(timer);
             payStatus({ outTradeNo })
-                .then(({ status }) => {
+                .then(({ data }) => {
+                    const { status } = data;
                     if (status === "WAIT_BUYER_PAY") timer = setTimeout(loop, delay);
                     else if (status === "TRADE_SUCCESS") resolve(status);
                     else reject(status);
@@ -40,13 +41,13 @@ export const getPayStatus = (outTradeNo, delay = 3000) => {
  * @param {*} calcName
  * @returns
  */
-export const sendPayment = async (outTradeNo, calcName) => {
+export const sendPayment = async (outTradeNo, type) => {
     try {
-        let form = await pay({ outTradeNo, type: calcName });
+        let response = await pay({ outTradeNo, type });
         const dom = document.createElement("div");
         document.body.append(dom);
-        dom.innerHTML = form;
-        form = document.getElementsByName("punchout_form");
+        dom.innerHTML = response.msg;
+        const form = document.getElementsByName("punchout_form");
         form[0].setAttribute("target", "_blank");
         form[0].submit();
         const status = await getPayStatus(outTradeNo, 3000);

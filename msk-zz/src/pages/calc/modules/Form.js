@@ -1,5 +1,5 @@
 import { Button, Col, Form as AForm, InputNumber, Tooltip } from "antd";
-import React, { forwardRef, useCallback, useImperativeHandle, useMemo } from "react";
+import React, { forwardRef, useImperativeHandle, useMemo } from "react";
 import { useIntl } from "react-intl";
 import "./Form.less";
 
@@ -41,18 +41,18 @@ export const Form = forwardRef(function Form({ children, initialValues, onCalc, 
         []
     );
 
-    const handleCalc = useCallback(() => {
+    const handleCalc = () => {
         form.validateFields()
             .then((formData) => {
                 typeof onCalc === "function" && onCalc(formData);
             })
             .catch((e) => { });
-    }, []);
+    }
 
-    const handleReset = useCallback(() => {
+    const handleReset = () => {
         form.resetFields();
         typeof onReset === "function" && onReset();
-    }, []);
+    }
 
     return (
         <AForm
@@ -75,7 +75,7 @@ export const Form = forwardRef(function Form({ children, initialValues, onCalc, 
 
 export const FormList = AForm.List;
 
-export function FormItem({ layout, label, tip, name, required, max, min, rules, ...restProps }) {
+export function FormItem({ layout, label, tip, name, required, max, min, rules, disabled, ...restProps }) {
     const intl = useIntl();
     const _label = useMemo(() => {
         if (tip) return <Tooltip title={intl.formatMessage({ id: tip })}>{label}</Tooltip>;
@@ -130,7 +130,7 @@ export function FormItem({ layout, label, tip, name, required, max, min, rules, 
     return (
         <Col {...stateLayout}>
             <AForm.Item {...{ ...restProps, name, rules: _rules }} title={label} label={_label}>
-                <InputNumber autoComplete="off" className="calc-form-input" />
+                <InputNumber disabled={disabled} autoComplete="off" className="calc-form-input" />
             </AForm.Item>
         </Col>
     );

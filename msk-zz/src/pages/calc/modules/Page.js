@@ -1,6 +1,7 @@
-import { Layout } from "antd";
+import { Layout, Spin } from "antd";
 import User from 'main/user';
 import React from "react";
+import { useSelector } from "react-redux";
 import { LocaleSwitch } from './Locale';
 import Nav from "./Nav";
 import "./Page.less";
@@ -8,6 +9,7 @@ import "./Page.less";
 const { Header, Content, Footer } = Layout;
 
 export default function Page({ active, nav, component: Component }) {
+    const { loading } = useSelector(state => state.pay);
     return (
         <Layout className="page">
             <Header className="page-header">
@@ -20,9 +22,11 @@ export default function Page({ active, nav, component: Component }) {
             <Content className="page-content">
                 <Layout className="page-content-layout">
                     <Nav nav={nav} active={active} />
-                    <Layout>
+                    <Layout className="page-content-overflow">
                         <Content className="page-content-main">
-                            <Component />
+                            <Spin spinning={loading} tip="正在支付中...">
+                                <Component />
+                            </Spin>
                         </Content>
                     </Layout>
                 </Layout>

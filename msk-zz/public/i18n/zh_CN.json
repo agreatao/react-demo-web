@@ -83,13 +83,13 @@
 
     "calc.iol.name": "ZZ IOL 计算器",
     "calc.iol.instructions": "辅助常规患者IOL屈光度选择<br>计算IOL屈光度",
-    "calc.iol.notes": "SE=等效球镜<br>CT=角膜厚度<br>AC=前房深度（内）<br>AL=眼轴长度<br>LT=晶体厚度<br>PP=瞳孔屈光力（4mm）（可获取设备如CSO公司Sirius或Zeus）",
+    "calc.iol.notes": "SE=等效球镜<br>AL=眼轴长度<br>ACD=前房深度（外）<br>LT=晶体厚度<br>PP=瞳孔屈光力（4mm）（可获取设备如CSO公司Sirius或Zeus）【理论上等效于全角膜屈光力】<br>CCT=中央角膜厚度",
     "calc.iol.rawdata": "",
     "calc.iol.pay": "",
 
     "calc.iol_toric.name": "ZZ TIOL 计算器",
     "calc.iol_toric.instructions": "辅助常规患者Toric IOL屈光度选择<br>计算Toric IOL屈光度和轴位",
-    "calc.iol_toric.notes": "SE=等效球镜<br>CT=角膜厚度<br>AC=前房深度（内）<br>AL=眼轴长度<br>LT=晶体厚度<br>PP=瞳孔屈光力（4mm）（可获取设备如CSO公司Sirius或Zeus）<br>Corn Asti=全角膜散光（4mm）<br>SIA=术源性散光",
+    "calc.iol_toric.notes": "SE=等效球镜<br>AL=眼轴长度<br>ACD=前房深度（外）<br>LT=晶体厚度<br>PP=瞳孔屈光力（4mm）（可获取设备如CSO公司Sirius或Zeus）【理论上等效于全角膜屈光力】<br>Corn Asti=全角膜散光（4mm）<br>SIA=术源性散光<br>CCT=中央角膜厚度",
     "calc.iol_toric.rawdata": "",
     "calc.iol_toric.pay": "",
 
@@ -123,11 +123,11 @@
     "calc.vr_pro.rawdata": "",
     "calc.vr_pro.pay": "",
 
-    "calc.lsa.name": "ZZ LSA 计算器",
-    "calc.lsa.instructions": "辅助Q值引导角膜屈光手术方案设计，定量改变LSA（纵向球差，D为单位）时，计算所需的Q值变量",
-    "calc.lsa.notes": "Vertex K=切向曲率<br>SE=等效球镜<br>e=角膜离心率值<br>",
-    "calc.lsa.rawdata": "",
-    "calc.lsa.pay": "",
+    "calc.lsa_qd.name": "ZZ LSA Q.D. 计算器",
+    "calc.lsa_qd.instructions": "辅助Q值引导角膜屈光手术方案设计<br>定量改变LSA（纵向球差，D为单位）时，计算所需的Q值变量及屈光度补偿量",
+    "calc.lsa_qd.notes": "Vertex K=切向曲率<br>SE=等效球镜<br>e=角膜离心率值",
+    "calc.lsa_qd.rawdata": "",
+    "calc.lsa_qd.pay": "",
     
     "calc.icl.name": "ZZ ICL 计算器",
     "calc.icl.instructions": "辅助ICL晶体屈光度和直径的选择，计算ICL屈光度并预期拱高",

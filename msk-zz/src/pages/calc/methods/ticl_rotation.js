@@ -1,6 +1,6 @@
 import { message, Row } from "antd";
 import calcApi from "api/calc";
-import React, { Fragment, useCallback, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { useIntl } from "react-intl";
 import P from "../modules/CalcP";
 import { Form, FormItem } from "../modules/Form";
@@ -10,7 +10,7 @@ export default function TICL_ROTATION() {
     const intl = useIntl();
     const [data, setData] = useState(null);
 
-    const onCalc = useCallback(async (formData) => {
+    const onCalc = async (formData) => {
         try {
             const { data } = await calcApi("zzticl")(formData);
             setData(data);
@@ -18,11 +18,11 @@ export default function TICL_ROTATION() {
             setData(null);
             message.error(intl.formatMessage({ id: "text.systemError" }));
         }
-    }, []);
+    }
 
-    const onReset = useCallback(() => {
+    const onReset = () => {
         setData(null);
-    }, []);
+    }
 
     return (
         <Fragment>
@@ -31,14 +31,14 @@ export default function TICL_ROTATION() {
             <div className="calc-form-wrapper">
                 <Form onCalc={onCalc} onReset={onReset}>
                     <Row gutter={24}>
-                        <FormItem name="maniSph" label="Mani Sph" required />
-                        <FormItem name="maniCyl" label="Mani Cyl" required />
-                        <FormItem name="maniCylAxis" label="Mani Cyl Axis" required />
-                        <FormItem name="resiSph" label="Resi Sph" required />
-                        <FormItem name="resiCyl" label="Resi Cyl" required />
-                        <FormItem name="resiCylAxis" label="Resi Cyl Axis" required />
-                        <FormItem name="siaD" label="SIA D" required />
-                        <FormItem name="siaAxis" label="SIA Axis" required />
+                        <FormItem name="maniSph" label="Mani S (D)" required />
+                        <FormItem name="maniCyl" label="Mani C (D)" required />
+                        <FormItem name="maniCylAxis" label="Mani Ax" required />
+                        <FormItem name="resiSph" label="Residual S (D)" required />
+                        <FormItem name="resiCyl" label="Residual C (D)" required />
+                        <FormItem name="resiCylAxis" label="Residual Ax" required />
+                        <FormItem name="siaD" label="SIA (D)" required />
+                        <FormItem name="siaAxis" label="SIA Ax" required />
                     </Row>
                 </Form>
                 {data && (

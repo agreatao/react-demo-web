@@ -1,6 +1,5 @@
 import { Radio } from "antd";
-import React, { useState, useCallback } from "react";
-import { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { useIntl } from "react-intl";
 import Polar from "./Polar";
 
@@ -8,9 +7,9 @@ export default function DataChart({ data }) {
     const intl = useIntl();
     const [chartType, setChartType] = useState("single");
 
-    const onChartTypeChange = useCallback((e) => {
+    const onChartTypeChange = (e) => {
         setChartType(e.target.value);
-    }, []);
+    };
 
     return (
         data && (

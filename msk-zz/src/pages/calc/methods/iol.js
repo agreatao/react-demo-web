@@ -1,6 +1,6 @@
 import { message, Row } from "antd";
 import calcApi from "api/calc";
-import React, { Fragment, useCallback, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { useIntl } from "react-intl";
 import P from "../modules/CalcP";
 import { Form, FormItem } from "../modules/Form";
@@ -10,7 +10,7 @@ export default function IOL() {
     const intl = useIntl();
     const [data, setData] = useState(null);
 
-    const onCalc = useCallback(async (formData) => {
+    const onCalc = async (formData) => {
         try {
             const { data } = await calcApi("zzcaliol")(formData);
             setData(data);
@@ -18,11 +18,11 @@ export default function IOL() {
             setData(null);
             message.error(intl.formatMessage({ id: "text.systemError" }));
         }
-    }, []);
+    }
 
-    const onReset = useCallback(() => {
+    const onReset = () => {
         setData(null);
-    }, []);
+    }
 
     return (
         <Fragment>
@@ -32,7 +32,8 @@ export default function IOL() {
             <div className="calc-form-wrapper">
                 <Form
                     initialValues={{
-                        ct: 500,
+                        targetSe: 0,
+                        cct: 500,
                         lt: 5,
                     }}
                     onCalc={onCalc}
@@ -40,12 +41,12 @@ export default function IOL() {
                 >
                     <Row gutter={24}>
                         <FormItem name="aConstant" label="A Constant" required />
-                        <FormItem name="targetSe" label="Target SE" required />
-                        <FormItem name="ct" label="CT (μm)" required />
-                        <FormItem name="ac" label="AC (mm)" required />
-                        <FormItem name="meanpp" label="Mean PP (D)" required />
+                        <FormItem name="targetSe" label="Target SE (D)" required />
                         <FormItem name="al" label="AL (mm)" required />
+                        <FormItem name="acd" label="ACD (mm)" required />
                         <FormItem name="lt" label="LT (mm)" required />
+                        <FormItem name="meanpp" label="Mean PP (D)" required />
+                        <FormItem name="cct" label="CCT (μm)" required />
                     </Row>
                 </Form>
                 {data && (

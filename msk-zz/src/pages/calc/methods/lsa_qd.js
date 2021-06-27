@@ -1,6 +1,6 @@
-import { message, Row, Select } from "antd";
+import { message, Row } from "antd";
 import calcApi from "api/calc";
-import React, { Fragment, useCallback, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { useIntl } from "react-intl";
 import P from "../modules/CalcP";
 import { Form, FormItem } from "../modules/Form";
@@ -10,50 +10,44 @@ export default function LSA() {
     const intl = useIntl();
     const [data, setData] = useState(null);
 
-    const onCalc = useCallback(async (formData) => {
+    const onCalc = async (formData) => {
         try {
-            const { data } = await calcApi("zzlsa")(formData);
+            const { data } = await calcApi("zzlsaqd")(formData);
             setData(data);
         } catch (e) {
             setData(null);
             message.error(intl.formatMessage({ id: "text.systemError" }));
         }
-    }, []);
+    }
 
-    const onReset = useCallback(() => {
+    const onReset = () => {
         setData(null);
-    }, []);
+    }
 
     return (
         <Fragment>
-            <h2>{intl.formatMessage({ id: "calc.lsa.name" })}</h2>
-            <P id="calc.lsa.instructions" />
+            <h2>{intl.formatMessage({ id: "calc.lsa_qd.name" })}</h2>
+            <P id="calc.lsa_qd.instructions" />
+            <P id="calc.lsa_qd.notes" />
             <div className="calc-form-wrapper">
-                <Form onCalc={onCalc} onReset={onReset}>
+                <Form onCalc={onCalc} onReset={onReset} initialValues={{
+                    opicZone: 5,
+                    lsa: -1
+                }}>
                     <Row gutter={24}>
-                        <FormItem name="opicZone" label="Opic Zone" required />
+                        <FormItem name="opicZone" label="Opic Zone (mm)" required disabled />
                         <FormItem name="vertexK" label="Vertex K" required />
                         <FormItem name="e" label="e" required />
-                        <FormItem name="correctSe" label="Correct SE" required />
+                        <FormItem name="correctSe" label="Correct SE (D)" required />
                         <FormItem name="lsa" label="Δ LSA" required />
                     </Row>
                 </Form>
                 {data && (
                     <div className="calc-result">
-                        <h4>> 5m</h4>
                         <Result
                             data={data}
                             dataKeys={{
-                                farQ: "Δ Q",
-                                farExpectQ: "Expect Q",
-                            }}
-                        />
-                        <h4>33cm</h4>
-                        <Result
-                            data={data}
-                            dataKeys={{
-                                nearQ: "Δ Q",
-                                nearExpectQ: "Expect Q",
+                                q: "Target Q",
                             }}
                         />
                     </div>

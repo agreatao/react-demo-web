@@ -20,12 +20,23 @@
     background-color: #fff;
 }
 
+.page-content-overflow {
+    overflow: auto;
+}
+
 .page-content-main {
     height: calc(100vh - 160px);
     overflow-y: auto;
     overflow-x: hidden;
     background-color: #fff;
     padding: 16px;
+
+    @media (min-width: 1024px) {
+        & {
+            min-width: 1032px;
+            overflow-x: auto;
+        }
+    }
 
     h2 {
         border-bottom: 1px solid #e6e6e6;
