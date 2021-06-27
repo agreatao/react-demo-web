@@ -125,9 +125,15 @@
 
     "calc.lsa_qd.name": "ZZ LSA Q.D. 计算器",
     "calc.lsa_qd.instructions": "辅助Q值引导角膜屈光手术方案设计<br>定量改变LSA（纵向球差，D为单位）时，计算所需的Q值变量及屈光度补偿量",
-    "calc.lsa_qd.notes": "Vertex K=切向曲率<br>SE=等效球镜<br>e=角膜离心率值",
+    "calc.lsa_qd.notes": "Vertex K=切向曲率<br>SE=等效球镜<br>e=角膜离心率值（5mm）<br>目标Q值已考虑生物力学变化（调整-0.3）<br>Q. D. (D)=因Q值变化需补偿的屈光度",
     "calc.lsa_qd.rawdata": "",
     "calc.lsa_qd.pay": "",
+
+    "calc.qd.name": "ZZ Q.D. 计算器",
+    "calc.qd.instructions": "辅助Q值引导角膜屈光手术方案设计<br>定量Q值时，计算所需的屈光度补偿量",
+    "calc.qd.notes": "SD=球镜度<br>e=角膜离心率值<br>Target D=补偿后的屈光度",
+    "calc.qd.rawdata": "",
+    "calc.qd.pay": "",
     
     "calc.icl.name": "ZZ ICL 计算器",
     "calc.icl.instructions": "辅助ICL晶体屈光度和直径的选择，计算ICL屈光度并预期拱高",
@@ -148,8 +154,8 @@
     "calc.ticl_rotation.pay": "",
 
     "calc.pc_prl.name": "PC-PRL屈光度",
-    "calc.pc_prl.instructions": "辅助PC-PRL晶体屈光度的选择",
-    "calc.pc_prl.notes": "Mani=主觉验光度<br>AC=前房深度（内皮）<br> CT=角膜厚度（选填）",
+    "calc.pc_prl.instructions": "辅助PC-PRL晶体屈光度的选择<br>计算PC-PRL屈光度",
+    "calc.pc_prl.notes": "Mani=主觉验光度<br>CT=角膜厚度（选填）<br>AC=前房深度（内皮）",
     "calc.pc_prl.rawdata": "",
     "calc.pc_prl.pay": "",
     

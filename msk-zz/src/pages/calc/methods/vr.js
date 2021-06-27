@@ -55,9 +55,9 @@ export default function VR() {
                         <FormItem name="c13" label="C13 (μm)" required />
                     </Row>
                     <Row gutter={24}>
-                        <FormItem name="maniSph" label="Mani Sph (D)" required />
-                        <FormItem name="maniCyl" label="Mani Cyl (D)" required />
-                        <FormItem name="maniCylAxis" label="Mani Cyl Ax" required />
+                        <FormItem name="maniSph" label="Mani S (D)" required />
+                        <FormItem name="maniCyl" label="Mani C (D)" required />
+                        <FormItem name="maniCylAxis" label="Mani Ax" required />
                     </Row>
                 </Form>
                 {data && (

@@ -4,10 +4,16 @@
 
 .calc-form {
     display: inline-block;
-    max-width: 600px;
     margin-bottom: 20px;
     padding: 0 15px;
     vertical-align: top;
+
+
+    @media (min-width: 1024px) {
+        & {
+            width: 600px;
+        }
+    }
 }
 
 .calc-form-btn {

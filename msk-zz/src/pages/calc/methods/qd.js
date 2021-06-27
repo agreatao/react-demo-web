@@ -6,13 +6,13 @@ import P from "../modules/CalcP";
 import { Form, FormItem } from "../modules/Form";
 import Result from "../modules/Result";
 
-export default function PC_PRL() {
+export default function LSA() {
     const intl = useIntl();
     const [data, setData] = useState(null);
 
     const onCalc = async (formData) => {
         try {
-            const { data } = await calcApi("zzpcprl")(formData);
+            const { data } = await calcApi("zzcalqd")(formData);
             setData(data);
         } catch (e) {
             setData(null);
@@ -26,16 +26,19 @@ export default function PC_PRL() {
 
     return (
         <Fragment>
-            <h2>{intl.formatMessage({ id: "calc.pc_prl.name" })}</h2>
-            <P id="calc.pc_prl.instructions" />
+            <h2>{intl.formatMessage({ id: "calc.qd.name" })}</h2>
+            <P id="calc.qd.instructions" />
+            <P id="calc.qd.notes" />
             <div className="calc-form-wrapper">
-                <Form onCalc={onCalc} onReset={onReset} initialValues={{ ct: 500 }}>
+                <Form onCalc={onCalc} onReset={onReset} initialValues={{
+                    opicZone: 5,
+                    lsa: -1
+                }}>
                     <Row gutter={24}>
-                        <FormItem name="maniS" label="Mani S (D)" required />
-                        <FormItem name="maniC" label="Mani C (D)" required />
-                        <FormItem name="k" label="K (D)" required />
-                        <FormItem name="ct" label="CT (μm)" required />
-                        <FormItem name="ac" label="AC (mm)" required />
+                        <FormItem name="k" label="K (D)" required disabled />
+                        <FormItem name="correctSd" label="Correct SD (D)" required />
+                        <FormItem name="e" label="e" required />
+                        <FormItem name="targetQ" label="Target Q" required />
                     </Row>
                 </Form>
                 {data && (
@@ -43,7 +46,10 @@ export default function PC_PRL() {
                         <Result
                             data={data}
                             dataKeys={{
-                                pcPrl: "PC-PRL",
+                                qd: 'Q.D. (D)',
+                                targetD: 'Target D',
+                                nomoD1: 'Sug. Nomo',
+                                nomoD2: 'D',
                             }}
                         />
                     </div>

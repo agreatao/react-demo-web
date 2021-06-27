@@ -21,7 +21,8 @@ export default [
         groups: [
             { title: "ZZ VR", key: "vr" },
             { disabled: true, title: "ZZ VR pro", key: "vr_pro" },
-            { title: "ZZ LSA Q.D.", key: "lsa_qd" },
+            { title: "ZZ LSA", key: "lsa_qd" },
+            { title: "ZZ Q.D.", key: "qd" },
         ],
     },
     {
