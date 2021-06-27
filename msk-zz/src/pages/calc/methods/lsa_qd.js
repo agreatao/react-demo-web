@@ -48,6 +48,10 @@ export default function LSA() {
                             data={data}
                             dataKeys={{
                                 q: "Target Q",
+                                qd: 'Q.D. (D)',
+                                td: 'Target D',
+                                nomoD1: 'Sug. Nomo',
+                                nomoD2: 'D',
                             }}
                         />
                     </div>
