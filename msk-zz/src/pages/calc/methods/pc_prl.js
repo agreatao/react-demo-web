@@ -28,6 +28,7 @@ export default function PC_PRL() {
         <Fragment>
             <h2>{intl.formatMessage({ id: "calc.pc_prl.name" })}</h2>
             <P id="calc.pc_prl.instructions" />
+            <P id="calc.pc_prl.notes" />
             <div className="calc-form-wrapper">
                 <Form onCalc={onCalc} onReset={onReset} initialValues={{ ct: 500 }}>
                     <Row gutter={24}>

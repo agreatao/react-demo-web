@@ -36,6 +36,9 @@ export const Form = forwardRef(function Form({ children, initialValues, onCalc, 
                 resetFields() {
                     form.resetFields();
                 },
+                setFieldsValue(values) {
+                    console.log(values);
+                }
             };
         },
         []

@@ -38,7 +38,7 @@ export default function LSA() {
                         <FormItem name="opicZone" label="Opic Zone (mm)" required disabled />
                         <FormItem name="vertexK" label="Vertex K" required />
                         <FormItem name="e" label="e" required />
-                        <FormItem name="correctSe" label="Correct SE (D)" required />
+                        <FormItem name="correctSd" label="Correct SD (D)" required />
                         <FormItem name="lsa" label="Δ LSA" required />
                     </Row>
                 </Form>

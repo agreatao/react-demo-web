@@ -125,7 +125,7 @@
     
     "calc.lsa_qd.name": "ZZ LSA Q.D.",
     "calc.lsa_qd.instructions": "Design of surgical strategy for Q-value guide refractive surgery<br>To calculate the ΔQ and the compensated diopter, for obtaining the expected ΔLSA (Longitudinal Spherical Aberration, Diopter)",
-    "calc.lsa_qd.notes": "K=Tangential Curvature<br>SE=Spherical Equivalent<br>e=ecc of cornea (5mm)<br>Biomechanical changes have been taken into account in the target Q (adjusted - 0.3)<br>Q. D. =Compensated Diopter, when the Q-value is changed",
+    "calc.lsa_qd.notes": "K=Tangential Curvature<br>SD=Spherical Diopter<br>e=ecc of cornea (5mm)<br>Biomechanical changes have been taken into account in the target Q (adjusted - 0.3)<br>Q. D. =Compensated Diopter, when the Q-value is changed",
     "calc.lsa_qd.rawdata": "",
     "calc.lsa_qd.pay": "",
 
@@ -137,19 +137,19 @@
     
     "calc.icl.name": "ZZ ICL",
     "calc.icl.instructions": "Selection of ICL(Implantable Collamer Lens)<br>To calculate the ICL refraction and estimated vaulting hight",
-    "calc.icl.notes": "Mani=Manifest refraction<br>SIA=Surgically Induced Astigmatism<br>CT=Corneal Thickness<br>AC=Anterior Chambler Depth (Internal)<br>LT=Lens Thickness (Optional)<br>H(0) to V(90)=Direction of ICL major axis<br>STS=Sulcus to Sulcus<br>H/V=Horizontal / Vertical",
+    "calc.icl.notes": "Mani=Manifest refraction<br>CT=Corneal Thickness<br>AC=Anterior Chambler Depth (Internal)<br>LT=Lens Thickness<br>STS=Sulcus to Sulcus<br>H/V=Horizontal / Vertical<br>ICL Ax=Direction of ICL major axis<br>SIA=Surgically Induced Astigmatism",
     "calc.icl.rawdata": "",
     "calc.icl.pay": "",
     
     "calc.icl_vault.name": "ZZ ICL Vault",
     "calc.icl_vault.instructions": "Selection of ICL (Implantable Collamer Lens) Diameter<br>To estimated vaulting hight after ICL implantation",
-    "calc.icl_vault.notes": "LT=Lens Thickness<br>H(0) to V(90)=Direction of ICL major axis<br>STS=Sulcus to Sulcus<br>H/V=Horizontal / Vertical",
+    "calc.icl_vault.notes": "LT=Lens Thickness<br>ICL Ax=Direction of ICL major axis<br>STS=Sulcus to Sulcus<br>H/V=Horizontal / Vertical",
     "calc.icl_vault.rawdata": "",
     "calc.icl_vault.pay": "",
     
     "calc.ticl_rotation.name": "ZZ TICL Rotation",
-    "calc.ticl_rotation.instructions": "Design of surgical strategy for adjustment of TICL(Toric Implantable Collamer Lens) axis error. To calculate the adjustment direction and angle of TICL in the current state, in order to reduce the residual astigmatism",
-    "calc.ticl_rotation.notes": "No new main incision<br>no replacement of TICL<br>Mani=Manifest refraction before TICL implantation<br>Resi=Residual manifest refraction after TICL implantation<br>SIA=Surgically Induced Astigmatism<br>Esti=Estimated diopter",
+    "calc.ticl_rotation.instructions": "Design of surgical strategy for adjustment of TICL(Toric Implantable Collamer Lens) axis error<br>To calculate the adjustment direction and angle of TICL in the current state, in order to reduce the residual astigmatism",
+    "calc.ticl_rotation.notes": "No new main incision<br>no replacement of TICL<br>Mani=Manifest refraction before TICL implantation<br>Resi=Residual manifest refraction after TICL implantation<br>SIA=Surgically Induced Astigmatism",
     "calc.ticl_rotation.rawdata": "",
     "calc.ticl_rotation.pay": "",
     

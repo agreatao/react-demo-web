@@ -28,12 +28,13 @@ export default function TICL_ROTATION() {
         <Fragment>
             <h2>{intl.formatMessage({ id: "calc.ticl_rotation.name" })}</h2>
             <P id="calc.ticl_rotation.instructions" />
+            <P id="calc.ticl_rotation.notes" />
             <div className="calc-form-wrapper">
                 <Form onCalc={onCalc} onReset={onReset}>
                     <Row gutter={24}>
-                        <FormItem name="maniSph" label="Mani S (D)" required />
-                        <FormItem name="maniCyl" label="Mani C (D)" required />
-                        <FormItem name="maniCylAxis" label="Mani Ax" required />
+                        <FormItem name="maniS" label="Mani S (D)" required />
+                        <FormItem name="maniC" label="Mani C (D)" required />
+                        <FormItem name="maniAx" label="Mani Ax" required />
                         <FormItem name="resiSph" label="Residual S (D)" required />
                         <FormItem name="resiCyl" label="Residual C (D)" required />
                         <FormItem name="resiCylAxis" label="Residual Ax" required />
@@ -46,10 +47,10 @@ export default function TICL_ROTATION() {
                         <Result
                             data={data}
                             dataKeys={{
-                                antiClockwise: data.type,
-                                estiSph: "Esti Sph",
-                                estiCyl: "Esti Cyl",
-                                estiCylAxis: "Esti Cyl Axis",
+                                clockwise: 'Clockwise',
+                                estimatedS: "Estimated S (D)",
+                                estimatedC: "Estimated C (D)",
+                                estimatedAx: "Estimated Ax",
                             }}
                         />
                     </div>

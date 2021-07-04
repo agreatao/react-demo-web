@@ -28,14 +28,15 @@ export default function ICL() {
         <Fragment>
             <h2>{intl.formatMessage({ id: "calc.icl_vault.name" })}</h2>
             <P id="calc.icl_vault.instructions" />
+            <P id="calc.icl_vault.notes" />
             <div className="calc-form-wrapper">
-                <Form onCalc={onCalc} onReset={onReset}>
+                <Form onCalc={onCalc} onReset={onReset} initialValues={{ lt: 4 }}>
                     <Row gutter={24}>
-                        <FormItem name="iclDiameter" label="Icl Diameter" required />
-                        <FormItem name="htov" label="H(0) to V(90)" required />
                         <FormItem name="lt" label="LT (mm)" required />
                         <FormItem name="stsh" label="STS-H (mm)" required />
                         <FormItem name="stsv" label="STS-V (mm)" required />
+                        <FormItem name="iclSize" label="ICL Size (mm)" required />
+                        <FormItem name="iclAx" label="ICL Ax" min={0} max={180} required />
                     </Row>
                 </Form>
                 {data && (
@@ -43,7 +44,7 @@ export default function ICL() {
                         <Result
                             data={data}
                             dataKeys={{
-                                estiVault: "Esti Vault",
+                                estiVault: "Esti Vault (mm)",
                             }}
                         />
                     </div>

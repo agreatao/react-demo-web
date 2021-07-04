@@ -1,7 +1,7 @@
 import { MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
-import { message, Row } from "antd";
-import calcApi from "api/calc";
-import React, { Fragment, useState } from "react";
+import { message, Row, Upload } from "antd";
+import calcApi, { readMeanXlsxFile } from "api/calc";
+import React, { Fragment, useRef, useState } from "react";
 import { useIntl } from "react-intl";
 import P from "../modules/CalcP";
 import { Form, FormItem, FormList } from "../modules/Form";
@@ -15,6 +15,7 @@ const layout = {
 
 export default function MEAN_SD_VECTOR() {
     const intl = useIntl();
+    const form = useRef();
     const [data, setData] = useState(null);
 
     const onCalc = async (formData) => {
@@ -31,12 +32,25 @@ export default function MEAN_SD_VECTOR() {
         setData(null);
     }
 
+    function upload({ file }) {
+        readMeanXlsxFile(file).then(({ result }) => {
+            const { zzMeanInfos } = result;
+            form.setFieldsValue({ zzMeanInfos });
+        }).catch(e => { })
+    }
     return (
         <Fragment>
             <h2>{intl.formatMessage({ id: "calc.mean_sd_vector.name" })}</h2>
             <P id="calc.mean_sd_vector.instructions" />
+            <div className="calculate-mean-tip">
+                您还可以从模板文件导入参数（<a href="/file/zzmean.xlsx" target="_blank">zz_mean.xlsx</a>），点击
+                <Upload customRequest={upload} showUploadList={false}>
+                    <a>上传</a>
+                </Upload>
+            </div>
             <div className="calc-form-wrapper">
                 <Form
+                    ref={form}
                     onCalc={onCalc}
                     onReset={onReset}
                     initialValues={{

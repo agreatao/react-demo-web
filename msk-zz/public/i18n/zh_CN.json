@@ -125,7 +125,7 @@
 
     "calc.lsa_qd.name": "ZZ LSA Q.D. 计算器",
     "calc.lsa_qd.instructions": "辅助Q值引导角膜屈光手术方案设计<br>定量改变LSA（纵向球差，D为单位）时，计算所需的Q值变量及屈光度补偿量",
-    "calc.lsa_qd.notes": "Vertex K=切向曲率<br>SE=等效球镜<br>e=角膜离心率值（5mm）<br>目标Q值已考虑生物力学变化（调整-0.3）<br>Q. D. (D)=因Q值变化需补偿的屈光度",
+    "calc.lsa_qd.notes": "Vertex K=切向曲率<br>SD=球镜度<br>e=角膜离心率值（5mm）<br>目标Q值已考虑生物力学变化（调整-0.3）<br>Q. D. (D)=因Q值变化需补偿的屈光度",
     "calc.lsa_qd.rawdata": "",
     "calc.lsa_qd.pay": "",
 
@@ -137,19 +137,19 @@
     
     "calc.icl.name": "ZZ ICL 计算器",
     "calc.icl.instructions": "辅助ICL晶体屈光度和直径的选择，计算ICL屈光度并预期拱高",
-    "calc.icl.notes": "Mani=主觉验光度<br>SIA=术源性散光<br>CT=角膜厚度<br>AC=前房深度（内皮）<br>LT=晶体厚度（非必须）<br>H(0) to V(90)=ICL长轴摆放轴位<br>STS=沟到沟<br>H/V=水平 / 垂直<br>",
+    "calc.icl.notes": "Mani=主觉验光度<br>CT=角膜厚度<br>AC=前房深度（内皮）<br>LT=晶体厚度<br>STS=沟到沟<br>H/V=水平 / 垂直<br>ICL Ax=ICL长轴摆放轴位<br>SIA=术源性散光",
     "calc.icl.rawdata": "",
     "calc.icl.pay": "",
     
     "calc.icl_vault.name": "ZZ ICLV 计算器",
-    "calc.icl_vault.instructions": "辅助ICL晶体直径的选择，预估ICL植入后的拱高",
-    "calc.icl_vault.notes": "LT=晶体厚度<br>H(0) to V(90)=ICL长轴摆放轴位<br>STS=沟到沟<br>H/V=水平 / 垂直<br>",
+    "calc.icl_vault.instructions": "辅助ICL晶体直径的选择<br>预估ICL植入后的拱高",
+    "calc.icl_vault.notes": "LT=晶体厚度<br>H(0) to V(90)=ICL长轴摆放轴位<br>STS=沟到沟<br>H/V=水平 / 垂直",
     "calc.icl_vault.rawdata": "",
     "calc.icl_vault.pay": "",
     
     "calc.ticl_rotation.name": "ZZ TICL 计算器",
-    "calc.ticl_rotation.instructions": "辅助TICL植入后轴位误差的调整设计。当TICL植入后出现残留散光，计算如何旋转TICL可以最大程度降低残余散光",
-    "calc.ticl_rotation.notes": "不新作主切口，不置换TICL<br>Mani=TICL植入前显然验光数据<br>Resi=TICL植入后残留验光数据<br>SIA=术源性散光<br>Esti=旋转后预估验光数据",
+    "calc.ticl_rotation.instructions": "辅助TICL植入后轴位误差的调整设计<br>当TICL植入后出现残留散光，计算如何旋转TICL可以最大程度降低残余散光",
+    "calc.ticl_rotation.notes": "不新作主切口； 不置换TICL<br>Mani=TICL植入前显然验光数据<br>Resi=TICL植入后残留验光数据<br>SIA=术源性散光",
     "calc.ticl_rotation.rawdata": "",
     "calc.ticl_rotation.pay": "",
 

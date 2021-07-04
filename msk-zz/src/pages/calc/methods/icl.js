@@ -28,25 +28,35 @@ export default function ICL() {
         <Fragment>
             <h2>{intl.formatMessage({ id: "calc.icl.name" })}</h2>
             <P id="calc.icl.instructions" />
+            <P id="calc.icl.notes" />
             <div className="calc-form-wrapper">
-                <Form onCalc={onCalc} onReset={onReset}>
+                <Form onCalc={onCalc} onReset={onReset}
+                    initialValues={{
+                        ct: 500,
+                        lt: 4,
+                        planIclS: 0,
+                        planIclC: 0,
+                        planIclAx: 0,
+                        sia: 0.3,
+                        siaAx: 0
+                    }}>
                     <Row gutter={24}>
-                        <FormItem name="maniSph" label="Mani Sph" required />
-                        <FormItem name="maniCyl" label="Mani Cyl" required />
-                        <FormItem name="maniCylAxis" label="Mani Cyl Axis" required />
-                        <FormItem name="siaD" label="SIA D" required />
-                        <FormItem name="siaA" label="SIA A" required />
+                        <FormItem name="maniS" label="Mani S (D)" required />
+                        <FormItem name="maniC" label="Mani C (D)" required />
+                        <FormItem name="maniAx" label="Mani Ax" required />
+                        <FormItem name="k" label="K (D)" required />
                         <FormItem name="ct" label="CT (μm)" required />
                         <FormItem name="ac" label="AC (mm)" required />
-                        <FormItem name="kf" label="Kf" required />
                         <FormItem name="lt" label="LT (mm)" required />
-                        <FormItem name="iclDiameter" label="Icl Diameter" required />
-                        <FormItem name="htov" label="H(0) to V(90)" required />
                         <FormItem name="stsH" label="STS-H (mm)" required />
                         <FormItem name="stsV" label="STS-V (mm)" required />
-                        <FormItem name="iclS" label="ICL S" required />
-                        <FormItem name="iclC" label="ICL C" required />
-                        <FormItem name="iclA" label="ICL A" required />
+                        <FormItem name="iclSize" label="ICL Size (mm)" required />
+                        <FormItem name="iclAx" label="ICL Ax" min={0} max={180} required />
+                        <FormItem name="planIclS" label="Plan ICL S (D)" required />
+                        <FormItem name="planIclC" label="Plan ICL C (D)" required />
+                        <FormItem name="planIclAx" label="Plan ICL Ax" required />
+                        <FormItem name="sia" label="SIA (D)" required />
+                        <FormItem name="siaAx" label="SIA Ax" required />
                     </Row>
                 </Form>
                 {data && (
@@ -54,13 +64,9 @@ export default function ICL() {
                         <Result
                             data={data}
                             dataKeys={{
-                                estiVault: "Esti Vault",
-                                iclS: "ICL S",
-                                iclC: "ICL C",
-                                iclA: "ICL A",
-                                resiDualS: "Residual S",
-                                resiDualC: "Residual C",
-                                resiDualA: "Residual A",
+                                iclS: "ICL S (D)",
+                                iclC: "ICL C (D)",
+                                iclAx: "ICL Ax",
                             }}
                         />
                     </div>
