@@ -75,8 +75,7 @@ export default function VR() {
                                 data && [
                                     [+data.maniCyl, +data.maniAxis, "Manifest Astigmatism"],
                                     [+data.comaCyl, +data.comaAxis, "COMA Astigmatism"],
-                                    [+data.secAstiD1, +data.secAstiD3, "Secondary Astigmatism D1"],
-                                    [+data.secAstiD2, +data.secAstiD4, "Secondary Astigmatism D2"],
+                                    [+data.secAstiD2, +data.secAstiD3, "Secondary Astigmatism"],
                                     [+data.vrCyl, +data.vrAxis, "VR"],
                                 ]
                             }
