@@ -67,6 +67,10 @@ export default function ICL() {
                                 iclS: "ICL S (D)",
                                 iclC: "ICL C (D)",
                                 iclAx: "ICL Ax",
+                                estiVault: 'Esti Vault (mm)',
+                                resiDualS: 'Residual S (D)',
+                                resiDualC: 'Residual C (D)',
+                                resiDualA: 'Residual Ax'
                             }}
                         />
                     </div>
