@@ -54,7 +54,7 @@ export default function ICL() {
                         <FormItem name="iclAx" label="ICL Ax" min={0} max={180} required />
                         <FormItem name="planIclS" label="Plan ICL S (D)" required />
                         <FormItem name="planIclC" label="Plan ICL C (D)" required />
-                        <FormItem name="planIclAx" label="Plan ICL Ax" required />
+                        {/* <FormItem name="planIclAx" label="Plan ICL Ax" required /> */}
                         <FormItem name="sia" label="SIA (D)" required />
                         <FormItem name="siaAx" label="SIA Ax" required />
                     </Row>
