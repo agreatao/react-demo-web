@@ -1,4 +1,4 @@
-import { message, Row, Radio } from "antd";
+import { message, Row } from "antd";
 import calcApi from "api/calc";
 import DataChart from "components/Chart/DataChart";
 import React, { Fragment, useState } from "react";
@@ -10,7 +10,6 @@ import Result from "../modules/Result";
 export default function AR() {
     const intl = useIntl();
     const [data, setData] = useState(null);
-    const [mode, setMode] = useState('not');
 
     const onCalc = async (formData) => {
         try {
@@ -32,29 +31,16 @@ export default function AR() {
             <P id="calc.ar.instructions" />
             <P id="calc.ar.notes" />
             <div className="calc-form-wrapper">
-                <div style={{ marginLeft: 50 }}>
-                    <h4>Corneal posterior surface astigmatism available or not</h4>
-                    <Radio.Group style={{ marginBottom: 20 }} value={mode} onChange={e => setMode(e.target.value)}>
-                        <Radio value="available">Available</Radio>
-                        <Radio value="not">Not</Radio>
-                    </Radio.Group>
-                </div>
-                <Form onCalc={onCalc} onReset={onReset} initialValues={{ resLensC: 20 }}>
+                <Form onCalc={onCalc} onReset={onReset}>
                     <Row gutter={24}>
                         <FormItem name="maniSph" label="Mani S (D)" required />
                         <FormItem name="maniCyl" label="Mani C (D)" required />
-                        <FormItem name="maniCylAxis" label="Mani Ax" required />
+                        <FormItem name="maniCylAxis" label="Mani Cyl Ax" required />
                         <FormItem name="kf" label="Kf (D)" required />
                         <FormItem name="ks" label="Ks (D)" required />
                         <FormItem name="kf2" label="Kf Ax" required />
-                        {mode === 'available' && [
-                            <FormItem name="cornPC" label="Corn-P C (D)" required key="cornPC" />,
-                            <FormItem name="CornPAx" label="Corn-P Ax" required key="cornPAx" />,
-                        ]}
                         <FormItem name="tmrc" label="TMR C (D)" required max={0} />
                         <FormItem name="tmra" label="TMR Ax" required />
-                        <FormItem name="tmra" label="TMR Ax" required />
-                        <FormItem name="resLensC" label="Res-Lens C (%)" required />
                     </Row>
                 </Form>
                 {data && (
@@ -70,9 +56,9 @@ export default function AR() {
                         <DataChart
                             data={
                                 data && [
-                                    [+data.hoAsC, +data.hoAsA, "HOAs Astigmatism"],
-                                    [+data.corneaC, +data.corneaA, "Corneal Astigmatism"],
-                                    [+data.lensC, +data.lensA, "Lens Astigmatism"],
+                                    [+data.maniCyl, +data.maniAxis, "Manifest Astigmatism"],
+                                    [+data.postLensCyl, +data.postLensAxis, "Intraocular Astigmatism"],
+                                    [+data.tmrCyl, +data.tmrAxis, "TMR Astigmatism"],
                                     [+data.arCyl, +data.arAxis, "AR"],
                                 ]
                             }

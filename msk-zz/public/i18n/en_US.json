@@ -105,9 +105,9 @@
     "calc.iol_plus.rawdata": "Currently only CSO Sirius or Zeus .zcs documents are supported (include more than 5 repeatable results)",
     "calc.iol_plus.pay": "RMB 200 Each (After the payment is successful, the result will be given within 48 hours)",
 
-    "calc.ar.name": "ZZ AR (Auto-compensation Refraction) Calculator",
+    "calc.ar.name": "ZZ ARp (Auto-compensation Refraction) Calculator",
     "calc.ar.instructions": "Used to assist surgical strategy planning for Topo-Guide refractive surgery<br>By calculating the compensation diopter while correcting HOAs for virgin cornea",
-    "calc.ar.notes": "Mani=Manifested<br>TMR=Topogray Modified Refraction<br>AR=After Auto-compensation (No Nomogramm)",
+    "calc.ar.notes": "Mani=Manifested<br>Corn-P=Corneal Posterior surface<br>TMR=Topogray Modified Refraction<br>Res=Reserved<br>AR=After Auto-compensation (No Nomogramm)",
     "calc.ar.rawdata": "",
     "calc.ar.pay": "",
     

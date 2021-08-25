@@ -14,7 +14,7 @@ export default [
         groups: [
             // { title: "ZZ IOL (Old Ver.)", key: "iolold" },
             // { disabled: true, title: "ZZ Toric IOL", key: "tiol" },
-            { disabled: true, title: "ZZ AR", key: "ar" },
+            { title: "ZZ AR", key: "ar" },
         ],
     },
     {

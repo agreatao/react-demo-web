@@ -106,8 +106,8 @@
     "calc.iol_plus.pay": "200块 / 次 （付费成功后，结果会在48小时内给出）",
 
     "calc.ar.name": "ZZ AR 计算器",
-    "calc.ar.instructions": "用于辅助角膜地形图引导角膜屈光手术方案规划，计算矫正高阶像差时的屈光补偿量（用于初始角膜）",
-    "calc.ar.notes": "Mani=显然验光数据<br>TMR=地形图修正散光<br>AR=AR补偿后数据 (未行Nomogramm)",
+    "calc.ar.instructions": "用于辅助角膜地形图引导角膜屈光手术方案规划<br>计算矫正高阶像差时的屈光补偿量（用于初始角膜）",
+    "calc.ar.notes": "Mani=显然验光数据<br>Corn-P=角膜后表面散光<br>TMR=地形图修正散光<br>Res=预留晶体散光<br>AR=AR补偿后数据 (未行Nomogramm)",
     "calc.ar.rawdata": "",
     "calc.ar.pay": "",
     
@@ -149,7 +149,7 @@
     
     "calc.ticl_rotation.name": "ZZ TICL 计算器",
     "calc.ticl_rotation.instructions": "辅助TICL植入后轴位误差的调整设计<br>当TICL植入后出现残留散光，计算如何旋转TICL可以最大程度降低残余散光",
-    "calc.ticl_rotation.notes": "不新作主切口； 不置换TICL<br>Mani=TICL植入前显然验光数据<br>Resi=TICL植入后残留验光数据<br>SIA=术源性散光",
+    "calc.ticl_rotation.notes": "不新作主切口<br> 不置换TICL<br>Mani=TICL植入前显然验光数据<br>Resi=TICL植入后残留验光数据<br>SIA=术源性散光",
     "calc.ticl_rotation.rawdata": "",
     "calc.ticl_rotation.pay": "",
 
