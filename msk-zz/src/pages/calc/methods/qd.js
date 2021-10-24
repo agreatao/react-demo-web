@@ -32,7 +32,8 @@ export default function LSA() {
             <div className="calc-form-wrapper">
                 <Form onCalc={onCalc} onReset={onReset} initialValues={{
                     opicZone: 5,
-                    lsa: -1
+                    lsa: -1,
+                    e: 0
                 }}>
                     <Row gutter={24}>
                         <FormItem name="k" label="K (D)" required />
@@ -48,8 +49,6 @@ export default function LSA() {
                             dataKeys={{
                                 qd: 'Q.D. (D)',
                                 targetD: 'Target D',
-                                nomoD1: 'Sug. Nomo',
-                                nomoD2: 'D',
                             }}
                         />
                     </div>

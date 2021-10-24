@@ -32,7 +32,8 @@ export default function LSA() {
             <div className="calc-form-wrapper">
                 <Form onCalc={onCalc} onReset={onReset} initialValues={{
                     opicZone: 5,
-                    lsa: -1
+                    lsa: -1,
+                    e: 0
                 }}>
                     <Row gutter={24}>
                         <FormItem name="opicZone" label="Opic Zone (mm)" required disabled />
