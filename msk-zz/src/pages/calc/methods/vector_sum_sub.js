@@ -32,12 +32,12 @@ export default function VECTOR_SUM_SUB() {
             <div className="calc-form-wrapper">
                 <Form onCalc={onCalc} onReset={onReset}>
                     <Row gutter={24}>
-                        <FormItem name="sph1" label="Sph A" required />
-                        <FormItem name="sph2" label="Sph B" required />
-                        <FormItem name="cyl1" label="Cyl A" required />
-                        <FormItem name="cyl2" label="Cyl B" required />
-                        <FormItem name="axis1" label="Axis A" required />
-                        <FormItem name="axis2" label="Axis B" required />
+                        <FormItem layout={{ span: 8 , xs: 24, sm: 8 }} name="sph1" label="Sph A" required />
+                        <FormItem layout={{ span: 8 , xs: 24, sm: 8 }} name="cyl1" label="Cyl A" required />
+                        <FormItem layout={{ span: 8 , xs: 24, sm: 8 }} name="axis1" label="Axis A" required />
+                        <FormItem layout={{ span: 8 , xs: 24, sm: 8 }} name="sph2" label="Sph B" required />
+                        <FormItem layout={{ span: 8 , xs: 24, sm: 8 }} name="cyl2" label="Cyl B" required />
+                        <FormItem layout={{ span: 8 , xs: 24, sm: 8 }} name="axis2" label="Axis B" required />
                     </Row>
                 </Form>
                 {data && (

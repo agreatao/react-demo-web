@@ -23,13 +23,13 @@ module.exports = merge(webpackConfig, {
         },
         proxy: {
             "/calculate": {
-                target: "http://localhost",
+                target: "https://121.196.216.228",
             },
             "/pay": {
-                target: "http://localhost",
+                target: "https://121.196.216.228",
             },
             "/userInfo": {
-                target: "http://localhost",
+                target: "https://121.196.216.228",
             },
         },
     },

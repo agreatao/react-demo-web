@@ -61,10 +61,10 @@ export default function AR() {
               rules={[
                 ({ getFieldValue }) => ({
                   validator(_, value) {
-                    if (value && getFieldValue("kf") >= value) {
+                    if (value && getFieldValue("kf") <= value) {
                       return Promise.resolve();
                     }
-                    return Promise.reject(new Error("Kf 必须大于等于 Ks"));
+                    return Promise.reject(new Error("Ks >= Kf"));
                   },
                 }),
               ]}

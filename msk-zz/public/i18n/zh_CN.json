@@ -125,7 +125,7 @@
 
     "calc.lsa_qd.name": "ZZ LSA Q.D. 计算器",
     "calc.lsa_qd.instructions": "辅助Q值引导角膜屈光手术方案设计<br>定量改变LSA（纵向球差，D为单位）时，计算所需的Q值变量及屈光度补偿量",
-    "calc.lsa_qd.notes": "Vertex K=切向曲率<br>SD=球镜度<br>e=角膜离心率值（5mm）<br>目标Q值已考虑生物力学变化（调整-0.3）<br>Q. D. (D)=因Q值变化需补偿的屈光度",
+    "calc.lsa_qd.notes": "Kf=切向曲率<br>e=角膜离心率值（5mm）<br>PSA=全眼初级球差（5mm）<br>目标Q值已考虑生物力学变化（术后1个月Q=目标Q+0.3）<br>Q. D. (D)=因Q值变化需补偿的屈光度",
     "calc.lsa_qd.rawdata": "",
     "calc.lsa_qd.pay": "",
 
