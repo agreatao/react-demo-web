@@ -35,8 +35,7 @@ export default function LSA() {
           onReset={onReset}
           initialValues={{
             opicZone: 5,
-            lsa: -1,
-            e: 0,
+            psa: 0,
           }}
         >
           <Row gutter={24}>
@@ -45,8 +44,6 @@ export default function LSA() {
             <FormItem name="e" label="e" required />
             <FormItem name="psa" label="PSA (μm)" required />
             <FormItem name="correctDs" label="Correct DS (D)" required />
-            <FormItem name="targetQ" label="Target Q" required />
-            <FormItem name="targetLsa" label="Target LSA (D)" required />
           </Row>
         </Form>
         {data && (
